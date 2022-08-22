@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     fieldOfStudy: String
 });
 
-const adminSchema = new mongoose.Schema({
+const moderatorSchema = new mongoose.Schema({
     fullname : {
         type: String
     },
@@ -36,6 +36,6 @@ const adminSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-const Admin = mongoose.model('Admin', adminSchema);
+const Moderator = mongoose.model('Admin', moderatorSchema);
 
-module.exports = {User, Admin}
+module.exports = {User, Moderator}
