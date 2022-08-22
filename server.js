@@ -1,3 +1,4 @@
+//npm i express morgan nodemon body-parser dotenv mongoose axios to install dependencies
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -5,7 +6,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 
-//npm i express morgan nodemon body-parser dotenv mongoose to install dependencies
+
+//Create your own config.env file
 dotenv.config({path: 'config.env'});
 const PORT = process.env.PORT || 8080;
 
@@ -17,8 +19,8 @@ app.use(morgan("tiny"));
 app.use(bodyParser.urlencoded({extended:true}));
 
 // View engine
-//app.set("view engine", "html"); we're using html for that right?
-//app.set("views", path.resolve(__dirname, "views"));
+app.set("view engine", "html");
+app.set("views", path.resolve(__dirname, "views"));
 
 // assets
 app.use('/css', express.static(path.resolve(__dirname, 'assets/css')));
@@ -29,4 +31,4 @@ app.get('/', (req, res) => {
     res.send("Crud app");
 });
 
-app.listen(PORT, ()=> {console.log(`Server is running on http://localhost:${PORT}`)});
+const listener = app.listen(PORT, ()=> {console.log(`Server is running on http://localhost:${PORT}`)});
