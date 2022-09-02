@@ -283,4 +283,147 @@ body{
 }
 
 
+/* For Navigation Bar */
+.navbar {
+    background: #333333;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    padding: 0 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.navbar .nav-items {
+    display: flex;
+}
+
+.navbar .nav-items li {
+    list-style: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+.navbar .nav-items li a {
+    color: #fff;
+    font-size: 24px;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+.navbar .nav-items li a:hover {
+    background-color: #6A4873;
+}
+
+.navbar a.active {
+    border-bottom: 3px solid #6A4873;
+  }
+
+.navbar .searchbar {
+    margin-top: -60px;
+    margin-left: 400px;
+}
+
+.navbar .searchbar input[type="text"] {
+    border: 0;
+    padding: 10px;
+    width: 550px;
+    height: 28px;
+}
+
+.write-review{
+    background-color: #333333;
+    width: 100%;
+    height: 180px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.welcome-title{
+    margin-left: 120px;
+    font-size: 50px;
+    font-weight: lighter;
+    color: white;
+}
+
+.write-review-button{
+    margin-left: 120px;
+    width: 110px;   
+    padding: 10px;
+    border: none;
+    background-color: #6A4873;
+    color:#fff;
+    font-size: 16px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+    text-align: center;
+}
+
+/*Review Section*/
+.review-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+.review-section .col {
+    padding:5px;
+    width: 25%;
+    height: 200px;
+    color:white; 
+    background: #6A4873;
+}
+
+.review-section .col h1 {
+    padding:5px;
+    font-weight: lighter;
+    font-size: 30px;
+}
+
+.review-section .col h2 {
+    padding:5px;
+    color:white; 
+    background: #6a4873c3;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.review-section .heart-icon span{
+    float: right;
+    font-size: 50px;
+}
+
+.heart-icon span:hover{
+    color: #EFC0EC;
+    cursor: pointer;
+}
+
+.review-section .star-review{
+    padding:5px;
+}
+
+.review-section .star-review .checked{
+    color: #A660A1;
+}
+
+.star-review span:hover {
+    color:#A660A1;
+}
+
+.review-section p{
+    font-size:16px;
+    padding: 5px;
+}
+
+.review-section footer{
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: lighter;
+    float:right;
+}
 
