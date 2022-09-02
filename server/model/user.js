@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fieldOfStudy: String
+    fieldsOfInterest: [{type: mongoose.Schema.Types.ObjectId, ref : 'Subject'}]
 });
 
 const moderatorSchema = new mongoose.Schema({

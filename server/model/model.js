@@ -1,7 +1,47 @@
-const mongoose = require("mongoose");
+import mongoose, {mongo} from "mongoose";
+
+
+const subjectSchema = new mongoose.Schema({
+    subjectCode: String,
+    subjectName: String,
+    fieldOfStudy: String,
+    university: String
+});
+
+const commentSchema = new mongoose.Schema({
+    content: {
+        type: String,
+        required: true
+    },
+    author: mongoose.Schema.Types.ObjectId, ref : 'User'
+});
+
+const reviewSchema = new mongoose.Schema({
+    content: {
+        type: String,
+        required: true
+    },
+    author: mongoose.Schema.Types.ObjectId, ref : 'User',
+    isPrivate: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    isVisible: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    subject: subjectSchema,
+    rating: {
+        type: Number,
+        required: true
+    },
+    comments: [commentSchema]
+});
 
 const userSchema = new mongoose.Schema({
-    name: {
+    fullname: {
         type: String,
         required: true
     },
@@ -18,10 +58,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fieldOfStudy: String
+    fieldsOfInterest: [subjectSchema]
 });
 
-const adminSchema = new mongoose.Schema({
+const moderatorSchema = new mongoose.Schema({
+    fullname : {
+        type: String
+    },
     username: {
         type: String,
         required: true
@@ -32,28 +75,10 @@ const adminSchema = new mongoose.Schema({
     }
 });
 
-const reviewSchema = new mongoose.Schema({
-    content: {
-        type: String,
-        required: true
-    },
-    author: userSchema,
-    isPrivate: {
-        type: Boolean,
-        required: true
-    },
-    subjectCode: String,
-    rating: {
-        type: Number,
-        required: true
-    },
-    comments: [commentSchema]
-});
+const Review = mongoose.model('Review', reviewSchema);
+const Comment = mongoose.model('Comment', commentSchema);
+const Subject = mongoose.model('Subject', subjectSchema);
+const Moderator = mongoose.model('Moderator', moderatorSchema);
+const User = mongoose.model('User', userSchema);
 
-const commentSchema = new mongoose.Schema({
-    content: {
-        type: String,
-        required: true
-    },
-    author: userSchema
-})
+module.exports = {Review, Comment, Subject, Moderator, User}

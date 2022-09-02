@@ -1,4 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, {mongo} from "mongoose";
+
+
+const subjectSchema = new mongoose.Schema({
+    subjectCode: String,
+    subjectName: String,
+    fieldOfStudy: String,
+    university: String
+});
 
 const commentSchema = new mongoose.Schema({
     content: {
@@ -6,7 +14,7 @@ const commentSchema = new mongoose.Schema({
         required: true
     },
     author: mongoose.Schema.Types.ObjectId, ref : 'User'
-})
+});
 
 const reviewSchema = new mongoose.Schema({
     content: {
@@ -16,9 +24,15 @@ const reviewSchema = new mongoose.Schema({
     author: mongoose.Schema.Types.ObjectId, ref : 'User',
     isPrivate: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
-    subjectCode: String,
+    isVisible: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    subject: subjectSchema,
     rating: {
         type: Number,
         required: true
@@ -28,5 +42,6 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model('Review', reviewSchema);
 const Comment = mongoose.model('Comment', commentSchema);
+const Subject = mongoose.model('Subject', subjectSchema);
 
-module.exports = {Review, Comment}
+module.exports = {Review, Comment, Subject}
