@@ -743,7 +743,6 @@ body{
 }
 
 
-
 .re .subject{
     margin:20px 10px 5px 20px;
 }
@@ -824,17 +823,24 @@ body{
     display: inline-flex;
 }
 
+.navi{
+    width:20%
+}
 
 .navi ul{
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 45%;
+    width: 100%;
     height: 100vh;
     line-height: 45px;
     background-color: #333333;
 }
 
+.navi ul li img{
+    width:200%;
+    padding: 10%;
+}
 .navi ul li a {
     display: block;
     color: #000;
@@ -863,34 +869,39 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.setting .appearence p{
+.setting .appearence h1{
     padding-top: 70px;
     color: #fff;
     font-size: 50px;
+    font-weight: normal;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
-
+.appearence{
+    padding-left: 30%;
+}
 .appearence img{
    padding-left: 80%;
    width:5%;
 }
 
 
+
 .theme{
     margin:0%; 
     background: #333;
-    width: 60%; 
+    width: 70%; 
     color: #fff;
 }
 
 .theme .btngroup{
     display: inline-flex;
-    padding: 40px 40px 60px 60px;
+    padding: 5% 0% 10% 10%;
+   
 }
 
 .theme label{
-    padding:60px;
+    padding:10%;
     font-size:35px;
     color: #fff;
     font-weight: lighter;
@@ -898,8 +909,8 @@ body{
 
 }
 .dark button{
-    width: 210px;
-    height: 75px;
+    width: 220px;
+    height: 90px;
     border: none;
     background-color: #3B3B3B;
     border-color:white;
@@ -911,11 +922,12 @@ body{
 }
 
 .light{
-    padding-left: 40px;
+    padding-left: 15%;
+
 }
 .light button{
-    width: 210px;
-    height: 75px;
+    width: 220px;
+    height: 90px;
     border: none;
     background-color:#fff;
     color:#000;
@@ -928,3 +940,102 @@ body{
     border:4px solid #6A4873;
 }
 
+
+.account{
+    padding-left: 30%;
+}
+.account img{
+   padding-left: 80%;
+   width:5%;
+}
+
+.account h1{
+    padding-top: 70px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: normal;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.account .info{
+    margin:0%; 
+    background: #333;
+    width: 70%; 
+    color: #fff;  
+
+}
+
+.account .info ul{
+    padding-left: 5%;
+}
+.account .info ul li{
+    line-height: 350%;
+    display:inline-flex;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.info ul li label{
+    font-size: 26px;
+    padding-right: 20px;
+}
+
+.info ul li p{
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.info ul li input{
+    width:300px;
+    font-size: 20px;
+    font-weight: lighter;
+    background-color: #333333;
+    color: #fff;
+}
+
+.info ul li button{
+    width: 80px;
+    height: 35px;
+    border: none;
+    background-color:#6A4873;
+    color:#fff;
+    font-size: 16px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.account .pwd{
+    margin:0%; 
+    background: #333;
+    width: 70%; 
+    color: #fff;  
+}
+
+.account .pwd ul{
+    list-style: none;
+    padding: 5%;
+}
+
+.account .pwd ul li{
+    line-height: 300%;
+}
+
+.account .pwd ul li label{
+    font-size: 26px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   
+}
+
+.account .pwd ul li button{
+    width: 105px;
+    height: 45px;
+    border: none;
+    background-color:#6A4873;
+    color:#fff;
+    font-size:22px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    cursor: pointer;
+
+}
