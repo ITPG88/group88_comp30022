@@ -37,7 +37,12 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    comments: [commentSchema]
+    comments: [commentSchema],
+    status: {
+        type: String,
+        enum : ['APPROVED', 'REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
+        default: 'APPROVED'
+    }
 });
 
 const Review = mongoose.model('Review', reviewSchema);
