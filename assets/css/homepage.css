@@ -93,7 +93,7 @@ a{
     font-size: 22px;
     color:var(--font-color);
     background-color: var(--color-navbar);
-    margin: 0px 20px 50px;
+    margin: 0px 20px 50px 0px;
 }
 
 .medium-buttn{
@@ -194,11 +194,15 @@ header{
     grid-template-rows: 460px;
     gap:40px;
 }
-
+/*=====================Button for different page======================*/
 .review-button-moderator{
     text-align:center;
 }
 
+.review-button-homepage{
+    text-align:left;
+}
+/*=====================End here======================*/
 .review-section button{
     font-weight: lighter;
 } 
@@ -220,6 +224,21 @@ header{
     margin-right: -25px;
     margin-left: -25px;
     padding: 10px 25px;
+}
+/*=====================END HERE======================*/
+/*=====================Button Type======================*/
+.recommend-button{
+    background-color: var(--pri-color);
+    color: var(--font-color);
+    font-size: 26px;
+    width:195px;
+    height:50px;
+}
+
+.Time-button{
+    font-size: 26px;
+    width:100px;
+    background-color: var(--color-page);
 }
 
 .edit-release-button{
