@@ -14,7 +14,7 @@
     --font-color:#F5F5F5;
     --secondary-font-color:#EFC0EC;
     --star-review-color:#A660A1;
-
+    --review-pri-color:rgb(80,60,76);
     --container-width:90%;
 }
 
@@ -51,6 +51,32 @@ h2{
     font-size: 30px;
 }
 
+section h5{
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+section h6{
+    font-weight: medium;
+    font-size: 26px;
+}
+
+section h7{
+    font-weight: lighter;
+    font-size: 18px;
+}
+
+section h7 b{
+    color: var(--secondary-font-color);
+    font-size: 24px;
+}
+
+section h8{
+    font-weight: lighter;
+    font-size:18px;
+    padding-left: 10px;
+}
+
 a{
     color:var(--font-color);
     font-size: 28px;
@@ -58,6 +84,30 @@ a{
 
 .active{
     border-bottom: 4px solid var(--pri-color);
+}
+
+
+.big-buttn{
+    width:270px;
+    height:65px;
+    font-size: 22px;
+    color:var(--font-color);
+    background-color: var(--color-navbar);
+    margin: 0px 20px 50px;
+}
+
+.medium-buttn{
+    width:145px;
+    height:35px;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.small-buttn{
+    width:100px;
+    height:35px;
+    font-size: 18px;
+    margin: 5px;
 }
 
 /*=====================NAVBAR======================*/
@@ -119,6 +169,10 @@ header{
     padding-top: 30px;
 }
 
+.header-content h1 b{
+    color: var(--secondary-font-color);
+}
+
 .header-content h2{
     padding-top: 30px;
 }
@@ -135,14 +189,59 @@ header{
     gap:40px;
 }
 
+.review-container-moderator{
+    display:grid;
+    grid-template-rows: 460px;
+    gap:40px;
+}
+
+.review-button-moderator{
+    text-align:center;
+}
+
+.review-section button{
+    font-weight: lighter;
+} 
+
 .each-review{
-    background: var(--pri-color);
+    background: var(--review-pri-color);
     padding: 25px;
 }
+
+
+/*=====================For Review Titlebar======================*/
+.review-titlebar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--star-review-color);
+    margin-bottom: 30px;
+    margin-top:-25px;
+    margin-right: -25px;
+    margin-left: -25px;
+    padding: 10px 25px;
+}
+
+.edit-release-button{
+    color:var(--pri-color);
+    background-color: white;
+}
+
+.reject-button{
+    color:var(--font-color);
+    background-color: var(--pri-color);
+}
+/*=====================END HERE======================*/
 
 .each-review p{
     padding:5px 0;
     font-size: 18px;
+    font-weight: lighter;
+}
+
+.each-review-big p{
+    padding:40px 0;
+    font-size: 20px;
     font-weight: lighter;
 }
 
@@ -161,5 +260,17 @@ header{
 .each-review .star-review{
     margin-top: 5px;
     font-size: 18px;
+}
+
+.each-review .star-review span{
     color:var(--star-review-color);
 }
+
+.each-review-big .star-review span{
+    color:var(--star-review-color);
+    font-size:26px;
+    float:left;
+}
+
+
+
