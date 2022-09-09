@@ -6,6 +6,7 @@
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "mongoose": "^6.5.2",
+    "mongoose-extend-schema": "^1.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19"
   },
@@ -16,6 +17,7 @@
   "description": "Name: Kai, StudentID: 1078175\r Name: Sebastian Davey Gargano, StudentID: 1083288\r Name: Ellen (Qingying Lyu), StudentID: 1173888\r Name: Mavis(Jia Zhao), StudentID: 1071383\r Name: Jason Phan, StudentID:",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ITPG88/group88_comp30022.git"

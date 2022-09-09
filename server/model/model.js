@@ -1,5 +1,4 @@
-import mongoose, {mongo} from "mongoose";
-
+import mongoose from "mongoose";
 
 const subjectSchema = new mongoose.Schema({
     subjectCode: String,

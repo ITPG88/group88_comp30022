@@ -10,10 +10,11 @@ const loginController = require("../controller/loginController");
 //   res.render("Login", { flash: req.flash("error"), title: "Login" });
 // });
 
-// add a route to handle the GET request for student homepage
-router.get("/:patient_id", studentController.getCurrentStudent);
 
 // Some initial routing
 router.get("/", loginController.landing);
 router.get("/signup", loginController.signup);
 module.exports = router;
+
+// add a route to handle the GET request for student homepage
+router.get("/:patient_id", studentController.getCurrentStudent);
