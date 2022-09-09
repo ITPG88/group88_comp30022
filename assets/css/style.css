@@ -490,12 +490,20 @@ body{
     color: #A660A1;
 }
 
+.review-section #rating-star{
+    margin-top: 5px;
+    margin-left: 5px;
+    color: #A660A1;
+}
+
 .star-review span:hover {
     color:#A660A1;
 }
 
 .review-section p{
-    font-size:16px;
+    font-size:18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 5px;
 }
 
@@ -1049,7 +1057,8 @@ body{
     background-color: #333333;
     display: flex;
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
+    width: 100%;
 }
 .Moderator-Navbar #main-logo{
     margin-left: 20px;
@@ -1074,14 +1083,12 @@ body{
     background-color: #333333;
     color:#fff;
     border: none;
-    margin-top: 20px;
     font-size: 28px;
     font-weight: regular;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .Moderator-Navbar #Moderator-Navitem li{
-    margin:20px;
     font-size: 28px;
     font-weight: regular;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -1092,13 +1099,43 @@ body{
     text-decoration: none;
 }
 
+/*Student Nav bar*/
+.Moderator-Navbar #Student-Navitem{
+    list-style: none;
+    display:inline-flex;
+    justify-content: space-evenly;
+}
+
+.Moderator-Navbar #Student-Navitem select{
+    background-color: #333333;
+    color:#fff;
+    border: none;
+    margin-top: 20px;
+    margin-left: 10px;
+    font-size: 28px;
+    font-weight: regular;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Navbar #Student-Navitem li{
+    margin:20px;
+    font-size: 28px;
+    font-weight: regular;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Navbar #Student-Navitem li a{
+    color:white;
+    text-decoration: none;
+}
 
 /*Welcome Bar*/
 .Moderator-Welcomebar{
     background-color: #333333;
     width: 100%;
-    height: 180px;
+    height: 220px;
 }
+
 
 .Moderator-Welcomebar h1{
     padding-top: 40px;
@@ -1109,6 +1146,19 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.Moderator-Welcomebar h3{
+    padding-left: 50px;
+    font-size: 30px;
+    color: white;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Welcomebar #overall-star{
+    display:flex;
+    float:left;
+    align-items: center;
+}
 .Moderator-Welcomebar h2{
     padding-top: 25px;
     padding-left: 50px;
@@ -1118,12 +1168,24 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.Moderator-Welcomebar #rating-star{
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.Moderator-Welcomebar #rating-star span{
+    font-size: 25px;
+    color: #A660A1;
+}
+
+
 /*Button*/
 .Moderator-button{
+    display: inline-block;
     width: 100%;
-    margin-top: 40px;
-    margin-bottom: 40px;
     text-align: center;
+    margin-top: 35px;
+    margin-bottom: 40px;
 
 }
 
@@ -1138,6 +1200,9 @@ body{
     color:#fff;
     text-align: center;
     margin-right:35px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    cursor: pointer;
 }
 
 .Moderator-button #New-subject-button{
@@ -1151,9 +1216,40 @@ body{
     color:#fff;
     text-align: center;
     margin-left:35px;
+    cursor: pointer;
 }
 
+.Moderator-button #Recommend-button{
+    float:left;
+    background-color: #6A4873;
+    border: none;
+    width: 195px;
+    height: 50px;
+    font-size: 26px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color:#fff;
+    text-align: center;
+    margin-left: 105px;
+    cursor: pointer;
+}
+
+.Moderator-button #Time-button{
+    float:left;
+    border: none;
+    background-color: #3B3B3B;
+    height: 50px;
+    font-size: 26px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color:#fff;
+    text-align: center;
+    margin-left: 30px;
+    cursor: pointer;
+}
 /*Review Section*/
+
+
 .Moderator-Review-Section{
     display:flex;
     flex-direction: column;
@@ -1162,6 +1258,67 @@ body{
     background-color: #5b4c5d;
 }
 
+/*Guest Review css*/
+.Guest-Review-Section{
+    margin-top: 50px;
+    display:flex;
+    flex-direction: column;
+    width: 1280px;
+    height: 400px;
+    background-color: #5b4c5d;
+}
+
+.Guest-Review-Section #Moderator-Review-Comment header{
+    margin-left:20px;
+    font-size: 30px;
+    color:#EFC0EC;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Guest-Review-Section #Moderator-Review-Comment #star-visable{
+    margin-top: 10px;
+}
+
+.Guest-Review-Section #Moderator-Review-Comment{
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.Guest-Review-Section #Like-reply{
+    width: 100%;
+    margin-top:90px;
+}
+
+.Guest-Review-Section #Like-reply #like-button{
+    display: inline-block;
+    background-color: #5b4c5d;
+    color:#fff;
+    border:none;
+    width: 80px;
+    height:35px;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Guest-Review-Section #Like-reply #like-button img{
+    display: inline-block;
+    padding-right: 3px;
+}
+
+
+.Guest-Review-Section #Like-reply h1{
+    display: inline-block;
+    margin-left: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/*til here*/
 .Moderator-Review-Section #Moderator-Review-title{
     width: 100%;
     height: 100px;
@@ -1368,4 +1525,124 @@ body{
 
 .Moderator-Review-Section #star-visable #rating-star span{
     color: #A660A1;
+}
+
+.Moderator-Review-Section #Like-reply-visable #remove-button{
+    color: #A660A1;
+    background-color: #fff;
+    margin-left: 900px;
+    display: inline-block;
+    border:none;
+    width: 80px;
+    height:35px;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Review-Section #Comment-Input {
+    margin: 0px;
+    margin-top: 70px;
+}
+
+.Moderator-Review-Section #Comment-Input ul input{
+    line-height: 50px;
+    width: 1120px;
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #1E1E1E;
+    border : none;
+}
+
+.Moderator-Review-Section #Comment-Input ul button{
+    line-height: 50px;
+    width: 134px;
+    font-size: 22px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #7B7B7B;
+    color: #fff;
+    border : none;
+    margin-left: 20px;
+}
+
+.Moderator-Review-Section #Comment-list{
+    margin: 20px;
+    margin-top: 40px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: lighter;
+}
+
+.Moderator-Review-Section #Comment-list header{
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.Moderator-Review-Section #Comment-list header a{
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.Moderator-Review-Section #Comment-list p{
+    font-weight: lighter;
+    margin-bottom: 8px;
+}
+
+.Moderator-Review-Section #Comment-list #like-button{
+    margin-left: -5px;
+    margin-bottom: 10px;
+    background-color: #3B3B3B;
+    color:#fff;
+    border:none;
+    width: 60px;
+    height:35px;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Review-Section #Comment-list #remove-button{
+    color: #fff;
+    background-color: #3B3B3B;;
+    display: inline-block;
+    border:none;
+    width: 80px;
+    height:35px;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Review-Section #Review-Content p{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left:20px;
+    font-size: 20px;
+    color:#fff;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Moderator-Review-Section #Review-Content footer{
+    margin-left:20px;
+    font-size: 24px;
+    color:#EFC0EC;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.star-review{
+    margin-top: 35px;
+    margin-right:950px;
+    float: right;
+    padding:5px;
+}
+
+.star-review .checked{
+    color: #A660A1;
+}
+
+.star-review span:hover {
+    color:#A660A1;
 }

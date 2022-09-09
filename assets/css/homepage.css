@@ -1,0 +1,165 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+    border:none;
+    outline: none;
+    text-decoration: none;
+}
+
+:root{
+    --color-page: #3B3B3B;
+    --color-navbar: #333333;
+    --pri-color:#6A4873;
+    --font-color:#F5F5F5;
+    --secondary-font-color:#EFC0EC;
+    --star-review-color:#A660A1;
+
+    --container-width:90%;
+}
+
+body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: var(--color-page);
+    color:var(--font-color);
+}
+
+.container{
+    width: var(--container-width);
+    margin: 0 auto;
+}
+
+section{
+    padding: 150px 0;
+}
+
+section h3{
+    font-size: 34px;
+}
+
+section h4{
+    font-size:16px;
+}
+
+h1{
+    font-weight: medium;
+    font-size: 50px;
+}
+
+h2{
+    font-weight: lighter;
+    font-size: 30px;
+}
+
+a{
+    color:var(--font-color);
+    font-size: 28px;
+}
+
+.active{
+    border-bottom: 4px solid var(--pri-color);
+}
+
+/*=====================NAVBAR======================*/
+nav{
+    background-color: var(--color-navbar);
+    width: 100vw;
+    height: 85px;
+    position:fixed;
+    top:0;
+    z-index: 11;
+}
+
+.navbar-container{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-menu{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-searchbar{
+    display:flex;
+}
+
+.nav-searchbar input{
+    width: 475px;
+    height: 54px;
+    font-size: 18px;
+}
+
+.nav-searchbar button{
+    background-color: white;
+}
+
+.nav-searchbar span{
+    font-size: 40px;
+    color:black;
+}
+
+/*=====================HEADER======================*/
+header{
+    background-color: var(--color-navbar);
+    position: relative;
+    top:85px;
+    height: 15vw;
+}
+
+.header-container{
+    height: 100%;
+    align-items: center;
+}
+
+.header-content h1{
+    padding-top: 30px;
+}
+
+.header-content h2{
+    padding-top: 30px;
+}
+
+.header-content h2 b{
+    color: var(--pri-color);
+}
+
+/*=====================REVIEW SECTION======================*/
+
+.review-container{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:40px;
+}
+
+.each-review{
+    background: var(--pri-color);
+    padding: 25px;
+}
+
+.each-review p{
+    padding:5px 0;
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.each-review footer{
+    font-size: 16px;
+    color:var(--secondary-font-color);
+    float: right;
+}
+
+.each-review .material-symbols-outlined{
+    float:right;
+    font-size: 50px;
+    color: var(--secondary-font-color);
+}
+
+.each-review .star-review{
+    margin-top: 5px;
+    font-size: 18px;
+    color:var(--star-review-color);
+}

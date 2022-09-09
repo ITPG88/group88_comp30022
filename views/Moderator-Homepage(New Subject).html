@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects Review-Moderator Homepage (New Subject)</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="Moderator-Navbar">
+        <img id = "main-logo" src="../assets/img/Subject Review Logo.png">
+        
+        <form>
+            <input type="text" placeholder=" Enter University Code/Subject Name/Code..."> 
+        </form> 
+
+        <div id = "Moderator-Navitem">
+            <li><a href="#" class ="active">Home</a></li>
+            <li><a href="#">Browse</a></li>
+            <select name="Account" id="Account">
+                <option value="Account">Account</option>                
+            </select>
+        </div>
+        
+    </div>
+
+    <div class = "Moderator-Welcomebar">
+        <h1>Welcome, <b style="color: #EFC0EC;">Moderator Name</b>!</h1>
+        <h2>X flagged reviews <b style="color: #6A4873 ;">|</b> Y new subjects</h2>
+    </div>
+
+    <div class="Moderator-button">
+        <button id="Flagged-review-button" type="button">Flagged review</button>
+        <button id="New-subject-button" type="button">New subject</button>
+    </div>
+    <div class="Moderator-Review-Section">
+        <div id="Moderator-Review-title">
+            <div id="Interest-field">
+                <h1>Interest of field:</h1>
+                <h2>INFORMATION TECHNOLOGY</h2>
+            </div>
+            <div class="inside-review-button">
+                <button id="Edit-button" type="button">Edit</button>
+                <button id="Release-button" type="button">Release</button>
+                <button id="Reject-button" type="button">Reject</button>
+            </div>
+        </div>
+        <div id="Moderator-Review-Comment">
+            <div id="Subject-Uni-Star">
+                <div id="Subject-Uni">
+                    <h1>COMP30026 IT PROJECT</h1>
+                    <h2>University of Melbourne</h2>
+                </div>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsatum varius duis at. Vitae nunc sed velit dignissim sodales ut. Habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat. Venenatis cras sed felis eget.
+                ...</p>
+            <footer>Example student <a style="color: #ffffff; font-size: 18px;">date</a></footer>
+        </div>
+        <div id="star-visable">
+            <div id="rating-star">
+                <span class="material-icons">star</span>
+                <span class="material-icons">star</span>
+                <span class="material-icons">star</span>
+                <span class="material-icons">star</span>
+                <span class="material-icons">star</span>
+            </div>
+            
+            <h1>Visable</h1>
+        </div>
+    </div>
+    
+</body>
