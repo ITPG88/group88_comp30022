@@ -21,8 +21,21 @@ const userSchema = new mongoose.Schema({
     fieldsOfInterest: [{type: mongoose.Schema.Types.ObjectId, ref : 'Subject'}]
 });
 
+const moderatorSchema = new mongoose.Schema({
+    fullname : {
+        type: String
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true,
+    }
+});
 
 const User = mongoose.model('User', userSchema);
+const Moderator = mongoose.model('Admin', moderatorSchema);
 
-
-module.exports = User
+module.exports = {User, Moderator}
