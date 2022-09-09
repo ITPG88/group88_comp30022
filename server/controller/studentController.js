@@ -11,12 +11,12 @@ const getCurrentStudent = async (req) => {
 
 const getReviewSortByTime = async (req) => {
     try { 
-        var reviews = await review.find().sort('-createdAt').lean()
+        var reviews = await Review.find().sort('-createdAt').lean()
         for (let i = 0; i < reviews.length; i++) {
             // Change the format of createAt to YYYY/MM/DD
-            reviews[i].createdAt = records[i].createdAt.toISOString().split('T')[0]
+            reviews[i].createdAt = reviews[i].createdAt.toISOString().split('T')[0]
         }
-        return res.render('doctorDashboard', { layout: false , reviews: reviews}) 
+        return res.render('APAGE', { layout: false , reviews: reviews}) 
     } catch (err) { 
         return next(err) 
     }
