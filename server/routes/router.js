@@ -11,5 +11,5 @@ router.get('/login', (req, res) => {
     res.render('Login', { flash: req.flash('error'), title: 'Login' })
 })
 
-// add a route to handle the GET request for landing page
-router.get('/landing', studentController)
+// add a route to handle the GET request for student homepage
+router.get('/:patient_id', studentController.getCurrentStudent)
