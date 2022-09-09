@@ -83,10 +83,23 @@ nav{
     gap: 30px;
 }
 
+.nav-searchbar{
+    display:flex;
+}
+
 .nav-searchbar input{
     width: 475px;
     height: 54px;
     font-size: 18px;
+}
+
+.nav-searchbar button{
+    background-color: white;
+}
+
+.nav-searchbar span{
+    font-size: 40px;
+    color:black;
 }
 
 /*=====================HEADER======================*/
@@ -124,7 +137,7 @@ header{
 
 .each-review{
     background: var(--pri-color);
-    padding: 25px
+    padding: 25px;
 }
 
 .each-review p{
@@ -150,6 +163,3 @@ header{
     font-size: 18px;
     color:var(--star-review-color);
 }
-
-.
-
