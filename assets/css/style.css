@@ -1075,14 +1075,12 @@ body{
     background-color: #333333;
     color:#fff;
     border: none;
-    margin-top: 20px;
     font-size: 28px;
     font-weight: regular;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .Moderator-Navbar #Moderator-Navitem li{
-    margin:20px;
     font-size: 28px;
     font-weight: regular;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
