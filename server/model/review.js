@@ -43,6 +43,8 @@ const reviewSchema = new mongoose.Schema({
         enum : ['APPROVED', 'REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
         default: 'APPROVED'
     }
+}, {
+    timestamps: true
 });
 
 const Review = mongoose.model('Review', reviewSchema);
