@@ -1,4 +1,5 @@
 //npm i express morgan nodemon body-parser dotenv mongoose axios to install dependencies
+
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -27,7 +28,11 @@ app.use(express.static(__dirname + "/"));
 // app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
+//All root routes directed by router
 app.use("/", require("./server/routes/router"));
+
+//All student routes directred by studentRouter
+//app.use('/student', require("./server/routes/studentRouter.js"));
 
 const listener = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
