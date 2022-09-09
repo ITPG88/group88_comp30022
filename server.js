@@ -6,29 +6,29 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 
-
 //Create your own config.env file
-dotenv.config({path: 'config.env'});
+dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
-
 
 // log any requests
 app.use(morgan("tiny"));
 
 // Using body-parser
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // View engine
 app.set("view engine", "html");
+app.engine("html", require("ejs").renderFile);
+
 app.set("views", path.resolve(__dirname, "views"));
-
+app.use(express.static(__dirname + "/"));
 // assets
-app.use('/css', express.static(path.resolve(__dirname, 'assets/css')));
-app.use('/img', express.static(path.resolve(__dirname, 'assets/img')));
-app.use('/js', express.static(path.resolve(__dirname, 'assets/js')));
+// app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
+// app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
+// app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
-app.get('/', (req, res) => {
-    res.send("Crud app");
+app.use("/", require("./server/routes/router"));
+
+const listener = app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-const listener = app.listen(PORT, ()=> {console.log(`Server is running on http://localhost:${PORT}`)});
