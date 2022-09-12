@@ -34,14 +34,6 @@ section{
     padding: 150px 0;
 }
 
-section h3{
-    font-size: 34px;
-}
-
-section h4{
-    font-size:16px;
-}
-
 h1{
     font-weight: medium;
     font-size: 50px;
@@ -51,6 +43,14 @@ h1{
 h2{
     font-weight: lighter;
     font-size: 30px;
+}
+
+section h3{
+    font-size: 34px;
+}
+
+section h4{
+    font-size:16px;
 }
 
 section h5{
@@ -77,6 +77,12 @@ section h8{
     font-weight: lighter;
     font-size:18px;
     padding-left: 10px;
+}
+
+
+h9{
+    font-weight: regular;
+    font-size: 30px;
 }
 
 a{
@@ -113,6 +119,7 @@ a{
     margin: 5px;
     cursor: pointer;
 }
+
 
 /*=====================NAVBAR======================*/
 nav{
@@ -185,6 +192,18 @@ header{
     color: var(--pri-color);
 }
 
+.lower-header-part{
+    display: flex;
+}
+
+.lower-header-part .star-review{
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.lower-header-part .star-review span{
+    font-size: 40px;
+    color: var(--star-review-color);
+}
 /*=====================REVIEW SECTION======================*/
 
 .review-container{
@@ -320,7 +339,7 @@ header{
 
 .each-review-big p{
     padding:40px 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: lighter;
 }
 
@@ -341,6 +360,7 @@ header{
     font-size: 18px;
 }
 
+
 .each-review .star-review span{
     color:var(--star-review-color);
 }
@@ -351,5 +371,26 @@ header{
     float:left;
 }
 
+.each-review-big .star-review-big{
+    margin-left: -7px;
+    margin-bottom:40px;
+}
+
+.each-review-big .star-review-big span{
+    color:var(--star-review-color);
+    font-size:40px;
+    float:left;
+}
 
 
+/*=====================FOOTER CSS======================*/
+.view-review-footer{
+    margin-top: 80px;
+    margin-left: -10px;
+}
+
+.view-review-footer .like-button{
+    background-color: var(--review-pri-color);
+    color: var(--font-color);
+    font-weight: lighter;
+}
