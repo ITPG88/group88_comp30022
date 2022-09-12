@@ -204,6 +204,12 @@ header{
     font-size: 40px;
     color: var(--star-review-color);
 }
+
+.lowerheader-wrftsbutton{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 /*=====================REVIEW SECTION======================*/
 
 .review-container{
@@ -320,6 +326,13 @@ header{
     height: 20px;
     margin-right: 5px;
     margin-top: 1px;
+}
+
+.wrfts-button{
+    height:50px;
+    background-color: var(--pri-color);
+    color: var(--font-color);
+    font-weight: lighter;
 }
 /*=====================END HERE======================*/
 
