@@ -223,6 +223,7 @@ header{
     align-items: center;
     margin-top:15px;
 }
+
 /*=====================Button for different page======================*/
 .review-button-moderator{
     text-align:center;
@@ -372,9 +373,11 @@ header{
 }
 
 .each-review-big .star-review-big{
+    display: flex;
+    align-items: center;
     margin-left: -7px;
-    margin-bottom:40px;
 }
+
 
 .each-review-big .star-review-big span{
     color:var(--star-review-color);
@@ -382,15 +385,36 @@ header{
     float:left;
 }
 
-
 /*=====================FOOTER CSS======================*/
 .view-review-footer{
-    margin-top: 80px;
+    margin-top: 60px;
     margin-left: -10px;
 }
 
+.view-review-footer-2to1{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.like-reply-remove{
+    display: flex;
+    align-items: center;
+}
 .view-review-footer .like-button{
     background-color: var(--review-pri-color);
     color: var(--font-color);
+    font-weight: lighter;
+}
+
+.view-review-footer .like-button-color{
+    background-color: var(--secondary-font-color);
+    color: var(--color-navbar);
+    font-weight: lighter;
+}
+
+.remove-button-color{
+    background-color: var(--font-color);
+    color: var(--pri-color);
     font-weight: lighter;
 }
