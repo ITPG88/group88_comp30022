@@ -5,6 +5,7 @@
     border:none;
     outline: none;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 :root{
@@ -87,7 +88,6 @@ a{
     border-bottom: 4px solid var(--pri-color);
 }
 
-
 .big-buttn{
     width:270px;
     height:65px;
@@ -95,6 +95,7 @@ a{
     color:var(--font-color);
     background-color: var(--color-navbar);
     margin: 0px 20px 50px 0px;
+    cursor: pointer;
 }
 
 .medium-buttn{
@@ -102,6 +103,7 @@ a{
     height:35px;
     font-size: 18px;
     margin: 5px;
+    cursor: pointer;
 }
 
 .small-buttn{
@@ -109,6 +111,7 @@ a{
     height:35px;
     font-size: 18px;
     margin: 5px;
+    cursor: pointer;
 }
 
 /*=====================NAVBAR======================*/
@@ -195,6 +198,12 @@ header{
     grid-template-rows: 460px;
     gap:40px;
 }
+
+.review-footer{
+    display: flex;
+    align-items: center;
+    margin-top:15px;
+}
 /*=====================Button for different page======================*/
 .review-button-moderator{
     text-align:center;
@@ -226,7 +235,11 @@ header{
     margin-left: -25px;
     padding: 10px 25px;
 }
+
+
 /*=====================END HERE======================*/
+
+
 /*=====================Button Type======================*/
 .recommend-button{
     background-color: var(--pri-color);
@@ -260,8 +273,45 @@ header{
     height: 67px;
     margin-top: 25px;
 }
+
+.neglect-button{
+    color:var(--pri-color);
+}
+
+.remove-button{
+    background-color: var(--color-navbar);
+    color: var(--font-color);
+}
+
+.like-button-container span{
+    font-size: 10px;
+}
+
+.like-button{
+    align-items: center;
+    background-color: var(--secondary-font-color);
+    font-size: 18px;
+    width:80px;
+    height:35px;
+}
+
+.like-button img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-top: 1px;
+}
 /*=====================END HERE======================*/
 
+/*=====================Type of Review/comment section size======================*/
+.review-header-flagged{
+    display:flex;
+}
+
+.header-flagged{
+    margin-right: 10px;
+}
+/*=====================END HERE======================*/
 .each-review p{
     padding:5px 0;
     font-size: 18px;
