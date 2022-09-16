@@ -10,7 +10,7 @@ const studentSchema = new mongoose.Schema({
       type: String,
       unique: true,
     },
-    fieldsOfInterest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subject" }],
+    fieldsOfInterest: [String],
     likedList: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
   });
   
