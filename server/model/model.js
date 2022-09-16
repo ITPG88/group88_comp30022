@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
 
 const subjectSchema = new mongoose.Schema({
     subjectCode: String,
@@ -12,7 +14,10 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User'
+    author : {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+   }
 });
 
 const reviewSchema = new mongoose.Schema({
@@ -20,7 +25,10 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User',
+    author : {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     isPrivate: {
         type: Boolean,
         required: true,
@@ -36,48 +44,18 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    comments: [commentSchema]
-});
-
-const userSchema = new mongoose.Schema({
-    fullname: {
+    comments: [commentSchema],
+    status: {
         type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true
-    },
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    fieldsOfInterest: [subjectSchema]
-});
-
-const moderatorSchema = new mongoose.Schema({
-    fullname : {
-        type: String
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true,
+        enum : ['APPROVED', 'REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
+        default: 'APPROVED'
     }
+}, {
+    timestamps: true
 });
 
 const Review = mongoose.model('Review', reviewSchema);
 const Comment = mongoose.model('Comment', commentSchema);
 const Subject = mongoose.model('Subject', subjectSchema);
-const Moderator = mongoose.model('Moderator', moderatorSchema);
-const User = mongoose.model('User', userSchema);
 
-module.exports = {Review, Comment, Subject, Moderator, User}
+module.exports = {Review, Comment, Subject}

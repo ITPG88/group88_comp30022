@@ -41,4 +41,4 @@ moderatorRouter.get('/logout', (req, res) => {
 // Some initial routing
 moderatorRouter.get("/", loginController.landing);
 moderatorRouter.get("/signup", loginController.signup);
-module.exports = router;
+module.exports = moderatorRouter;

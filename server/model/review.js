@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose') 
+var Schema = mongoose.Schema
 
 
 const subjectSchema = new mongoose.Schema({
@@ -13,7 +14,10 @@ const commentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User'
+    author : {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+   }
 });
 
 const reviewSchema = new mongoose.Schema({
@@ -21,7 +25,10 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User',
+    author : {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     isPrivate: {
         type: Boolean,
         required: true,

@@ -7,6 +7,11 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 
+// Initialise Passport.js
+const passport = require('./passport')
+app.use(passport.authenticate('session'))
+
+
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
@@ -28,12 +33,14 @@ app.use(express.static(__dirname + "/"));
 // app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
-//All root routes directed by router
-app.use("/", require("./server/routes/router"));
+// link to our router
+const studentRouter = require('./server/routes/studentRouter')
+const moderatorRouter = require('./server/routes/moderatorRouter')
 
-//All student routes directred by studentRouter
-//app.use('/student', require("./server/routes/studentRouter.js"));
+// manage routers
+app.use('/student', studentRouter)
+app.use('/moderator', moderatorRouter)
 
-const listener = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

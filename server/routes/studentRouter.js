@@ -6,6 +6,7 @@ const passport = require('passport')
 const studentRouter = express.Router();
 // import controller functions
 const loginController = require("../controller/loginController");
+const studentController = require("../controller/studentController");
 
 // Authentication middleware
 const isAuthenticated = (req, res, next) => {
@@ -30,7 +31,8 @@ const isAuthenticated = (req, res, next) => {
 // Some initial routing
 studentRouter.get("/", loginController.landing);
 studentRouter.get("/signup", loginController.signup);
-module.exports = router;
 
 // add a route to handle the GET request for student homepage
 studentRouter.get("/:student_id", studentController.getCurrentStudent);
+
+module.exports = studentRouter;
