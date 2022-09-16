@@ -1,5 +1,5 @@
 const User = require('../model/user');
-const Review = require('../model/review');
+const Student = require('../model/student');
 
 const expressValidator = require('express-validator')
 

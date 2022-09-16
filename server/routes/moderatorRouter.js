@@ -29,7 +29,7 @@ moderatorRouter.get('/login', (req, res) => {
 // Handle login
 moderatorRouter.post('/login',
     passport.authenticate('local', {
-        successRedirect: './dashboard', failureRedirect: './login', failureFlash: true
+        successRedirect: './homepage', failureRedirect: './login', failureFlash: true
     })
 )
 // Handle logout
@@ -39,6 +39,6 @@ moderatorRouter.get('/logout', (req, res) => {
 })
 
 // Some initial routing
-moderatorRouter.get("/", loginController.landing);
+moderatorRouter.get("/landing", loginController.landing);
 moderatorRouter.get("/signup", loginController.signup);
 module.exports = moderatorRouter;

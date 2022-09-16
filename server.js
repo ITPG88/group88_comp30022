@@ -4,6 +4,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const flash = require('express-flash')
 const session = require('express-session')
 const path = require("path");
 const app = express();
@@ -11,6 +12,9 @@ const app = express();
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
+
+// Flash messages for failed logins, and (possibly) other success/error messages
+app.use(flash())
 
 // Track authenticated users through login sessions
 app.use(
@@ -58,6 +62,10 @@ app.use(express.static(__dirname + "/"));
 // link to our router
 const studentRouter = require('./server/routes/studentRouter')
 const moderatorRouter = require('./server/routes/moderatorRouter')
+
+app.get('/', (req, res) => {
+    res.render('Landing.html')
+})
 
 // manage routers
 app.use('/student', studentRouter)

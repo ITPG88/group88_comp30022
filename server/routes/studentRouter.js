@@ -22,14 +22,13 @@ const isAuthenticated = (req, res, next) => {
     return next()
 }
 
-// Login page (with failure message displayed upon login failure)
-// router.get("/login", (req, res) => {
-//   res.render("Login", { flash: req.flash("error"), title: "Login" });
-// });
+//Login page (with failure message displayed upon login failure)
+studentRouter.get("/login", (req, res) => {
+   res.render("Login", { flash: req.flash("error"), title: "Login" });
+});
 
 
 // Some initial routing
-studentRouter.get("/", loginController.landing);
 studentRouter.get("/signup", loginController.signup);
 
 // add a route to handle the GET request for student homepage
