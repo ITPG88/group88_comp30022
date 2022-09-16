@@ -3,6 +3,11 @@ import {writeFile} from 'fs';
 import * as path from 'path';
 import {getHTML} from './WebUtils';
 
+// Run script with : npx ts-node --esm ./subjectListScraper.ts
+
+// Heavily based off 
+// https://github.com/Trontor/lookahead/blob/master/subject-utils/scripts/subjectListScraper.ts
+
 /**
  * Stores basic information about a subject
  */
