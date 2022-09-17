@@ -27,7 +27,7 @@ const reviewSchema = new mongoose.Schema({
     },
     author : {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Student'
     },
     isPrivate: {
         type: Boolean,
