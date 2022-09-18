@@ -1,54 +1,54 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    enum : ['student', 'moderator'],
-    default: 'student'
-  }
+    enum: ["student", "moderator"],
+    default: "student",
+  },
 });
 
 // Password comparison function
 // Compares the provided password with the stored password
 // Allows us to call user.verifyPassword on any returned objects
 userSchema.methods.verifyPassword = function (password, callback) {
-    bcrypt.compare(password, this.password, (err, valid) => {
-        callback(err, valid)
-    })
-}
+  bcrypt.compare(password, this.password, (err, valid) => {
+    callback(err, valid);
+  });
+};
 // Password salt factor
-const SALT_FACTOR = 10
+const SALT_FACTOR = 10;
 // Hash password before saving
-userSchema.pre('save', function save(next) {
-    const user = this
-    // Go to next if password field has not been modified
-    if (!user.isModified('password')) {
-        return next()
+userSchema.pre("save", function save(next) {
+  const user = this;
+  // Go to next if password field has not been modified
+  if (!user.isModified("password")) {
+    return next();
+  }
+  // Automatically generate salt, and calculate hash
+  bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
+    if (err) {
+      return next(err);
     }
-    // Automatically generate salt, and calculate hash
-    bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
-        if (err) {
-            return next(err)
-        }
-        // Replace password with hash
-        user.password = hash
-        next()
-    })
-})
- 
-  const User = mongoose.model("User", userSchema);
+    // Replace password with hash
+    user.password = hash;
+    next();
+  });
+});
 
-  module.exports = User;
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
