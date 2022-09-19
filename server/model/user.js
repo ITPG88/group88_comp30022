@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
-const bcrypt = require('bcryptjs')
+const extendSchema = require('mongoose-extend-schema');
+const bcrypt = require('bcryptjs');
+const {mongo} = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  fullname: {
+  fullName: {
     type: String,
     required: true
   },
   username: {
     type: String,
-    required: true
+    required: true,
+      unique: true
   },
   password: {
     type: String,
@@ -27,7 +30,7 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.verifyPassword = function (password, callback) {
     bcrypt.compare(password, this.password, (err, valid) => {
         callback(err, valid)
-    })
+    });
 }
 // Password salt factor
 const SALT_FACTOR = 10
@@ -48,7 +51,28 @@ userSchema.pre('save', function save(next) {
         next()
     })
 })
- 
-  const User = mongoose.model("User", userSchema);
 
-  module.exports = User;
+const studentSchema = extendSchema(userSchema, {
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    fieldsOfInterest: {
+        type: [String],
+        default: []
+    },
+    likedList: {
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
+    }
+});
+
+const moderatorSchema = extendSchema(userSchema, {
+
+});
+const User = mongoose.model("User", userSchema, 'users');
+const Student = mongoose.model("Student", studentSchema, 'users');
+const Moderator = mongoose.model("Moderator", moderatorSchema, 'users');
+
+
+module.exports = {User, Student, Moderator, studentSchema};

@@ -8,10 +8,18 @@ const flash = require('express-flash')
 const session = require('express-session')
 const path = require("path");
 const app = express();
+const connectDB = require('./server/database/connection');
+const Review = require('./server/model/review');
+const userModels = require('./server/model/user');
+
+
 
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
+
+// Get DB connection
+connectDB();
 
 // Flash messages for failed logins, and (possibly) other success/error messages
 app.use(flash())
@@ -45,6 +53,7 @@ app.use(morgan("tiny"));
 
 // Using body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // View engine
 app.set("view engine", "html");
@@ -62,6 +71,7 @@ app.use(express.static(__dirname + "/"));
 // link to our router
 const studentRouter = require('./server/routes/studentRouter')
 const moderatorRouter = require('./server/routes/moderatorRouter')
+const {studentSchema} = require("./server/model/user");
 
 app.get('/', (req, res) => {
     res.render('Landing.html')
@@ -71,6 +81,28 @@ app.get('/', (req, res) => {
 app.use('/student', studentRouter)
 app.use('/moderator', moderatorRouter)
 
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+const review = {
+    content: "This is a fake review.\nLol",
+    isPrivate:
+    false,
+    isVisible:
+    true,
+
+    rating:
+    4,
+    status:
+    "APPROVED",
+
+    comments: []
+}
+
+Review.create(review);
+
+//console.log(review);
+
+

@@ -1,24 +1,4 @@
 const mongoose = require('mongoose') 
-var Schema = mongoose.Schema
-
-
-const subjectSchema = new mongoose.Schema({
-    subjectCode: String,
-    subjectName: String,
-    fieldOfStudy: String,
-    university: String
-});
-
-const commentSchema = new mongoose.Schema({
-    content: {
-        type: String,
-        required: true
-    },
-    author : {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-   }
-});
 
 const reviewSchema = new mongoose.Schema({
     content: {
@@ -26,7 +6,7 @@ const reviewSchema = new mongoose.Schema({
         required: true
     },
     author : {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
     },
     isPrivate: {
@@ -39,12 +19,15 @@ const reviewSchema = new mongoose.Schema({
         required: true,
         default: true
     },
-    subject: subjectSchema,
+    subject: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Subject"
+    },
     rating: {
         type: Number,
         required: true
     },
-    comments: [commentSchema],
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
     status: {
         type: String,
         enum : ['APPROVED', 'REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
@@ -55,7 +38,5 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model('Review', reviewSchema);
-const Comment = mongoose.model('Comment', commentSchema);
-const Subject = mongoose.model('Subject', subjectSchema);
 
-module.exports = {Review, Comment, Subject}
+module.exports = Review;

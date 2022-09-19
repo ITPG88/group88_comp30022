@@ -7,9 +7,9 @@ const connectDB = async () =>{
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+        con.connection.useDb("subjectReviewDB");
         mongoose.connection.on('connected', () => console.log('Connected'));
         console.log(`MongoDB connected : ${con.connection.host}\n`);
-
     }catch(err){
         console.log(err);
         process.exit(1);

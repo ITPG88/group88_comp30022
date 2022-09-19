@@ -1,6 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const User = require('./server/model/user')
+const User = require('./server/model/user').Student
 
 // Serialize information to be stored in session/cookie
 passport.serializeUser((user, done) => {
@@ -58,7 +58,7 @@ passport.use(
 User.find({}, (err, users) => {
     if (users.length > 0) return;
     User.deleteMany({}, {}, (err) => {
-        User.create({username: 'user', password: '123456'}, (err) => {
+        User.create({username: 'user', fullName: 'test user', password: '123456'}, (err) => {
             if (err) { console.log(err); return; }
             console.log('user inserted')
         })

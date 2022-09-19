@@ -1,5 +1,5 @@
 // Login Controller
-const User = require("../model/user");
+const User = require("../model/user").User;
 
 const landing = (req, res) => {
   res.render("Landing", { title: "Landing" });

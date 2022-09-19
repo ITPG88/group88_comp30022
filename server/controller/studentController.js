@@ -1,6 +1,4 @@
 const User = require('../model/user');
-const Student = require('../model/student');
-
 const expressValidator = require('express-validator')
 
 const getCurrentStudent = async (req) => {
@@ -29,7 +27,7 @@ const getReviewSortByTime = async (req) => {
  */
 const createNewStudent = (req, res) => {
     if(!req.body){
-        res.status(400).send({ message : "Content can not be emtpy!"});
+        res.status(400).send({ message : "Content can not be empty!"});
         return;
     }
 
