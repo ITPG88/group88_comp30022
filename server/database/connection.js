@@ -8,6 +8,7 @@ const connectDB = async () =>{
             useUnifiedTopology: true,
         });
         con.connection.useDb("subjectReviewDB");
+        con.connection.getClient().db("SubjectReviewDB");
         mongoose.connection.on('connected', () => console.log('Connected'));
         console.log(`MongoDB connected : ${con.connection.host}\n`);
     }catch(err){

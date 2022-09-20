@@ -86,23 +86,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-const review = {
-    content: "This is a fake review.\nLol",
-    isPrivate:
-    false,
-    isVisible:
-    true,
 
-    rating:
-    4,
-    status:
-    "APPROVED",
-
-    comments: []
-}
-
-Review.create(review);
-
-//console.log(review);
 
 

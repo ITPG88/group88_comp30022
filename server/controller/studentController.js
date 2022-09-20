@@ -1,4 +1,4 @@
-const User = require('../model/user');
+const Student = require('../model/user').Student;
 const expressValidator = require('express-validator')
 
 const getCurrentStudent = async (req) => {
@@ -48,6 +48,8 @@ const createNewStudent = (req, res) => {
     
     if (result){
         console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
+        res.status(400).send({ message : "Error, username or email already exist in database"});
+        return;
     }
 
 
@@ -60,15 +62,43 @@ const createNewStudent = (req, res) => {
         likedList: req.body.likedList
     });
     
-    student.save(student)
-    .then(data => {
-        //res.send(data)
-        //res.redirect('/add-user');
-    })
-    .catch(err =>{
+    Student.create(student).catch(err =>{
         res.status(500).send({
             message : err.message || "Some error occurred while creating a create operation"
         });
+    });
+}
+
+/**
+ * @description: updates modifiable fields of a student-user object. Req.body must contain userID field containing
+ * ID of user
+ * @method PATCH
+ * @param req
+ * @param res
+ */
+const updateStudentUser = async (req, res) => {
+
+    /* This method expects a patch request containing the field(s) to be updated, and the userID to be provided
+    ex:
+    req.body = {
+                 password: "thisIsMyNewPassword",
+                 userID: ObjectID ('6329172f237b056836e960f1') - an objectID from the userDB
+               }
+     */
+    const userID = req.body.userID;
+
+
+    await Student.findByIdAndUpdate(userID, req.body).then(data => {
+        if (!data) {
+            res.status(404).send({
+                message: `Cannot update user with ${userID}. Is the user id correct?`
+            });
+        } else {
+            console.log("updating");
+            res.send(data);
+        }
+    }).catch(err =>{
+    res.status(500).send({message: `Error in updating user information`});
     });
 }
 
