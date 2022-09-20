@@ -8,7 +8,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const path = require("path");
 const app = express();
-const connectDB = require("./db");
+const connectDB = require("./server/database/connection");
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 8080;
 // Flash messages for failed logins, and (possibly) other success/error messages
 app.use(flash());
 connectDB();
+
 // Track authenticated users through login sessions
 app.use(
   session({
