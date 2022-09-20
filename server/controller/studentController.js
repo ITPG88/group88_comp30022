@@ -76,6 +76,7 @@ const updateStudentUser = async (req, res) => {
 
 
     await Student.findByIdAndUpdate(userID, req.body).then(data => {
+        console.log(data);
         if (!data) {
             res.status(404).send({
                 message: `Cannot update user with ${userID}. Is the user id correct?`
@@ -85,7 +86,7 @@ const updateStudentUser = async (req, res) => {
             res.send(data);
         }
     }).catch(err =>{
-    res.status(500).send({message: `Error in updating user information`});
+        res.status(500).send({message: `Error in updating user information`});
     });
 }
 
@@ -93,4 +94,5 @@ module.exports = {
     getCurrentStudent,
     getReviewSortByTime,
     createNewStudent,
+    updateStudentUser
 }

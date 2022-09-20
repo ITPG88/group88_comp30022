@@ -73,6 +73,7 @@ const studentRouter = require('./server/routes/studentRouter')
 const moderatorRouter = require('./server/routes/moderatorRouter')
 const {studentSchema} = require("./server/model/user");
 
+
 app.get('/', (req, res) => {
     res.render('Landing.html')
 })
@@ -86,19 +87,18 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-const testUserReq = {
+
+/*
+const mongoose = require("mongoose");
+testing stuff
+const userID = mongoose.Types.ObjectId('632928b70eaf462946524199');
+const testUpdateReq = {
     body: {
-        fullName: "George Georginton",
-        username: 'GG123',
-        email: 'georgeG@gmail.com',
-        password: "dibuefwojnsf",
-        type: 'student',
-        likedList: [],
-        fieldsOfInterest: ['COMP']
+        email: "newEmail@yahoo.com.au"
     }
 }
-
-const sController = require('./server/controller/studentController');
-sController.createNewStudent(testUserReq);
+testUpdateReq.body.userID = userID;
+console.log(testUpdateReq);
+require("./server/controller/studentController").updateStudentUser(testUpdateReq)*/
 
 
