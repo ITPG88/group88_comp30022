@@ -86,6 +86,19 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+const testUserReq = {
+    body: {
+        fullName: "George Georginton",
+        username: 'GG123',
+        email: 'georgeG@gmail.com',
+        password: "dibuefwojnsf",
+        type: 'student',
+        likedList: [],
+        fieldsOfInterest: ['COMP']
+    }
+}
 
+const sController = require('./server/controller/studentController');
+sController.createNewStudent(testUserReq);
 
 

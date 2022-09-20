@@ -1,4 +1,5 @@
 const Student = require('../model/user').Student;
+const User = require('../model/user').User;
 const expressValidator = require('express-validator')
 
 const getCurrentStudent = async (req) => {
@@ -37,36 +38,22 @@ const createNewStudent = (req, res) => {
     }
 
     const query = { username: req.body.username, email: req.body.email};
-
-    const result = User.find(query).toArray(function(err, result){
-        if (err){
-            throw err;
+    User.find(query).then(data => {
+        console.log(data);
+        if (data !== []){
+            console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
+            res.status(400).send({ message : "Error, username or email already exist in database"});
             return;
         }
-        console.log(result);
-    });
-    
-    if (result){
-        console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
-        res.status(400).send({ message : "Error, username or email already exist in database"});
-        return;
-    }
-
-
-    const student = new Student({
-        username: req.body.username,
-        fullname: req.body.fullname,
-        email: req.body.email,
-        password: req.body.password,
-        fieldsOfInterest: req.body.fieldsOfInterest,
-        likedList: req.body.likedList
-    });
-    
-    Student.create(student).catch(err =>{
-        res.status(500).send({
-            message : err.message || "Some error occurred while creating a create operation"
+        console.log("here")
+        Student.create(req.body).catch(err =>{
+            res.status(500).send({
+                message : err.message || "Some error occurred while creating a create operation"
+            });
         });
+
     });
+
 }
 
 /**
@@ -105,4 +92,5 @@ const updateStudentUser = async (req, res) => {
 module.exports = {
     getCurrentStudent,
     getReviewSortByTime,
+    createNewStudent,
 }
