@@ -15,7 +15,7 @@ const getReviewSortByTime = async (req) => {
             // Change the format of createAt to YYYY/MM/DD
             reviews[i].createdAt = reviews[i].createdAt.toISOString().split('T')[0]
         }
-        return res.render('APAGE', { layout: false , reviews: reviews}) 
+        return res.render('APAGE', { layout: false , reviews: reviews})
     } catch (err) { 
         return next(err) 
     }
@@ -72,7 +72,7 @@ const updateStudentUser = async (req, res) => {
                  userID: ObjectID ('6329172f237b056836e960f1') - an objectID from the userDB
                }
      */
-    const userID = req.body.userID;
+    const userID = req.body.studentID;
 
 
     await Student.findByIdAndUpdate(userID, req.body).then(data => {
@@ -88,6 +88,13 @@ const updateStudentUser = async (req, res) => {
     }).catch(err =>{
         res.status(500).send({message: `Error in updating user information`});
     });
+}
+
+/**
+ * @description Returns the
+ */
+const getStudentLikedList = async (req, res) => {
+
 }
 
 module.exports = {
