@@ -1,6 +1,6 @@
 const Student = require('../model/user').Student;
 const User = require('../model/user').User;
-const expressValidator = require('express-validator')
+const expressValidator = require('express-validator');
 
 const getCurrentStudent = async (req) => {
     const userId = req.user._id
