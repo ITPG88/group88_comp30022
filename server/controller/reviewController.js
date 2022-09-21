@@ -10,9 +10,9 @@ const Comment = require('../model/comment');
  * @returns {Promise<void>}
  */
 const getReviewWithID = async (req, res) => {
-    const reviewID = "vefve" //req.params.reviewID;
+    const reviewID = req.params.reviewID;
 
-    return await Review.findById(reviewID).then(data => {
+    await Review.findById(reviewID).then(data => {
         if (!data){
             res.status(404).send({message: `Review with id ${reviewID} not found.`});
         } else {
@@ -33,7 +33,7 @@ const getReviewWithID = async (req, res) => {
 const getReviewViaQuery = async (req, res) => {
     const query = req.body;
 
-    return await Review.find(query).then(data => {
+    await Review.find(query).then(data => {
         res.send(data);
     }).catch(err =>{
         res.status(500).send({message: `Error retrieving reviews based on parameters: ${query}.`});
