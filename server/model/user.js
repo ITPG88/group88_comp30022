@@ -70,9 +70,10 @@ const studentSchema = extendSchema(userSchema, {
 const moderatorSchema = extendSchema(userSchema, {
 
 });
+
 const User = mongoose.model("User", userSchema, 'users');
 const Student = mongoose.model("Student", studentSchema, 'users');
 const Moderator = mongoose.model("Moderator", moderatorSchema, 'users');
 
 
-module.exports = {User, Student, Moderator, studentSchema};
+module.exports = {User, Student, Moderator};

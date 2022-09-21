@@ -90,12 +90,9 @@ const updateStudentUser = async (req, res) => {
     });
 }
 
-/**
- * @description Returns the
- */
-const getStudentLikedList = async (req, res) => {
 
-}
+
+
 
 module.exports = {
     getCurrentStudent,

@@ -48,10 +48,57 @@ const getReviewViaSearch = async (req, res) => {
 async function getReviewComments(commentsIDArray){
     let comments = []
 
-    for (let i = 0; i < comments.length, i++){
+    for (let i = 0; i < comments.length; i++){
         comments[i] = await Comment.findById(commentsIDArray[i]);
     }
 
     return comments;
+}
+
+/**
+ * @description Retrieves the appropriate data for the homepage. If no user provided, simply returns first 10 reviews
+ * in database. If moderator given, returns flagged reviews. If student given, returns liked list.
+ */
+const getHomePageReviews = async (req, res) => {
+
+    if (!req.body.hasOwnProperty('user')){
+        // Non-user logic
+        await Review.find().then(data =>{
+            res.send(data);
+        }).catch(err =>{
+            res.status(500).send({
+                message: err.message||"Error occurred while retrieving data"
+            });
+        });
+    } else {
+        // User logic
+        if (req.body.user.type === 'moderator') {
+            await Review.find({$or:[{status: "REQUIRES_SUBJECT_REVIEW"},{status: "FLAGGED"}]}).then(data =>{
+                res.send(data);
+            }).catch(err =>{
+                res.status(500).send({
+                    message: err.message||"Error occurred while retrieving data"
+                });
+            });
+        } else {
+            await Review.find({author: req.body.user._id}).then(data =>{
+                res.send(getReviewsFromID(data));
+            }).catch(err =>{
+                res.status(500).send({
+                    message: err.message||"Error occurred while retrieving data"
+                });
+            });
+        }
+    }
+}
+
+async function getReviewsFromID (reviewIDList){
+    let reviews = []
+
+    for (let i = 0; i < reviews.length; i++){
+        reviews[i] = await Review.findById(reviewIDList[i]);
+    }
+
+    return reviews;
 }
 
