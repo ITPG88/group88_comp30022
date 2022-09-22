@@ -9,21 +9,21 @@ const home = (req, res) => {
 };
 
 const browse = (req, res) => {
-  res.render("Home page (Browse).include", { title: "Browse" });
+  res.render("Home page (Browse).html", { title: "Browse" });
 };
 
 const history = (req, res) => {
-  res.render("Home page (History).include", { title: "History" });
+  res.render("Home page (History).html", { title: "History" });
 };
 
 const account = (req, res) => {
-  res.render("Account-setting.include", { title: "Account" });
+  res.render("Account-setting.html", { title: "Account" });
 };
 const appearance = (req, res) => {
-  res.render("Appearence-setting.include", { title: "Appearance" });
+  res.render("Appearence-setting.html", { title: "Appearance" });
 };
 const interests = (req, res) => {
-  res.render("Interest_areas-setting .include", { title: "Interests" });
+  res.render("Interest_areas-setting .html", { title: "Interests" });
 };
 
 const getCurrentStudent = async (req) => {
