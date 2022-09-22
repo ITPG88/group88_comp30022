@@ -4,15 +4,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const flash = require('express-flash')
-const session = require('express-session')
+const flash = require("express-flash");
+const session = require("express-session");
 const path = require("path");
 const app = express();
-const connectDB = require('./server/database/connection');
-const Review = require('./server/model/review');
-const userModels = require('./server/model/user');
-
-
+const connectDB = require("./server/database/connection");
 
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
@@ -22,31 +18,32 @@ const PORT = process.env.PORT || 8080;
 connectDB();
 
 // Flash messages for failed logins, and (possibly) other success/error messages
-app.use(flash())
+app.use(flash());
+connectDB();
 
 // Track authenticated users through login sessions
 app.use(
-    session({
-        // The secret used to sign session cookies (ADD ENV VAR)
-        secret: process.env.SESSION_SECRET || 'keyboard cat',
-        name: 'demo', // The cookie name (CHANGE THIS)
-        saveUninitialized: false,
-        resave: false,
-        cookie: {
-            sameSite: 'strict',
-            httpOnly: true,
-            secure: app.get('env') === 'production'
-        },
-    })
-)
+  session({
+    // The secret used to sign session cookies (ADD ENV VAR)
+    secret: process.env.SESSION_SECRET || "keyboard cat",
+    name: "demo", // The cookie name (CHANGE THIS)
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      sameSite: "strict",
+      httpOnly: true,
+      secure: app.get("env") === "production",
+    },
+  })
+);
 
-if (app.get('env') === 'production') {
-    app.set('trust proxy', 1); // Trust first proxy
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1); // Trust first proxy
 }
 
 // Initialise Passport.js
-const passport = require('./passport')
-app.use(passport.authenticate('session'))
+const passport = require("./passport");
+app.use(passport.authenticate("session"));
 
 // log any requests
 app.use(morgan("tiny"));
@@ -62,25 +59,18 @@ app.engine("html", require("ejs").renderFile);
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
 
-
 // assets
 // app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 // app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
+//All root routes directed by router
+app.use("/", require("./server/routes/index.js"));
+app.use("/admin", require("./server/routes/admin.js"));
+app.use("/subject", require("./server/routes/subject.js"));
+app.use("/settings", require("./server/routes/settings.js"));
+
 // link to our router
-const studentRouter = require('./server/routes/studentRouter')
-const moderatorRouter = require('./server/routes/moderatorRouter')
-const {studentSchema} = require("./server/model/user");
-
-
-app.get('/', (req, res) => {
-    res.render('Landing.html')
-})
-
-// manage routers
-app.use('/student', studentRouter)
-app.use('/moderator', moderatorRouter)
 
 
 app.listen(PORT, () => {

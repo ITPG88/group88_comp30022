@@ -6,14 +6,20 @@ const landing = (req, res) => {
 };
 
 const login = (req, res) => {
-  res.render("Landing", { title: "Landing" });
+  res.render("Login", { title: "Login" });
 };
 
 const signup = (req, res) => {
-  res.render("signup", { title: "Landing" });
+  res.render("signup", { title: "signup" });
+};
+
+const forget = (req, res) => {
+  res.render("forgettingemail", { title: "forgettingemail" });
 };
 
 module.exports = {
   landing,
   signup,
+  login,
+  forget,
 };

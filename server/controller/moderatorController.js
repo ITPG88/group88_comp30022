@@ -1,5 +1,7 @@
 const Moderator = require("../model/user").Moderator;
 const Subject = require("../model/subject");
+const User = require("../model/user").User;
+const Review = require("../model/review");
 
 
 /**
@@ -15,3 +17,12 @@ const createSubject = async (req, res) =>{
         });
     });
 }
+
+
+const home = (req, res) => {
+  res.render("Moderator-Homepage(Browse)", { title: "home" });
+};
+
+module.exports = {
+  home,
+};
