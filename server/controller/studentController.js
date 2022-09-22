@@ -1,6 +1,7 @@
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
 const expressValidator = require("express-validator");
+const async = require("async");
 
 // Routing
 const home = (req, res) => {
@@ -8,21 +9,21 @@ const home = (req, res) => {
 };
 
 const browse = (req, res) => {
-  res.render("Home page (Browse).html", { title: "Browse" });
+  res.render("Home page (Browse).include", { title: "Browse" });
 };
 
 const history = (req, res) => {
-  res.render("Home page (History).html", { title: "History" });
+  res.render("Home page (History).include", { title: "History" });
 };
 
 const account = (req, res) => {
-  res.render("Account-setting.html", { title: "Account" });
+  res.render("Account-setting.include", { title: "Account" });
 };
 const appearance = (req, res) => {
-  res.render("Appearence-setting.html", { title: "Appearance" });
+  res.render("Appearence-setting.include", { title: "Appearance" });
 };
 const interests = (req, res) => {
-  res.render("Interest_areas-setting .html", { title: "Interests" });
+  res.render("Interest_areas-setting .include", { title: "Interests" });
 };
 
 const getCurrentStudent = async (req) => {
@@ -49,9 +50,11 @@ const getReviewSortByTime = async (req) => {
  * @description: Creates a new student-user. Expects well formed student created from sign-up.
  * @method POST 
  */
-const createNewStudent = (req, res) => {
+const createNewStudent = async (req, res) => {
+    console.log(req.body);
     if(!req.body){
         res.status(400).send({ message : "Content can not be empty!"});
+        res.redirect('/signup');
         return;
     }
 
@@ -66,6 +69,7 @@ const createNewStudent = (req, res) => {
         if (data !== []){
             console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
             res.status(400).send({ message : "Error, username or email already exist in database"});
+            res.redirect('/signup');
             return;
         }
         console.log("here")
@@ -78,6 +82,10 @@ const createNewStudent = (req, res) => {
     });
 
 }
+
+
+
+
 
 /**
  * @description: updates modifiable fields of a student-user object. Req.body must contain userID field containing

@@ -1,15 +1,18 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const studentController = require('../controller/studentController');
+const services = require('../services/render');
 
 const login = require("../controller/loginController");
 const auth = require("../helper/auth");
 
 // Landing Page
-router.get("/", auth.ensureGuest, login.landing);
+router.get("/", auth.ensureGuest, services.landing);
 
 // Login Page
-router.get("/login", auth.ensureGuest, login.login);
+router.get("/login", auth.ensureGuest, services.login);
+
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
@@ -26,10 +29,15 @@ router.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+
 router.get("/forgetpassword", auth.ensureGuest, login.forget);
 
+
 // SignUp Page
-router.get("/signup", auth.ensureGuest, login.signup);
+router.get("/signup", auth.ensureGuest, services.signup);
+router.post('/signup', auth.ensureGuest, services.addUser)
+
+
 
 // passport not set up yet
 const student = require("../controller/studentController");
@@ -57,3 +65,9 @@ module.exports = router;
 
 // // add a route to handle the GET request for student homepage
 // studentRouter.get("/:student_id", studentController.getCurrentStudent);
+
+
+
+// API
+router.post('/api/users', studentController.createNewStudent);
+router.get('/api/users/:id', studentController.getCurrentStudent);

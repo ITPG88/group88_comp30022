@@ -19,7 +19,6 @@ connectDB();
 
 // Flash messages for failed logins, and (possibly) other success/error messages
 app.use(flash());
-connectDB();
 
 // Track authenticated users through login sessions
 app.use(
