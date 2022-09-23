@@ -1,14 +1,223 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Subjects Review-interest asking</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
-</head>
+<link href="/style/style.css" rel="stylesheet" type="text/css" />
+<form action="/signup/choose_interests" method="post" id="signup_interests">
+  <div class="interest">
+    <div class="asking">
+      <p>Choose your field(s)</p>
+    </div>
+    <br />
+    <div class="change">
+      <p>You can change your preferences later.</p>
+    </div>
+    <br />
+    <br />
 
-<body>
-<%- include('partials/_signup_interests_form')%>
-</body>
-</html>
+    <div class="group">
+      <!--maybe?? kinda looks wonky atm-->
+      <input type="checkbox" hidden name="arch" id="arch" />
+      <label
+        class="b"
+        for="arch"
+        style="background: url(/assets/img/Architecture.png)"
+      >
+        <label for="arch" style="user-select: none">Architecture</label>
+      </label>
+
+      <div class="space2"></div>
+      <input type="checkbox" hidden name="busi" id="busi" />
+      <label
+        class="b"
+        for="busi"
+        style="background: url(/assets/img/Business.png)"
+      >
+        <label for="busi" style="user-select: none">Business</label>
+      </label>
+      <div class="space2"></div>
+      <input type="checkbox" hidden name="desi" id="desi" />
+      <label
+        class="b"
+        for="desi"
+        style="background: url(/assets/img/Design.png)"
+      >
+        <label for="desi" style="user-select: none">Design</label>
+      </label>
+      <div class="space2"></div>
+      <input type="checkbox" hidden name="educ" id="educ" />
+      <label
+        class="b"
+        for="educ"
+        style="background: url(/assets/img/Education.png)"
+      >
+        <label for="educ" style="user-select: none">Education</label>
+      </label>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="group">
+      <input type="checkbox" hidden name="sports" id="sports" />
+      <label
+        class="b"
+        for="sports"
+        style="background: url(/assets/img/Sports.png)"
+      >
+        <label for="sports" style="user-select: none">Sports</label>
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="envi" id="envi" />
+      <label
+        class="b"
+        for="envi"
+        style="background: url(/assets/img/Enviroment.png)"
+      >
+        <label for="envi" style="user-select: none">Enviroment</label>
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="food" id="food" />
+      <label class="b" for="food" style="background: url(/assets/img/Food.png)">
+        <label for="food" style="background-color: rgba(202, 100, 17, 0.7)"
+          >Food</label
+        >
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="scie" id="scie" />
+      <label
+        class="b"
+        for="scie"
+        style="background: url(/assets/img/Science.png)"
+      >
+        <label for="scie">Science</label>
+      </label>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="group">
+      <input type="checkbox" hidden name="soci" id="soci" />
+      <label
+        class="b"
+        for="soci"
+        style="background: url(/assets/img/Sociology.png)"
+      >
+        <label for="soci" style="background-color: rgba(204, 14, 141, 0.7)"
+          >Sociology</label
+        >
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="info" id="info" />
+      <label
+        class="b"
+        for="info"
+        style="background: url(/assets/img/Information_Technology.png)"
+      >
+        <label for="info">IT</label>
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="law" id="law" />
+      <label class="b" for="law" style="background: url(/assets/img/Law.png)">
+        >
+        <label for="law">Law</label>
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="media" id="media" />
+      <label
+        class="b"
+        for="media"
+        style="background: url(/assets/img/Media.png)"
+      >
+        >
+        <label for="media" style="background-color: rgba(158, 105, 189, 0.7)"
+          >Media</label
+        >
+      </label>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="group">
+      <input type="checkbox" hidden name="med" id="med" />
+      <label
+        class="b"
+        for="med"
+        style="background: url(/assets/img/Medicine.png)"
+      >
+        >
+        <label for="med" style="background-color: rgba(39, 109, 201, 0.7)"
+          >Medicine</label
+        >
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="nurs" id="nurs" />
+      <label
+        class="b"
+        for="nurs"
+        style="background: url(/assets/img/Nursing.png)"
+      >
+        >
+        <label for="nurs" style="background-color: rgba(56, 122, 209, 0.616)"
+          >Nursing</label
+        >
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="health" id="health" />
+      <label
+        class="b"
+        for="health"
+        style="background: url(/assets/img/Health_Science.png)"
+      >
+        >
+        <label for="health" style="background-color: rgba(31, 92, 172, 0.7)"
+          >Health Science</label
+        >
+      </label>
+
+      <div class="space2"></div>
+
+      <input type="checkbox" hidden name="engr" id="engr" />
+      <label
+        class="b"
+        for="engr"
+        style="background: url(/assets/img/Engineering.png)"
+      >
+        >
+        <label for="engr" style="background-color: rgba(31, 92, 172, 0.7)"
+          >Engineering</label
+        >
+      </label>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <div style="text-align: right">
+    <div class="finishbutton">
+      <button type="submit">Finish</button>
+    </div>
+  </div>
+
+  <br />
+  <br />
+</form>

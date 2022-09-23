@@ -1,6 +1,6 @@
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const User = require('./server/model/user').User
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("./server/model/user").User;
 
 // Serialize information to be stored in session/cookie
 passport.serializeUser((user, done) => {
@@ -70,6 +70,5 @@ User.find({}, (err, users) => {
     );
   });
 });
-
 
 module.exports = passport;
