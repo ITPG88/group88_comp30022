@@ -58,16 +58,28 @@ app.engine("html", require("ejs").renderFile);
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
 
+app.set('view engine', 'ejs')
+
+app.use('/static', express.static( "static" ))
+app.use( '/static/css', express.static( "styles" ))
+
+app.use(express.urlencoded({extended : false}))
+
 // assets
 // app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 // app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 //All root routes directed by router
-app.use("/", require("./server/routes/index.js"));
+/*app.use("/", require("./server/routes/index.js"));
 app.use("/admin", require("./server/routes/admin.js"));
 app.use("/subject", require("./server/routes/subject.js"));
-app.use("/settings", require("./server/routes/settings.js"));
+app.use("/settings", require("./server/routes/settings.js"));*/
+
+app.get('/', (req,res) =>{
+  res.render('index')
+})
+app.use('/student', require('./routes/student'))
 
 // link to our router
 

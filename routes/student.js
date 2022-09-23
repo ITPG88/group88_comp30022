@@ -1,5 +1,6 @@
 const express = require('express')
-const Review = require('./../model/review')
+const Review = require('./../model/review');
+const subject = require('./../model/subject');
 const Subject = require('./../model/subject')
 const router = express.Router();
 
@@ -29,9 +30,9 @@ router.get('/:id', async (req,res) =>{
 })
 
 router.post('/', async (req,res) =>{
-    const subject = new Subject({ subjectCode: req.body.subjectcode})
-    let review = new Review({
-        subject: subject,
+    console.log(req.body.subjectCode)
+    let review = new Review({       
+        subject : {subjectCode : req.body.subjectCode, subjectName : null, fieldOfStudy : null, university : 'University of Melbourne'},
         content: req.body.content,
         isPrivate: false,
         isVisible: true,
