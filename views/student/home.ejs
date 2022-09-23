@@ -20,7 +20,8 @@
           <article class="each-review">
             <span class="material-symbols-outlined">favorite</span>
             
-            <h3><%= review %></h3>
+            <h3><%= review.subject%></h3>
+            
             <h4>University of Melbourne</h4>
             <div class="star-review">
               <span class="fa fa-star checked"></span>
@@ -32,7 +33,7 @@
             <p>
               <%= review.content %>
             </p>
-            <footer><%= review.createdAt.toLocaleDateString() %></footer>
+            <footer>date</footer>
           </article>
           
         <% }) %> 

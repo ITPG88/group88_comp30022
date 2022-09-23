@@ -1,11 +1,11 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const Review = require('./../model/review');
-const subject = require('./../model/subject');
-const Subject = require('./../model/subject')
+const Subject = require('./../model/subject');
 const router = express.Router();
 
 router.get('/', async (req,res) => {
-    const reviews = await Review.find().populate('subject')
+    const reviews = await Review.find()
     res.render('student/home', { reviews : reviews })
 })
 
@@ -30,9 +30,11 @@ router.get('/:id', async (req,res) =>{
 })
 
 router.post('/', async (req,res) =>{
-    console.log(req.body.subjectCode)
-    let review = new Review({       
-        subject : {subjectCode : req.body.subjectCode, subjectName : null, fieldOfStudy : null, university : 'University of Melbourne'},
+    
+    const result = await Subject.find({subjectCode : req.body.subjectCode})
+    console.log(result[0]._id)
+    let review = new Review({   
+        subject : result[0]._id,    
         content: req.body.content,
         isPrivate: false,
         isVisible: true,
@@ -40,8 +42,10 @@ router.post('/', async (req,res) =>{
     })
     try{
         review = await review.save()
+        console.log(review)
         res.redirect(`/student/${review.id}`)
     }catch(e){
+        console.log(e)
         res.render('student/write-review', { review : review})
     }
     
