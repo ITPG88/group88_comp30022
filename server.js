@@ -57,11 +57,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // View engine
-/*app.set("view engine", "html");
+app.set("view engine", "html");
 app.engine("html", require("ejs").renderFile);
 
 app.set("views", path.resolve(__dirname, "views"));
-app.use(express.static(__dirname + "/"));*/
+app.use(express.static(__dirname + "/"));
 
 //ejs engine
 app.set('view engine', 'ejs')
@@ -86,10 +86,10 @@ app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 
 //All root routes directed by router
-/*app.use("/", require("./server/routes/index.js"));
+app.use("/", require("./server/routes/index.js"));
 app.use("/admin", require("./server/routes/admin.js"));
 app.use("/subject", require("./server/routes/subject.js"));
-app.use("/settings", require("./server/routes/settings.js"));*/
+app.use("/settings", require("./server/routes/settings.js"));
 
 app.get('/', (req,res) =>{
     res.render('index')

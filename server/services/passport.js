@@ -1,6 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const passport = require('passport');
 const User = require('../model/user').User;
 
 module.exports = function(passport) {
@@ -11,7 +11,7 @@ module.exports = function(passport) {
                 return done(null, false, {message: "User does not exist"});
             }
 
-            bcrypt.compare(password, user.password, (err, isMatch) =>{
+            user.verifyPassword(password, (err, isMatch) =>{
                 if (err) throw err;
 
                 if (isMatch){
@@ -22,9 +22,10 @@ module.exports = function(passport) {
             });
 
         }).
-        catch()
+        catch(err => {
+            console.log(err);
         })
-    );
+    }));
 
     passport.serializeUser(function(user, cb) {
         process.nextTick(function() {
