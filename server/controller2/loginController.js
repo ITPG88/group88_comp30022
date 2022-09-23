@@ -4,7 +4,7 @@ const Review = require("../model/review");
 const Moderator = require("../model/user").Moderator;
 const expressValidator = require("express-validator");
 
-exports.createStudent = (req, res) => {
+exports.createStudent = (req, res, next) => {
   console.log(req.body);
   const { username, fullName, email, password } = req.body;
   let errors = [];
@@ -45,31 +45,17 @@ exports.createStudent = (req, res) => {
     Student.create(req.body)
       .then((data) => {
         console.log(data);
+        next();
         //req.flash("success_msg", "You are now registered.");
-        res.redirect("/signup/choose_interests");
       })
       .catch((err) => {
-        if (data.length !== 0){
-            console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
-            res.redirect('/signup');
-            return;
-        }
-        console.log("here")
-        Student.create(req.body).
-        then(data => {
-            console.log(data);
-            //req.flash("success_msg", "You are now registered.");
-            res.locals.user = req.body.username;
-            res.redirect("/signup/choose_interests");
-        }).
-        catch(err =>{
-            res.status(500).send({
-                message : err.message || "Some error occurred while creating a create operation"
-            });
+        console.log("Error detected");
+        res.status(500).send({
+            message : err.message || "Some error occurred while creating a create operation"
         });
       });
   });
-};
+}
 
 exports.getStudentReviews = async (req, res) => {
   let reviews = [];
@@ -85,14 +71,21 @@ exports.getStudentReviews = async (req, res) => {
 };
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
-    const username = req.locals.user;
-    if (req.body.fieldsOfInterest.isEmpty()){
-        res.redirect("/login", {message: "You are now signed up. Login with your new details."});
+    console.log(req.body);
+    const username = req.user.username;
+
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+        console.log('Object missing');
+        res.redirect("/logout");
         return;
     }
-
-    await Student.findOneAndUpdate({username: username}, {fieldsOfInterest: req.body.fieldsOfInterest});
-    res.redirect("/login", {message: "You are now signed up. Login with your new details."});
+    let fieldsofInterest = [];
+    for (const code in req.body) {
+        fieldsofInterest.push(code);
+    }
+    console.log(fieldsofInterest);
+    await Student.findOneAndUpdate({username: username}, {fieldsOfInterest: fieldsofInterest});
+    res.redirect("/logout");
 }
 
 exports.resetPassword = async (req, res) => {
