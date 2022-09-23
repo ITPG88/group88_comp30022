@@ -45,16 +45,10 @@ exports.createStudent = (req, res) => {
     Student.create(req.body)
       .then((data) => {
         console.log(data);
-<<<<<<< Updated upstream
         //req.flash("success_msg", "You are now registered.");
         res.redirect("/signup/choose_interests");
       })
       .catch((err) => {
-        res.status(500).send({
-          message:
-            err.message ||
-            "Some error occurred while creating a create operation",
-=======
         if (data.length !== 0){
             console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
             res.redirect('/signup');
@@ -72,7 +66,6 @@ exports.createStudent = (req, res) => {
             res.status(500).send({
                 message : err.message || "Some error occurred while creating a create operation"
             });
->>>>>>> Stashed changes
         });
       });
   });
@@ -92,11 +85,7 @@ exports.getStudentReviews = async (req, res) => {
 };
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
     const username = req.locals.user;
->>>>>>> Stashed changes
     if (req.body.fieldsOfInterest.isEmpty()){
         res.redirect("/login", {message: "You are now signed up. Login with your new details."});
         return;
@@ -115,12 +104,5 @@ exports.resetPassword = async (req, res) => {
 exports.sendPasswordEmailLink = async (req, res) => {
 
 }
-=======
-  console.log(req.user.fullName);
-  //   if (req.body.fieldsOfInterest.isEmpty()) {
-  //     res.redirect("/login", {
-  //       message: "You are now signed up. Login with your new details.",
-  //     });
-  //   }
-};
->>>>>>> Stashed changes
+
+
