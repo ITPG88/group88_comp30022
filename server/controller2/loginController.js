@@ -72,6 +72,20 @@ exports.getStudentReviews = async (req, res) => {
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
     if (req.body.fieldsOfInterest.isEmpty()){
-        res.redirect("/login", {message: "You are now signed up. Login with your new details."})
+        res.redirect("/login", {message: "You are now signed up. Login with your new details."});
+        return;
     }
+
+    await Student.findByIdAndUpdate(req.user._id, {fieldsOfInterest: req.body.fieldsOfInterest});
+    res.redirect("/login", {message: "You are now signed up. Login with your new details."});
+}
+
+exports.resetPassword = async (req, res) => {
+    const newPassword = req.body.password;
+    await Student.findByIdAndUpdate(req.user._id, {password: newPassword});
+    res.redirect("/login", {message: "Password reset. Please login."});
+}
+
+exports.sendPasswordEmailLink = async (req, res) => {
+
 }

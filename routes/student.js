@@ -17,8 +17,8 @@ router.get('/history', (req,res) => {
     res.render('student/history')
 })
 
-router.get('/write-review', (req,res) => {
-    res.render('student/write-review', {review : new Review()})
+router.get('/write_review', (req,res) => {
+    res.render('student/write_review', {review : new Review()})
 })
 
 router.get('/:id', async (req,res) =>{

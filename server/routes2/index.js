@@ -3,7 +3,10 @@ const router = express.Router();
 const passport = require("passport");
 
 const userController = require("../controller2/loginController");
-const {ensureAuthenticated} = require("../services/auth");
+const auth = require("../services/auth");
+const Review = require("../../model/review");
+const reviewController = require("../controller2/reviewController");
+const student = require("../controller/studentController");
 
 // @desc Landing
 // @route GET /
@@ -21,7 +24,7 @@ router.get('/login', (req, res) => {
 // @route POST /login
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: `/${req.user.type}/home`,
+        successRedirect: `/home`,
         failureRedirect: '/login',
     })(req, res, next);
 });
@@ -50,5 +53,35 @@ router.patch('/signup/choose_interests');
 router.get("/forgot_password", (req, res) => {
     res.render("forgot_password.ejs", {title: "forgot_password"});
 });
+
+/**
+ * @desc Get homepage
+ * @route GET /home
+ */
+router.get('/home', reviewController.getHomepageReviews);
+
+
+// @desc get browsepage
+// @route GET /browse
+router.get('/browse', auth.ensureAuthenticated, reviewController.getBrowsePageReviews)
+
+// @desc get historypage
+// @route GET /history
+router.get("/history", auth.ensureAuthenticated, reviewController.getHistoryReviews);
+
+
+// @desc get account
+// @route GET /account
+router.get("/account", (req, res) => {
+    res.redirect("/settings");
+});
+
+// @desc get write_review
+// @route GET /write_review
+router.get('/write_review', (req, res) => {
+    res.render("/student/write_review");
+});
+
+router.post('/write_review', auth.ensureAuthenticated, reviewController.postReview);
 
 module.exports = router;
