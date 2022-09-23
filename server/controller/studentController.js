@@ -64,16 +64,22 @@ const createNewStudent = async (req, res) => {
     }
 
     const query = { username: req.body.username, email: req.body.email};
+    console.log(query);
     User.find(query).then(data => {
-        console.log(data);
-        if (data !== []){
+        console.log(`data is ${data.length}`);
+        if (data.length !== 0){
             console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
             res.status(400).send({ message : "Error, username or email already exist in database"});
             res.redirect('/signup');
             return;
         }
         console.log("here")
-        Student.create(req.body).catch(err =>{
+        Student.create(req.body).
+        then(data => {
+            console.log(data);
+            res.redirect("/signup/choose_interests");
+        }).
+        catch(err =>{
             res.status(500).send({
                 message : err.message || "Some error occurred while creating a create operation"
             });

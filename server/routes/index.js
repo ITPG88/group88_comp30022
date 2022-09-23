@@ -35,7 +35,7 @@ router.get("/forgetpassword", auth.ensureGuest, login.forget);
 
 // SignUp Page
 router.get("/signup", auth.ensureGuest, services.signup);
-router.post('/signup', auth.ensureGuest, services.addUser)
+router.get("/signup/choose_interests", services.signupPreferences);
 
 
 
@@ -58,6 +58,15 @@ router.get("/account", (req, res) => {
 });
 module.exports = router;
 
+
+
+// API
+router.post('/api/users', studentController.createNewStudent);
+router.patch('/api/users/:id', studentController.updateStudentUser);
+router.get('/api/users/:id', studentController.getCurrentStudent);
+
+
+
 // Login page (with failure message displayed upon login failure)
 // router.get("/login", (req, res) => {
 //   res.render("Login", { flash: req.flash("error"), title: "Login" });
@@ -65,9 +74,3 @@ module.exports = router;
 
 // // add a route to handle the GET request for student homepage
 // studentRouter.get("/:student_id", studentController.getCurrentStudent);
-
-
-
-// API
-router.post('/api/users', studentController.createNewStudent);
-router.get('/api/users/:id', studentController.getCurrentStudent);

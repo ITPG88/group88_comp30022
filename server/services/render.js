@@ -4,6 +4,10 @@ exports.signup = (req, res) => {
     res.render("signup.ejs", { title: "signup" });
 };
 
+exports.signupPreferences = (req, res) =>{
+    res.render("signup_interests.ejs", {title: "interests"});
+}
+
 exports.addUser = (req, res) => {
     console.log("we make it");
     axios.post(`${process.env.HOST}/api/users`).

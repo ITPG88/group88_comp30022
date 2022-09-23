@@ -63,7 +63,8 @@ const studentSchema = extendSchema(userSchema, {
         default: []
     },
     likedList: {
-        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}],
+        default: []
     }
 });
 
