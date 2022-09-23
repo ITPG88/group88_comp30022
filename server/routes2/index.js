@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require("passport");
 
-const userController = require("../controller2/loginController");
+const loginController = require("../controller2/loginController");
 const auth = require("../services/auth");
-const Review = require("../../model/review");
 const reviewController = require("../controller2/reviewController");
 const student = require("../controller/studentController");
 
@@ -23,8 +22,9 @@ router.get('/login', (req, res) => {
 // @desc Attempt login
 // @route POST /login
 router.post('/login', (req, res, next) => {
+    console.log(req.body);
     passport.authenticate('local', {
-        successRedirect: `/home`,
+        successRedirect: '/home',
         failureRedirect: '/login',
     })(req, res, next);
 });
@@ -37,7 +37,7 @@ router.get('/signup', (req, res) => {
 
 // @desc Attempt Signup
 // @route POST /signup
-router.post('/signup', userController.createStudent);
+router.post('/signup', loginController.createStudent);
 
 // @desc Signup interests page
 // @route GET /signup/choose_interests
@@ -47,7 +47,7 @@ router.get('/signup/choose_interests', (req, res) => {
 
 // @desc Add fields on sign-up handle
 // @route PATCH /signup
-router.patch('/signup/choose_interests');
+router.patch('/signup/choose_interests', loginController.editStudentFieldsOfInterest);
 
 // @desc Add
 router.get("/forgot_password", (req, res) => {
