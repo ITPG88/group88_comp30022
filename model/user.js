@@ -6,51 +6,51 @@ const {mongo} = require("mongoose");
 const userSchema = new mongoose.Schema({
   fullName: {
     type: String,
-    required: true
+    required: true,
   },
   username: {
     type: String,
     required: true,
-      unique: true
+    unique: true
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    enum : ['student', 'moderator'],
-    default: 'student'
-  }
+    enum: ["student", "moderator"],
+    default: "student",
+  },
 });
 
 // Password comparison function
 // Compares the provided password with the stored password
 // Allows us to call user.verifyPassword on any returned objects
 userSchema.methods.verifyPassword = function (password, callback) {
-    bcrypt.compare(password, this.password, (err, valid) => {
-        callback(err, valid)
-    });
-}
+  bcrypt.compare(password, this.password, (err, valid) => {
+    callback(err, valid);
+  });
+};
 // Password salt factor
-const SALT_FACTOR = 10
+const SALT_FACTOR = 10;
 // Hash password before saving
-userSchema.pre('save', function save(next) {
-    const user = this
+userSchema.pre("save", function save(next) {
+    const user = this;
     // Go to next if password field has not been modified
-    if (!user.isModified('password')) {
-        return next()
+    if (!user.isModified("password")) {
+      return next();
     }
     // Automatically generate salt, and calculate hash
     bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
-        if (err) {
-            return next(err)
+        if (err){
+          return next(err);
         }
         // Replace password with hash
         user.password = hash
         next()
     })
-})
+});
 
 const studentSchema = extendSchema(userSchema, {
     email: {
@@ -63,17 +63,15 @@ const studentSchema = extendSchema(userSchema, {
         default: []
     },
     likedList: {
-        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}],
+        default: []
     }
 });
 
-const moderatorSchema = extendSchema(userSchema, {
-
-});
+const moderatorSchema = extendSchema(userSchema, {});
 
 const User = mongoose.model("User", userSchema, 'users');
 const Student = mongoose.model("Student", studentSchema, 'users');
 const Moderator = mongoose.model("Moderator", moderatorSchema, 'users');
 
-
-module.exports = {User, Student, Moderator};
+module.exports = {User, Student, Moderator}

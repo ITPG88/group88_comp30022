@@ -1,6 +1,6 @@
 const express = require('express')
-const Review = require('./../model/review')
-const Subject = require('./../model/subject')
+const Review = require('../server/model/review')
+const Subject = require('../server/model/subject')
 const router = express.Router();
 
 router.get('/', async (req,res) => {
