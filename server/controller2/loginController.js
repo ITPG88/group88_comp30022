@@ -45,6 +45,7 @@ exports.createStudent = (req, res) => {
     Student.create(req.body)
       .then((data) => {
         console.log(data);
+<<<<<<< Updated upstream
         //req.flash("success_msg", "You are now registered.");
         res.redirect("/signup/choose_interests");
       })
@@ -53,6 +54,25 @@ exports.createStudent = (req, res) => {
           message:
             err.message ||
             "Some error occurred while creating a create operation",
+=======
+        if (data.length !== 0){
+            console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
+            res.redirect('/signup');
+            return;
+        }
+        console.log("here")
+        Student.create(req.body).
+        then(data => {
+            console.log(data);
+            //req.flash("success_msg", "You are now registered.");
+            res.locals.user = req.body.username;
+            res.redirect("/signup/choose_interests");
+        }).
+        catch(err =>{
+            res.status(500).send({
+                message : err.message || "Some error occurred while creating a create operation"
+            });
+>>>>>>> Stashed changes
         });
       });
   });
@@ -73,12 +93,16 @@ exports.getStudentReviews = async (req, res) => {
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    const username = req.locals.user;
+>>>>>>> Stashed changes
     if (req.body.fieldsOfInterest.isEmpty()){
         res.redirect("/login", {message: "You are now signed up. Login with your new details."});
         return;
     }
 
-    await Student.findByIdAndUpdate(req.user._id, {fieldsOfInterest: req.body.fieldsOfInterest});
+    await Student.findOneAndUpdate({username: username}, {fieldsOfInterest: req.body.fieldsOfInterest});
     res.redirect("/login", {message: "You are now signed up. Login with your new details."});
 }
 
