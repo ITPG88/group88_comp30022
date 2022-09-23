@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const extendSchema = require("mongoose-extend-schema");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
@@ -32,7 +33,22 @@ userSchema.methods.verifyPassword = function (password, callback) {
 // Password salt factor
 const SALT_FACTOR = 10;
 // Hash password before saving
-userSchema.pre("save", function save(next) {
+
+const studentSchema = extendSchema(userSchema, {
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  fieldsOfInterest: {
+    type: [String],
+    default: [],
+  },
+  likedList: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+  },
+});
+studentSchema.pre("save", function save(next) {
   const user = this;
   // Go to next if password field has not been modified
   if (!user.isModified("password")) {
@@ -50,5 +66,5 @@ userSchema.pre("save", function save(next) {
 });
 
 const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+const Student = mongoose.model("Student", studentSchema, "users");
+module.exports = { User, Student };

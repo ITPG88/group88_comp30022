@@ -1,5 +1,4 @@
 const User = require("../model/user");
-const Student = require("../model/student");
 const expressValidator = require("express-validator");
 // Routing
 const home = (req, res) => {

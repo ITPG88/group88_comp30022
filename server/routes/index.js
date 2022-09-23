@@ -12,7 +12,7 @@ router.get("/", auth.ensureGuest, login.landing);
 router.get("/login", auth.ensureGuest, login.login);
 router.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
+  passport.authenticate("local-login", { failureRedirect: "/login" }),
   (req, res) => {
     res.redirect("/home");
   }
@@ -30,6 +30,13 @@ router.get("/forgetpassword", auth.ensureGuest, login.forget);
 
 // SignUp Page
 router.get("/signup", auth.ensureGuest, login.signup);
+router.post(
+  "/signup",
+  passport.authenticate("local-signup", { failureRedirect: "/signup" }),
+  (req, res) => {
+    res.redirect("/home");
+  }
+);
 
 // passport not set up yet
 const student = require("../controller/studentController");
@@ -42,9 +49,9 @@ const mod = require("../controller/moderatorController");
 //   }
 // });
 
-router.get("/home", auth.isAdmin, student.home);
-router.get("/browse", auth.isAdmin, student.browse);
-router.get("/history", auth.isAdmin, student.history);
+router.get("/home", auth.ensureAuth, student.home);
+router.get("/browse", auth.ensureAuth, student.browse);
+router.get("/history", auth.ensureAuth, student.history);
 router.get("/account", (req, res) => {
   res.redirect("/settings");
 });

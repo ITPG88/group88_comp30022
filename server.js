@@ -37,15 +37,14 @@ if (app.get("env") === "production") {
   app.set("trust proxy", 1); // Trust first proxy
 }
 
+// Using body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
 // Initialise Passport.js
 const passport = require("./passport");
 app.use(passport.authenticate("session"));
 
 // log any requests
 app.use(morgan("tiny"));
-
-// Using body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // View engine
 app.set("view engine", "html");
