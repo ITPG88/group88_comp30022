@@ -5,7 +5,7 @@ const Subject = require('./../model/subject');
 const router = express.Router();
 
 router.get('/', async (req,res) => {
-    const reviews = await Review.find()
+    const reviews = await Review.find().populate('subject');
     res.render('student/home', { reviews : reviews })
 })
 

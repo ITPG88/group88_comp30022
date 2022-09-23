@@ -39,14 +39,14 @@ router.post('/signup', userController.createStudent);
 // @desc Signup interests page
 // @route GET /signup/choose_interests
 router.get('/signup/choose_interests', (req, res) => {
-    res.render("/signup_interests.ejs", {title: "interests"});
+    res.render("signup_interests.ejs", {title: "interests"});
 })
 
 // @desc Add fields on sign-up handle
 // @route PATCH /signup
 router.patch('/signup/choose_interests');
 
-
+// @desc Add
 router.get("/forgot_password", (req, res) => {
     res.render("forgot_password.ejs", {title: "forgot_password"});
 });

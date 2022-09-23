@@ -4,6 +4,8 @@ const Review = require("../model/review");
 const Moderator = require("../model/user").Moderator;
 const expressValidator = require("express-validator");
 
+
+
 exports.createStudent = (req, res) => {
     console.log(req.body);
     const {username, fullName, email, password} = req.body;
@@ -29,9 +31,11 @@ exports.createStudent = (req, res) => {
         return;
     }
 
-    const query = { username: req.body.username, email: req.body.email};
+    //const query = {$or:[{username: req.body.username}, {email: req.body.email}]};
+    const query = {username: req.body.username}
     console.log(query);
     User.find(query).then(data => {
+        console.log(data);
         if (data.length !== 0){
             console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
             res.redirect('/signup');
@@ -64,4 +68,10 @@ exports.getStudentReviews = async (req, res) => {
         reviews = await Review.find().populate('subject')
     }
     res.render('student/home', { reviews : reviews })
+}
+
+exports.editStudentFieldsOfInterest = async (req, res) => {
+    if (req.body.fieldsOfInterest.isEmpty()){
+        res.redirect("/login", {message: "You are now signed up. Login with your new details."})
+    }
 }
