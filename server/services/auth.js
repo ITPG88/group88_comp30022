@@ -1,15 +1,27 @@
-module.exports = {
-  ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    //req.flash('error_msg', 'Please log in to view that resource');
-    res.redirect('/login');
-  },
-  forwardAuthenticated: function(req, res, next) {
-    if (!req.isAuthenticated()) {
-      return next();
-    }
-    res.redirect('/');
+function ensureAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect("/");
   }
+}
+
+function ensureGuest(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect("/home");
+  } else {
+    return next();
+  }
+}
+function forwardAuthenticated(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/");
+}
+
+module.exports = {
+  ensureAuth,
+  ensureGuest,
+  forwardAuthenticated,
 };

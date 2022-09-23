@@ -16,9 +16,12 @@ exports.createStudent = (req, res, next) => {
   if (req.body.password.length < 5) {
     errors.push({ message: "Password should be at least 5 characters" });
   }
-
+  if (!ValidateEmail(email)) {
+    errors.push({ message: "Needs to a unimelb email" });
+  }
   if (errors.length > 0) {
     console.log("We get here :(");
+    console.log(errors);
     res.render("signup.ejs", {
       errors,
       fullName,
@@ -42,6 +45,7 @@ exports.createStudent = (req, res, next) => {
       return;
     }
     console.log("here");
+
     Student.create(req.body)
       .then((data) => {
         console.log(data);
@@ -51,10 +55,26 @@ exports.createStudent = (req, res, next) => {
       .catch((err) => {
         console.log("Error detected");
         res.status(500).send({
-            message : err.message || "Some error occurred while creating a create operation"
+          message:
+            err.message ||
+            "Some error occurred while creating a create operation",
         });
       });
   });
+};
+
+const STUDENT_EMAIL = "student.unimelb.edu.au";
+// RFC-5322 Email regex
+var emailRegex = new RegExp(
+  "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+);
+// validate email
+function ValidateEmail(email) {
+  if (emailRegex.test(email)) {
+    if (email.endsWith(STUDENT_EMAIL)) return true;
+  }
+  console.log("You have entered an invalid email address!");
+  return false;
 }
 
 exports.getStudentReviews = async (req, res) => {
@@ -71,31 +91,29 @@ exports.getStudentReviews = async (req, res) => {
 };
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
-    console.log(req.body);
-    const username = req.user.username;
+  console.log(req.body);
+  const username = req.user.username;
 
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        console.log('Object missing');
-        res.redirect("/logout");
-        return;
-    }
-    let fieldsofInterest = [];
-    for (const code in req.body) {
-        fieldsofInterest.push(code);
-    }
-    console.log(fieldsofInterest);
-    await Student.findOneAndUpdate({username: username}, {fieldsOfInterest: fieldsofInterest});
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    console.log("Object missing");
     res.redirect("/logout");
-}
+    return;
+  }
+  let fieldsofInterest = [];
+  for (let code in req.body) {
+    fieldsofInterest.push(code);
+  }
+  await Student.findOneAndUpdate(
+    { username: username },
+    { fieldsOfInterest: fieldsofInterest }
+  );
+  res.redirect("/logout");
+};
 
 exports.resetPassword = async (req, res) => {
-    const newPassword = req.body.password;
-    await Student.findByIdAndUpdate(req.user._id, {password: newPassword});
-    res.redirect("/login", {message: "Password reset. Please login."});
-}
+  const newPassword = req.body.password;
+  await Student.findByIdAndUpdate(req.user._id, { password: newPassword });
+  res.redirect("/login", { message: "Password reset. Please login." });
+};
 
-exports.sendPasswordEmailLink = async (req, res) => {
-
-}
-
-
+exports.sendPasswordEmailLink = async (req, res) => {};

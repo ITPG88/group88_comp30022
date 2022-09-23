@@ -1,8 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-const studentController = require('../controller/studentController');
-const services = require('../services/render');
+const studentController = require("../controller/studentController");
+const services = require("../services/render");
 
 const login = require("../controller/loginController");
 const auth = require("../helper/auth");
@@ -32,12 +32,9 @@ router.get("/logout", (req, res, next) => {
 
 router.get("/forgetpassword", auth.ensureGuest, login.forget);
 
-
 // SignUp Page
 router.get("/signup", auth.ensureGuest, services.signup);
 router.get("/signup/choose_interests", services.signupPreferences);
-
-
 
 // passport not set up yet
 const student = require("../controller/studentController");
@@ -58,15 +55,11 @@ router.get("/account", (req, res) => {
 });
 module.exports = router;
 
-
-
 // API
 //router.get('/api/users', studentController.getStudent);
-router.post('/api/users', studentController.createNewStudent);
-router.patch('/api/users/:id', studentController.updateStudentUser);
-router.get('/api/users/:id', studentController.getCurrentStudent);
-
-
+router.post("/api/users", studentController.createNewStudent);
+router.patch("/api/users/:id", studentController.updateStudentUser);
+router.get("/api/users/:id", studentController.getCurrentStudent);
 
 // Login page (with failure message displayed upon login failure)
 // router.get("/login", (req, res) => {
