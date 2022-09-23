@@ -1,5 +1,7 @@
 const Review = require("../model/review");
 const Subject = require('../model/subject');
+const User = require('../model/user').User;
+const Student = require('../model/user').Student
 const mongoose = require('mongoose');
 
 /**
@@ -9,11 +11,13 @@ const mongoose = require('mongoose');
 async function getReviewsByFieldOfInterest(req){
     let reviews = [];
     let subjectIDs = []
-    const fields = req.user.fieldsOfInterest;
+    const fields = await Student.findById(req.user._id)["fieldsOfInterest"];
 
-    fields.forEach(field => {
-        subjectIDs.push(Subject.find({fieldOfStudy: field}));
-    });
+    if (fields){
+        fields.forEach(field => {
+            subjectIDs.push(Subject.find({fieldOfStudy: field}));
+        });
+    }
 
     for (const subjectID of subjectIDs) {
         const review = await Review.find({subject: subjectID}).limit(5);
@@ -26,11 +30,15 @@ async function getReviewsByFieldOfInterest(req){
 exports.getHomepageReviews = async (req, res) => {
     let reviews = [];
     if (req.user){
+        console.log(req.user);
         if (req.user.type === 'student'){
-            const likedReviews = req.user.likedList;
-            likedReviews.forEach(reviewID => {
-                reviews.push(Review.findById(reviewID))
-            })
+            const likedReviews = await Student.findById(req.user._id)["likedList"];
+            console.log(likedReviews);
+            if (likedReviews) {
+                likedReviews.forEach(reviewID => {
+                    reviews.push(Review.findById(reviewID))
+                })
+            }
             // If no liked reviews, try field of interest
             if (reviews.length === 0){
                 reviews = await getReviewsByFieldOfInterest(req);
@@ -39,7 +47,7 @@ exports.getHomepageReviews = async (req, res) => {
                     const query = {status: "APPROVED"};
                     reviews = await Review.find(query).limit(10);
                 }
-                res.render("student/homepage", {reviews: reviews});
+                res.render("student/home", {reviews: reviews});
             }
         } else {
             // Moderator

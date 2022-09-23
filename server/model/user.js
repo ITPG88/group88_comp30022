@@ -24,34 +24,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Password comparison function
-// Compares the provided password with the stored password
-// Allows us to call user.verifyPassword on any returned objects
-userSchema.methods.verifyPassword = function (password, callback) {
-  bcrypt.compare(password, this.password, (err, valid) => {
-    callback(err, valid);
-  });
-};
-// Password salt factor
-const SALT_FACTOR = 10;
-// Hash password before saving
-userSchema.pre("save", function save(next) {
-    const user = this;
-    // Go to next if password field has not been modified
-    if (!user.isModified("password")) {
-      return next();
-    }
-    // Automatically generate salt, and calculate hash
-    bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
-        if (err){
-          return next(err);
-        }
-        // Replace password with hash
-        user.password = hash
-        next()
-    })
-});
-
 const studentSchema = extendSchema(userSchema, {
     email: {
         type: String,
@@ -69,6 +41,36 @@ const studentSchema = extendSchema(userSchema, {
 });
 
 const moderatorSchema = extendSchema(userSchema, {});
+
+// Password comparison function
+// Compares the provided password with the stored password
+// Allows us to call user.verifyPassword on any returned objects
+userSchema.methods.verifyPassword = function (password, callback) {
+  bcrypt.compare(password, this.password, (err, valid) => {
+    callback(err, valid);
+  });
+};
+
+// Password salt factor
+const SALT_FACTOR = 10;
+// Hash password before saving
+studentSchema.pre("save", function save(next) {
+    const user = this;
+    // Go to next if password field has not been modified
+    if (!user.isModified("password")) {
+      return next();
+    }
+    // Automatically generate salt, and calculate hash
+    bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
+        if (err){
+          return next(err);
+        }
+        // Replace password with hash
+        user.password = hash
+        next()
+    })
+});
+
 
 const User = mongoose.model("User", userSchema, 'users');
 const Student = mongoose.model("Student", studentSchema, 'users');

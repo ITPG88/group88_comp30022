@@ -4,8 +4,8 @@ const passport = require('passport');
 const User = require('../model/user').User;
 
 module.exports = function(passport) {
-    passport.use(new LocalStrategy({username: 'username'}, (username, password, done) =>{
-        User.findOne({username: username}).
+    passport.use(new LocalStrategy({username: 'username'}, async(username, password, done) =>{
+        await User.findOne({username: username}).
         then(user => {
             if (!user){
                 return done(null, false, {message: "User does not exist"});
@@ -30,9 +30,9 @@ module.exports = function(passport) {
     passport.serializeUser(function(user, cb) {
         process.nextTick(function() {
             return cb(null, {
-                id: user.id,
+                _id: user.id,
                 username: user.username,
-                picture: user.picture
+                type: user.type
             });
         });
     });
