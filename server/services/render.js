@@ -1,5 +1,13 @@
 const axios = require("axios");
 
+exports.landing = (req, res) => {
+    res.render("landing.ejs", { title: "Landing" });
+};
+
+exports.login = (req, res) => {
+    res.render("login.ejs", { title: "Login" });
+};
+
 exports.signup = (req, res) => {
     res.render("signup.ejs", { title: "signup" });
 };
@@ -20,13 +28,7 @@ exports.addUser = (req, res) => {
     });
 };
 
-exports.landing = (req, res) => {
-    res.render("Landing", { title: "Landing" });
-};
 
-exports.login = (req, res) => {
-    res.render("Login", { title: "Login" });
-};
 
 
 

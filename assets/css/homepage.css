@@ -178,6 +178,7 @@ header{
 
 .header-content h1{
     padding-top: 30px;
+    margin-bottom: 35px;
 }
 
 .header-content h1 b{
@@ -291,13 +292,23 @@ header{
     background-color: var(--pri-color);
 }
 
-.write-review-button{
+/*.write-review-button{
     background-color: var(--pri-color);
     font-size: 22px;
     font-weight: lighter;
     width:173px;
     height: 67px;
     margin-top: 25px;
+}*/
+
+
+.header-content a{
+    width:175px;
+    height: 68px;
+    background-color: var(--pri-color);
+    font-size: 22px;
+    padding: 10px;
+    text-align: center;
 }
 
 .neglect-button{

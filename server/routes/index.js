@@ -61,6 +61,7 @@ module.exports = router;
 
 
 // API
+//router.get('/api/users', studentController.getStudent);
 router.post('/api/users', studentController.createNewStudent);
 router.patch('/api/users/:id', studentController.updateStudentUser);
 router.get('/api/users/:id', studentController.getCurrentStudent);

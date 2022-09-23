@@ -1,5 +1,5 @@
-//npm i express morgan nodemon body-parser dotenv mongoose axios to install dependencies
-
+//npm i express morgan nodemon body-parser dotenv mongoose axios express-validator to install dependencies
+//const passport = require("passport");
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
@@ -13,6 +13,10 @@ const connectDB = require("./server/database/connection");
 //Create your own config.env file
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
+
+
+// Passport include
+//require("./server/services/passport.js")(passport);
 
 // Get DB connection
 connectDB();
@@ -40,6 +44,7 @@ if (app.get("env") === "production") {
   app.set("trust proxy", 1); // Trust first proxy
 }
 
+
 // Initialise Passport.js
 const passport = require("./passport");
 app.use(passport.authenticate("session"));
@@ -58,6 +63,8 @@ app.engine("html", require("ejs").renderFile);
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
 
+
+//ejs engine
 app.set('view engine', 'ejs')
 
 app.use('/static', express.static( "static" ))
@@ -65,10 +72,20 @@ app.use( '/static/css', express.static( "styles" ))
 
 app.use(express.urlencoded({extended : false}))
 
+
+
+//ends here
+
+//Passport middleware
+//app.use(passport.initialize);
+//app.use(passport.session);
+
+
 // assets
-// app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
-// app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
-// app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
+app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
+app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
+app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
+
 
 //All root routes directed by router
 /*app.use("/", require("./server/routes/index.js"));
