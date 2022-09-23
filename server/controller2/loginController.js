@@ -1,6 +1,6 @@
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
-const Review = req
+const Review = require("../model/review");
 const Moderator = require("../model/user").Moderator;
 const expressValidator = require("express-validator");
 
@@ -26,7 +26,9 @@ exports.createStudent = (req, res) => {
             password,
             username
         });
+        return;
     }
+
     const query = { username: req.body.username, email: req.body.email};
     console.log(query);
     User.find(query).then(data => {
