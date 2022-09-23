@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require("passport");
 
-const userController = require("../controller2/userController");
+const userController = require("../controller2/loginController");
 const {ensureAuthenticated} = require("../services/auth");
 
 // @desc Landing
@@ -39,7 +39,7 @@ router.post('/signup', userController.createStudent);
 // @desc Signup interests page
 // @route GET /signup/choose_interests
 router.get('/signup/choose_interests', (req, res) => {
-    res.render("signup_interests.ejs", {title: "interests"});
+    res.render("/signup_interests.ejs", {title: "interests"});
 })
 
 // @desc Add fields on sign-up handle

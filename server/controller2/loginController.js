@@ -1,5 +1,6 @@
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
+const Review = req
 const Moderator = require("../model/user").Moderator;
 const expressValidator = require("express-validator");
 
@@ -8,7 +9,7 @@ exports.createStudent = (req, res) => {
     const {username, fullName, email, password} = req.body;
     let errors = [];
 
-    if (username || fullName || email || password){
+    if (!username || !fullName || !email || !password){
         errors.push({message: "All fields required"});
     }
 
@@ -17,6 +18,7 @@ exports.createStudent = (req, res) => {
     }
 
     if (errors.length > 0){
+        console.log("We get here :(");
         res.render('/signup.ejs', {
             errors,
             fullName,
@@ -30,7 +32,6 @@ exports.createStudent = (req, res) => {
     User.find(query).then(data => {
         if (data.length !== 0){
             console.log(`${req.body.username} or ${req.body.email} already exist in user database.`);
-            res.status(400).send({ message : "Error, username or email already exist in database"});
             res.redirect('/signup');
             return;
         }
@@ -48,4 +49,17 @@ exports.createStudent = (req, res) => {
         });
 
     });
+}
+
+exports.getStudentReviews = async (req, res) => {
+    let reviews = [];
+    if (req.user.likedList.length > 0){
+        req.user.likedList.forEach(id => {
+            reviews.push()
+        })
+        reviews = await Review.findById().populate('subject')
+    } else {
+        reviews = await Review.find().populate('subject')
+    }
+    res.render('student/home', { reviews : reviews })
 }

@@ -2,16 +2,25 @@ const express = require('express')
 const Review = require('../server/model/review')
 const Subject = require('../server/model/subject')
 const router = express.Router();
+const loginController = require('../controller2/loginController');
 
 router.get('/', async (req,res) => {
     const reviews = await Review.find().populate('subject')
     res.render('student/home', { reviews : reviews })
 });
 
-router.get('/home', async (req,res) => {
-    const reviews = await Review.find().populate('subject')
+router.get('/home', userController.getStudentReviews)/*async (req,res) => {
+    let reviews = [];
+    if (req.user.likedList.length > 0){
+        req.user.likedList.forEach(id => {
+            reviews.push()
+        })
+        reviews = await Review.findById().populate('subject')
+    } else {
+        reviews = await Review.find().populate('subject')
+    }
     res.render('student/home', { reviews : reviews })
-})
+})*/
 
 router.get('/browse', (req,res) => {
     res.render('student/browse')
