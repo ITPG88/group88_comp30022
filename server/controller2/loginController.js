@@ -23,7 +23,7 @@ exports.createStudent = (req, res, next) => {
     console.log("We get here :(");
     console.log(errors);
     res.render("signup.ejs", {
-      errors,
+      errors: errors,
       fullName,
       email,
       password,

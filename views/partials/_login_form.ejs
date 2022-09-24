@@ -1,41 +1,71 @@
 <form action="/login" method="post" id="login">
-<div class="content">
+  <div class="content">
     <div class="login">
-        <div class="logo">
-            <img src="/assets/img/Subject%20Review%20Logo.png" alt="" />
-        </div>
+      <div class="logo">
+        <img src="/assets/img/Subject%20Review%20Logo.png" alt="" />
+      </div>
+      <div
+        id="err"
+        style="
+          display: none;
+          justify-content: center;
+          align-items: center;
+          width: 270px;
+          padding: 5%;
+          height: 50px;
+          border: 2px solid red;
+          border-radius: 20px;
+          text-align: center;
+          background-color: #2e0000;
+          color: aliceblue;
+          font-weight: 600;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        "
+      >
+        The username or password was incorrect. Please try again.
+      </div>
+      <ul>
+        <li><label>Username</label></li>
+        <li>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Enter your username"
+            style="padding-left: 10px; padding-right: 10px"
+            required
+          />
+        </li>
+      </ul>
 
-        <ul>
-            <li><label>Username</label></li>
-            <li>
-                <input
-                        id="username"
-                        name="username"
-                        type="text"
-                        placeholder=" Enter your username"
-                        required
-                />
-            </li>
-        </ul>
-
-        <ul>
-            <li><label>Password</label></li>
-            <li><input id="password"
-                       name="password"
-                       type="text"
-                       placeholder=" Enter your password"
-                       required/></li>
-        </ul>
+      <ul>
+        <li><label>Password</label></li>
+        <li>
+          <input
+            id="password"
+            name="password"
+            type="text"
+            placeholder="Enter your password"
+            style="padding-left: 10px; padding-right: 10px"
+            required
+          />
+        </li>
+      </ul>
     </div>
 
     <a href="/forgot_password" style="padding-left: 200px; font-size: 14px"
-    >Forget password?
+      >Forget password?
     </a>
 
     <div class="loginbutton">
-        <button type="submit">Login</button>
+      <button type="submit">Login</button>
     </div>
     <p>Don't have an account?<a href="/signup"> Sign up</a></p>
-</div>
-
+  </div>
 </form>
+<script>
+  if ( <%=error%> > 0) {
+    document.getElementById("err").style.display = "flex";
+  }
+</script>

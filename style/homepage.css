@@ -125,6 +125,7 @@ a{
 nav{
     background-color: var(--color-navbar);
     width: 100vw;
+    max-width: 100%;
     height: 85px;
     position:fixed;
     top:0;
@@ -132,9 +133,11 @@ nav{
 }
 
 .navbar-container{
+    box-sizing: border-box;
     height: 100%;
     display: flex;
     justify-content: space-between;
+    vertical-align: top;
     align-items: center;
 }
 
