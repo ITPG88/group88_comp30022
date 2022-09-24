@@ -65,11 +65,10 @@ app.use(express.static(__dirname + "/"));
 
 
 //ejs engine
+
 app.set('view engine', 'ejs')
-
 app.use('/static', express.static( "static" ))
-app.use( '/static/css', express.static( "styles" ))
-
+app.use('/static/css', express.static( "styles" ))
 app.use(express.urlencoded({extended : false}))
 
 

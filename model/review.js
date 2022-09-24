@@ -24,6 +24,9 @@ const reviewSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Subject"
     },
+    subjectCode: {
+      type: String,
+    },
     rating: {
       type: Number,
       required: true,

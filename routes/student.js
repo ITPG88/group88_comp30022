@@ -32,13 +32,16 @@ router.get('/:id', async (req,res) =>{
 router.post('/', async (req,res) =>{
     
     const result = await Subject.find({subjectCode : req.body.subjectCode})
-    console.log(result[0]._id)
+    //console.log(result)
     let review = new Review({   
-        subject : result[0]._id,    
+        subject : result[0]._id,
+        subjectCode : result[0].subjectCode,
         content: req.body.content,
         isPrivate: false,
         isVisible: true,
-        rating: 5
+        rating: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     })
     try{
         review = await review.save()
@@ -46,7 +49,7 @@ router.post('/', async (req,res) =>{
         res.redirect(`/student/${review.id}`)
     }catch(e){
         console.log(e)
-        res.render('student/write-review', { review : review})
+        res.render('student/write_review', { review : review})
     }
     
 })
