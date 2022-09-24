@@ -54,7 +54,10 @@
       </ul>
     </div>
 
-    <a href="/forgot_password" style="padding-left: 200px; font-size: 14px"
+    <a
+      href="#"
+      onclick="document.getElementById('forget').style.display='block'"
+      style="padding-left: 200px; font-size: 14px"
       >Forget password?
     </a>
 
@@ -64,8 +67,78 @@
     <p>Don't have an account?<a href="/signup"> Sign up</a></p>
   </div>
 </form>
+
+<!-- The Modal -->
+<div id="forget" class="modal">
+  <!-- Modal Content -->
+
+  <form class="modal-content animate" method="post" action="/forget">
+    <span
+      onclick="document.getElementById('forget').style.display='none'"
+      class="close"
+      title="Close"
+      >&times;</span
+    >
+    <div class="forgetemail">
+      <h1>Forget your password?</h1>
+      <br />
+      <p>Enter the email address associated with your account</p>
+      <p>and we'll send you a link to reset your password</p>
+      <br />
+      <br />
+      <div class="forget">
+        <ul>
+          <li><label>Your email</label></li>
+          <li>
+            <input type="text" placeholder=" Enter your email address..." />
+          </li>
+        </ul>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="sendemailbutton">
+        <button type="submit">Send email to me</button>
+      </div>
+    </div>
+  </form>
+  <!--
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required />
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required />
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember" /> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color: #f1f1f1">
+    <button
+      type="button"
+      onclick="document.getElementById('id01').style.display='none'"
+      class="cancelbtn"
+    >
+      Cancel
+    </button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+</div>
+--></div>
 <script>
-  if ( <%=error%> > 0) {
-    document.getElementById("err").style.display = "flex";
+    if ( <%=error%> > 0) {
+      document.getElementById("err").style.display = "flex";
+    }
+    var modal = document.getElementById('forget');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
   }
 </script>
