@@ -9,6 +9,11 @@ router.get('/', async (req,res) => {
     res.render('student/home', { reviews : reviews })
 })
 
+router.get('/home', async (req,res) => {
+    const reviews = await Review.find().populate('subject');
+    res.render('student/home', { reviews : reviews })
+})
+
 router.get('/browse', (req,res) => {
     res.render('student/browse')
 })
