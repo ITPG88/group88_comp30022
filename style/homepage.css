@@ -109,6 +109,7 @@ a{
     height:35px;
     font-size: 18px;
     margin: 5px;
+    padding: 5px;
     cursor: pointer;
 }
 
@@ -181,6 +182,10 @@ header{
     margin-bottom: 35px;
 }
 
+.header-content-np h1{
+    margin-bottom: -10px;
+}
+
 .header-content h1 b{
     color: var(--secondary-font-color);
 }
@@ -221,7 +226,7 @@ header{
 
 .review-container-moderator{
     display:grid;
-    grid-template-rows: 460px;
+    grid-template-rows: 260px;
     gap:40px;
 }
 
@@ -340,7 +345,9 @@ header{
 }
 
 .wrfts-button{
+    text-align: center;
     height:50px;
+    font-size: 15px;
     background-color: var(--pri-color);
     color: var(--font-color);
     font-weight: lighter;
@@ -356,16 +363,22 @@ header{
     margin-right: 10px;
 }
 /*=====================END HERE======================*/
+.review-container{
+    padding:15px 0;
+    word-wrap: break-word;
+}
+
 .each-review p{
     padding:5px 0;
     font-size: 18px;
     font-weight: lighter;
+    word-wrap: break-word;
 }
 
 .each-review-big p{
-    padding:40px 0;
     font-size: 22px;
     font-weight: lighter;
+    word-wrap: break-word;
 }
 
 .each-review footer{
@@ -411,7 +424,7 @@ header{
 
 /*=====================FOOTER CSS======================*/
 .view-review-footer{
-    margin-top: 60px;
+    margin-top: 30px;
     margin-left: -10px;
 }
 

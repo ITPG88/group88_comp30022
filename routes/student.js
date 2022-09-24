@@ -21,17 +21,21 @@ router.get('/write_review', (req,res) => {
     res.render('student/write_review', {review : new Review()})
 })
 
-router.get('/view_review', (req,res) => {
-    res.render('student/view_review')
+router.get('/view_review', async (req,res) => {
+    const result = await Subject.find({subjectCode : req.body.subjectCode})
+    console.log(result)
+    
+    //res.render('student/view_review' , { reviews : reviews })
 })
 
 router.get('/:id', async (req,res) =>{
     const review = await Review.findById(req.params.id)
+    const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
     if(review == null){
         res.redirect('/')
     }
-    res.send(req.params.id)
-    //res.render('student/view_review', { review : review })
+    //res.send(req.params.id)
+    res.render('student/view_review', { review : review , same_subjectcode : same_subjectcode})
 })
 
 router.post('/', async (req,res) =>{
@@ -41,6 +45,7 @@ router.post('/', async (req,res) =>{
     let review = new Review({   
         subject : result[0]._id,
         subjectCode : result[0].subjectCode,
+        subjectName: result[0].subjectName,
         content: req.body.content,
         isPrivate: false,
         isVisible: true,
@@ -50,7 +55,7 @@ router.post('/', async (req,res) =>{
     })
     try{
         review = await review.save()
-        console.log(review)
+        //console.log(review)
         res.redirect(`/student/${review.id}`)
     }catch(e){
         console.log(e)
