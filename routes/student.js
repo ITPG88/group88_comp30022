@@ -21,12 +21,17 @@ router.get('/write_review', (req,res) => {
     res.render('student/write_review', {review : new Review()})
 })
 
+router.get('/view_review', (req,res) => {
+    res.render('student/view_review')
+})
+
 router.get('/:id', async (req,res) =>{
     const review = await Review.findById(req.params.id)
     if(review == null){
         res.redirect('/')
     }
-    //res.render('', { review : review })
+    res.send(req.params.id)
+    //res.render('student/view_review', { review : review })
 })
 
 router.post('/', async (req,res) =>{
