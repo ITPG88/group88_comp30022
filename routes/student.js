@@ -13,8 +13,9 @@ router.get('/browse', (req,res) => {
     res.render('student/browse')
 })
 
-router.get('/history', (req,res) => {
-    res.render('student/history')
+router.get('/history', async (req,res) => {
+    const reviews = await Review.find().populate('subject');
+    res.render('student/history', { reviews : reviews })
 })
 
 router.get('/write_review', (req,res) => {
