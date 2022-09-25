@@ -11,10 +11,10 @@ const student = require("../controller/studentController");
 // @desc Landing
 // @route GET /
 router.get("/", auth.ensureGuest, (req, res) => {
-  if (req.user){
-      res.redirect("/home");
+  if (req.user) {
+    res.redirect("/home");
   } else {
-      res.render('landing');
+    res.render("landing");
   }
 });
 
@@ -22,17 +22,16 @@ router.get("/", auth.ensureGuest, (req, res) => {
 // @route GET /login
 router.get("/login", (req, res) => {
   let error;
+  let username;
   if (typeof req.session.messages === "undefined") {
-    error = 0;
   } else if (req.session.messages.length === 0) {
-    error = 0;
   } else {
-    error = 1;
+    username = req.session.messages[0];
     req.session.messages = [];
   }
   res.render("login.ejs", {
     title: "Login",
-    error: error,
+    username: username,
   });
 });
 
