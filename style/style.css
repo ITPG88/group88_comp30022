@@ -540,7 +540,9 @@ body{
 }
 
 .interest .group{
-    display: block;
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
 
 }
 .interest .group .b {
@@ -548,8 +550,13 @@ body{
     border-radius: 50%;
     height: 170px;
     width: 170px;
-    display: inline-block;
+    display: flex;
+    
 }
+.interest .group .b label{
+    user-select: none
+}
+
 
 .interest .group input[type="checkbox"]:checked+label{
     /*border:6px solid #6A4873;*/
@@ -1672,6 +1679,23 @@ body{
     color:#A660A1;
 }
 
+#err {
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    width: 270px;
+
+
+    border: 2px solid red;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #2e0000;
+    color: aliceblue;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
  /* The Modal (background) */
  .modal {

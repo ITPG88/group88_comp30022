@@ -30,10 +30,12 @@ exports.createStudent = (req, res, next) => {
     return;
   }
 
-  //const query = {$or:[{username: req.body.username}, {email: req.body.email}]};
-  const query = { username: req.body.username };
-  User.find(query).then((data) => {
-    if (data.length !== 0) {
+  const query = {
+    $or: [{ username: username }, { email: email }],
+  };
+  Student.findOne(query).then((data) => {
+    console.log(data);
+    if (data) {
       errors.push("Username or Email is already exists");
       res.render("signup.ejs", {
         errors: errors,
@@ -61,18 +63,17 @@ exports.createStudent = (req, res, next) => {
   });
 };
 
-
 exports.getStudentReviews = async (req, res) => {
-    let reviews = [];
-    if (req.user.likedList.length > 0) {
-      for (const reviewID of req.user.likedList.length) {
-          const review = await Review.findById(reviewID).populate("subject");
-          reviews.push(review);
-      }
-    } else {
-        reviews = await Review.find().populate("subject").limit(12);
+  let reviews = [];
+  if (req.user.likedList.length > 0) {
+    for (const reviewID of req.user.likedList.length) {
+      const review = await Review.findById(reviewID).populate("subject");
+      reviews.push(review);
     }
-    res.render("student/home", { reviews: reviews });
+  } else {
+    reviews = await Review.find().populate("subject").limit(12);
+  }
+  res.render("student/home", { reviews: reviews });
 };
 
 exports.editStudentFieldsOfInterest = async (req, res) => {
@@ -92,7 +93,7 @@ exports.editStudentFieldsOfInterest = async (req, res) => {
     { username: username },
     { fieldsOfInterest: fieldsofInterest }
   );
-  res.redirect("/logout");
+  res.redirect("/logout?signedup");
 };
 
 exports.resetPassword = async (req, res) => {
@@ -101,13 +102,12 @@ exports.resetPassword = async (req, res) => {
   res.redirect("/login", { message: "Password reset. Please login." });
 };
 
-
 // Password and email functions
 
 const STUDENT_EMAIL = "student.unimelb.edu.au";
 // RFC-5322 Email regex
 let emailRegex = new RegExp(
-    "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+  "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
 );
 // validate email
 function ValidateEmail(email) {
