@@ -1,4 +1,4 @@
-const Review = require("../model/review");
+const Review = require("../model/review").Review;
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
@@ -141,6 +141,10 @@ exports.deleteReview = async (req, res) => {
     if (!req.user){
         // Guest handling
     }
-    const reviewID = req.params.
-    if (req.user.type === 'moderator' || req.user)
+    const reviewID = req.params._id
+    if (req.user.type === 'moderator' || req.user._id === reviewID){
+      // Authorised
+    } else {
+      // Not authorised
+    }
 }

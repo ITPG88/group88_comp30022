@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
-const extendSchema = require('mongoose-extend-schema');
+const mongoose = require('mongoose')
 
-const reviewSchema = new mongoose.Schema(
-    {
+const reviewSchema = new mongoose.Schema({
         content: {
             type: String,
             required: true,
@@ -30,26 +28,22 @@ const reviewSchema = new mongoose.Schema(
             required: true,
         },
         comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
-    },
-    {
+        status: {
+            type: String,
+            enum: ["APPROVED", "REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
+            default: "APPROVED",
+        },
+        attemptedCode: {
+            type: String,
+            required: false
+        }
+    }, {
         timestamps: true,
     }
 );
 
-const badReviewSchema = new extendSchema(reviewSchema,
-    {
-        attemptedCode: String,
-        status: {
-            type: String,
-            enum: ["REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
-            default: "FLAGGED"
-        },
-    }
-);
 
 
+const Review = mongoose.model('Review', reviewSchema);
 
-const Review = mongoose.model('Review', reviewSchema, 'reviews');
-const BadReview = mongoose.model('BadReview', badReviewSchema, 'badReviews');
-
-module.exports = {Review, BadReview};
+module.exports = Review;
