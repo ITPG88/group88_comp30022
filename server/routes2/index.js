@@ -11,8 +11,9 @@ const student = require("../controller/studentController");
 // @desc Landing
 // @route GET /
 router.get("/", auth.ensureGuest, (req, res) => {
-  if (req.user) {
-    res.redirect("/home");
+  if (Object.keys(req.query)[0] === "signedup") {
+    console.log("made an account");
+    res.render("landing", { signedup: 1 });
   } else {
     res.render("landing");
   }
@@ -113,14 +114,18 @@ router.get("/logout", (req, res, next) => {
     if (error) {
       return next(error);
     }
-    res.redirect("/");
+    if (Object.keys(req.query).length == 0) {
+      res.redirect("/");
+      return;
+    }
+    res.redirect("/?" + Object.keys(req.query)[0]);
   });
 });
 
 // @desc get write_review
 // @route GET /write_review
 router.get("/write_review", (req, res) => {
-  res.render("/student/write_review");
+  res.render("student/write_review.ejs");
 });
 
 router.post("/write_review", auth.ensureAuth, reviewController.postReview);
