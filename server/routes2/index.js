@@ -102,6 +102,9 @@ router.get("/account", (req, res) => {
   res.redirect("/settings");
 });
 
+
+// @desc get logout
+// @route GET /logout
 router.get("/logout", (req, res, next) => {
   req.logout((error) => {
     if (error) {

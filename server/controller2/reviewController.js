@@ -114,10 +114,10 @@ exports.postReview = async (req, res) => {
   });
   console.log(subjectResult._id);
 
-    if (!subjectResult){
+  if (!subjectResult){
         // Needs moderator attention
         console.log("Subject created with faulty code");
-    } else {
+  } else {
         let reviewObject = {
             content: content,
             subject: subjectResult,
@@ -133,7 +133,7 @@ exports.postReview = async (req, res) => {
             console.log(err)
             res.render('student/write_review', {review : reviewObject});
         });
-    }
+  }
 
 }
 
