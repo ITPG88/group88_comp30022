@@ -37,7 +37,11 @@
                         <button class="like-button like-button-color small-buttn"><img src="/assets/img/Like symbol.png">111</button>               
                         <h8>2 Replies</h8>
                     </div>
-                    <button class="remove-button-color small-buttn">Remove</button>
+                    <form action="/student/<%= review.id %>?_method=delete" 
+                        method = "post">
+                        <button class="remove-button-color small-buttn">Remove</button>
+                    </form>
+                    
                 </div>
 
             </article>

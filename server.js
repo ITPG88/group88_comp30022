@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const session = require("express-session");
+const methodOverride = require('method-override')
 const path = require("path");
 const app = express();
 const connectDB = require("./server/database/connection");
@@ -70,6 +71,7 @@ app.set('view engine', 'ejs')
 app.use('/static', express.static( "static" ))
 app.use('/static/css', express.static( "styles" ))
 app.use(express.urlencoded({extended : false}))
+app.use(methodOverride('_method'));
 
 
 

@@ -422,6 +422,17 @@ header{
     float:left;
 }
 
+.each-review .view-subject{
+    margin-top: 15px;
+}
+.each-review form .view-subject-bttn{
+    margin-left: 0px;
+    color: var(--font-color);
+    background-color: var(--star-review-color);
+    font-size: 18px;
+    font-weight: lighter;
+    text-align: center;
+}
 /*=====================FOOTER CSS======================*/
 .view-review-footer{
     margin-top: 30px;

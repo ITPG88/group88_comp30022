@@ -28,24 +28,29 @@ router.get('/write_review', (req,res) => {
 })
 
 router.get('/view_review', async (req,res) => {
-    const result = await Subject.find({subjectCode : req.body.subjectCode})
-    console.log(result)
-    
-    //res.render('student/view_review' , { reviews : reviews })
+    res.send('in view_review')
 })
 
-router.get('/:id', async (req,res) =>{
+router.get('/view_review/:id', async (req,res)=>{
     const review = await Review.findById(req.params.id)
     const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
-    if(review == null){
-        res.redirect('/')
-    }
+    console.log(review.subjectCode)
     //res.send(req.params.id)
     res.render('student/view_review', { review : review , same_subjectcode : same_subjectcode})
 })
 
-router.post('/', async (req,res) =>{
+router.get('/:id', async (req,res) =>{
+    const review = await Review.findById(req.params.id)
     
+    if(review == null){
+        res.redirect('/')
+    }
+    //res.send(req.params.id)
+    //res.render('student/view_review', { review : review , same_subjectcode : same_subjectcode})
+    res.redirect('/student/home')
+})
+
+router.post('/', async (req,res) =>{
     const result = await Subject.find({subjectCode : req.body.subjectCode})
     //console.log(result)
     let review = new Review({   
@@ -68,6 +73,11 @@ router.post('/', async (req,res) =>{
         res.render('student/write_review', { review : review})
     }
     
+})
+
+router.delete('/:id', async (req,res)=>{
+    await Review.findByIdAndDelete(req.params.id)
+    res.redirect('/student/view_review')
 })
 
 module.exports = router
