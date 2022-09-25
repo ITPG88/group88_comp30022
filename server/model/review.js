@@ -1,7 +1,6 @@
 const mongoose = require('mongoose') 
 
-const reviewSchema = new mongoose.Schema(
-  {
+const reviewSchema = new mongoose.Schema({
     content: {
       type: String,
       required: true,
@@ -11,31 +10,34 @@ const reviewSchema = new mongoose.Schema(
         ref: 'Student'
     },
     isPrivate: {
-      type: Boolean,
-      required: true,
-      default: false,
+        type: Boolean,
+       required: true,
+        default: false,
     },
     isVisible: {
-      type: Boolean,
-      required: true,
-      default: true,
+        type: Boolean,
+        required: true,
+        default: true,
     },
     subject: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Subject"
     },
     rating: {
-      type: Number,
-      required: true,
+        type: Number,
+        required: true,
     },
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
     status: {
-      type: String,
-      enum: ["APPROVED", "REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
-      default: "APPROVED",
+        type: String,
+        enum: ["APPROVED", "REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
+        default: "APPROVED",
     },
-  },
-  {
+    attemptedCode: {
+        type: String,
+        required: false
+    }
+  }, {
     timestamps: true,
   }
 );

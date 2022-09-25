@@ -32,6 +32,7 @@ module.exports = function(passport) {
             return cb(null, {
                 _id: user.id,
                 username: user.username,
+                fullName: user.fullName,
                 type: user.type
             });
         });
