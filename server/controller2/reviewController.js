@@ -134,3 +134,11 @@ exports.postReview = async (req, res) => {
     }
 
 }
+
+exports.deleteReview = async (req, res) => {
+    if (!req.user){
+        // Guest handling
+    }
+    const reviewID = req.params.
+    if (req.user.type === 'moderator' || req.user)
+}

@@ -10,7 +10,13 @@ const student = require("../controller/studentController");
 
 // @desc Landing
 // @route GET /
-router.get("/", auth.ensureGuest, render.landing);
+router.get("/", auth.ensureGuest, (req, res) => {
+  if (req.user){
+      res.redirect("/home");
+  } else {
+      res.render('landing');
+  }
+});
 
 // @desc Login page
 // @route GET /login

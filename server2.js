@@ -62,7 +62,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
 // Routes
-app.use('/', require('./server/routes2/index.js'));
+app.use('/', require('./server/routes2/index.'));
+app.use('/settings', require('./server/routes2/settings'));
+app.use('/subject', require('./server/routes2/subject'));
+
+
+// Error 404 not found
+app.all('*', (req, res) => {  // 'default' route to catch user errors
+    res.status(404).render('error', {errorCode: '404', message: 'That route is invalid.'})
+    //res.send('error')
+})
 
 // Listen on port
 app.listen(PORT, () => {
