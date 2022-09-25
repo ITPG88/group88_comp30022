@@ -8,7 +8,7 @@
       <div
         id="err"
         style="
-          display: flex;
+          display: none;
           flex-direction: column;
           justify-content: center;
           align-items: center;
@@ -35,7 +35,7 @@
             type="text"
             placeholder="Enter your username"
             name="username"
-            value="<%=username%>"
+            value="<%=locals.username%>"
           />
         </li>
       </ul>
@@ -48,7 +48,7 @@
             type="text"
             placeholder="Enter your name"
             name="fullName"
-            value="<%=fullName%>"
+            value="<%=locals.fullName%>"
           />
         </li>
       </ul>
@@ -61,7 +61,7 @@
             type="text"
             placeholder="Enter your email address"
             name="email"
-            value="<%=email%>"
+            value="<%=locals.email%>"
           />
         </li>
       </ul>
@@ -88,11 +88,10 @@
 
 <script>
       const errElement = document.getElementById("err");
-
-
         const errors = <%-JSON.stringify(locals.errors)%>
-        console.log(errors);
   for (const err of errors) {
+    document.getElementById("err").style.display = "flex";
+
       errElement.insertAdjacentHTML('beforeend', "<li  style = \"margin: 5px 0;\" >"+err+"</li>")
   }
 </script>
