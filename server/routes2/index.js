@@ -21,14 +21,29 @@ router.get("/", auth.ensureGuest, (req, res) => {
 // @desc Login page
 // @route GET /login
 router.get("/login", (req, res) => {
-  res.render("login.ejs", { title: "Login" });
+  let error;
+  if (typeof req.session.messages === "undefined") {
+    error = 0;
+  } else if (req.session.messages.length === 0) {
+    error = 0;
+  } else {
+    error = 1;
+    req.session.messages = [];
+  }
+  res.render("login.ejs", {
+    title: "Login",
+    error: error,
+  });
 });
 
 // @desc Attempt login
 // @route POST /login
 router.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureMessage: true,
+  }),
   (req, res) => {
     res.redirect("/home");
   }
