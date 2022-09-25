@@ -7,11 +7,11 @@ const passport = require("passport");
 
 
 router.get("/", auth.ensureAuth, (req, res) => {
-    res.redirect("/account");
+    res.redirect("/settings/account");
 });
 
 router.get('/account', auth.ensureAuth, (req, res) => {
-    res.render("student/account_settings");
+    res.render("student/account_settings", {user: req.user});
 });
 
 router.post('/account', auth.ensureAuth, settingsController.editAccountSettings);
