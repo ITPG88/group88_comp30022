@@ -53,13 +53,13 @@ exports.getHomepageReviews = async (req, res) => {
       // Moderator
       const query = { status: { $ne: "APPROVED" } };
       reviews = await Review.find(query);
-      res.render("moderator/homepage", { reviews: reviews });
+      res.render("moderator/home", { reviews: reviews });
     }
   } else {
     // Guest
     const query = { status: "APPROVED" };
     reviews = await Review.find(query).limit(10);
-    res.render("guest/homepage", { reviews: reviews });
+    res.render("guest/home", { reviews: reviews });
   }
 };
 

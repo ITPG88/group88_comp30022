@@ -38,8 +38,8 @@ router.get("/login", (req, res) => {
 // @desc Attempt login
 // @route POST /login
 router.post(
-  "/login",
-  passport.authenticate("local", {
+    "/login",
+    passport.authenticate("local", {
     failureRedirect: "/login",
     failureMessage: true,
   }),
@@ -70,22 +70,27 @@ router.get("/signup/choose_interests", (req, res) => {
 });
 
 // @desc Add fields on sign-up handle
-// @route PATCH /signup
+// @route POST /signup
 router.post(
   "/signup/choose_interests",
   loginController.editStudentFieldsOfInterest
 );
 
-// @desc Add
+// @desc Forgot password
+// @route GET /forgot_password
 router.get("/forgot_password", (req, res) => {
   res.render("forgot_password.ejs", { title: "forgot_password" });
 });
 
-/**
- * @desc Get homepage
- * @route GET /home
- */
+// @desc Get homepage
+// @route GET /home
 router.get("/home", reviewController.getHomepageReviews);
+
+// @desc create review via pop-up from homepage
+// @route POST /home
+router.post("/home", (req, res) => {
+  res.redirect(307, `/subject/${req.body.subjectCode}`);
+})
 
 // @desc get browsepage
 // @route GET /browse
@@ -101,7 +106,6 @@ router.get("/account", (req, res) => {
   res.redirect("/settings");
 });
 
-
 // @desc get logout
 // @route GET /logout
 router.get("/logout", (req, res, next) => {
@@ -112,6 +116,7 @@ router.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+
 // @desc get write_review
 // @route GET /write_review
 router.get("/write_review", (req, res) => {
@@ -120,4 +125,17 @@ router.get("/write_review", (req, res) => {
 
 router.post("/write_review", auth.ensureAuth, reviewController.postReview);
 
+
+
+/*
+Moderator
+ */
+
+// @desc get pending_subject
+// @route GET /home/pending_subject
+router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
+
+router.get("/home/flagged", auth.ensureAuth, (req, res) => {
+  res.redirect("/home");
+})
 module.exports = router;

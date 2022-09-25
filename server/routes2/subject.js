@@ -14,4 +14,7 @@ router.get('/', (req, res) =>{
     res.status(404);
 });
 
+router.post('/subject/:subjectCode', subjectController.postReview)
+
+
 module.exports = router;
