@@ -10,10 +10,14 @@
       <button><span class="material-symbols-outlined">search</span></button>
     </form>
     <ul class="navbar-menu">
-      <li><a href="/home">Home</a></li>
-      <li><a href="/browse">Browse</a></li>
-      <li><a href="/history">History</a></li>
-      <li><a href="/account">Account</a></li>
+      <li><a name="home" href="/home">Home</a></li>
+      <li><a name="browse" href="/browse">Browse</a></li>
+      <li><a name="history" href="/history">History</a></li>
+      <li><a name="account" href="/account">Account</a></li>
     </ul>
   </div>
 </nav>
+
+<script>
+  document.getElementsByName("<%=locals.title%>")[0].classList.add("active");
+</script>
