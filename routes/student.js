@@ -7,11 +7,13 @@ const router = express.Router();
 router.get('/', async (req,res) => {
     const reviews = await Review.find().populate('subject');
     res.render('student/home', { reviews : reviews })
+    // in index
 })
 
 router.get('/home', async (req,res) => {
     const reviews = await Review.find().populate('subject');
     res.render('student/home', { reviews : reviews })
+    // in index
 })
 
 router.get('/browse', (req,res) => {
