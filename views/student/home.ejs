@@ -39,7 +39,7 @@
               <%= review.content %>
             </p>
             <form class = "view-subject">
-              <a href="/student/view_review/<%= review.id %> " class="medium-buttn view-subject-bttn">View Subject</a>
+              <a href="/student/view_review/<%= review.subjectCode %>/<%= review.id %> " class="medium-buttn view-subject-bttn">View Subject</a>
             </form>
             <footer><%= review.createdAt.toLocaleDateString() %></footer>
           </article>

@@ -10,13 +10,11 @@ const path = require("path");
 const app = express();
 const connectDB = require("./server/database/connection");
 
-
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
 
-require('./server/services/passport')(passport)
+require("./server/services/passport")(passport);
 connectDB();
-
 
 app.use(flash());
 
@@ -30,22 +28,21 @@ app.use((req, res, next) => {
 
 // Session
 app.use(
-    session({
-        // The secret used to sign session cookies (ADD ENV VAR)
-        secret: process.env.SESSION_SECRET || "keyboard cat",
-        name: "user", // The cookie name (CHANGE THIS)
-        saveUninitialized: false,
-        resave: false,
-        cookie: {
-            sameSite: "strict",
-            httpOnly: true,
-            secure: app.get("env") === "production",
-        },
-    })
+  session({
+    // The secret used to sign session cookies (ADD ENV VAR)
+    secret: process.env.SESSION_SECRET || "keyboard cat",
+    name: "user", // The cookie name (CHANGE THIS)
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      sameSite: "strict",
+      httpOnly: true,
+      secure: app.get("env") === "production",
+    },
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // Express session and flash
 app.use(express.json());
@@ -62,19 +59,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 
 // Routes
-app.use('/', require('./server/routes2/index.'));
-app.use('/settings', require('./server/routes2/settings'));
-app.use('/subject', require('./server/routes2/subject'));
-
+app.use("/", require("./server/routes2/index"));
+app.use("/settings", require("./server/routes2/settings"));
+app.use("/subject", require("./server/routes2/subject"));
 
 // Error 404 not found
-app.all('*', (req, res) => {  // 'default' route to catch user errors
-    res.status(404).render('error', {errorCode: '404', message: 'That route is invalid.'})
-    //res.send('error')
-})
+app.all("*", (req, res) => {
+  // 'default' route to catch user errors
+  res
+    .status(404)
+    .render("error", { errorCode: "404", message: "That route is invalid." });
+  //res.send('error')
+});
 
 // Listen on port
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-

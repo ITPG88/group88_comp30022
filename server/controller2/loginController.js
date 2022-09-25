@@ -5,50 +5,48 @@ const Moderator = require("../model/user").Moderator;
 const expressValidator = require("express-validator");
 
 exports.createStudent = (req, res, next) => {
-  console.log(req.body);
   const { username, fullName, email, password } = req.body;
   let errors = [];
 
   if (!username || !fullName || !email || !password) {
-    errors.push({ message: "All fields required" });
+    errors.push("All fields required");
   }
 
   if (req.body.password.length < 5) {
-    errors.push({ message: "Password should be at least 5 characters" });
+    errors.push("Password should be at least 5 characters");
   }
   if (!ValidateEmail(email)) {
-    errors.push({ message: "Needs to a unimelb email" });
+    errors.push("Needs to be a unimelb email");
   }
   if (errors.length > 0) {
     console.log("We get here :(");
     console.log(errors);
     res.render("signup.ejs", {
       errors: errors,
-      fullName,
-      email,
-      password,
-      username,
+      fullName: fullName,
+      email: email,
+      username: username,
     });
     return;
   }
 
   //const query = {$or:[{username: req.body.username}, {email: req.body.email}]};
   const query = { username: req.body.username };
-  console.log(query);
   User.find(query).then((data) => {
-    console.log(data);
     if (data.length !== 0) {
-      console.log(
-        `${req.body.username} or ${req.body.email} already exist in user database.`
-      );
-      res.redirect("/signup");
+      errors.push("Username or Email is already exists");
+      res.render("signup.ejs", {
+        errors: errors,
+        fullName: fullName,
+        email: email,
+        username: username,
+      });
       return;
     }
     console.log("here");
 
     Student.create(req.body)
       .then((data) => {
-        console.log(data);
         next();
         //req.flash("success_msg", "You are now registered.");
       })

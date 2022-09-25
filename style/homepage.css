@@ -443,6 +443,8 @@ header{
 }
 
 .view-review-footer-2to1{
+    margin-top: 0px;
+    margin-left: -3px;
     display: flex;
     justify-content: space-between;
 
