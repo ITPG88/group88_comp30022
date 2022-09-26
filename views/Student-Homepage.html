@@ -24,7 +24,28 @@
                 <li><a href="Student-Homepage.html"  class ="active">Home</a></li>
                 <li><a href="Home page (Browse).html">Browse</a></li>
                 <li><a href="Home page (History).html">History</a></li>
-                <li><a href="#">Account</a></li>
+
+                <script type="text/javascript">
+                    function handleSelect(selection)
+                    {
+                        if (selection == "Write") {
+                            // need fix
+                        }
+                        else if (selection == "Setting") {
+                            window.location.replace("Appearence-Setting.html");
+                        }
+                        else if (selection == "Logout") {
+                            window.location.replace("Landing.html");
+                        }
+                    }
+                </script>
+
+                <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
+                    <option value="" selected disabled hidden>Account</option>
+                    <option value="Write">Write</option>
+                    <option value="Setting">Setting</option>
+                    <option value="Logout">Logout</option>
+                </select>
             </ul> 
         </div>      
     </nav>
@@ -33,7 +54,7 @@
         <div class="container header-container">
             <div class="header-content">
                 <h1>Welcome, <b>Student Name</b>!</h1>
-                <button class = "write-review-button big-buttn">Write Review</button>
+                <button id="write-review-button" class = "write-review-button big-buttn">Write Review</button>
             </div>
         </div>
     </header>

@@ -22,7 +22,24 @@
             <ul class="navbar-menu">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Browse</a></li>
-                <li><a href="#">Account</a></li>
+                                
+                <script type="text/javascript">
+                    function handleSelect(selection)
+                    {
+                        if (selection == "Setting") {
+                            window.location.replace("Appearence-Setting.html");
+                        }
+                        else if (selection == "Logout") {
+                            window.location.replace("Landing.html");
+                        }
+                    }
+                </script>
+    
+                <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
+                    <option value="" selected disabled hidden>Account</option>
+                    <option value="Setting">Setting</option>
+                    <option value="Logout">Logout</option>
+                </select>
             </ul> 
         </div>      
     </nav>

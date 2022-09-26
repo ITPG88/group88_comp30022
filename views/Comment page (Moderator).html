@@ -23,7 +23,20 @@
         <div id = "Moderator-Navitem">
             <li><a href="#" class ="active">Home</a></li>
             <li><a href="#">Browse</a></li>
-            <select name="Account" id="Account">
+                            
+            <script type="text/javascript">
+                function handleSelect(selection)
+                {
+                    if (selection == "Setting") {
+                        window.location.replace("Appearence-Setting.html");
+                    }
+                    else if (selection == "Logout") {
+                        window.location.replace("Landing.html");
+                    }
+                }
+            </script>
+
+            <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
                 <option value="" selected disabled hidden>Account</option>
                 <option value="Setting">Setting</option>
                 <option value="Logout">Logout</option>
