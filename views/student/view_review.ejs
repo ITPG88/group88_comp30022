@@ -16,17 +16,19 @@
           <article class="each-review each-review-big">
               <div class="review-header-flagged">
                   <div class="header-flagged">
-                      <h3><%= review.subjectCode %> </h3>
-                      <h4><%= review.subjectName %></h4>
+                        <div class="inline">
+                            <h3 style="margin-right: 10px;"><%= review.subjectCode %> </h3>
+                            <div style = "margin-top: 12px;" class="star-review">
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                            </div>
+                        </div>
+                        <h4><%= review.subjectName %></h4>
                   </div>
                   
-                  <div class="star-review">
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                  </div>
               </div>
               
               <p><%= review.content %></p>
