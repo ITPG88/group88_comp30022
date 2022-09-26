@@ -60,8 +60,8 @@ body{
 
 
 .content{
-    width:350px;
-    margin-top: 200px;
+    margin-top: 20%;
+    margin-bottom: 20%;
 
 }
 
@@ -1776,3 +1776,11 @@ body{
   button:hover {
     opacity: 0.8;
   }
+
+#signup,
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
