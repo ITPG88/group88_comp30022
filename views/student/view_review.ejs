@@ -50,7 +50,7 @@
           
           <% review.comment_content.forEach(comment => { %>
             <article class="each-review each-review-big each-comment">
-                    <h7><b style="font-size: 22px;">Example(Myself) </b>date</h7>
+                    <h7><b style="font-size: 22px;">Example(Myself) </b><%= comment.date.toLocaleDateString() %></h7>
                     <p><%= comment.content %></p>
                     <div class="inline">
                         <form>
