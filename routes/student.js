@@ -38,7 +38,7 @@ router.get('/view_review', async (req,res) => {
     //res.render('student/view_review', { review : review , same_subjectcode : same_subjectcode})
 })
 
-router.get('/view_review/:subjectCode/:id', async (req,res)=>{
+router.get('/subject/:subjectCode/:id', async (req,res)=>{
     const review = await Review.findById(req.params.id)
     const result = await Subject.find({subjectCode : review.subjectCode})
     const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
@@ -47,7 +47,7 @@ router.get('/view_review/:subjectCode/:id', async (req,res)=>{
     res.render('student/view_review', { result:result[0], same_subjectcode : same_subjectcode})
 })
 
-router.get('/view_review/:subjectCode', async (req,res)=>{
+router.get('/subject/:subjectCode', async (req,res)=>{
     const result = await Subject.find({subjectCode : req.params.subjectCode})
     const same_subjectcode = await Review.find({subjectCode : req.params.subjectCode})
     res.render('student/view_review', { result:result[0], same_subjectcode : same_subjectcode})
@@ -91,9 +91,9 @@ router.post('/', async (req,res) =>{
     
 })
 
-router.delete('/view_review/:subjectCode/:id', async (req,res)=>{
+router.delete('/subject/:subjectCode/:id', async (req,res)=>{
     await Review.findByIdAndDelete(req.params.id)
-    res.redirect(`/student/view_review/${req.params.subjectCode}`)
+    res.redirect(`/student/subject/${req.params.subjectCode}`)
 })
 
 module.exports = router
