@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
+    "start2": "nodemon server2.js", 
     "test": "jest --watchAll --verbose"
   },
   "name": "group88_comp30022",

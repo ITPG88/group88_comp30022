@@ -39,8 +39,8 @@ router.get("/login", (req, res) => {
 // @desc Attempt login
 // @route POST /login
 router.post(
-    "/login",
-    passport.authenticate("local", {
+  "/login",
+  passport.authenticate("local", {
     failureRedirect: "/login",
     failureMessage: true,
   }),
@@ -85,13 +85,17 @@ router.get("/forgot_password", (req, res) => {
 
 // @desc Get homepage
 // @route GET /home
-router.get("/home", reviewController.getHomepageReviews);
+router.get(
+  "/home",
+  reviewController.setStudentName,
+  reviewController.getHomepageReviews
+);
 
 // @desc create review via pop-up from homepage
 // @route POST /home
 router.post("/home", (req, res) => {
   res.redirect(307, `/subject/${req.body.subjectCode}`);
-})
+});
 
 // @desc get browsepage
 // @route GET /browse
@@ -99,7 +103,12 @@ router.get("/browse", auth.ensureAuth, reviewController.getBrowsePageReviews);
 
 // @desc get historypage
 // @route GET /history
-router.get("/history", auth.ensureAuth, reviewController.getHistoryReviews);
+router.get(
+  "/history",
+  auth.ensureAuth,
+  reviewController.setStudentName,
+  reviewController.getHistoryReviews
+);
 
 // @desc get account
 // @route GET /account
@@ -130,17 +139,15 @@ router.get("/write_review", (req, res) => {
 
 router.post("/write_review", auth.ensureAuth, reviewController.postReview);
 
-
-
 /*
 Moderator
  */
 
 // @desc get pending_subject
 // @route GET /home/pending_subject
-router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
+// router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
 
 router.get("/home/flagged", auth.ensureAuth, (req, res) => {
   res.redirect("/home");
-})
+});
 module.exports = router;
