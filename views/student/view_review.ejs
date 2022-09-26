@@ -16,17 +16,19 @@
           <article class="each-review each-review-big">
               <div class="review-header-flagged">
                   <div class="header-flagged">
-                      <h3><%= review.subjectCode %> </h3>
-                      <h4><%= review.subjectName %></h4>
+                        <div class="inline">
+                            <h3 style="margin-right: 10px;"><%= review.subjectCode %> </h3>
+                            <div style = "margin-top: 12px;" class="star-review">
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                                <span class="material-symbols-outlined">star</span>
+                            </div>
+                        </div>
+                        <h4><%= review.subjectName %></h4>
                   </div>
                   
-                  <div class="star-review">
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                      <span class="material-symbols-outlined">star</span>
-                  </div>
               </div>
               
               <p><%= review.content %></p>
@@ -40,25 +42,28 @@
           </article>
 
           <div class = "inline comment-area">
-            <form>
-              <input type = "text" placeholder=" Add a comment..." name = "comment" class="comment-post"> 
-              <button class = "medium-buttn post-bttn">Post</button>
+            <form action = "/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>" method = "POST" class="inline">
+                <textarea placeholder=" Add a comment..." name = "comment" class="comment-post"></textarea>
+                <button class = "medium-buttn post-bttn">Post</button>
             </form>
           </div>
           
-          <article class="each-review each-review-big each-comment">
-            <h7><b style="font-size: 22px;">Example(Myself) </b>date</h7>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto ipsa iste dolorum ea dolor amet? Temporibus fugiat quidem, totam, pariatur natus, maxime vero hic nostrum accusamus animi aliquam? Odit, iusto!</p>
-            <div class="inline">
-                <form>
-                    <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png">111</button>
-                </form>
-                <form>
-                    <button class="remove-bttn small-buttn">Remove</button>
-                </form>
-            </div>
-            <hr class="solid">
-          </article>
+          <% review.comment_content.forEach(comment => { %>
+            <article class="each-review each-review-big each-comment">
+                    <h7><b style="font-size: 22px;">Example(Myself) </b>date</h7>
+                    <p><%= comment.content %></p>
+                    <div class="inline">
+                        <form>
+                            <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png">111</button>
+                        </form>
+                        <form action="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>/<%= comment.id %>?_method=DELETE" 
+                            method = "POST">
+                            <button class="remove-bttn small-buttn">Remove</button>
+                        </form>
+                    </div>
+                    <hr class="solid">
+            </article>
+         <% }) %> 
       </div>
     </section>
 
