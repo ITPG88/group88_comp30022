@@ -34,7 +34,22 @@ const reviewSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
+    comments: { type: [{
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: "Comment",
+                }],
+                default: []
+              },
+    comment_content: {type: [{
+                            content: {
+                                type: String
+                            },
+                            comment_id: {
+                                type: String
+                            }
+                        }],
+                        default: []
+                      },
     status: {
       type: String,
       enum: ["APPROVED", "REQUIRES_SUBJECT_REVIEW", "FLAGGED"],

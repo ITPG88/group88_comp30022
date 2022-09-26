@@ -1,7 +1,8 @@
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require('express');
+const mongoose = require('mongoose');
 const Review = require('./../model/review');
 const Subject = require('./../model/subject');
+const Comment = require('./../model/comment');
 const router = express.Router();
 
 router.get('/', async (req,res) => {
@@ -29,12 +30,33 @@ router.get('/write_review', (req,res) => {
     res.render('student/write_review', {review : new Review()})
 })
 
-router.get('/view_review/:id', async (req,res) => {
+router.get('/subject/:subjectCode/view_review/:id', async (req,res) => {
     const review = await Review.findById(req.params.id)
-    //const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
-    //console.log(review.subjectName)
-    //res.send(req.params.id)
     res.render('student/view_review', { review : review })
+})
+
+router.post('/subject/:subjectCode/view_review/:id', async (req,res) => {
+    const new_comment = new Comment({content: req.body.comment})
+    const review = await Review.findById(req.params.id).populate('comments').exec()
+    review.comments.push(new_comment);
+    review.save();
+    review.comment_content.push({content : review.comments[0].content , comment_id : review.comments[0]._id})
+    console.log(review.comment_content)
+    res.redirect(`/student/subject/${review.subjectCode}/view_review/${review.id}`)
+})
+
+router.delete('/subject/:subjectCode/view_review/:id/:commentid', async (req,res) => {
+    //console.log(req.params.commentid)
+    //await Review.comment_content.findByIdAndDelete(req.params.commentid)
+    const review = await Review.findById(req.params.id)
+    for (let i =0; i < review.comment_content.length; i++){
+        if(review.comment_content[i]._id == req.params.commentid){
+            review.comment_content.splice(i, 1);
+            review.save();
+        }
+    }
+    console.log(review.comment_content)
+    res.redirect(`/student/subject/${req.params.subjectCode}/view_review/${req.params.id}`)
 })
 
 router.get('/subject/:subjectCode/:id', async (req,res)=>{

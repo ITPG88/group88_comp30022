@@ -486,6 +486,7 @@ hr.solid {
     height: 56px;
 }
 .comment-area .comment-post{
+    padding-top: 15px;
     width: 1205px;
     height: 56px;
     font-size: 22px;
@@ -494,9 +495,10 @@ hr.solid {
 }
 
 .comment-area .post-bttn{
+    margin-top: 0px;
     width:150px;
     height:56px;
-    font-size: 22px;
+    font-size: 28px;
     margin-right: 0px;
     background-color: #7B7B7B;
     color: var(--font-color);
