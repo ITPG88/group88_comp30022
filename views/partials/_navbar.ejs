@@ -1,13 +1,16 @@
 <nav>
   <div class="container navbar-container">
     <img src="/static/Subject Review Logo.png" />
-    <form class="nav-searchbar">
+    <form class="nav-searchbar" action="/subject/" id="search" method="get">
       <input
         style="padding-left: 1em"
         type="text"
         placeholder="Enter Subject Name/Code..."
+        name="code"
       />
-      <button><span class="material-symbols-outlined">search</span></button>
+      <button type="submit">
+        <span class="material-symbols-outlined">search</span>
+      </button>
     </form>
     <ul class="navbar-menu">
       <li><a name="home" href="/home">Home</a></li>

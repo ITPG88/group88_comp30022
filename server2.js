@@ -63,6 +63,9 @@ app.use("/", require("./server/routes2/index"));
 app.use("/settings", require("./server/routes2/settings"));
 app.use("/subject", require("./server/routes2/subject"));
 
+app.all("*", (req, res) => {
+  res.redirect("/error404");
+});
 // Error 404 not found
 app.all("*", (req, res) => {
   // 'default' route to catch user errors

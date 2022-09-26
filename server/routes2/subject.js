@@ -5,16 +5,26 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
+router.get("/", (req, res) => {
+  let code = req.query.code;
 
-router.get('/:subjectCode', subjectController.loadSubjectPage);
-
-router.get('/:subjectCode/review/:id', subjectController.loadSingleReview);
-
-router.get('/', (req, res) =>{
-    res.status(404);
+  if (code) {
+    res.redirect("/subject/" + code);
+  } else {
+    res.redirect("/browse");
+  }
 });
 
-router.post('/subject/:subjectCode', subjectController.postReview)
+router.get("/:subjectCode", subjectController.loadSubjectPage);
+router.param("subjectCode", (req, res, next, subjectCode) => {
+  next();
+});
+router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
+router.get("/", (req, res) => {
+  res.status(404);
+});
+
+router.post("/subject/:subjectCode", subjectController.postReview);
 
 module.exports = router;

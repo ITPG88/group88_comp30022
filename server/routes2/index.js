@@ -139,6 +139,10 @@ router.get("/write_review", (req, res) => {
 
 router.post("/write_review", auth.ensureAuth, reviewController.postReview);
 
+router.all("/error404", (req, res) => {
+  res.status(404).render("error404.ejs");
+});
+
 /*
 Moderator
  */
