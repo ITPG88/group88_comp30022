@@ -465,3 +465,52 @@ header{
     color: var(--color-navbar);
     font-weight: lighter;
 }
+/*=====================COMMENT CSS======================*/
+.inline{
+    display: flex;
+}
+
+hr.solid {
+    margin-top: 15px;
+    border-top: 3px solid #bbb;
+}
+
+.each-comment{
+    margin-top: -25px;
+    background-color: var(--color-page);
+    margin-bottom: -35px;
+}
+
+.comment-area{
+    width: 100%;
+    height: 56px;
+}
+.comment-area .comment-post{
+    width: 1205px;
+    height: 56px;
+    font-size: 22px;
+    background-color: #1E1E1E;
+    color: var(--font-color);
+}
+
+.comment-area .post-bttn{
+    width:150px;
+    height:56px;
+    font-size: 22px;
+    margin-right: 0px;
+    background-color: #7B7B7B;
+    color: var(--font-color);
+}
+
+.remove-bttn{
+    margin-left: 0px;
+    background-color: var(--color-page);
+    color: var(--font-color);
+}
+
+.like-bttn{
+    margin-left: -23px;
+    margin-right: 0px;
+    background-color: var(--color-page);
+    color: var(--font-color);
+}

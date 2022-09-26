@@ -29,13 +29,12 @@ router.get('/write_review', (req,res) => {
     res.render('student/write_review', {review : new Review()})
 })
 
-router.get('/view_review', async (req,res) => {
-    res.send('in view_review')
-    //const review = await Review.findById(req.params.id)
+router.get('/view_review/:id', async (req,res) => {
+    const review = await Review.findById(req.params.id)
     //const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
     //console.log(review.subjectName)
     //res.send(req.params.id)
-    //res.render('student/view_review', { review : review , same_subjectcode : same_subjectcode})
+    res.render('student/view_review', { review : review })
 })
 
 router.get('/subject/:subjectCode/:id', async (req,res)=>{
