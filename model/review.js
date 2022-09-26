@@ -46,7 +46,11 @@ const reviewSchema = new mongoose.Schema(
                             },
                             comment_id: {
                                 type: String
-                            }
+                            },
+                            date: {
+                              type: Date,
+                              default: Date.now
+                          }
                         }],
                         default: []
                       },
