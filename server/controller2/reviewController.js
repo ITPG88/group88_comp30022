@@ -78,7 +78,10 @@ exports.getHistoryReviews = async (req, res) => {
   const reviews = await Review.find(query);
   res.render("student/history", { title: "history", reviews: reviews });
 };
-
+exports.setStudentName = async (req, res, next) => {
+  if (req.user) res.locals.fullName = req.user.fullName;
+  next();
+};
 exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;
@@ -114,37 +117,35 @@ exports.postReview = async (req, res) => {
   });
   console.log(subjectResult._id);
 
-  if (!subjectResult){
-        // Needs moderator attention
-        console.log("Subject created with faulty code");
+  if (!subjectResult) {
+    // Needs moderator attention
+    console.log("Subject created with faulty code");
   } else {
-        let reviewObject = {
-            content: content,
-            subject: subjectResult,
-            author: req.user._id,
-            isPrivate: false,
-            isVisible: true,
-            rating: rating,
-            comments: [],
-            status: 'APPROVED'
-        }
-        Review.create(reviewObject).
-        catch(err => {
-            console.log(err)
-            res.render('student/write_review', {review : reviewObject});
-        });
+    let reviewObject = {
+      content: content,
+      subject: subjectResult,
+      author: req.user._id,
+      isPrivate: false,
+      isVisible: true,
+      rating: rating,
+      comments: [],
+      status: "APPROVED",
+    };
+    Review.create(reviewObject).catch((err) => {
+      console.log(err);
+      res.render("student/write_review", { review: reviewObject });
+    });
   }
-
-}
+};
 
 exports.deleteReview = async (req, res) => {
-    if (!req.user){
-        // Guest handling
-    }
-    const reviewID = req.params._id
-    if (req.user.type === 'moderator' || req.user._id === reviewID){
-      // Authorised
-    } else {
-      // Not authorised
-    }
-}
+  if (!req.user) {
+    // Guest handling
+  }
+  const reviewID = req.params._id;
+  if (req.user.type === "moderator" || req.user._id === reviewID) {
+    // Authorised
+  } else {
+    // Not authorised
+  }
+};
