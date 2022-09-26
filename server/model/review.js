@@ -36,7 +36,7 @@ const reviewSchema = new mongoose.Schema(
     }
 );
 
-const badReviewSchema = new extendSchema(reviewSchema,
+const pendingReviewSchema = new extendSchema(reviewSchema,
     {
         attemptedCode: String,
         status: {
@@ -50,6 +50,6 @@ const badReviewSchema = new extendSchema(reviewSchema,
 
 
 const Review = mongoose.model('Review', reviewSchema, 'reviews');
-const PendingReview = mongoose.model('BadReview', badReviewSchema, 'badReviews');
+const PendingReview = mongoose.model('PendingReview', pendingReviewSchema, 'pendingReviews');
 
 module.exports = {Review, PendingReview};
