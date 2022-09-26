@@ -44,13 +44,14 @@ router.get('/subject/:subjectCode/:id', async (req,res)=>{
     const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
     console.log(review.subjectName)
     //res.send(req.params.id)
-    res.render('student/view_review', { result:result[0], same_subjectcode : same_subjectcode})
+    res.render('student/view_subject', { result:result[0], same_subjectcode : same_subjectcode})
 })
 
 router.get('/subject/:subjectCode', async (req,res)=>{
     const result = await Subject.find({subjectCode : req.params.subjectCode})
+    //console.log(result)
     const same_subjectcode = await Review.find({subjectCode : req.params.subjectCode})
-    res.render('student/view_review', { result:result[0], same_subjectcode : same_subjectcode})
+    res.render('student/view_subject', { result:result[0], same_subjectcode : same_subjectcode})
     //res.send(req.params.subjectCode)
 })
     
