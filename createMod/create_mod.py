@@ -50,7 +50,7 @@ def main():
         hashed = bcrypt.hashpw(bytes(pwd, encoding='utf-8'), bcrypt.gensalt(rounds=10))
         
         mod = {"fullName": fullName,
-        "username":user,
+        "username": user,
         "password": hashed.decode(),
         "type": "moderator"}
 
