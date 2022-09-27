@@ -48,9 +48,9 @@
             </form>
           </div>
           
-          <% review.comments.forEach(comment => { %>
+          <% comments.forEach(comment => { %>
             <article class="each-review each-review-big each-comment">
-                    <h7><b style="font-size: 22px;"><%= (comment.author) ? (comment.author.fullName) : "UserNotFound"%></b><%= comment.createdAt.toLocaleDateString() %></h7>
+                    <h7><b style="font-size: 22px;"><%= (comment.author) ? `${comment.author.fullName}  ` : "UserNotFound"%></b><%= comment.createdAt.toLocaleDateString() %></h7>
                     <p><%= comment.content %></p>
                     <div class="inline">
                         <form>

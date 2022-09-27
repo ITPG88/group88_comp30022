@@ -25,13 +25,18 @@ exports.loadSubjectPage = async (req, res) => {
 
 exports.loadSingleReview = async (req, res) => {
   const review = await Review.findById(req.params.id).populate('comments').populate('subject');
+  let comments = []
+  for (const comment of review.comments) {
+    comments.push(await comment.populate('author'));
+  }
 
   if (!review) {
     res.status(404);
   }
-  console.log(review);
+  console.log(comments);
   res.render("./student/view_review", {
     review: review,
+    comments: comments,
     subjectCode: req.params.subject,
   });
 };
