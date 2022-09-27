@@ -99,7 +99,7 @@ router.post('/', async (req,res) =>{
         isVisible: req.body.visible == 'on',
         rating: 5,
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
     })
     try{
         review = await review.save()
