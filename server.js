@@ -99,6 +99,7 @@ app.get('/', (req,res) =>{
 })
 app.use('/student', require('./routes/student'))
 
+app.use('/moderator', require('./routes/moderator'))
 // link to our router
 
 

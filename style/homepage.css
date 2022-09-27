@@ -233,6 +233,12 @@ header{
     gap:40px;
 }
 
+.review-container-fr{
+    display:grid;
+    grid-template-rows: 320px;
+    gap:40px;
+}
+
 .review-footer{
     display: flex;
     align-items: center;
@@ -257,7 +263,10 @@ header{
     padding: 25px;
 }
 
-
+.each-review-m{
+    height: 330px;
+    margin-bottom: 30px;
+}
 /*=====================For Review Titlebar======================*/
 .review-titlebar{
     display: flex;
