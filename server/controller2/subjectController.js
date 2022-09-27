@@ -1,13 +1,14 @@
 const Review = require("../model/review").Review;
+const Comment = require("../model/comment");
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
-  const result = await Subject.find({ subjectCode: req.params.subjectCode });
+  const result = await Subject.findOne({ subjectCode: req.params.subjectCode });
   console.log(result);
-  if (result.length !== 0) {
+  if (result) {
     console.log(result);
     const same_subjectcode = await Review.find({
       subjectCode: req.params.subjectCode,
@@ -23,7 +24,7 @@ exports.loadSubjectPage = async (req, res) => {
 };
 
 exports.loadSingleReview = async (req, res) => {
-  const review = await Review.findById(req.params.id);
+  const review = await Review.findById(req.params.id).populate('comments').populate('subject');
 
   if (!review) {
     res.status(404);
@@ -79,3 +80,27 @@ exports.deleteReview = async (req, res) => {
         .send({ message: `Could not delete review with id=${req.params.id}` });
     });
 };
+
+exports.addComment = async (req, res) => {
+  const content = req.body.content;
+  console.log(req.user);
+  const authorID = req.user._id;
+
+  const reviewID = req.params._id;
+
+  const newComment = await Comment.create({content: content, author: authorID});
+
+  const reviewUpdated = await Review.update({_id: reviewID}, {$push: {comments: newComment}});
+
+  // redirect back to the page POST request came from with new review
+  res.redirect('back', {review: reviewUpdated});
+}
+
+exports.likeReview = async (req, res) => {
+  const reviewID = req.params._id;
+
+  const reviewUpdated = await Review.update({_id: reviewID}, {$inc: {nLikes: 1}});
+
+  // redirect back to the page POST request came from with new review
+  res.redirect('back', {review: reviewUpdated});
+}

@@ -26,7 +26,7 @@
                                 <span class="material-symbols-outlined">star</span>
                             </div>
                         </div>
-                        <h4><%= review.subjectName %></h4>
+                        <h4><%= review.subject.subjectName %></h4>
                   </div>
                   
               </div>
@@ -42,13 +42,13 @@
           </article>
 
           <div class = "inline comment-area">
-            <form action = "/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>" method = "POST" class="inline">
+            <form action = "/subject/<%= review.subject.subjectCode %>/review/<%= review._id %>" method = "POST" class="inline">
                 <textarea placeholder=" Add a comment..." name = "comment" class="comment-post"></textarea>
                 <button class = "medium-buttn post-bttn">Post</button>
             </form>
           </div>
           
-          <% review.comment_content.forEach(comment => { %>
+          <% review.comments.forEach(comment => { %>
             <article class="each-review each-review-big each-comment">
                     <h7><b style="font-size: 22px;">Example(Myself) </b><%= comment.date.toLocaleDateString() %></h7>
                     <p><%= comment.content %></p>
@@ -56,7 +56,7 @@
                         <form>
                             <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png">111</button>
                         </form>
-                        <form action="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>/<%= comment.id %>?_method=DELETE" 
+                        <form action="/student/subject/<%= review.subject.subjectCode %>/view_review/<%= review._id %>/<%= comment._id %>?_method=DELETE"
                             method = "POST">
                             <button class="remove-bttn small-buttn">Remove</button>
                         </form>

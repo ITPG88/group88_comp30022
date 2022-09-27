@@ -26,7 +26,7 @@
             <article class="each-review">
               <span class="material-symbols-outlined">favorite</span>
   
-              <h3><%= review.subjectCode %></h3>
+              <h3><%= review.subject.subjectCode %></h3>
               
               <h4>University of Melbourne</h4>
               <div class="star-review">
@@ -41,10 +41,10 @@
               </p>
               <div class="inline">
                 <form class = "view-subject">
-                  <a href="/student/subject/<%= review.subjectCode %>/<%= review.id %> " class="medium-buttn view-subject-bttn">View Subject</a>
+                  <a href="/subject/<%= review.subject.subjectCode %>" class="medium-buttn view-subject-bttn">View Subject</a>
                 </form>
                 <form class = "view-subject">
-                  <a href="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %> " class="medium-buttn view-subject-bttn">View review</a>
+                  <a href="/subject/<%= review.subject.subjectCode %>/review/<%= review.id %> " class="medium-buttn view-subject-bttn">View review</a>
                 </form>
               </div>
               <footer><%= review.createdAt.toLocaleDateString() %></footer>

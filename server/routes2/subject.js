@@ -21,6 +21,14 @@ router.param("subjectCode", (req, res, next, subjectCode) => {
 });
 router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
+// @desc Add comment to review
+// @route /POST
+router.post("/:subjectCode/review/:id", subjectController.addComment);
+
+// @desc Add thumbs up to review
+// @route PATCH
+router.patch("/:subjectCode/review/:id", subjectController.likeReview);
+
 router.get("/", (req, res) => {
   res.status(404);
 });

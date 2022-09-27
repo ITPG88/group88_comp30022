@@ -1,4 +1,5 @@
 const Review = require("../model/review").Review;
+const PendingReview = require("../model/review").PendingReview;
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
@@ -20,7 +21,7 @@ async function getReviewsByFieldOfInterest(req) {
   }
 
   for (const subjectID of subjectIDs) {
-    const review = await Review.find({ subject: subjectID }).limit(5);
+    const review = await Review.find({ subject: subjectID }).populate('subject').limit(5);
     reviews.push(review);
   }
 
@@ -36,7 +37,7 @@ exports.getHomepageReviews = async (req, res) => {
       console.log(likedReviews);
       if (likedReviews) {
         likedReviews.forEach((reviewID) => {
-          reviews.push(Review.findById(reviewID));
+          reviews.push(Review.findById(reviewID).populate('subject'));
         });
       }
       // If no liked reviews, try field of interest
@@ -44,21 +45,18 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-          const query = { status: "APPROVED" };
-          reviews = await Review.find(query).limit(10);
+          reviews = await Review.find().populate('subject').limit(10);
         }
         res.render("student/home", { title: "home", reviews: reviews });
       }
     } else {
       // Moderator
-      const query = { status: { $ne: "APPROVED" } };
-      reviews = await Review.find(query);
+      reviews = await PendingReview.find();
       res.render("moderator/home", { reviews: reviews });
     }
   } else {
     // Guest
-    const query = { status: "APPROVED" };
-    reviews = await Review.find(query).limit(10);
+    reviews = await Review.find().populate('subject').limit(10);
     res.render("guest/home", { reviews: reviews });
   }
 };
@@ -75,7 +73,7 @@ exports.getHistoryReviews = async (req, res) => {
     return;
   }
   const query = { author: req.user._id };
-  const reviews = await Review.find(query);
+  const reviews = await Review.find(query).populate('subject');
   res.render("student/history", { title: "history", reviews: reviews });
 };
 exports.setStudentName = async (req, res, next) => {
@@ -129,7 +127,6 @@ exports.postReview = async (req, res) => {
       isVisible: true,
       rating: rating,
       comments: [],
-      status: "APPROVED",
     };
     Review.create(reviewObject).catch((err) => {
       console.log(err);

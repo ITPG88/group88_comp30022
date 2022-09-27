@@ -29,6 +29,11 @@ const reviewSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        nLikes: {
+            type: Number,
+            required: true,
+            default: 0
+        },
         comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
     },
     {
