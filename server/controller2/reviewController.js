@@ -45,7 +45,7 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-          reviews = await Review.find().populate('subject').limit(10);
+          reviews = await Review.find().populate('subject').limit(20);
         }
         res.render("student/home", { title: "home", reviews: reviews });
       }
@@ -56,7 +56,7 @@ exports.getHomepageReviews = async (req, res) => {
     }
   } else {
     // Guest
-    reviews = await Review.find().populate('subject').limit(10);
+    reviews = await Review.find().populate('subject').limit(20);
     res.render("guest/home", { reviews: reviews });
   }
 };

@@ -35,26 +35,26 @@
               <h7><b>Example student</b> <%= review.createdAt.toLocaleDateString() %></h7>
 
               <div class="review-footer">
-                  <button class="like-button small-buttn"><img src="/static/Like%20symbol.png">111</button>
+                  <button class="like-button small-buttn"><img src="/static/Like%20symbol.png"><%= review.nLikes%></button>
                   <h8>2 Replies</h8>
-                  <h8>Visable</h8>
+                  <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
               </div>
           </article>
 
           <div class = "inline comment-area">
             <form action = "/subject/<%= review.subject.subjectCode %>/review/<%= review._id %>" method = "POST" class="inline">
-                <textarea placeholder=" Add a comment..." name = "comment" class="comment-post"></textarea>
+                <textarea placeholder=" Add a comment..." name = "content" class="comment-post"></textarea>
                 <button class = "medium-buttn post-bttn">Post</button>
             </form>
           </div>
           
           <% review.comments.forEach(comment => { %>
             <article class="each-review each-review-big each-comment">
-                    <h7><b style="font-size: 22px;">Example(Myself) </b><%= comment.date.toLocaleDateString() %></h7>
+                    <h7><b style="font-size: 22px;"><%= (comment.author) ? (comment.author.fullName) : "UserNotFound"%></b><%= comment.createdAt.toLocaleDateString() %></h7>
                     <p><%= comment.content %></p>
                     <div class="inline">
                         <form>
-                            <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png">111</button>
+                            <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png"><%= (comment.nLikes) ? comment.nLikes : 111%></button>
                         </form>
                         <form action="/student/subject/<%= review.subject.subjectCode %>/view_review/<%= review._id %>/<%= comment._id %>?_method=DELETE"
                             method = "POST">

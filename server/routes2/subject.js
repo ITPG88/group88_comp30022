@@ -23,16 +23,16 @@ router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
 // @desc Add comment to review
 // @route /POST
-router.post("/:subjectCode/review/:id", subjectController.addComment);
+router.post("/:subjectCode/review/:id", auth.ensureAuth, subjectController.addComment);
 
 // @desc Add thumbs up to review
 // @route PATCH
-router.patch("/:subjectCode/review/:id", subjectController.likeReview);
+router.patch("/:subjectCode/review/:id", auth.ensureAuth, subjectController.likeReview);
 
 router.get("/", (req, res) => {
   res.status(404);
 });
 
-router.post("/subject/:subjectCode", subjectController.postReview);
+router.post("/subject/:subjectCode", auth.ensureAuth, subjectController.postReview);
 
 module.exports = router;

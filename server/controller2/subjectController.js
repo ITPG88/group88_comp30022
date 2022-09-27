@@ -29,7 +29,7 @@ exports.loadSingleReview = async (req, res) => {
   if (!review) {
     res.status(404);
   }
-
+  console.log(review);
   res.render("./student/view_review", {
     review: review,
     subjectCode: req.params.subject,
@@ -83,17 +83,24 @@ exports.deleteReview = async (req, res) => {
 
 exports.addComment = async (req, res) => {
   const content = req.body.content;
-  console.log(req.user);
   const authorID = req.user._id;
 
-  const reviewID = req.params._id;
+  const reviewID = req.params.id;
 
   const newComment = await Comment.create({content: content, author: authorID});
-
-  const reviewUpdated = await Review.update({_id: reviewID}, {$push: {comments: newComment}});
-
-  // redirect back to the page POST request came from with new review
-  res.redirect('back', {review: reviewUpdated});
+  console.log(newComment);
+  console.log(reviewID);
+  Review.findByIdAndUpdate(reviewID, {$push: {comments: newComment}}).then(data => {
+    console.log(data);
+    if (!data){
+      res.status(404).send({
+        message: `Cannot update review with ${reviewID}. Is the id correct?`
+      });
+    } else{
+      console.log("We get here ");
+      res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
+    }
+  });
 }
 
 exports.likeReview = async (req, res) => {
