@@ -6,13 +6,13 @@ const Comment = require('./../model/comment');
 const router = express.Router();
 
 router.get('/', async (req,res) => {
-    const reviews = await Review.find().populate('subject');
+    const reviews = await Review.find().populate('subject').exec();
     res.render('student/home', { reviews : reviews })
     // in index
 })
 
 router.get('/home', async (req,res) => {
-    const reviews = await Review.find().populate('subject');
+    const reviews = await Review.find().populate('subject').exec();
     res.render('student/home', { reviews : reviews })
     // in index
 })
@@ -41,7 +41,7 @@ router.post('/subject/:subjectCode/view_review/:id', async (req,res) => {
     review.comments.push(new_comment);
     review.save();
     review.comment_content.push({content : review.comments[0].content , comment_id : review.comments[0]._id})
-    console.log(review.comment_content)
+    //console.log(review.comment_content)
     res.redirect(`/student/subject/${review.subjectCode}/view_review/${review.id}`)
 })
 
@@ -63,7 +63,7 @@ router.get('/subject/:subjectCode/:id', async (req,res)=>{
     const review = await Review.findById(req.params.id)
     const result = await Subject.find({subjectCode : review.subjectCode})
     const same_subjectcode = await Review.find({subjectCode : review.subjectCode})
-    console.log(review.subjectName)
+    //console.log(review.subjectName)
     //res.send(req.params.id)
     res.render('student/view_subject', { result:result[0], same_subjectcode : same_subjectcode})
 })
@@ -78,7 +78,7 @@ router.get('/subject/:subjectCode', async (req,res)=>{
     
 
 router.get('/:id', async (req,res) =>{
-    const review = await Review.findById(req.params.id)
+    const review = await Review.findById(req.params.id).populate('subject').exec();
     
     if(review == null){
         res.redirect('/')

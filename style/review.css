@@ -31,6 +31,13 @@ body{
     margin: 0 auto;
 }
 
+.inline-checkbox{
+    display: flex;
+}
+.toright{
+    float: right;
+}
+
 
 h1{
     margin-top: 100px;
