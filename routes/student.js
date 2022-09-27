@@ -90,14 +90,13 @@ router.get('/:id', async (req,res) =>{
 
 router.post('/', async (req,res) =>{
     const result = await Subject.find({subjectCode : req.body.subjectCode})
-    //console.log(result)
     let review = new Review({   
         subject : result[0]._id,
         subjectCode : result[0].subjectCode,
         subjectName: result[0].subjectName,
         content: req.body.content,
-        isPrivate: false,
-        isVisible: true,
+        isPrivate: req.body.private == 'on',
+        isVisible: req.body.visible == 'on',
         rating: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
