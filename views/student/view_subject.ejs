@@ -47,7 +47,7 @@
               <h8><%= `${review.comments.length} replies`%></h8>
             </div>
             <form
-              action="/subject/<%= subjectCode %>/review/<%= review._id %>" method="DELETE"
+              action="/subject/<%= subjectCode %>/review/<%= review._id %>?_method=delete" method="POST"
             >
               <button class="remove-button-color small-buttn">Remove</button>
             </form>

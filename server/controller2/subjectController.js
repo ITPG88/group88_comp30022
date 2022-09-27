@@ -112,7 +112,8 @@ exports.deleteComment = async (req, res) => {
   if (req.user.type === "moderator" || comment.author.toString() === req.user._id.toString()){
 
     await Comment.findByIdAndDelete(commentID);
-    const review = await Review.findById(reviewID);
+    const review = await Review.findByIdAndUpdate(reviewID, {$pull: {comments: commentID}});
+    console.log(commentID);
     console.log(review);
     res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
   } else {
