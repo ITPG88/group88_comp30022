@@ -108,3 +108,34 @@ h1{
     margin: 5px;
     cursor: pointer;
 }
+
+.star-review{
+    width: 180px;
+    margin-left: -15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.star-review input{
+    display: none;
+}
+
+.star-review label{
+    float: right;
+    padding-right: 5px;
+    color: var(--font-color)
+
+}
+
+input:checked ~ label{
+    color:var(--star-review-color)
+}
+
+input:not(:checked) ~label:hover
+input:not(:checked) ~label:hover ~label{
+    color:var(--star-review-color)
+}
+
+
+
+
