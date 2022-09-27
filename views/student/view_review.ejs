@@ -36,7 +36,7 @@
 
               <div class="review-footer">
                   <button class="like-button small-buttn"><img src="/static/Like%20symbol.png"><%= review.nLikes%></button>
-                  <h8>2 Replies</h8>
+                  <h8><%= (review.comments.length>1) ? `${review.comments.length} replies` : '1 reply'%> </h8>
                   <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
               </div>
           </article>
@@ -48,17 +48,16 @@
             </form>
           </div>
           
-          <% comments.forEach(comment => { %>
+          <% review.comments.forEach(comment => { %>
             <article class="each-review each-review-big each-comment">
                     <h7><b style="font-size: 22px;"><%= (comment.author) ? `${comment.author.fullName}  ` : "UserNotFound"%></b><%= comment.createdAt.toLocaleDateString() %></h7>
                     <p><%= comment.content %></p>
                     <div class="inline">
                         <form>
-                            <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png"><%= (comment.nLikes) ? comment.nLikes : 111%></button>
+                            <button class="like-bttn small-buttn"><img src="/static/Lke symbol (white).png"><%= (comment.nLikes !== null) ? comment.nLikes : 111%></button>
                         </form>
-                        <form action="/student/subject/<%= review.subject.subjectCode %>/view_review/<%= review._id %>/<%= comment._id %>?_method=DELETE"
-                            method = "POST">
-                            <button class="remove-bttn small-buttn">Remove</button>
+                        <form action="/subject/<%=subjectCode %>/review/<%= review._id %>/<%=comment._id%>?_method=DELETE" method = "POST">
+                            <button class="remove-bttn small-buttn", type="submit">Remove</button>
                         </form>
                     </div>
                     <hr class="solid">

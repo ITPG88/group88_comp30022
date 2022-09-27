@@ -1,4 +1,5 @@
 const Review = require("../model/review").Review;
+const Comment = require("../model/comment");
 const PendingReview = require("../model/review").PendingReview;
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
@@ -6,17 +7,17 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 /**
- * @desc: Helper function that gets reviews based on fieldsOfInterest.
+ * @description Helper function that gets reviews based on fieldsOfInterest.
  *
  */
 async function getReviewsByFieldOfInterest(req) {
   let reviews = [];
   let subjectIDs = [];
-  const fields = await Student.findById(req.user._id)["fieldsOfInterest"];
-
-  if (fields) {
-    fields.forEach((field) => {
-      subjectIDs.push(Subject.find({ fieldOfStudy: field }));
+  let fieldsOfInterest = (await Student.findById(req.user._id)).fieldsOfInterest;
+  /*
+  if (fieldsOfInterest) {
+    fieldsOfInterest.forEach((field) => {
+      subjectIDs.push(Subject.find({fieldOfStudy: field}));
     });
   }
 
@@ -24,8 +25,8 @@ async function getReviewsByFieldOfInterest(req) {
     const review = await Review.find({ subject: subjectID }).populate('subject').limit(5);
     reviews.push(review);
   }
-
-  return reviews;
+  return reviews;*/
+  return [];
 }
 
 exports.getHomepageReviews = async (req, res) => {
@@ -34,7 +35,6 @@ exports.getHomepageReviews = async (req, res) => {
     console.log(req.user);
     if (req.user.type === "student") {
       const likedReviews = await Student.findById(req.user._id)["likedList"];
-      console.log(likedReviews);
       if (likedReviews) {
         likedReviews.forEach((reviewID) => {
           reviews.push(Review.findById(reviewID).populate('subject'));
@@ -45,6 +45,7 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
+
           reviews = await Review.find().populate('subject').limit(20);
         }
         res.render("student/home", { title: "home", reviews: reviews });
@@ -60,9 +61,9 @@ exports.getHomepageReviews = async (req, res) => {
     res.render("guest/home", { reviews: reviews });
   }
 };
-
 exports.getBrowsePageReviews = async (req, res) => {
-  const reviews = getReviewsByFieldOfInterest(req);
+  const reviews = await getReviewsByFieldOfInterest(req);
+  console.log(reviews);
   res.render("student/browse", { title: "browse", reviews: reviews });
 };
 
@@ -74,12 +75,15 @@ exports.getHistoryReviews = async (req, res) => {
   }
   const query = { author: req.user._id };
   const reviews = await Review.find(query).populate('subject');
-  res.render("student/history", { title: "history", reviews: reviews });
+  const comments = await Comment.find(query);
+  res.render("student/history", { title: "history", reviews: reviews, comments: comments});
 };
+
 exports.setStudentName = async (req, res, next) => {
   if (req.user) res.locals.fullName = req.user.fullName;
   next();
 };
+
 exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;

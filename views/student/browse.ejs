@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student home</title>
+    <title>Student browse page</title>
     <link rel="stylesheet" href="/style/homepage.css" />
     <link
       rel="stylesheet"
@@ -18,5 +18,42 @@
   <body>
     <%- include('../partials/_navbar') %>
     <h1>in browse</h1>
+    <section class="review-section">
+      <div class="container review-container">
+        <% reviews.forEach(review => { %>
+          <% if(review.isVisible){ %>
+            <article class="each-review">
+              <span class="material-symbols-outlined">favorite</span>
+
+              <h3><%= review.subject.subjectCode %></h3>
+
+              <h4>University of Melbourne</h4>
+              <div class="star-review">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <p>
+                <%= review.content %>
+              </p>
+              <div class="inline">
+                <form class = "view-subject">
+                  <a href="/subject/<%= review.subject.subjectCode %>" class="medium-buttn view-subject-bttn">View Subject</a>
+                </form>
+                <form class = "view-subject">
+                  <a href="/subject/<%= review.subject.subjectCode %>/review/<%= review._id %> " class="medium-buttn view-subject-bttn">View review</a>
+                </form>
+              </div>
+              <footer><%= review.createdAt.toLocaleDateString() %></footer>
+            </article>
+          <% } else{ %>
+          <% } %>
+
+
+        <% }) %>
+      </div>
+    </section>
   </body>
 </html>

@@ -7,16 +7,14 @@ const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
   const result = await Subject.findOne({ subjectCode: req.params.subjectCode });
-  console.log(result);
+  //console.log(result);
   if (result) {
-    console.log(result);
-    const same_subjectcode = await Review.find({
-      subjectCode: req.params.subjectCode,
-    });
+    const reviews = await Review.find({subject: result._id}).populate('author');
+    console.log(reviews);
     res.render("student/view_subject", {
-      title: req.params.subjectCode,
-      result: result[0],
-      same_subjectcode: same_subjectcode,
+      subjectCode: req.params.subjectCode,
+      subject: result,
+      reviews: reviews
     });
   } else {
     res.redirect("/error404");
@@ -33,11 +31,10 @@ exports.loadSingleReview = async (req, res) => {
   if (!review) {
     res.status(404);
   }
-  console.log(comments);
+  review.comments = comments;
   res.render("./student/view_review", {
     review: review,
-    comments: comments,
-    subjectCode: req.params.subject,
+    subjectCode: req.params.subjectCode,
   });
 };
 
@@ -74,9 +71,7 @@ exports.deleteReview = async (req, res) => {
           message: `Cannot delete with id ${req.params.id}. Is the id correct?`,
         });
       } else {
-        res.send({
-          message: "Review was deleted",
-        });
+        res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`)
       }
     })
     .catch((err) => {
@@ -106,6 +101,24 @@ exports.addComment = async (req, res) => {
       res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
     }
   });
+}
+
+exports.deleteComment = async (req, res) => {
+  console.log("delete comment called");
+  const reviewID = req.params.id;
+  const commentID = req.params.commentID;
+
+  const comment = await Comment.findById(commentID);
+  if (req.user.type === "moderator" || comment.author.toString() === req.user._id.toString()){
+
+    await Comment.findByIdAndDelete(commentID);
+    const review = await Review.findById(reviewID);
+    console.log(review);
+    res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
+  } else {
+    res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
+  }
+
 }
 
 exports.likeReview = async (req, res) => {

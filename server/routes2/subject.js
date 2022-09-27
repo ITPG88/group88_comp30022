@@ -19,6 +19,7 @@ router.get("/:subjectCode", subjectController.loadSubjectPage);
 router.param("subjectCode", (req, res, next, subjectCode) => {
   next();
 });
+
 router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
 // @desc Add comment to review
@@ -28,6 +29,14 @@ router.post("/:subjectCode/review/:id", auth.ensureAuth, subjectController.addCo
 // @desc Add thumbs up to review
 // @route PATCH
 router.patch("/:subjectCode/review/:id", auth.ensureAuth, subjectController.likeReview);
+
+// @desc delete a review
+// @route DELETE
+router.delete("/:subjectCode/review/:id", auth.ensureAuth, subjectController.deleteReview);
+
+// @desc delete a comment
+// @route DELETE via POST
+router.post("/:subjectCode/review/:id/:commentID/", auth.ensureAuth, subjectController.deleteComment)
 
 router.get("/", (req, res) => {
   res.status(404);

@@ -9,7 +9,8 @@ const reviewSchema = new mongoose.Schema(
         },
         author : {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Student'
+            ref: 'Student',
+            required: true
         },
         isPrivate: {
             type: Boolean,
