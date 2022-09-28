@@ -33,10 +33,10 @@
                                 <h5>Disrespectful! Please delete it.</h6>
                             </div>
                             <div class = "inline">
-                                <form>
-                                    <button class="neglect-button medium-buttn" type="button">Neglect</button>
+                                <form action="/home/flagged/<%= review._id %>/neglect" method="POST">
+                                    <button class="neglect-button medium-buttn">Neglect</button>
                                 </form>
-                                <form action="/home/flagged/<%= review._id %>" method="POST">
+                                <form action="/home/flagged/<%= review._id %>/remove" method="POST">
                                     <button class="remove-button small-buttn">Remove</button>
                                 </form>
                             </div>
