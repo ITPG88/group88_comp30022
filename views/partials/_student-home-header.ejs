@@ -1,10 +1,190 @@
+
+ <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+ <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <header>
   <div class="container header-container">
     <div class="header-content">
       <h1>Welcome, <b><%= locals.fullName || "Student Name"%></b>!</h1>
-      <a href="/write_review" class="write-review-button big-buttn"
-        >Write Review</a
-      >
+      
+      <button id="window" style="
+      background: #6A4873;
+      color: #ffffff;
+      border: none;
+      width: 120px;
+      height: 40px;
+      font-size: 18px;
+      font-weight: lighter;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+      ">Write Review</button>
     </div>
   </div>
 </header>
+<style>
+  #pop {
+      display: none;
+      width: 800px;
+      height: 600px;
+      background: #3b3b3b;
+      position: absolute;
+      left: 20%;
+      top: 20%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  #pop h1{
+      text-align: center;
+      color: #fff;
+      font-size:28px;
+      font-weight: normal;
+      padding-top: 20px;
+      
+
+  }
+
+
+ 
+  #pop label{
+      font-weight: lighter;
+      font-size: 18px;
+
+  }
+  #pop select{
+      width: 600px;
+      height: 35px;
+      font-size: 18px;
+      color: #fff;
+      font-weight: lighter;
+      background-color: #1e1e1e;
+  }
+
+  #pop textarea{
+      width: 600px;
+      height: 200px;
+      background-color: #1e1e1e;
+      color: #fff;
+      font-weight: lighter;
+      font-size: 18px;
+
+  }
+
+  #cancle {      
+      background: #3b3b3b;
+      color: #ffffff;
+      border: none;
+      width: 100px;
+      height: 40px;
+      font-size: 20px;
+      font-weight: lighter;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  }
+  
+  #save {
+      background: #6A4873;
+      color: #ffffff;
+      border: none;
+      width: 100px;
+      height: 40px;
+      font-size: 20px;
+      font-weight: lighter;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  }
+  </style>
+
+    
+    <script>
+      $("#window").click(function() {
+          $('#pop').show();
+      })
+    
+      $("#cancle").click(function() {
+          $('#pop').hide();
+      })
+      $("#save").click(function() {
+          $('#pop').hide();
+          
+      })
+  
+    </script>
+
+
+
+ <!-- review your subject pop window-->
+ <form id="pop">
+
+  <h1>Review your subject</h1>
+      <br>
+      <br>
+
+      <div style="padding-left: 100px;">
+          <ul>
+              <li><label for="subjectCode">Subject</label></li>
+              <li><input type="text" name="subjectCode" class="each-field" style="width: ;"/></li>
+          </ul>
+          <br>
+  
+          <ul>
+              <li><label for="rating">Rate</label>
+              <li>
+                <div class="star-review">
+                  <input type="radio" id="star5" name="rating" value="5" /><label
+                    for="star5"
+                    class="fa fa-star full"
+                  ></label>
+                  <input type="radio" id="star4" name="rating" value="4" /><label
+                    for="star4"
+                    class="fa fa-star full"
+                  ></label>
+                  <input type="radio" id="star3" name="rating" value="3" /><label
+                    for="star3"
+                    class="fa fa-star full"
+                  ></label>
+                  <input type="radio" id="star2" name="rating" value="2" /><label
+                    for="star2"
+                    class="fa fa-star full"
+                  ></label>
+                  <input type="radio" id="star1" name="rating" value="1" /><label
+                    for="star1"
+                    class="fa fa-star full"
+                  ></label>
+                </div>
+                  
+              </li>
+          </ul>
+          <br>
+  
+  
+          <ul>
+              <li> <label for="content">Review-content</label>
+               </li>
+              <li>
+                <textarea name="content" class="each-field big-form"> </textarea>
+              </li>
+          </ul>
+
+
+          <div style="display:inline-flex;">
+            <div>
+              <input style="width: 30px; height: 30px" name="visible" type="checkbox" />
+              <label style="margin-top: -6px" for="visible">Visible</label>
+            </div>
+            <div style="padding-left: 20px;">
+              <input style="width: 30px; height: 30px" name="private" type="checkbox" />
+              <label style="margin-top: -6px" for="private">Private</label>
+            </div>
+          </div>
+                    
+      </div>
+
+      
+
+  <br>
+  <br>
+  <div style="text-align: center;">  
+  
+    <button class="write-review-button big-buttn" id="cancle">Close</button> 
+    <button class="write-review-button big-buttn" id="save">Submit</button>
+  </div>
+
+</form>
