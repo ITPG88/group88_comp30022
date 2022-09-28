@@ -17,14 +17,12 @@ exports.loadSubjectPage = async (req, res) => {
     console.log(reviews);
     if (req.user) {
       res.render("student/view_subject", {
-        subjectCode: req.params.subjectCode,
         subject: result,
         reviews: reviews,
       });
     } else {
       // Guest
       res.render("guest/view_subject_guest", {
-        subjectCode: req.params.subjectCode,
         subject: result,
         reviews: reviews,
       });

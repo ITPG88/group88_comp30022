@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Subjects Review: <%=locals.title%></title>
+    <title>Subjects Review: <%= locals.subjectCode %></title>
     <link rel="stylesheet" href="/style/homepage.css" />
     <link
       rel="stylesheet"
@@ -16,51 +16,54 @@
     />
   </head>
   <body>
-    <%- include('../partials/_navbar') %> <%-
+    <%- include('../partials/navbars/_student_navbar') %> <%-
     include('../partials/_student-view-review-header') %>
     <section class="review-section">
       <div class="container review-container-moderator">
-        <% reviews.forEach(review => { %>
-          <% if(review.isVisible){ %>
-            <article class="each-review each-review-big">
-              <h7
-                ><b style="font-size: 30px"> <%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%> </b> <%=
-                review.createdAt.toLocaleDateString() %></h7
+        <% reviews.forEach(review => { %> <% if(review.isVisible){ %>
+        <article class="each-review each-review-big">
+          <h7
+            ><b style="font-size: 30px">
+              <%= (review.author.fullName!=null) ? `${review.author.fullName}` :
+              'Anonymous'%>
+            </b>
+            <%= review.createdAt.toLocaleDateString() %></h7
+          >
+
+          <div class="star-review star-review-big">
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+            <span class="material-symbols-outlined">star</span>
+          </div>
+
+          <div class="review-container">
+            <p><%= review.content %></p>
+          </div>
+
+          <div class="review-footer view-review-footer view-review-footer-2to1">
+            <div class="like-reply-remove">
+              <button class="like-button like-button-color small-buttn">
+                <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
+              </button>
+              <h8><%= `${review.comments.length} replies`%></h8>
+              <form
+                action="/subject/<%= subjectCode %>/review/<%= review._id %>/flagged"
+                method="POST"
               >
-
-              <div class="star-review star-review-big">
-                <span class="material-symbols-outlined">star</span>
-                <span class="material-symbols-outlined">star</span>
-                <span class="material-symbols-outlined">star</span>
-                <span class="material-symbols-outlined">star</span>
-                <span class="material-symbols-outlined">star</span>
-              </div>
-
-              <div class="review-container">
-                <p><%= review.content %></p>
-              </div>
-
-              <div class="review-footer view-review-footer view-review-footer-2to1">
-                <div class="like-reply-remove">
-                  <button class="like-button like-button-color small-buttn">
-                    <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
-                  </button>
-                  <h8><%= `${review.comments.length} replies`%></h8>
-                  <form action="/subject/<%= subjectCode %>/review/<%= review._id %>/flagged" method = "POST">
-                      <button class="report-bttn">Report</button>
-                  </form>
-                </div>
-                <form
-                  action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete" method="POST"
-                >
-                  <button class="remove-button-color small-buttn">Remove</button>
-                </form>
-                
-              </div>
-            </article>
-            <% } else{ %>  
-            <% } %>
-        <% }) %>
+                <button class="report-bttn">Report</button>
+              </form>
+            </div>
+            <form
+              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
+              method="POST"
+            >
+              <button class="remove-button-color small-buttn">Remove</button>
+            </form>
+          </div>
+        </article>
+        <% } else{ %> <% } %> <% }) %>
       </div>
     </section>
   </body>
