@@ -7,6 +7,7 @@ const auth = require("../services/auth");
 const render = require("../services/render");
 const reviewController = require("../controller2/reviewController");
 const student = require("../controller/studentController");
+const { PendingReview } = require("../model/review");
 
 // @desc Landing
 // @route GET /
@@ -151,7 +152,9 @@ Moderator
 // @route GET /home/pending_subject
 // router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
 
-router.get("/home/flagged", auth.ensureAuth, (req, res) => {
-  res.redirect("/home");
+router.get("/home/flagged", auth.ensureAuth, async (req, res) => {
+  const pending_review = await PendingReview.find().populate('subject').populate('author')
+  const flagged_review_count = await PendingReview.find({status : "FLAGGED"}).count();
+  res.render("moderator/flagged_review", {reviews: pending_review, flagged_review_count:flagged_review_count});
 });
 module.exports = router;

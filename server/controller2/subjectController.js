@@ -1,4 +1,5 @@
 const Review = require("../model/review").Review;
+const pendingReview = require("../model/review").PendingReview;
 const Comment = require("../model/comment");
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
@@ -63,6 +64,24 @@ exports.postReview = async (req, res) => {
     res.render("student/write_review", { review: review });
   }
 };
+
+exports.flaggedReview = async (req, res) => {
+  const review = await Review.findById(req.params.id);
+  let reviewObject = {
+    content: review.content,
+    subject: review.subject,
+    author: review.author,
+    isPrivate: review.isPrivate,
+    isVisible: review.isVisible,
+    rating: review.rating,
+    comments: review.comments,
+    status: "FLAGGED",
+
+  };
+  await pendingReview.create(reviewObject);
+  await Review.findByIdAndDelete(req.params.id);
+  res.redirect(`/subject/${req.params.subjectCode}`)
+}
 
 exports.deleteReview = async (req, res) => {
 

@@ -45,12 +45,16 @@
                 <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
               </button>
               <h8><%= `${review.comments.length} replies`%></h8>
+              <form action="/subject/<%= subjectCode %>/review/<%= review._id %>/flagged" method = "POST">
+                  <button class="report-bttn">Report</button>
+              </form>
             </div>
             <form
               action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete" method="POST"
             >
               <button class="remove-button-color small-buttn">Remove</button>
             </form>
+            
           </div>
         </article>
 

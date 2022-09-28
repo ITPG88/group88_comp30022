@@ -26,6 +26,9 @@ router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 // @route /POST
 router.post("/:subjectCode/review/:id", auth.ensureAuth, subjectController.addComment);
 
+// @desc Flagged a review
+// @route /POST
+router.post("/:subjectCode/review/:id/flagged", auth.ensureAuth, subjectController.flaggedReview);
 
 // @desc delete a review
 // @route DELETE
