@@ -67,7 +67,9 @@ exports.postReview = async (req, res) => {
 exports.deleteReview = async (req, res) => {
 
   console.log('i am in delete')
-  await Review.findByIdAndDelete(req.params.id)
+  const review = await Review.findById(req.params.id);
+  if (req.user.type === "moderator" || review.author.toString() === req.user._id.toString()){
+    await Review.findByIdAndDelete(req.params.id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -82,6 +84,10 @@ exports.deleteReview = async (req, res) => {
         .status(500)
         .send({ message: `Could not delete review with id=${req.params.id}` });
     });
+  }else {
+    res.redirect(`/subject/${req.params.subjectCode}`);
+  }
+  
 };
 
 exports.addComment = async (req, res) => {
