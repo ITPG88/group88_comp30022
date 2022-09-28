@@ -7,7 +7,7 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
-  const result = await Subject.findOne({ subjectCode: req.params.subjectCode });
+  const result = req.subject;
   //console.log(result);
   if (result) {
     const reviews = await Review.find({
@@ -15,18 +15,18 @@ exports.loadSubjectPage = async (req, res) => {
       isVisible: true,
     }).populate("author");
     console.log(reviews);
-    if (req.user){
+    if (req.user) {
       res.render("student/view_subject", {
         subjectCode: req.params.subjectCode,
         subject: result,
-        reviews: reviews
+        reviews: reviews,
       });
     } else {
       // Guest
       res.render("guest/view_subject_guest", {
         subjectCode: req.params.subjectCode,
         subject: result,
-        reviews: reviews
+        reviews: reviews,
       });
     }
   } else {
@@ -50,7 +50,7 @@ exports.loadSingleReview = async (req, res) => {
   //review.comments = comments;
   console.log(review);
 
-  if (req.user){
+  if (req.user) {
     // Logged in mode
     res.render("./student/view_review", {
       review: review,
@@ -63,11 +63,10 @@ exports.loadSingleReview = async (req, res) => {
       subjectCode: req.params.subjectCode,
     });
   }
-
 };
 
 exports.postReview = async (req, res) => {
-  const subject = await Subject.findOne({ subjectCode: req.body.subjectCode });
+  const subject = req.subject;
 
   let review = new Review({
     subject: subject._id,
@@ -90,7 +89,23 @@ exports.postReview = async (req, res) => {
     res.render("student/write_review", { review: review });
   }
 };
-
+exports.FindSubject = async (req, res, next) => {
+  let subjectCode = "";
+  if (!req.params.subjectCode) {
+    subjectCode = req.body.subjectCode;
+  } else {
+    subjectCode = req.params.subjectCode;
+  }
+  const subject = await Subject.findOne({
+    subjectCode: subjectCode,
+  });
+  if (subject) {
+    res.locals.subjectCode = subject.subjectCode;
+    res.locals.subjectName = subject.subjectName;
+  }
+  req.subject = subject;
+  next();
+};
 exports.flaggedReview = async (req, res) => {
   const review = await Review.findById(req.params.id);
   let reviewObject = {
