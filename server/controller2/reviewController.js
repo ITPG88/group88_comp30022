@@ -29,6 +29,7 @@ async function getReviewsByFieldOfInterest(req) {
 
 exports.getHomepageReviews = async (req, res) => {
   let reviews = [];
+  res.locals.title = "home";
   if (req.user) {
     console.log(req.user);
     if (req.user.type === "student") {
@@ -47,7 +48,7 @@ exports.getHomepageReviews = async (req, res) => {
           const query = { status: "APPROVED" };
           reviews = await Review.find(query).limit(10);
         }
-        res.render("student/home", { title: "home", reviews: reviews });
+        res.render("student/home", { reviews: reviews });
       }
     } else {
       // Moderator

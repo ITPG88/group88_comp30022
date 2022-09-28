@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student home</title>
+    <title>Subjects Review: Home</title>
     <link rel="stylesheet" href="/style/homepage.css" />
     <link
       rel="stylesheet"
@@ -16,44 +16,45 @@
     />
   </head>
   <body style="min-width: 300px">
-    <%- include('../partials/_navbar') %> <%-
+    <%- include('../partials/navbars/_student_navbar') %> <%-
     include('../partials/_student-home-header') %>
 
     <section class="review-section">
       <div class="container review-container">
-        <% reviews.forEach(review => { %>
-          <% if(review.isVisible){ %>
-            <article class="each-review">
-              <span class="material-symbols-outlined">favorite</span>
-  
-              <h3><%= review.subjectCode %></h3>
-              
-              <h4>University of Melbourne</h4>
-              <div class="star-review">
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-              </div>
-              <p>
-                <%= review.content %>
-              </p>
-              <div class="inline">
-                <form class = "view-subject">
-                  <a href="/student/subject/<%= review.subjectCode %>/<%= review.id %> " class="medium-buttn view-subject-bttn">View Subject</a>
-                </form>
-                <form class = "view-subject">
-                  <a href="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %> " class="medium-buttn view-subject-bttn">View review</a>
-                </form>
-              </div>
-              <footer><%= review.createdAt.toLocaleDateString() %></footer>
-            </article>
-          <% } else{ %>  
-         <% } %>
-          
-          
-        <% }) %> 
+        <% reviews.forEach(review => { %> <% if(review.isVisible){ %>
+        <article class="each-review">
+          <span class="material-symbols-outlined">favorite</span>
+
+          <h3><%= review.subjectCode %></h3>
+
+          <h4>University of Melbourne</h4>
+          <div class="star-review">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+          </div>
+          <p><%= review.content %></p>
+          <div class="inline">
+            <form class="view-subject">
+              <a
+                href="/student/subject/<%= review.subjectCode %>/<%= review.id %> "
+                class="medium-buttn view-subject-bttn"
+                >View Subject</a
+              >
+            </form>
+            <form class="view-subject">
+              <a
+                href="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %> "
+                class="medium-buttn view-subject-bttn"
+                >View review</a
+              >
+            </form>
+          </div>
+          <footer><%= review.createdAt.toLocaleDateString() %></footer>
+        </article>
+        <% } else{ %> <% } %> <% }) %>
       </div>
     </section>
   </body>

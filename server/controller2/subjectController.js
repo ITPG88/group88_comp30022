@@ -5,17 +5,13 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
-  const result = await Subject.find({ subjectCode: req.params.subjectCode });
-  console.log(result);
-  if (result.length !== 0) {
-    console.log(result);
-    const same_subjectcode = await Review.find({
-      subjectCode: req.params.subjectCode,
+  const subject = req.subject;
+  if (subject.length !== 0) {
+    const reviews = await Review.find({
+      subject: subject._id,
     });
     res.render("student/view_subject", {
-      title: req.params.subjectCode,
-      result: result[0],
-      same_subjectcode: same_subjectcode,
+      reviews: reviews,
     });
   } else {
     res.redirect("/error404");
@@ -36,8 +32,7 @@ exports.loadSingleReview = async (req, res) => {
 };
 
 exports.postReview = async (req, res) => {
-  const subject = await Subject.findOne({ subjectCode: req.body.subjectCode });
-
+  const subject = req.subject;
   let review = new Review({
     subject: subject._id,
     subjectCode: subject.subjectCode,
@@ -60,6 +55,15 @@ exports.postReview = async (req, res) => {
   }
 };
 
+exports.FindSubject = async (req, res, next) => {
+  const subject = await Subject.findOne({
+    subjectCode: req.params.subjectCode,
+  });
+  res.locals.subjectCode = subject.subjectCode;
+  res.locals.subjectName = subject.subjectName;
+  req.subject = subject;
+  next();
+};
 exports.deleteReview = async (req, res) => {
   await Review.findByIdAndDelete(req.params.id)
     .then((data) => {

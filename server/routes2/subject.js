@@ -16,9 +16,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:subjectCode", subjectController.loadSubjectPage);
-router.param("subjectCode", (req, res, next, subjectCode) => {
-  next();
-});
+router.param("subjectCode", subjectController.FindSubject);
 router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
 router.get("/", (req, res) => {
