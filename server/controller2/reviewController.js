@@ -210,7 +210,8 @@ exports.getFlaggedReviews = async (req, res) => {
   }
 
   const flaggedReviews = await PendingReview.find({status: "FLAGGED"}).populate('subject').populate('author');
-  res.render('moderator/flagged_review', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length});
+  const new_subject = await PendingReview.find({status: "REQUIRES_SUBJECT_REVIEW"}).populate('subject').populate('author');
+  res.render('moderator/flagged_review', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length, newsubjectCount: new_subject.length});
 }
 
 exports.getPendingSubjectReviews = async (req, res) => {
@@ -220,13 +221,9 @@ exports.getPendingSubjectReviews = async (req, res) => {
     return;
   }
 
-  const pendingSubjectReviews = await PendingReview.find({status: 'REQUIRES_SUBJECT_REVIEW'})
-      .populate('subject')
-      .populate('author');
-  res.render('moderator/home_new_subject', {
-    pendingReviews: pendingSubjectReviews,
-    flaggedReviewCount: pendingSubjectReviews.length
-  });
+  const flaggedReviews = await PendingReview.find({status: "FLAGGED"}).populate('subject').populate('author');
+  const new_subject = await PendingReview.find({status: "REQUIRES_SUBJECT_REVIEW"}).populate('subject').populate('author');
+  res.render('moderator/home_new_subject', {reviews: new_subject, newsubjectCount: new_subject.length, flaggedReviewCount: flaggedReviews.length});
 }
 
 exports.deleteFlaggedPendingReview = async (req, res) => {
@@ -257,3 +254,5 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
   await PendingReview.findByIdAndDelete(req.params.id);
   res.redirect('/home/flagged')
 }
+
+

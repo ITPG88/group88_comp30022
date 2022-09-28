@@ -2,7 +2,8 @@
     <div class="container header-container">
         <div class="header-content">
             <h1>Welcome, <b>Moderator Name</b>!</h1>           
-            <h2><%= (flaggedReviewCount>=1) ? `${flaggedReviewCount} flagged reviews` : '0 flagged reviews'%> <b>|</b> Y new subjects</h2>
+            
+            <h2><%= (flaggedReviewCount>=1) ? `${flaggedReviewCount} flagged reviews` : '0 flagged reviews'%> <b>|</b> <%= (newsubjectCount>=1) ? `${newsubjectCount} new subjects` : '0 new subjects'%></h2>
         </div>
     </div>
 </header>
