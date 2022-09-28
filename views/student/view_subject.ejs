@@ -23,7 +23,7 @@
         <% reviews.forEach(review => { %>
         <article class="each-review each-review-big">
           <h7
-            ><b style="font-size: 30px"> <%= review.author.fullName %> </b> <%=
+            ><b style="font-size: 30px"> <%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%> </b> <%=
             review.createdAt.toLocaleDateString() %></h7
           >
 

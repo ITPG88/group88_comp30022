@@ -32,7 +32,7 @@
               </div>
               
               <p><%= review.content %></p>
-              <h7><b> <%= review.author.fullName %></b> <%= review.createdAt.toLocaleDateString() %></h7>
+              <h7><b> <%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%></b> <%= review.createdAt.toLocaleDateString() %></h7>
 
               <div class="review-footer">
                   <button class="like-button small-buttn"><img src="/static/Like%20symbol.png"><%= review.nLikes%></button>

@@ -55,7 +55,8 @@
                         </div>
                         
                         <p><%= review.content %> </p>
-                        <h7><b style="margin-right: 10px;"><%= review.author.fullName %> </b>date</h7>
+                        
+                        <h7><b style="margin-right: 10px;"><%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%> </b>date</h7>
         
                         <div class="review-footer">
                             <button class="like-button small-buttn"><img src="/assets/img/Like%20symbol.png">111</button>
