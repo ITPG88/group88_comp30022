@@ -75,8 +75,8 @@ exports.getHomepageReviews = async (req, res) => {
       }
     } else {
       // Moderator
-      reviews = await PendingReview.find();
-      res.render("moderator/home", { reviews: reviews });
+      res.redirect("/home/flagged");
+      return;
     }
   } else {
     // Guest
