@@ -86,6 +86,7 @@ router.get("/forgot_password", (req, res) => {
 
 // @desc Get homepage
 // @route GET /home
+// re-route moderators to /home/flagged
 router.get(
   "/home",
   reviewController.setStudentName,
@@ -124,7 +125,7 @@ router.get("/logout", (req, res, next) => {
     if (error) {
       return next(error);
     }
-    if (Object.keys(req.query).length == 0) {
+    if (Object.keys(req.query).length === 0) {
       res.redirect("/");
       return;
     }
@@ -148,19 +149,20 @@ router.all("/error404", (req, res) => {
 Moderator
  */
 
+
 // @desc get pending_subject
 // @route GET /home/pending_subject
-// router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
+//router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
 
-router.get("/home/flagged", auth.ensureAuth, async (req, res) => {
-  const pending_review = await PendingReview.find().populate('subject').populate('author')
-  const flagged_review_count = await PendingReview.find({status : "FLAGGED"}).count();
-  res.render("moderator/flagged_review", {reviews: pending_review, flagged_review_count:flagged_review_count});
-});
 
-router.post("/home/flagged/:id", auth.ensureAuth, async (req, res) => {
-  //console.log("i am in remove moderator")
-  await PendingReview.findByIdAndDelete(req.params.id);
-  res.redirect('/home/flagged');
-})
+/*****/
+router.get("/home/flagged", auth.ensureAuth, reviewController.getFlaggedReviews);
+
+router.get('/home/pending_subject', auth.ensureAuth, reviewController.getPendingSubjectReviews);
+
+
+router.post("/home/flagged/:id", auth.ensureAuth, reviewController.deleteFlaggedPendingReview);
+
+
+
 module.exports = router;

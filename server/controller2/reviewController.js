@@ -45,6 +45,9 @@ async function findSubjectID(subjectCode){
 }
 
 
+/*
+STUDENT(and guest)-CALLED FUNCTIONS
+ */
 exports.getHomepageReviews = async (req, res) => {
   let reviews = [];
   if (req.user) {
@@ -104,6 +107,13 @@ exports.setStudentName = async (req, res, next) => {
   next();
 };
 
+
+/**
+ * @description Attempts a post review given a request created from write_review
+ * @param req request
+ * @param res response
+ * @returns {Promise<void>}
+ */
 exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;
@@ -157,8 +167,8 @@ exports.postReview = async (req, res) => {
       content: content,
       subject: subjectResult,
       author: req.user._id,
-      isPrivate: req.body.private == 'on',
-      isVisible: req.body.visible == 'on',
+      isPrivate: req.body.private === 'on',
+      isVisible: req.body.visible === 'on',
       rating: rating,
       comments: [],
     };
@@ -186,3 +196,49 @@ exports.deleteReview = async (req, res) => {
     // Not authorised
   }
 };
+
+
+/*
+MODERATOR-CALLED FUNCTIONS
+Re-direct students away from these
+ */
+exports.getFlaggedReviews = async (req, res) => {
+  if (req.user.type === 'student'){
+    console.log("Student attempted to enter moderator area");
+    res.redirect('/home');
+    return;
+  }
+
+  const flaggedReviews = await PendingReview.find({status: "FLAGGED"}).populate('subject').populate('author');
+  res.render('moderator/home', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length});
+}
+
+exports.getPendingSubjectReviews = async (req, res) => {
+  if (req.user.type === 'student'){
+    console.log("Student attempted to enter moderator area");
+    res.redirect('/home');
+    return;
+  }
+
+  const pendingSubjectReviews = await PendingReview.find({status: 'REQUIRES_SUBJECT_REVIEW'})
+      .populate('subject')
+      .populate('author');
+  res.render('moderator/home_new_subject', {
+    pendingReviews: pendingSubjectReviews,
+    flaggedReviewCount: pendingSubjectReviews.length
+  });
+}
+
+exports.deleteFlaggedPendingReview = async (req, res) => {
+  //console.log("i am in remove moderator")
+  if (req.user.type === 'student'){
+    console.log("Student attempted to enter moderator area");
+    res.redirect('/home');
+    return;
+  }
+
+  const pendingReview = await PendingReview.findByIdAndDelete(req.params.id);
+  res.redirect('/home/flagged');
+}
+
+
