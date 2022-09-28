@@ -157,4 +157,10 @@ router.get("/home/flagged", auth.ensureAuth, async (req, res) => {
   const flagged_review_count = await PendingReview.find({status : "FLAGGED"}).count();
   res.render("moderator/flagged_review", {reviews: pending_review, flagged_review_count:flagged_review_count});
 });
+
+router.post("/home/flagged/:id", auth.ensureAuth, async (req, res) => {
+  //console.log("i am in remove moderator")
+  await PendingReview.findByIdAndDelete(req.params.id);
+  res.redirect('/home/flagged');
+})
 module.exports = router;
