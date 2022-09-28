@@ -70,8 +70,8 @@ exports.getHomepageReviews = async (req, res) => {
       }
     } else {
       // Moderator
-      reviews = await PendingReview.find();
-      res.render("moderator/home", { reviews: reviews });
+      res.redirect("/home/flagged");
+      return;
     }
   } else {
     // Guest
@@ -212,7 +212,7 @@ exports.getFlaggedReviews = async (req, res) => {
   const flaggedReviews = await PendingReview.find({ status: "FLAGGED" })
     .populate("subject")
     .populate("author");
-  res.render("moderator/home", {
+  res.render("moderator/flagged_review", {
     reviews: flaggedReviews,
     flaggedReviewCount: flaggedReviews.length,
   });
@@ -245,5 +245,22 @@ exports.deleteFlaggedPendingReview = async (req, res) => {
   }
 
   const pendingReview = await PendingReview.findByIdAndDelete(req.params.id);
+  res.redirect("/home/flagged");
+};
+
+exports.neglectFlaggedPendingReview = async (req, res) => {
+  console.log("in neglect");
+  const review = await PendingReview.findById(req.params.id);
+  let reviewObject = {
+    content: review.content,
+    subject: review.subject,
+    author: review.author,
+    isPrivate: review.isPrivate,
+    isVisible: review.isVisible,
+    rating: review.rating,
+    comments: review.comments,
+  };
+  await Review.create(reviewObject);
+  await PendingReview.findByIdAndDelete(req.params.id);
   res.redirect("/home/flagged");
 };

@@ -7,16 +7,21 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
-  const subject = req.subject;
-  if (subject) {
+  const result = await Subject.findOne({ subjectCode: req.params.subjectCode });
+  //console.log(result);
+  if (result) {
     const reviews = await Review.find({
-      subject: subject._id,
-    });
+      subject: result._id,
+      isVisible: true,
+    }).populate("author");
+    console.log(reviews);
     res.render("student/view_subject", {
+      subjectCode: req.params.subjectCode,
+      subject: result,
       reviews: reviews,
     });
   } else {
-    res.redirect("/home");
+    res.redirect("/error404");
   }
 };
 
@@ -42,7 +47,8 @@ exports.loadSingleReview = async (req, res) => {
 };
 
 exports.postReview = async (req, res) => {
-  const subject = req.subject;
+  const subject = await Subject.findOne({ subjectCode: req.body.subjectCode });
+
   let review = new Review({
     subject: subject._id,
     subjectCode: subject.subjectCode,
@@ -65,23 +71,6 @@ exports.postReview = async (req, res) => {
   }
 };
 
-exports.FindSubject = async (req, res, next) => {
-  let subjectCode = "";
-  if (!req.params.subjectCode) {
-    subjectCode = req.body.subjectCode;
-  } else {
-    subjectCode = req.params.subjectCode;
-  }
-  const subject = await Subject.findOne({
-    subjectCode: subjectCode,
-  });
-  if (subject) {
-    res.locals.subjectCode = subject.subjectCode;
-    res.locals.subjectName = subject.subjectName;
-  }
-  req.subject = subject;
-  next();
-};
 exports.flaggedReview = async (req, res) => {
   const review = await Review.findById(req.params.id);
   let reviewObject = {
@@ -204,7 +193,15 @@ exports.likeReview = async (req, res) => {
 
 exports.likeComment = async (req, res) => {
   const commentID = req.params.commentID;
-
+  if (req.user.type === "moderator") {
+    res.redirect("back");
+    console.log("moderator attempted liking");
+  }
+  const student = await Student.findById(req.user._id);
+  if (student.likedComments.includes(commentID)) {
+    // Student cannot like comment more than once
+    return;
+  }
   const commentUpdated = await Comment.findByIdAndUpdate(commentID, {
     $inc: { nLikes: 1 },
   });

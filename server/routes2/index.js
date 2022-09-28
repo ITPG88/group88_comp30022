@@ -178,6 +178,18 @@ router.get(
 );
 
 router.post(
+  "/home/flagged/:id/remove",
+  auth.ensureAuth,
+  reviewController.deleteFlaggedPendingReview
+);
+
+router.post(
+  "/home/flagged/:id/neglect",
+  auth.ensureAuth,
+  reviewController.neglectFlaggedPendingReview
+);
+
+router.post(
   "/home/flagged/:id",
   auth.ensureAuth,
   reviewController.deleteFlaggedPendingReview

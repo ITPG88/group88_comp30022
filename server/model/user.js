@@ -42,7 +42,13 @@ const studentSchema = extendSchema(userSchema, {
         type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}],
         required: true,
         default: []
+    },
+    likedComments: {
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
+        required: true,
+        default: []
     }
+
 });
 
 const moderatorSchema = extendSchema(userSchema, {});
