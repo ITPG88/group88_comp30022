@@ -64,21 +64,20 @@ exports.postReview = async (req, res) => {
 };
 
 exports.deleteReview = async (req, res) => {
-  await Review.findByIdAndDelete(req.params.id)
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot delete with id ${req.params.id}. Is the id correct?`,
-        });
-      } else {
-        res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`)
-      }
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: `Could not delete review with id=${req.params.id}` });
-    });
+  const comments = (await Review.findById(req.params.id)).comments;
+  const success = await Review.findByIdAndDelete(req.params.id);
+  console.log(success);
+  if (success){
+    for (const comment of comments) {
+      await Comment.findByIdAndDelete(comment);
+    }
+    console.log("Review removed");
+    res.redirect(`/subject/${req.params.subjectCode}`);
+  } else {
+    console.log("review deletion error");
+    res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`);
+  }
+
 };
 
 exports.addComment = async (req, res) => {

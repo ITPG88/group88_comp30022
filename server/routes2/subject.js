@@ -32,7 +32,7 @@ router.patch("/:subjectCode/review/:id", auth.ensureAuth, subjectController.like
 
 // @desc delete a review
 // @route DELETE
-router.delete("/:subjectCode/review/:id", auth.ensureAuth, subjectController.deleteReview);
+router.post("/:subjectCode/review/:id/delete", auth.ensureAuth, subjectController.deleteReview);
 
 // @desc delete a comment
 // @route DELETE via POST
