@@ -125,7 +125,7 @@ exports.postReview = async (req, res) => {
     res.render("student/write_review", {
       errors,
       content,
-      subject,
+      subjectCode,
     });
     return;
   }
@@ -143,7 +143,7 @@ exports.postReview = async (req, res) => {
       attemptedCode: subjectCode,
       status: "REQUIRES_SUBJECT_REVIEW",
     };
-    pendingReview.create(pendingReviewObj).catch((err) => {
+    await PendingReview.create(pendingReviewObj).catch((err) => {
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
     });
