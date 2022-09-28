@@ -10,7 +10,7 @@ exports.loadSubjectPage = async (req, res) => {
   const result = await Subject.findOne({ subjectCode: req.params.subjectCode });
   //console.log(result);
   if (result) {
-    const reviews = await Review.find({subject: result._id}).populate('author');
+    const reviews = await Review.find({subject: result._id, isVisible: true}).populate('author');
     console.log(reviews);
     res.render("student/view_subject", {
       subjectCode: req.params.subjectCode,
