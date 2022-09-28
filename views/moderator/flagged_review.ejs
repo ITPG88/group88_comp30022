@@ -20,10 +20,7 @@
     <%- include('../partials/_moderator-fr-header') %>
 
     <section class="review-section">
-        <div class="container review-button-moderator">
-            <button class="flagged-review-button big-buttn" type="button"><a href="Moderator-Homepage(Flagged review).html">Flagged review</a></button>
-            <button class="new-subject-button big-buttn" type="button"><a href="Moderator-Homepage(New%20Subject).htmlml">New subject</a></button>
-        </div>  
+        <%- include('../partials/_flagged-newsubject') %>
         <div class="container review-container-moderator review-container-fr">
             <% reviews.forEach(review => { %>
                 <% if(review.status == "FLAGGED"){ %>
