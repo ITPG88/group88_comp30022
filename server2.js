@@ -3,6 +3,7 @@ const passport = require("passport");
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const methodOverride = require('method-override')
 const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const session = require("express-session");
@@ -52,6 +53,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
+app.use(methodOverride('_method'));
 
 // Bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));

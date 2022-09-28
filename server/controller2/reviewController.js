@@ -45,7 +45,6 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-
           reviews = await Review.find().populate('subject').limit(20);
         }
         res.render("student/home", { title: "home", reviews: reviews });
@@ -88,9 +87,11 @@ exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;
   const author = req.user._id;
-  const subject = req.body.subject;
-  const rating = req.body.rating;
-
+  //changed below for testing purposes
+  //const subject = req.body.subject;
+  const subject = req.body.subjectCode;
+  //const rating = req.body.rating;
+  const rating = 5;
   if (req.user.type === "moderator") {
     // Moderator has no post review capability, should be redirected to home
     res.redirect("/home");
@@ -98,15 +99,18 @@ exports.postReview = async (req, res) => {
   }
 
   if (!content || !subject || !rating) {
+    console.log('no either one')
     errors.push({ message: "Not all fields correctly filled" });
   }
 
   if (!author) {
+    console.log('no author!')
     errors.push({ message: "Author identification error" });
   }
 
   if (errors.length > 0) {
-    res.render("write_review.ejs", {
+    console.log('i am in error')
+    res.render("student/write_review.ejs", {
       errors,
       content,
       subject,
@@ -118,24 +122,29 @@ exports.postReview = async (req, res) => {
     subjectCode: req.body.subjectCode,
   });
   console.log(subjectResult._id);
-
   if (!subjectResult) {
     // Needs moderator attention
     console.log("Subject created with faulty code");
   } else {
+
     let reviewObject = {
       content: content,
       subject: subjectResult,
       author: req.user._id,
-      isPrivate: false,
-      isVisible: true,
+      isPrivate: req.body.private == 'on',
+      isVisible: req.body.visible == 'on',
       rating: rating,
       comments: [],
     };
-    Review.create(reviewObject).catch((err) => {
+    
+    try{
+      let review = await Review.create(reviewObject)
+      review = review.save();
+      res.redirect('/home')
+    }catch(err){
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
-    });
+    };
   }
 };
 

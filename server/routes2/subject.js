@@ -36,7 +36,7 @@ router.delete("/:subjectCode/review/:id", auth.ensureAuth, subjectController.del
 
 // @desc delete a comment
 // @route DELETE via POST
-router.post("/:subjectCode/review/:id/:commentID/", auth.ensureAuth, subjectController.deleteComment)
+router.delete("/:subjectCode/review/:id/:commentID/", auth.ensureAuth, subjectController.deleteComment)
 
 router.get("/", (req, res) => {
   res.status(404);

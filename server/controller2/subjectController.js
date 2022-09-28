@@ -22,7 +22,7 @@ exports.loadSubjectPage = async (req, res) => {
 };
 
 exports.loadSingleReview = async (req, res) => {
-  const review = await Review.findById(req.params.id).populate('comments').populate('subject');
+  const review = await Review.findById(req.params.id).populate('comments').populate('subject').populate('author');
   let comments = []
   for (const comment of review.comments) {
     comments.push(await comment.populate('author'));
@@ -64,6 +64,7 @@ exports.postReview = async (req, res) => {
 };
 
 exports.deleteReview = async (req, res) => {
+  console.log('i am in delete')
   await Review.findByIdAndDelete(req.params.id)
     .then((data) => {
       if (!data) {
@@ -71,7 +72,7 @@ exports.deleteReview = async (req, res) => {
           message: `Cannot delete with id ${req.params.id}. Is the id correct?`,
         });
       } else {
-        res.redirect(`/subject/${req.params.subjectCode}/review/${req.params.id}`)
+        res.redirect(`/subject/${req.params.subjectCode}`)
       }
     })
     .catch((err) => {
