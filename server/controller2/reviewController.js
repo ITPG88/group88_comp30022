@@ -199,7 +199,6 @@ exports.getFlaggedReviews = async (req, res) => {
     .populate("author");
   res.render("moderator/flagged_review", {
     reviews: flaggedReviews,
-    flaggedReviewCount: flaggedReviews.length,
   });
 };
 
@@ -216,8 +215,7 @@ exports.getPendingSubjectReviews = async (req, res) => {
     .populate("subject")
     .populate("author");
   res.render("moderator/home_new_subject", {
-    pendingReviews: pendingSubjectReviews,
-    flaggedReviewCount: pendingSubjectReviews.length,
+    reviews: pendingSubjectReviews,
   });
 };
 
@@ -250,3 +248,10 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
   await PendingReview.findByIdAndDelete(req.params.id);
   res.redirect("/home/flagged");
 };
+
+exports.getNumPendingReviews = async (req, res, next) => {
+  res.locals.newSubjectCount = await PendingReview.find({status: "REQUIRES_SUBJECT_REVIEW"}).count();
+  res.locals.flaggedReviewCount = await PendingReview.find({status: "FLAGGED"}).count();
+  next();
+}
+

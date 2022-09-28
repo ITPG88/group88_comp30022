@@ -23,7 +23,6 @@
         <%- include('../partials/_flagged-newsubject') %>
         <div class="container review-container-moderator review-container-fr">
             <% if (locals.reviews) reviews.forEach(review => { %>
-                <% if(review.status == "FLAGGED"){ %>
                     <article class="each-review each-review-big">
                         <div class="review-titlebar">
                             <div>
@@ -42,7 +41,7 @@
         
                         <div class="review-header-flagged">
                             <div class="header-flagged">
-                                <h3> <%= review.subject.subjectCode %> </h3>
+                                <h3> <%= review.attemptedCode %> </h3>
                                 <h4>University of Melbourne</h4>
                             </div>
                             
@@ -65,8 +64,6 @@
                             <h8>Visable</h8>
                         </div>
                     </article>
-                    <% } else{ %>  
-                    <% } %>
             <% }) %> 
 
         </div>
