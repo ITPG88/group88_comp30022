@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
   const subject = req.subject;
-  if (subject.length !== 0) {
+  if (subject) {
     const reviews = await Review.find({
       subject: subject._id,
     });
@@ -14,7 +14,7 @@ exports.loadSubjectPage = async (req, res) => {
       reviews: reviews,
     });
   } else {
-    res.redirect("/error404");
+    res.redirect("/home");
   }
 };
 
@@ -56,11 +56,19 @@ exports.postReview = async (req, res) => {
 };
 
 exports.FindSubject = async (req, res, next) => {
+  let subjectCode = "";
+  if (!req.params.subjectCode) {
+    subjectCode = req.body.subjectCode;
+  } else {
+    subjectCode = req.params.subjectCode;
+  }
   const subject = await Subject.findOne({
-    subjectCode: req.params.subjectCode,
+    subjectCode: subjectCode,
   });
-  res.locals.subjectCode = subject.subjectCode;
-  res.locals.subjectName = subject.subjectName;
+  if (subject) {
+    res.locals.subjectCode = subject.subjectCode;
+    res.locals.subjectName = subject.subjectName;
+  }
   req.subject = subject;
   next();
 };

@@ -1,4 +1,5 @@
 const Review = require("../model/review").Review;
+const pendingReview = require("../model/review").PendingReview;
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
@@ -87,55 +88,66 @@ exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;
   const author = req.user._id;
-  const subject = req.body.subject;
+  const subjectCode = req.body.subjectCode;
   const rating = req.body.rating;
-
+  const subjectResult = req.subject;
   if (req.user.type === "moderator") {
     // Moderator has no post review capability, should be redirected to home
     res.redirect("/home");
     return;
   }
 
-  if (!content || !subject || !rating) {
+  if (!content || !subjectCode || !rating) {
     errors.push({ message: "Not all fields correctly filled" });
   }
 
   if (!author) {
     errors.push({ message: "Author identification error" });
   }
-
+  console.log(errors);
   if (errors.length > 0) {
-    res.render("write_review.ejs", {
+    res.render("/student/write_review.ejs", {
       errors,
       content,
       subject,
     });
     return;
   }
-
-  const subjectResult = await Subject.findOne({
-    subjectCode: req.body.subjectCode,
-  });
-  console.log(subjectResult._id);
-
+  console.log(subjectResult);
   if (!subjectResult) {
     // Needs moderator attention
+    let pendingReviewObj = {
+      content: content,
+      subject: subjectResult,
+      author: req.user._id,
+      isPrivate: false,
+      isVisible: false,
+      rating: rating,
+      comments: [],
+      attemptedCode: subjectCode,
+      status: "REQUIRES_SUBJECT_REVIEW",
+    };
+    pendingReview.create(pendingReviewObj).catch((err) => {
+      console.log(err);
+      res.render("student/write_review", { review: reviewObject });
+    });
     console.log("Subject created with faulty code");
+    res.redirect("/subject/" + subjectCode);
   } else {
     let reviewObject = {
       content: content,
       subject: subjectResult,
       author: req.user._id,
       isPrivate: false,
-      isVisible: true,
+      isVisible: false,
       rating: rating,
       comments: [],
-      status: "APPROVED",
     };
     Review.create(reviewObject).catch((err) => {
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
     });
+    res.redirect("/subject/" + subjectCode);
   }
 };
 

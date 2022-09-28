@@ -6,6 +6,7 @@ const loginController = require("../controller2/loginController");
 const auth = require("../services/auth");
 const render = require("../services/render");
 const reviewController = require("../controller2/reviewController");
+const subjectController = require("../controller2/subjectController");
 const student = require("../controller/studentController");
 
 // @desc Landing
@@ -137,7 +138,12 @@ router.get("/write_review", (req, res) => {
   res.render("student/write_review.ejs");
 });
 
-router.post("/write_review", auth.ensureAuth, reviewController.postReview);
+router.post(
+  "/write_review",
+  auth.ensureAuth,
+  subjectController.FindSubject,
+  reviewController.postReview
+);
 
 router.all("/error404", (req, res) => {
   res.status(404).render("error404.ejs");
