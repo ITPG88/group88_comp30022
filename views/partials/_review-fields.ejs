@@ -1,12 +1,18 @@
 <div class="form-field">
-  <label for="subjectCode">Subject</label>
+  <label for="subjectCode">Subject: </label>
   <div class="autocomplete" style="width: 820px">
-    <input id="myInput" type="text" name="subjectCode" class="each-field" />
+    <input
+      id="myInput"
+      style="padding"
+      type="text"
+      name="subjectCode"
+      class="each-field"
+    />
   </div>
 </div>
 
 <div class="form-field">
-  <label for="rating">Rate</label>
+  <label for="rating">Rating: </label>
   <div class="star-review">
     <input type="radio" id="star5" name="rating" value="5" /><label
       for="star5"
@@ -32,13 +38,18 @@
 </div>
 
 <div class="form-field">
-  <label for="content">Review-content</label>
+  <label for="content">Review Content: </label>
   <textarea name="content" class="each-field big-form"> </textarea>
 </div>
 
 <div class="form-field inline-checkbox toright">
   <div class="visible-checkbox inline-checkbox">
-    <input style="width: 30px; height: 30px" name="visible" type="checkbox" />
+    <input
+      style="width: 30px; height: 30px"
+      name="visible"
+      type="checkbox"
+      checked
+    />
     <label style="margin-top: -6px" for="visible">Visible</label>
   </div>
 
@@ -47,7 +58,7 @@
     style="margin-right: -60px; margin-left: 20px"
   >
     <input style="width: 30px; height: 30px" name="private" type="checkbox" />
-    <label style="margin-top: -6px" for="private">Private</label>
+    <label style="margin-top: -6px" for="private">Anonymous</label>
   </div>
 </div>
 
