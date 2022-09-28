@@ -1,7 +1,7 @@
 <header>
   <div class="container header-container">
     <div class="header-content">
-      <h1>Welcome, <b>Moderator Name</b>!</h1>
+      <h1>Welcome, <b><%= locals.fullName%></b>!</h1>
 
       <h2>
         <%= (locals.flaggedReviewCount>=1) ? `${locals.flaggedReviewCount}

@@ -168,12 +168,14 @@ Moderator
 router.get(
   "/home/flagged",
   auth.ensureAuth,
+  reviewController.setFullName,
   reviewController.getFlaggedReviews
 );
 
 router.get(
   "/home/pending_subject",
   auth.ensureAuth,
+    reviewController.setFullName,
   reviewController.getPendingSubjectReviews
 );
 
