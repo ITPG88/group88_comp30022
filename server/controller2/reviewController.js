@@ -148,7 +148,7 @@ exports.postReview = async (req, res) => {
       res.render("student/write_review", { review: reviewObject });
     });
     console.log("Subject created with faulty code");
-    res.redirect("/subject/" + subjectCode);
+    res.redirect("/home");
   } else {
     let reviewObject = {
       content: content,
