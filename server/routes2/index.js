@@ -136,9 +136,14 @@ router.get("/logout", (req, res, next) => {
 
 // @desc get write_review
 // @route GET /write_review
-router.get("/write_review", auth.ensureAuth, (req, res) => {
-  res.render("student/write_review.ejs");
-});
+router.get(
+  "/write_review",
+  auth.ensureAuth,
+  subjectController.getSubjectList,
+  (req, res) => {
+    res.render("student/write_review.ejs");
+  }
+);
 
 router.post("/write_review", auth.ensureAuth, reviewController.postReview);
 
@@ -150,20 +155,39 @@ router.all("/error404", (req, res) => {
 Moderator
  */
 
-
 // @desc get pending_subject
 // @route GET /home/pending_subject
 //router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
 
-
 /*****/
-router.get("/home/flagged", auth.ensureAuth, reviewController.getFlaggedReviews);
+router.get(
+  "/home/flagged",
+  auth.ensureAuth,
+  reviewController.getFlaggedReviews
+);
 
-router.get('/home/pending_subject', auth.ensureAuth, reviewController.getPendingSubjectReviews);
+router.get(
+  "/home/pending_subject",
+  auth.ensureAuth,
+  reviewController.getPendingSubjectReviews
+);
 
-router.post("/home/flagged/:id/remove", auth.ensureAuth, reviewController.deleteFlaggedPendingReview);
+router.post(
+  "/home/flagged/:id/remove",
+  auth.ensureAuth,
+  reviewController.deleteFlaggedPendingReview
+);
 
-router.post("/home/flagged/:id/neglect", auth.ensureAuth, reviewController.neglectFlaggedPendingReview);
+router.post(
+  "/home/flagged/:id/neglect",
+  auth.ensureAuth,
+  reviewController.neglectFlaggedPendingReview
+);
 
+router.post(
+  "/home/flagged/:id",
+  auth.ensureAuth,
+  reviewController.deleteFlaggedPendingReview
+);
 
 module.exports = router;

@@ -39,6 +39,7 @@ body{
 }
 
 
+
 h1{
     margin-top: 100px;
     margin-bottom: 80px;
@@ -137,5 +138,44 @@ input:not(:checked) ~label:hover ~label{
 }
 
 
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 6px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+  }
+
+.autocomplete-items {
+position: absolute;
+border: 1px solid #d4d4d4;
+border-bottom: none;
+border-top: none;
+z-index: 99;
+/*position the autocomplete items to be the same width as the container:*/
+top: 100%;
+left: 0;
+right: 0;
+}
+.autocomplete-items div {
+padding: 10px;
+cursor: pointer;
+background-color: #1E1E1E;
+border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+/*when hovering an item:*/
+background-color: #444444;
+}
+.autocomplete-active {
+/*when navigating through the items using the arrow keys:*/
+background-color: DodgerBlue !important;
+color: #ffffff;
+}
 
 
