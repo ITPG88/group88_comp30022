@@ -115,6 +115,7 @@ exports.flaggedReview = async (req, res) => {
     isVisible: review.isVisible,
     rating: review.rating,
     comments: review.comments,
+    createdAt: review.createdAt,
     status: "FLAGGED",
   };
   await pendingReview.create(reviewObject);
@@ -209,7 +210,7 @@ exports.deleteComment = async (req, res) => {
 exports.likeReview = async (req, res) => {
   const reviewID = req.params.id;
 
-  if (req.user.type === "moderator"){
+  if (req.user.type === "moderator") {
     console.log("moderator attempted liking review");
     return;
   }
@@ -220,9 +221,15 @@ exports.likeReview = async (req, res) => {
     return;
   } else {
     console.log("correct up to herre");
-    console.log(await Student.findByIdAndUpdate(req.user._id, {$push: {likedList: reviewID}}));
+    console.log(
+      await Student.findByIdAndUpdate(req.user._id, {
+        $push: { likedList: reviewID },
+      })
+    );
   }
-  const reviewUpdated = await Review.findByIdAndUpdate(reviewID, { $inc: { nLikes: 1 }} );
+  const reviewUpdated = await Review.findByIdAndUpdate(reviewID, {
+    $inc: { nLikes: 1 },
+  });
 
   if (!reviewUpdated) {
     console.log("review liking error");
@@ -242,7 +249,9 @@ exports.likeComment = async (req, res) => {
     // Student cannot like comment more than once
     return;
   } else {
-    await Student.findByIdAndUpdate(req.user._id, {$push: {likedComments: commentID}});
+    await Student.findByIdAndUpdate(req.user._id, {
+      $push: { likedComments: commentID },
+    });
   }
   const commentUpdated = await Comment.findByIdAndUpdate(commentID, {
     $inc: { nLikes: 1 },

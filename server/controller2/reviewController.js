@@ -244,6 +244,7 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
     isVisible: review.isVisible,
     rating: review.rating,
     comments: review.comments,
+    createdAt: review.createdAt,
   };
   await Review.create(reviewObject);
   await PendingReview.findByIdAndDelete(req.params.id);
