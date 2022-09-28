@@ -13,7 +13,8 @@ const mongoose = require("mongoose");
 async function getReviewsByFieldOfInterest(req) {
   let reviews = [];
   let subjectIDs = [];
-  let fieldsOfInterest = (await Student.findById(req.user._id)).fieldsOfInterest;
+  let fieldsOfInterest = (await Student.findById(req.user._id))
+    .fieldsOfInterest;
   /*
   if (fieldsOfInterest) {
     fieldsOfInterest.forEach((field) => {
@@ -32,18 +33,16 @@ async function getReviewsByFieldOfInterest(req) {
 /**
  * @description Gets a subject ID from subject code
  */
-async function findSubjectID(subjectCode){
-  let retVal = '';
+async function findSubjectID(subjectCode) {
+  let retVal = "";
   let subject;
 
-  if ((subject = await Subject.findOne({subjectCode: subjectCode}))){
+  if ((subject = await Subject.findOne({ subjectCode: subjectCode }))) {
     retVal = subject._id;
   }
 
   return retVal;
-
 }
-
 
 /*
 STUDENT(and guest)-CALLED FUNCTIONS
@@ -57,7 +56,7 @@ exports.getHomepageReviews = async (req, res) => {
       const likedReviews = await Student.findById(req.user._id)["likedList"];
       if (likedReviews) {
         likedReviews.forEach((reviewID) => {
-          reviews.push(Review.findById(reviewID).populate('subject'));
+          reviews.push(Review.findById(reviewID).populate("subject"));
         });
       }
       // If no liked reviews, try field of interest
@@ -65,10 +64,7 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-
-
-          reviews = await Review.find().populate('subject').limit(19);
-
+          reviews = await Review.find().populate("subject").limit(19);
         }
         res.render("student/home", { reviews: reviews });
       }
@@ -79,7 +75,7 @@ exports.getHomepageReviews = async (req, res) => {
     }
   } else {
     // Guest
-    reviews = await Review.find().populate('subject').limit(20);
+    reviews = await Review.find().populate("subject").limit(20);
     res.render("guest/home", { reviews: reviews });
   }
 };
@@ -96,15 +92,18 @@ exports.getHistoryReviews = async (req, res) => {
     return;
   }
   const query = { author: req.user._id };
-  const reviews = await Review.find(query).populate('subject');
+  const reviews = await Review.find(query).populate("subject");
   const comments = await Comment.find(query);
-  res.render("student/history", { title: "history", reviews: reviews, comments: comments});
+  res.render("student/history", {
+    title: "history",
+    reviews: reviews,
+    comments: comments,
+  });
 };
 exports.setFullName = async (req, res, next) => {
   if (req.user) res.locals.fullName = req.user.fullName;
   next();
 };
-
 
 /**
  * @description Attempts a post review given a request created from write_review
@@ -126,20 +125,18 @@ exports.postReview = async (req, res) => {
   }
 
   if (!content || !subject || !rating) {
-    console.log('no either one')
+    console.log("no either one");
     errors.push({ message: "Not all fields correctly filled" });
   }
 
   if (!author) {
-    console.log('no author!')
+    console.log("no author!");
     errors.push({ message: "Author identification error" });
   }
   console.log(errors);
   if (errors.length > 0) {
-
-    console.log("Review creation field error.")
+    console.log("Review creation field error.");
     res.render("student/write_review", {
-
       errors,
       content,
       subject,
@@ -171,20 +168,20 @@ exports.postReview = async (req, res) => {
       content: content,
       subject: subjectResult,
       author: req.user._id,
-      isPrivate: req.body.private === 'on',
-      isVisible: req.body.visible === 'on',
+      isPrivate: req.body.private === "on",
+      isVisible: req.body.visible === "on",
       rating: rating,
       comments: [],
     };
-    
-    try{
-      let review = await Review.create(reviewObject)
+
+    try {
+      let review = await Review.create(reviewObject);
       review = review.save();
-      res.redirect('/home')
-    }catch(err){
+      res.redirect("/home");
+    } catch (err) {
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
-    });
+    }
     res.redirect("/subject/" + subjectCode);
   }
 };
@@ -201,48 +198,52 @@ exports.deleteReview = async (req, res) => {
   }
 };
 
-
 /*
 MODERATOR-CALLED FUNCTIONS
 Re-direct students away from these
  */
 exports.getFlaggedReviews = async (req, res) => {
-  if (req.user.type === 'student'){
+  if (req.user.type === "student") {
     console.log("Student attempted to enter moderator area");
-    res.redirect('/home');
+    res.redirect("/home");
     return;
   }
 
-  const flaggedReviews = await PendingReview.find({status: "FLAGGED"}).populate('subject').populate('author');
-  res.render('moderator/home', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length});
-}
+  const flaggedReviews = await PendingReview.find({ status: "FLAGGED" })
+    .populate("subject")
+    .populate("author");
+  res.render("moderator/home", {
+    reviews: flaggedReviews,
+    flaggedReviewCount: flaggedReviews.length,
+  });
+};
 
 exports.getPendingSubjectReviews = async (req, res) => {
-  if (req.user.type === 'student'){
+  if (req.user.type === "student") {
     console.log("Student attempted to enter moderator area");
-    res.redirect('/home');
+    res.redirect("/home");
     return;
   }
 
-  const pendingSubjectReviews = await PendingReview.find({status: 'REQUIRES_SUBJECT_REVIEW'})
-      .populate('subject')
-      .populate('author');
-  res.render('moderator/home_new_subject', {
+  const pendingSubjectReviews = await PendingReview.find({
+    status: "REQUIRES_SUBJECT_REVIEW",
+  })
+    .populate("subject")
+    .populate("author");
+  res.render("moderator/home_new_subject", {
     pendingReviews: pendingSubjectReviews,
-    flaggedReviewCount: pendingSubjectReviews.length
+    flaggedReviewCount: pendingSubjectReviews.length,
   });
-}
+};
 
 exports.deleteFlaggedPendingReview = async (req, res) => {
   //console.log("i am in remove moderator")
-  if (req.user.type === 'student'){
+  if (req.user.type === "student") {
     console.log("Student attempted to enter moderator area");
-    res.redirect('/home');
+    res.redirect("/home");
     return;
   }
 
   const pendingReview = await PendingReview.findByIdAndDelete(req.params.id);
-  res.redirect('/home/flagged');
-}
-
-
+  res.redirect("/home/flagged");
+};

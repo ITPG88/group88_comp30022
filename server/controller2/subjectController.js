@@ -117,11 +117,9 @@ exports.deleteReview = async (req, res) => {
         }
       })
       .catch((err) => {
-        res
-          .status(500)
-          .send({
-            message: `Could not delete review with id=${req.params.id}`,
-          });
+        res.status(500).send({
+          message: `Could not delete review with id=${req.params.id}`,
+        });
       });
   } else {
     res.redirect(`/subject/${req.params.subjectCode}`);
@@ -155,6 +153,12 @@ exports.addComment = async (req, res) => {
       );
     }
   });
+};
+exports.getSubjectList = async (req, res, next) => {
+  res.locals.subjectList = (await Subject.find()).map(
+    (subject) => subject.subjectCode
+  );
+  next();
 };
 
 exports.deleteComment = async (req, res) => {
