@@ -26,9 +26,6 @@ router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 // @route /POST
 router.post("/:subjectCode/review/:id", auth.ensureAuth, subjectController.addComment);
 
-// @desc Add thumbs up to review
-// @route PATCH
-router.patch("/:subjectCode/review/:id", auth.ensureAuth, subjectController.likeReview);
 
 // @desc delete a review
 // @route DELETE
@@ -37,6 +34,10 @@ router.post("/:subjectCode/review/:id/delete", auth.ensureAuth, subjectControlle
 // @desc delete a comment
 // @route DELETE via POST
 router.post("/:subjectCode/review/:id/:commentID/", auth.ensureAuth, subjectController.deleteComment)
+
+// @desc like a comment
+// @route PATCH via POST
+router.post("/:subjectCode/review/:id/:commentID/likeComment", auth.ensureAuth, subjectController.likeComment);
 
 router.get("/", (req, res) => {
   res.status(404);
