@@ -209,19 +209,25 @@ exports.deleteComment = async (req, res) => {
 };
 
 exports.likeReview = async (req, res) => {
-  const reviewID = req.params._id;
+  const reviewID = req.params.id;
 
-  const reviewUpdated = await Review.update(
-    { _id: reviewID },
-    { $inc: { nLikes: 1 } }
-  );
+  if (req.user.type === "moderator"){
+    console.log("moderator attempted liking review");
+    return;
+  }
 
-  if (reviewUpdated) {
-    if (req.user.type !== "moderator") {
-      await Student.findByIdAndUpdate(req.user._id, {
-        $push: { likedList: reviewUpdated._id },
-      });
-    }
+  const student = await Student.findById(req.user._id);
+  if (student.likedList.includes(reviewID)) {
+    // Student cannot like comment more than once
+    return;
+  } else {
+    console.log("correct up to herre");
+    console.log(await Student.findByIdAndUpdate(req.user._id, {$push: {likedList: reviewID}}));
+  }
+  const reviewUpdated = await Review.findByIdAndUpdate(reviewID, { $inc: { nLikes: 1 }} );
+
+  if (!reviewUpdated) {
+    console.log("review liking error");
   }
   // redirect back to the page POST request came from with new review
   res.redirect("back");

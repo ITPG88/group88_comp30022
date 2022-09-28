@@ -60,6 +60,14 @@ router.post(
   subjectController.likeComment
 );
 
+// @desc like a review
+// @route PATCH via POST /:subjectCode/review/:id/likeReview
+router.post(
+    "/:subjectCode/review/:id/likeReview",
+    auth.ensureAuth,
+    subjectController.likeReview
+);
+
 router.get("/", (req, res) => {
   res.status(404);
 });

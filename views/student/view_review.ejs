@@ -48,9 +48,11 @@
           >
 
           <div class="review-footer">
-            <button class="like-button small-buttn">
+            <form action="/subject/<%=subjectCode %>/review/<%= review._id %>/likeReview" method="POST">
+            <button type="submit" class="like-button small-buttn">
               <img src="/static/Like%20symbol.png" /><%= review.nLikes%>
             </button>
+            </form>
             <h8
               ><%= (review.comments.length!=1) ? `${review.comments.length}
               replies` : '1 reply'%>
