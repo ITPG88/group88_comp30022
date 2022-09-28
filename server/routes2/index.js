@@ -136,16 +136,11 @@ router.get("/logout", (req, res, next) => {
 
 // @desc get write_review
 // @route GET /write_review
-router.get("/write_review", (req, res) => {
+router.get("/write_review", auth.ensureAuth, (req, res) => {
   res.render("student/write_review.ejs");
 });
 
-router.post(
-  "/write_review",
-  auth.ensureAuth,
-  subjectController.FindSubject,
-  reviewController.postReview
-);
+router.post("/write_review", auth.ensureAuth, reviewController.postReview);
 
 router.all("/error404", (req, res) => {
   res.status(404).render("error404.ejs");

@@ -118,14 +118,14 @@ exports.postReview = async (req, res) => {
   const author = req.user._id;
   const subjectCode = req.body.subjectCode;
   const rating = req.body.rating;
-  const subjectResult = req.subject;
+  const subjectResult = findSubjectID(subjectCode);
   if (req.user.type === "moderator") {
     // Moderator has no post review capability, should be redirected to home
     res.redirect("/home");
     return;
   }
 
-  if (!content || !subject || !rating) {
+  if (!content || !subjectCode || !rating) {
     console.log('no either one')
     errors.push({ message: "Not all fields correctly filled" });
   }
@@ -178,13 +178,12 @@ exports.postReview = async (req, res) => {
     };
     
     try{
-      let review = await Review.create(reviewObject)
-      review = review.save();
+      let review = await Review.create(reviewObject);
       res.redirect('/home')
     }catch(err){
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
-    });
+    }
     res.redirect("/subject/" + subjectCode);
   }
 };

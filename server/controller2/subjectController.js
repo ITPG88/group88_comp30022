@@ -12,11 +12,20 @@ exports.loadSubjectPage = async (req, res) => {
   if (result) {
     const reviews = await Review.find({subject: result._id, isVisible: true}).populate('author');
     console.log(reviews);
-    res.render("student/view_subject", {
-      subjectCode: req.params.subjectCode,
-      subject: result,
-      reviews: reviews
-    });
+    if (req.user){
+      res.render("student/view_subject", {
+        subjectCode: req.params.subjectCode,
+        subject: result,
+        reviews: reviews
+      });
+    } else {
+      // Guest
+      res.render("guest/view_subject_guest", {
+        subjectCode: req.params.subjectCode,
+        subject: result,
+        reviews: reviews
+      });
+    }
   } else {
     res.redirect("/error404");
   }
@@ -34,10 +43,21 @@ exports.loadSingleReview = async (req, res) => {
   }
   //review.comments = comments;
   console.log(review);
-  res.render("./student/view_review", {
-    review: review,
-    subjectCode: req.params.subjectCode,
-  });
+
+  if (req.user){
+    // Logged in mode
+    res.render("./student/view_review", {
+      review: review,
+      subjectCode: req.params.subjectCode,
+    });
+  } else {
+    // Guest mode
+    res.render("guest/view_review_guest", {
+      review: review,
+      subjectCode: req.params.subjectCode,
+    });
+  }
+
 };
 
 exports.postReview = async (req, res) => {
