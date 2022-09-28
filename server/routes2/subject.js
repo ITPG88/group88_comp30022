@@ -46,6 +46,8 @@ router.get("/", (req, res) => {
   res.status(404);
 });
 
+// @desc Post a review
+// @route POST
 router.post("/subject/:subjectCode", auth.ensureAuth, subjectController.postReview);
 
 module.exports = router;
