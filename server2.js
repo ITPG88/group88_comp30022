@@ -54,6 +54,8 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
 app.use(methodOverride('_method'));
+app.use('/static', express.static( "static" ))
+app.use('/static/css', express.static( "styles" ))
 
 // Bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
