@@ -29,6 +29,22 @@ async function getReviewsByFieldOfInterest(req) {
   return [];
 }
 
+/**
+ * @description Gets a subject ID from subject code
+ */
+async function findSubjectID(subjectCode){
+  let retVal = '';
+  let subject;
+
+  if ((subject = await Subject.findOne({subjectCode: subjectCode}))){
+    retVal = subject._id;
+  }
+
+  return retVal;
+
+}
+
+
 exports.getHomepageReviews = async (req, res) => {
   let reviews = [];
   if (req.user) {
@@ -45,8 +61,13 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-          reviews = await Review.find().populate('subject').limit(20);
+
+
+          reviews = await Review.find().populate('subject').limit(19);
+
         }
+        reviews.reverse();
+        //console.log(reviews.length);
         res.render("student/home", { title: "home", reviews: reviews });
       }
     } else {
@@ -87,11 +108,14 @@ exports.postReview = async (req, res) => {
   let errors = [];
   const content = req.body.content;
   const author = req.user._id;
+
   //changed below for testing purposes
   //const subject = req.body.subject;
   const subject = req.body.subjectCode;
   //const rating = req.body.rating;
   const rating = 5;
+
+
   if (req.user.type === "moderator") {
     // Moderator has no post review capability, should be redirected to home
     res.redirect("/home");
@@ -109,8 +133,10 @@ exports.postReview = async (req, res) => {
   }
 
   if (errors.length > 0) {
-    console.log('i am in error')
-    res.render("student/write_review.ejs", {
+
+    console.log("Review creation field error.")
+    res.render("student/write_review", {
+
       errors,
       content,
       subject,
@@ -145,6 +171,7 @@ exports.postReview = async (req, res) => {
       console.log(err);
       res.render("student/write_review", { review: reviewObject });
     };
+
   }
 };
 
