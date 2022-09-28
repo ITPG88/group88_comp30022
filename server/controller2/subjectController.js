@@ -166,7 +166,15 @@ exports.likeReview = async (req, res) => {
 
 exports.likeComment = async (req, res) => {
   const commentID = req.params.commentID;
-
+  if (req.user.type === 'moderator') {
+    res.redirect('back');
+    console.log("moderator attempted liking");
+  }
+  const student = await Student.findById(req.user._id);
+  if (student.likedComments.includes(commentID)){
+    // Student cannot like comment more than once
+    return;
+  }
   const commentUpdated = await Comment.findByIdAndUpdate(commentID, {$inc: {nLikes: 1}});
 
   if (!commentUpdated){
