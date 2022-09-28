@@ -79,7 +79,7 @@ exports.getHistoryReviews = async (req, res) => {
   const reviews = await Review.find(query);
   res.render("student/history", { title: "history", reviews: reviews });
 };
-exports.setStudentName = async (req, res, next) => {
+exports.setFullName = async (req, res, next) => {
   if (req.user) res.locals.fullName = req.user.fullName;
   next();
 };

@@ -87,7 +87,7 @@ router.get("/forgot_password", (req, res) => {
 // @route GET /home
 router.get(
   "/home",
-  reviewController.setStudentName,
+  reviewController.setFullName,
   reviewController.getHomepageReviews
 );
 
@@ -106,7 +106,7 @@ router.get("/browse", auth.ensureAuth, reviewController.getBrowsePageReviews);
 router.get(
   "/history",
   auth.ensureAuth,
-  reviewController.setStudentName,
+  reviewController.setFullName,
   reviewController.getHistoryReviews
 );
 
