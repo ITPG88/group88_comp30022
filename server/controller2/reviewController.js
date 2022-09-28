@@ -210,7 +210,7 @@ exports.getFlaggedReviews = async (req, res) => {
   }
 
   const flaggedReviews = await PendingReview.find({status: "FLAGGED"}).populate('subject').populate('author');
-  res.render('moderator/home', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length});
+  res.render('moderator/flagged_review', {reviews: flaggedReviews, flaggedReviewCount: flaggedReviews.length});
 }
 
 exports.getPendingSubjectReviews = async (req, res) => {
