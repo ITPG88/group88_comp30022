@@ -23,7 +23,9 @@
           <div class="review-header-flagged">
             <div class="header-flagged">
               <div class="inline">
-                <h3 style="margin-right: 10px"><%= review.subjectCode %></h3>
+                <h3 style="margin-right: 10px">
+                  <%= review.subject.subjectCode %>
+                </h3>
                 <div style="margin-top: 12px" class="star-review">
                   <span class="material-symbols-outlined">star</span>
                   <span class="material-symbols-outlined">star</span>
@@ -32,58 +34,72 @@
                   <span class="material-symbols-outlined">star</span>
                 </div>
               </div>
-              <h4><%= review.subjectName %></h4>
+              <h4><%= review.subject.subjectName %></h4>
             </div>
           </div>
 
           <p><%= review.content %></p>
           <h7
-            ><b>Example student</b> <%= review.createdAt.toLocaleDateString()
-            %></h7
+            ><b>
+              <%= (review.author.fullName!=null) ? `${review.author.fullName}` :
+              'Anonymous'%></b
+            >
+            <%= review.createdAt.toLocaleDateString() %></h7
           >
 
           <div class="review-footer">
             <button class="like-button small-buttn">
-              <img src="/static/Like%20symbol.png" />111
+              <img src="/static/Like%20symbol.png" /><%= review.nLikes%>
             </button>
-            <h8>2 Replies</h8>
-            <h8>Visable</h8>
+            <h8
+              ><%= (review.comments.length!=1) ? `${review.comments.length}
+              replies` : '1 reply'%>
+            </h8>
+            <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
           </div>
         </article>
 
         <div class="inline comment-area">
           <form
-            action="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>"
+            action="/subject/<%= review.subject.subjectCode %>/review/<%= review._id %>"
             method="POST"
             class="inline"
           >
             <textarea
               placeholder=" Add a comment..."
-              name="comment"
+              name="content"
               class="comment-post"
             ></textarea>
             <button class="medium-buttn post-bttn">Post</button>
           </form>
         </div>
 
-        <% review.comment_content.forEach(comment => { %>
+        <% review.comments.forEach(comment => { %>
         <article class="each-review each-review-big each-comment">
           <h7
-            ><b style="font-size: 22px">Example(Myself) </b><%=
-            comment.date.toLocaleDateString() %></h7
+            ><b style="font-size: 22px"
+              ><%= (comment.author) ? `${comment.author.fullName} ` :
+              "UserNotFound"%></b
+            ><%= comment.createdAt.toLocaleDateString() %></h7
           >
           <p><%= comment.content %></p>
           <div class="inline">
-            <form>
-              <button class="like-bttn small-buttn">
-                <img src="/static/Lke symbol (white).png" />111
+            <form
+              action="/subject/<%=subjectCode %>/review/<%= review._id %>/<%=comment._id%>/likeComment"
+              method="POST"
+            >
+              <button class="like-bttn small-buttn" type="submit">
+                <img src="/static/Lke symbol (white).png" /><%= (comment.nLikes
+                !== null) ? comment.nLikes : 111%>
               </button>
             </form>
             <form
-              action="/student/subject/<%= review.subjectCode %>/view_review/<%= review.id %>/<%= comment.id %>?_method=DELETE"
+              action="/subject/<%=subjectCode %>/review/<%= review._id %>/<%=comment._id%>?_method=DELETE"
               method="POST"
             >
-              <button class="remove-bttn small-buttn">Remove</button>
+              <button class="remove-bttn small-buttn" type="submit">
+                Remove
+              </button>
             </form>
           </div>
           <hr class="solid" />

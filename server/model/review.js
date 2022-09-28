@@ -9,7 +9,8 @@ const reviewSchema = new mongoose.Schema(
         },
         author : {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Student'
+            ref: 'Student',
+            required: true
         },
         isPrivate: {
             type: Boolean,
@@ -29,7 +30,17 @@ const reviewSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
-        comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
+        nLikes: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        comments: {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: "Comment",
+            required: true,
+            default: []
+        }
     },
     {
         timestamps: true,

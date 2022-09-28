@@ -8,6 +8,7 @@ const render = require("../services/render");
 const reviewController = require("../controller2/reviewController");
 const subjectController = require("../controller2/subjectController");
 const student = require("../controller/studentController");
+const { PendingReview } = require("../model/review");
 
 // @desc Landing
 // @route GET /
@@ -86,6 +87,7 @@ router.get("/forgot_password", (req, res) => {
 
 // @desc Get homepage
 // @route GET /home
+// re-route moderators to /home/flagged
 router.get(
   "/home",
   reviewController.setFullName,
@@ -124,7 +126,7 @@ router.get("/logout", (req, res, next) => {
     if (error) {
       return next(error);
     }
-    if (Object.keys(req.query).length == 0) {
+    if (Object.keys(req.query).length === 0) {
       res.redirect("/");
       return;
     }
@@ -153,11 +155,20 @@ router.all("/error404", (req, res) => {
 Moderator
  */
 
+
 // @desc get pending_subject
 // @route GET /home/pending_subject
-// router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
+//router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
 
-router.get("/home/flagged", auth.ensureAuth, (req, res) => {
-  res.redirect("/home");
-});
+
+/*****/
+router.get("/home/flagged", auth.ensureAuth, reviewController.getFlaggedReviews);
+
+router.get('/home/pending_subject', auth.ensureAuth, reviewController.getPendingSubjectReviews);
+
+
+router.post("/home/flagged/:id", auth.ensureAuth, reviewController.deleteFlaggedPendingReview);
+
+
+
 module.exports = router;

@@ -35,10 +35,12 @@ const studentSchema = extendSchema(userSchema, {
     },
     fieldsOfInterest: {
         type: [String],
+        required: true,
         default: []
     },
     likedList: {
         type: [{type: mongoose.Schema.Types.ObjectId, ref: "Review"}],
+        required: true,
         default: []
     }
 });

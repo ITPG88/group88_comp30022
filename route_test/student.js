@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Review = require('./../model/review');
+const Review = require('./../model/review').Review;
 const Subject = require('./../model/subject');
 const Comment = require('./../model/comment');
 const router = express.Router();
@@ -99,7 +99,7 @@ router.post('/', async (req,res) =>{
         isVisible: req.body.visible == 'on',
         rating: 5,
         createdAt: new Date(),
-        updatedAt: new Date(),
+        updatedAt: new Date()
     })
     try{
         review = await review.save()

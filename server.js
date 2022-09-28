@@ -97,8 +97,9 @@ app.use("/settings", require("./server/routes/settings.js"));*/
 app.get('/', (req,res) =>{
   res.render('index')
 })
-app.use('/student', require('./routes/student'))
+app.use('/student', require('./server/route_test/student'))
 
+app.use('/moderator', require('./server/route_test/moderator'))
 // link to our router
 
 
