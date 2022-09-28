@@ -106,6 +106,7 @@ exports.FindSubject = async (req, res, next) => {
   req.subject = subject;
   next();
 };
+
 exports.flaggedReview = async (req, res) => {
   const review = await Review.findById(req.params.id);
   let reviewObject = {
@@ -236,6 +237,8 @@ exports.likeComment = async (req, res) => {
   if (student.likedComments.includes(commentID)) {
     // Student cannot like comment more than once
     return;
+  } else {
+    await Student.findByIdAndUpdate(req.user._id, {$push: {likedComments: commentID}});
   }
   const commentUpdated = await Comment.findByIdAndUpdate(commentID, {
     $inc: { nLikes: 1 },
