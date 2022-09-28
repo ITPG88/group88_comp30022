@@ -58,6 +58,7 @@
             <form
               action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
               method="POST"
+              style="display: block%>"
             >
               <button type="submit" class="remove-button-color small-buttn">
                 Remove
@@ -70,3 +71,6 @@
     </section>
   </body>
 </html>
+<script>
+  console.log(<%=session.user._id%>)
+</script>
