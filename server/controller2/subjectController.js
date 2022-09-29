@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
   const result = req.subject;
-  //console.log(result);
+  console.log(result);
   if (result) {
     const reviews = await Review.find({
       subject: result._id,
@@ -37,13 +37,15 @@ exports.loadSingleReview = async (req, res) => {
     .populate("comments")
     .populate("subject")
     .populate("author");
+
+  if (!review) {
+    res.redirect("/error404");
+    return;
+  }
+
   let comments = [];
   for (const comment of review.comments) {
     comments.push(await comment.populate("author"));
-  }
-
-  if (!review) {
-    res.status(404);
   }
   //review.comments = comments;
   console.log(review);
