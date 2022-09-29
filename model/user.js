@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    sparse: true,
+  },
   type: {
     type: String,
     enum: ["student", "moderator"],
@@ -53,12 +59,6 @@ userSchema.pre("save", function save(next) {
 });
 
 const studentSchema = extendSchema(userSchema, {
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    sparse: true,
-  },
   fieldsOfInterest: {
     type: [String],
     default: [],
