@@ -23,49 +23,75 @@
 <style>
   #pop {
       display: none;
-      width: 800px;
-      height: 600px;
+      width: 60%;
+      height: 650px;
       background: #3b3b3b;
       position: absolute;
       left: 20%;
-      top: 20%;
+      top: 15%;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   #pop h1{
-      text-align: center;
-      color: #fff;
-      font-size:28px;
-      font-weight: normal;
-      padding-top: 20px;
-      
-
-  }
+        text-align: center;
+        color: #fff;
+        font-size:35px;
+        font-weight: normal;
+        padding-top: 20px;
 
 
- 
+    }
   #pop label{
-      font-weight: lighter;
-      font-size: 18px;
+    font-weight: lighter;
+    
+
 
   }
-  #pop select{
-      width: 600px;
-      height: 35px;
-      font-size: 18px;
-      color: #fff;
-      font-weight: lighter;
-      background-color: #1e1e1e;
-  }
+  .form-field{
+    font-weight: lighter;
+    font-size: 30px;
+    padding-bottom: 30px;
+}
 
-  #pop textarea{
-      width: 600px;
-      height: 200px;
-      background-color: #1e1e1e;
-      color: #fff;
-      font-weight: lighter;
-      font-size: 18px;
+  .each-field{
+    color: #fff;
+    font-size: 22px;
+    font-weight: lighter;
 
-  }
+}
+
+
+
+
+.star-review{
+  width: 29%;
+
+}
+
+.star-review input{
+  display: none;
+}
+
+.star-review label{
+  float: right;
+  padding-right:5px;
+  font-size:40px;
+  color: var(--font-color)
+  
+
+}
+
+input:checked ~ label{
+  color:var(--star-review-color)
+}
+
+input:not(:checked) ~label:hover
+input:not(:checked) ~label:hover ~label{
+  color:var(--star-review-color)
+}
+
+
+
+
 
   #cancle {      
       background: #3b3b3b;
@@ -117,15 +143,20 @@
       <br>
       <br>
 
-      <div style="padding-left: 100px;">
+      <div style="padding-left: 15%">
           <ul>
-              <li><label for="subjectCode">Subject</label></li>
-              <li><input type="text" name="subjectCode" class="each-field" style="width: ;"/></li>
+              <li><label for="subjectCode" style="font-size: 26px;">Subject</label></li>
+              <li><input type="text" name="subjectCode" class="each-field" style="width:70%;
+              height:40px;
+              background-color: #1e1e1e;
+              
+              
+              "/></li>
           </ul>
           <br>
   
           <ul>
-              <li><label for="rating">Rate</label>
+              <li><label for="rating" style="font-size: 26px;">Rate</label>
               <li>
                 <div class="star-review">
                   <input type="radio" id="star5" name="rating" value="5" /><label
@@ -156,10 +187,15 @@
   
   
           <ul>
-              <li> <label for="content">Review-content</label>
+              <li> <label for="content"  style="font-size: 26px;">Review-content</label>
                </li>
               <li>
-                <textarea name="content" class="each-field big-form"> </textarea>
+                <textarea name="content" class="each-field big-form" style="width:70%;
+                height:220px;
+                background-color: #1e1e1e;
+                
+                
+                "> </textarea>
               </li>
           </ul>
 
@@ -167,11 +203,11 @@
           <div style="display:inline-flex;">
             <div>
               <input style="width: 30px; height: 30px" name="visible" type="checkbox" />
-              <label style="margin-top: -6px" for="visible">Visible</label>
+              <label style="margin-top: -6px; font-size: 26px;" for="visible">Visible</label>
             </div>
             <div style="padding-left: 20px;">
               <input style="width: 30px; height: 30px" name="private" type="checkbox" />
-              <label style="margin-top: -6px" for="private">Private</label>
+              <label style="margin-top: -6px; font-size: 26px;" for="private" >Private</label>
             </div>
           </div>
                     
