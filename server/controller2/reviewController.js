@@ -42,7 +42,11 @@ exports.getHomepageReviews = async (req, res) => {
       const likedReviews = await Student.findById(req.user._id)["likedList"];
       if (likedReviews) {
         likedReviews.forEach((reviewID) => {
-          reviews.push(Review.findById(reviewID).populate("subject"));
+          reviews.push(
+            Review.findById(reviewID)
+              .sort({ createdAt: -1 })
+              .populate("subject")
+          );
         });
       }
       // If no liked reviews, try field of interest
@@ -50,7 +54,10 @@ exports.getHomepageReviews = async (req, res) => {
         reviews = await getReviewsByFieldOfInterest(req);
         // If no field of interest, default
         if (reviews.length === 0) {
-          reviews = await Review.find().populate("subject").limit(19);
+          reviews = await Review.find()
+            .sort({ createdAt: -1 })
+            .populate("subject")
+            .limit(19);
         }
         res.render("student/home", { reviews: reviews });
       }
@@ -61,7 +68,10 @@ exports.getHomepageReviews = async (req, res) => {
     }
   } else {
     // Guest
-    reviews = await Review.find().populate("subject").limit(20);
+    reviews = await Review.find()
+      .sort({ createdAt: -1 })
+      .populate("subject")
+      .limit(20);
     res.render("guest/home", { reviews: reviews });
   }
 };
@@ -250,8 +260,11 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
 };
 
 exports.getNumPendingReviews = async (req, res, next) => {
-  res.locals.newSubjectCount = await PendingReview.find({status: "REQUIRES_SUBJECT_REVIEW"}).count();
-  res.locals.flaggedReviewCount = await PendingReview.find({status: "FLAGGED"}).count();
+  res.locals.newSubjectCount = await PendingReview.find({
+    status: "REQUIRES_SUBJECT_REVIEW",
+  }).count();
+  res.locals.flaggedReviewCount = await PendingReview.find({
+    status: "FLAGGED",
+  }).count();
   next();
-}
-
+};
