@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
   const result = req.subject;
+  console.log('i am here')
   console.log(result);
   if (result) {
     const reviews = await Review.find({
@@ -91,14 +92,17 @@ exports.postReview = async (req, res) => {
 };
 exports.FindSubject = async (req, res, next) => {
   let subjectCode = "";
+  
   if (!req.params.subjectCode) {
     subjectCode = req.body.subjectCode;
   } else {
     subjectCode = req.params.subjectCode;
   }
-  const subject = await Subject.findOne({
-    subjectCode: subjectCode,
-  });
+  const subject = await Subject.findOne({$or: [
+    {subjectCode: subjectCode},
+    {subjectName: subjectCode}
+]});
+ 
   if (subject) {
     res.locals.subjectCode = subject.subjectCode;
     res.locals.subjectName = subject.subjectName;
