@@ -31,7 +31,14 @@
           style="width: 60%"
         />
       </div>
-      <div class="landingpagebutton">
+
+      <script>
+        if (<%=locals.signedup%> === 1) {
+            document.getElementsByClassName("content")[0].insertAdjacentHTML('beforeend', "<div id=\"err\" style=\"display:block; height: 30px; \">You've signed up! Please log in :)</div>")
+        }
+      </script>
+
+      <div class="landingpagebutton" style=" margin-top: 20px;">
         <button type="button" onclick="document.location='/login'">
           Login
         </button>
@@ -80,8 +87,4 @@
 
   </body>
 </html>
-<script>
-  if (<%=locals.signedup%> === 1) {
-      document.getElementsByClassName("content")[0].insertAdjacentHTML('beforeend', "<div id=\"err\" style=\"display:block; margin-top: 10px\">You've signed up! Please log in :)</div>")
-  }
-</script>
+
