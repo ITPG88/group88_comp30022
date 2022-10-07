@@ -45,14 +45,16 @@
                                 <h3> <%= review.subject.subjectCode %> </h3>
                                 <h4>University of Melbourne</h4>
                             </div>
-                            
-                            <div style = "margin-top: 8px;" class="star-review">
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
+
+                            <div class="star-review" style="margin-left: 0px; margin-top: 2px;">
+                                <% for(let i = 0; i < review.rating; i++){ %>
+                                  <span class="material-symbols-outlined" style="margin-right: -5px; font-size: 35px;">star</span>
+                                <% } %>
+                                <% for(let j = 0; j < 5-review.rating; j++){ %>
+                                  <span class="material-symbols-outlined" style="margin-right: -5px; color: #ffffff; font-size: 35px;">star</span>
+                                <% } %>
                             </div>
+                            
                         </div>
                         
                         <p><%= review.content %> </p>

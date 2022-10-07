@@ -29,13 +29,13 @@
             </b>
             <%= review.createdAt.toLocaleDateString() %></h7
           >
-
           <div class="star-review star-review-big">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
+            <% for(let i = 0; i < review.rating; i++){ %>
+              <span class="material-symbols-outlined" style="margin-right: -7px; font-size: 40px;">star</span>
+            <% } %>
+            <% for(let j = 0; j < 5-review.rating; j++){ %>
+              <span class="material-symbols-outlined" style="margin-right: -7px; color: #ffffff; font-size: 40px;">star</span>
+            <% } %>
           </div>
 
           <div class="review-container">
@@ -60,7 +60,7 @@
             <form
               action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
               method="POST"
-              style="display: block%>"
+              style="display: block"
             >
               <button type="submit" class="remove-button-color small-buttn">
                 Remove
