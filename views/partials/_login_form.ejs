@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="/assets/img/Subject%20Review%20Logo.png" alt="" />
       </div>
-      <div id="err" style="padding: 5%; height: 50px">
+      <div id="err" style="padding: 5%; height: 40px;">
         The username or password was incorrect. Please try again.
       </div>
       <ul>
@@ -47,7 +47,7 @@
     <div class="loginbutton">
       <button type="submit">Login</button>
     </div>
-    <p>Don't have an account?<a href="/signup"> Sign up</a></p>
+    <p>Don't have a student account?<a href="/signup"> Sign up</a></p>
   </div>
 </form>
 
@@ -68,8 +68,11 @@
       <p>Enter the email address associated with your account</p>
       <p>and we'll send you a link to reset your password</p>
       <br />
-      <br />
-      <div class="forget">
+      <div
+        id="err"
+        style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%;"
+      ></div>
+      <div class="emailEntering">
         <ul>
           <li><label>Your email</label></li>
           <li>
