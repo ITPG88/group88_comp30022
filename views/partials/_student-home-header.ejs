@@ -24,7 +24,7 @@
   #pop {
       display: none;
       width: 60%;
-      height: 650px;
+      height: 700px;
       background: #3b3b3b;
       position: absolute;
       left: 20%;
@@ -140,7 +140,7 @@ input:not(:checked) ~label:hover ~label{
  <!-- review your subject pop window-->
  <form id="pop" action="/write_review" method="POST">
 
-  <h1>Review your subject</h1>
+  <h1 style="padding-top: 30px;">Review your subject</h1>
       <br>
       <br>
 
@@ -214,16 +214,11 @@ input:not(:checked) ~label:hover ~label{
           <br>
           <br>
 
-          <div style="text-align: center; padding-right: 20%">  
+          <div style="text-align: center; padding-right: 20%; margin-top: -10px">  
   
-            <button class="write-review-button big-buttn" id="cancle">Close</button> 
+            <a href="/home" class="write-review-button big-buttn" id="cancle">Close</a> 
             <button class="save" formmethod="post">Submit</button>
           </div>
                     
       </div>
-
-      
-
-  
-
 </form>
