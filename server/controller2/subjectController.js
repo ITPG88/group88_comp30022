@@ -100,7 +100,7 @@ exports.FindSubject = async (req, res, next) => {
   }
   const subject = await Subject.findOne({$or: [
     {subjectCode: subjectCode},
-    {subjectName: subjectCode}
+    {subjectName: new RegExp(`^${subjectCode}$`, 'i')}
 ]});
  
   if (subject) {
