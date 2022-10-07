@@ -7,7 +7,7 @@
 
       <div
         id="err"
-        style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%"
+        style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%;"
       ></div>
 
       <ul>
@@ -74,6 +74,6 @@
   const errors = <%-JSON.stringify(locals.errors)%>
   for (const err of errors) {
     document.getElementById("err").style.display = "flex";
-    errElement.insertAdjacentHTML('beforeend', "<li  style = \"margin: 5px 0;\" >"+err+"</li>")
+    errElement.insertAdjacentHTML('beforeend', "<li  style = \"margin: 3px 0;\" >"+err+"</li>")
   }
 </script>
