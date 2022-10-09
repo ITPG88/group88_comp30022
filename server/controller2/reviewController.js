@@ -4,7 +4,7 @@ const PendingReview = require("../model/review").PendingReview;
 const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
-const mongoose = require("mongoose");
+const Mongoose = require("mongoose");
 
 /**
  * @description Helper function that gets reviews based on fieldsOfInterest.
@@ -76,9 +76,41 @@ exports.getHomepageReviews = async (req, res) => {
   }
 };
 exports.getBrowsePageReviews = async (req, res) => {
-  const reviews = await getReviewsByFieldOfInterest(req);
-  console.log(reviews);
-  res.render("student/browse", { title: "browse", reviews: reviews });
+  if (!req.user) {
+    res.redirect("/home");
+  }
+
+  let reviews = []
+  if (req.user.type === "moderator"){
+    // Moderators get most recent reviews
+    reviews = await Review.find()
+        .sort({createdAt: -1})
+        .populate("subject")
+        .limit(25);
+  } else {
+    // Students get reviews from their interested field of study, then recent reviews
+    const student = await Student.findById(req.user._id);
+    const fieldsOfInterest =  student.fieldsOfInterest;
+    let subjects = []
+    for (const field of fieldsOfInterest) {
+      const result = await Subject.find({fieldOfStudy: field});
+      for (const sub of result){
+        subjects.push(sub);
+      }
+    }
+
+    for (const subject of subjects){
+      const result = await Review.find({subject: subject._id}).populate("subject");
+      reviews = reviews.concat(result)
+    }
+    if (reviews.length < 10){
+      reviews = reviews.concat(await Review.find()
+          .sort({createdAt: -1})
+          .populate("subject")
+          .limit(20 - reviews.length));
+    }
+  }
+  res.render("student/browse", {title: "browse", reviews: reviews});
 };
 
 exports.getHistoryReviews = async (req, res) => {
@@ -164,7 +196,7 @@ exports.postReview = async (req, res) => {
   } else {
     let reviewObject = {
       content: content,
-      subject: subjectResult,
+      subject: subjectResult._id,
       author: req.user._id,
       isPrivate: req.body.private === "on",
       isVisible: req.body.visible === "on",

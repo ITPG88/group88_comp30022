@@ -97,7 +97,7 @@ exports.postReview = async (req, res) => {
     res.render("student/write_review", { review: review });
   }
 };
-exports.FindSubject = async (req, res, next) => {
+exports.findSubject = async (req, res, next) => {
   let subjectCode = "";
   
   if (!req.params.subjectCode) {
@@ -223,6 +223,9 @@ exports.deleteComment = async (req, res) => {
 exports.likeReview = async (req, res) => {
   const reviewID = req.params.id;
 
+  if (!req.user){
+    res.redirect("/login");
+  }
   if (req.user.type === "moderator") {
     console.log("moderator attempted liking review");
     return;

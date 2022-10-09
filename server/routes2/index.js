@@ -97,9 +97,11 @@ router.get(
 
 // @desc create review via pop-up from homepage
 // @route POST /home
-router.post("/home", (req, res) => {
-  res.redirect(307, `/subject/${req.body.subjectCode}`);
-});
+router.post(
+    "/home",
+    auth.ensureAuth,
+    reviewController.postReview
+);
 
 // @desc get browsepage
 // @route GET /browse
@@ -149,7 +151,7 @@ router.get(
 router.post(
   "/write_review",
   auth.ensureAuth,
-  subjectController.FindSubject,
+  subjectController.findSubject,
   reviewController.postReview
 );
 
