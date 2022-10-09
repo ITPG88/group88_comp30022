@@ -182,6 +182,8 @@ router.get(
   reviewController.getPendingSubjectReviews
 );
 
+router.post("/home/pending_subject/:id/reject", reviewController.deletePendingSubjectReview);
+router.post("/home/pending_subject/:id/approve", reviewController.approvePendingSubjectReview);
 router.post(
   "/home/flagged/:id/remove",
   auth.ensureAuth,

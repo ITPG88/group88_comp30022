@@ -146,11 +146,13 @@ exports.postReview = async (req, res) => {
       content: content,
       subject: subjectResult,
       author: req.user._id,
-      isPrivate: false,
-      isVisible: false,
+      isPrivate: req.body.private === "on",
+      isVisible: req.body.visible === "on",
       rating: rating,
       comments: [],
       attemptedCode: subjectCode,
+      attemptedName: req.body.subjectName,
+      attemptedfield: req.body.fieldofstudy,
       status: "REQUIRES_SUBJECT_REVIEW",
     };
     await PendingReview.create(pendingReviewObj).catch((err) => {
@@ -241,6 +243,7 @@ exports.deleteFlaggedPendingReview = async (req, res) => {
   res.redirect("/home/flagged");
 };
 
+
 exports.neglectFlaggedPendingReview = async (req, res) => {
   console.log("in neglect");
   const review = await PendingReview.findById(req.params.id);
@@ -257,6 +260,51 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
   await Review.create(reviewObject);
   await PendingReview.findByIdAndDelete(req.params.id);
   res.redirect("/home/flagged");
+};
+
+exports.deletePendingSubjectReview = async (req, res) => {
+  //console.log("i am in remove moderator")
+  if (req.user.type === "student") {
+    console.log("Student attempted to enter moderator area");
+    res.redirect("/home");
+    return;
+  }
+
+  const pendingReview = await PendingReview.findByIdAndDelete(req.params.id);
+  res.redirect("/home/pending_subject");
+
+};
+
+exports.approvePendingSubjectReview = async (req, res) => {
+  console.log("i am in approve PS")
+  //find pending review through review_id.
+  const review = await PendingReview.findById(req.params.id);
+  //Add approved subject to subject list.
+  let subjectObject = {
+    subjectCode: review.attemptedCode,
+    subjectName: review.attemptedName,
+    fieldOfStudy: review.attemptedfield,
+    university: "University of Melbourne"
+  }
+  await Subject.create(subjectObject);
+  const new_subject = await Subject.find(subjectObject)
+  console.log(new_subject)
+  //review get added to student home.
+  let reviewObject = {
+    content: review.content,
+    subject: new_subject[0],
+    author: review.author,
+    isPrivate: review.isPrivate,
+    isVisible: review.isVisible,
+    rating: review.rating,
+    comments: review.comments,
+    createdAt: review.createdAt,
+  };
+  console.log()
+  await Review.create(reviewObject);
+  await PendingReview.findByIdAndDelete(req.params.id);
+  res.redirect("/home/pending_subject");
+  
 };
 
 exports.getNumPendingReviews = async (req, res, next) => {

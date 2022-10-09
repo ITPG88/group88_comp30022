@@ -26,14 +26,15 @@
                     <article class="each-review each-review-big">
                         <div class="review-titlebar">
                             <div>
-                                <h5>Disrespectful! Please delete it.</h6>
+                                <h5>Interest of field:</h5>
+                                <h6><%= review.attemptedfield %></h6>
                             </div>
                             <div class = "inline">
-                                <form>
-                                    <button class="neglect-button medium-buttn">Neglect</button>
+                                <form action="/home/pending_subject/<%= review._id %>/approve" method="POST">
+                                    <button class="neglect-button medium-buttn">Approve</button>
                                 </form>
-                                <form action="/home/flagged/<%= review._id %>" method="POST">
-                                    <button class="remove-button small-buttn">Remove</button>
+                                <form action="/home/pending_subject/<%= review._id %>/reject" method="POST">
+                                    <button class="remove-button small-buttn">Reject</button>
                                 </form>
                             </div>
                         
@@ -41,28 +42,25 @@
         
                         <div class="review-header-flagged">
                             <div class="header-flagged">
-                                <h3> <%= review.attemptedCode %> </h3>
+                                <h3> <%= review.attemptedCode %> <%= review.attemptedName %></h3>
                                 <h4>University of Melbourne</h4>
                             </div>
-                            
-                            <div style = "margin-top: 8px;" class="star-review">
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                                <span class="material-symbols-outlined">star</span>
-                            </div>
                         </div>
                         
-                        <p><%= review.content %> </p>
+                        <p style="margin: 10px 0px;"><%= review.content %> </p>
                         
                         <h7><b style="margin-right: 10px;"><%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%> </b>date</h7>
-        
-                        <div class="review-footer">
-                            <button class="like-button small-buttn"><img src="/assets/img/Like%20symbol.png">111</button>
-                            <h8>2 Replies</h8>
-                            <h8>Visable</h8>
+                        
+                        <div class="star-review" style="margin-left: -5px; margin-top:5px;">
+                            <% for(let i = 0; i < review.rating; i++){ %>
+                              <span class="material-symbols-outlined">star</span>
+                            <% } %>
+                            <% for(let j = 0; j < 5-review.rating; j++){ %>
+                              <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
+                            <% } %>
+                            <h8> Visible</h8>
                         </div>
+
                     </article>
             <% }) %> 
 

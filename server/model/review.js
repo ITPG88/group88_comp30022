@@ -55,6 +55,8 @@ const reviewSchema = new mongoose.Schema(
 
 const pendingReviewSchema = new extendSchema(reviewSchema, {
   attemptedCode: String,
+  attemptedName: String,
+  attemptedfield: String,
   status: {
     type: String,
     enum: ["REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
