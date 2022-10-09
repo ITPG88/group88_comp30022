@@ -21,11 +21,18 @@
           </h2>
 
           <div class="star-review">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
+            <% if(avg_rating > 0){ %>
+              <% for(let i = 0; i < avg_rating; i++){ %>
+                <span class="material-symbols-outlined">star</span>
+              <% } %>
+              <% for(let j = 0; j < 5-avg_rating; j++){ %>
+                <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
+              <% } %>
+              <% } else{ %> 
+                <% for(let j = 0; j < 5; j++){ %>
+                  <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
+                <% } %>
+              <% } %>
           </div>
         </div>
         <button id="window" style="
@@ -168,7 +175,7 @@
 
 
  <!-- review your subject pop window-->
- <form id="pop">
+ <form id="pop" action="/write_review" method="POST">
 
   <h1>Review your subject</h1>
       <br>
@@ -239,8 +246,9 @@
           <br>
           <br>
           <div style="text-align: center; padding-right: 20%">  
-  
-            <button class="write-review-button big-buttn" id="cancle">Close</button> 
+            <a href="/subject/<%= locals.subjectCode %> " class="write-review-button big-buttn" id="cancle"
+        >Close</a
+      >
             <button class="save" formmethod="post">Submit</button>
                     
            </div>

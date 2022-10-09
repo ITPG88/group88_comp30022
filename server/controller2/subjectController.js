@@ -8,18 +8,25 @@ const mongoose = require("mongoose");
 
 exports.loadSubjectPage = async (req, res) => {
   const result = req.subject;
-  console.log('i am here')
-  console.log(result);
+  //console.log('i am here')
+  //console.log(result);
   if (result) {
     const reviews = await Review.find({
       subject: result._id,
       isVisible: true,
     }).populate("author");
-    console.log(reviews);
+
     if (req.user) {
+      let total_rating = 0;
+      for(let i = 0; i < reviews.length; i++){
+        total_rating = total_rating + reviews[i].rating
+      }
+      //console.log(Math.round(total_rating/reviews.length))
+      console.log('in viiew subject page')
       res.render("student/view_subject", {
         subject: result,
         reviews: reviews,
+        avg_rating: Math.round(total_rating/reviews.length)
       });
     } else {
       // Guest
