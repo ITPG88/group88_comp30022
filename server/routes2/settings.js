@@ -27,7 +27,7 @@ router.get('/logout', auth.ensureAuth, (req, res) => {
 });
 
 router.get('/appearance', auth.ensureAuth, (req, res) => {
-    res.render("student/appearance_settings");
+    res.render("student/appearance_settings", {user: req.user});
 });
 
 router.get('/close', auth.ensureAuth, (req, res) => {
