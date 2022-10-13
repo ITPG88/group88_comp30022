@@ -6,18 +6,15 @@ const mongoose = require("mongoose");
 
 
 exports.editFieldsOfInterest = async (req, res) =>{
+    const studentID = req.user._id;
+
+
     if (!req.body) {
         res.redirect("/home");
         return;
     }
 
     console.log(req.body);
-
-    if (req.user.type === 'moderator'){
-        // moderator shouldnt be doing this
-    }
-    const studentID = req.user._id;
-    const newFieldsOfInterest = req.body.fieldsOfInterest;
 
     await Student.findByIdAndUpdate(studentID, {fieldsOfInterest: newFieldsOfInterest}).catch(err => {
         console.log("Error detected");
@@ -28,6 +25,16 @@ exports.editFieldsOfInterest = async (req, res) =>{
         });
 
     });
+
+    let fieldsofInterest = [];
+    for (let code in req.body) {
+      fieldsofInterest.push(code);
+    }
+    await Student.findOneAndUpdate(
+      { studentID: username },
+      { fieldsOfInterest: fieldsofInterest }
+    );
+    res.redirect("/interest_areas");
 }
 
 exports.editAccountSettings = async (req, res) => {
