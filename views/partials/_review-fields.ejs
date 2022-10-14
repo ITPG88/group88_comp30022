@@ -1,0 +1,76 @@
+<div class="form-field">
+  <label for="subjectCode">Subject: </label>
+  <div class="autocomplete" style="width: 820px">
+    <input
+      id="myInput"
+      style="padding"
+      type="text"
+      name="subjectCode"
+      class="each-field"
+    />
+  </div>
+</div>
+
+<div class="form-field">
+  <label for="rating">Rating: </label>
+  <div class="star-review">
+    <input type="radio" id="star5" name="rating" value="5" /><label
+      for="star5"
+      class="fa fa-star full"
+    ></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label
+      for="star4"
+      class="fa fa-star full"
+    ></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label
+      for="star3"
+      class="fa fa-star full"
+    ></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label
+      for="star2"
+      class="fa fa-star full"
+    ></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label
+      for="star1"
+      class="fa fa-star full"
+    ></label>
+  </div>
+</div>
+
+<div class="form-field">
+  <label for="content">Review Content: </label>
+  <textarea name="content" class="each-field big-form"> </textarea>
+</div>
+
+<div class="form-field inline-checkbox toright">
+  <div class="visible-checkbox inline-checkbox">
+    <input
+      style="width: 30px; height: 30px"
+      name="visible"
+      type="checkbox"
+      checked
+    />
+    <label style="margin-top: -6px" for="visible">Visible</label>
+  </div>
+
+  <div
+    class="private-checkbox inline-checkbox"
+    style="margin-right: -60px; margin-left: 20px"
+  >
+    <input style="width: 30px; height: 30px" name="private" type="checkbox" />
+    <label style="margin-top: -6px" for="private">Anonymous</label>
+  </div>
+</div>
+
+<div class="close-submit-bttn">
+  <a href="/home" style="font-size: 26px">close</a>
+  <button type="submit" formmethod="post" class="medium-buttn submit-bttn">
+    submit
+  </button>
+</div>
+
+<script type="text/javascript" src="/server/services/autocomplete.js"></script>
+<script>
+  const subjectList = <%-JSON.stringify(locals.subjectList)%>
+    autocomplete(document.getElementById("myInput"), subjectList, 5);
+</script>

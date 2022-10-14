@@ -1,0 +1,47 @@
+<nav>
+  <div class="container navbar-container">
+    <a href="/home">
+      <img src="/static/Subject Review Logo.png" />
+    </a>
+    <form class="nav-searchbar" action="/subject/" id="search" method="get">
+      <div class="autocomplete">
+        <input
+          style="padding-left: 1em"
+          type="text"
+          placeholder="Enter Subject Name/Code..."
+          name="code"
+          id="code"
+        />
+        <button type="submit">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </form>
+    <ul class="navbar-menu">
+      <li><a name="home" href="/home">Home</a></li>
+      <li><a name="browse" href="/browse">Browse</a></li>
+      <li><a name="history" href="/history">History</a></li>
+      <script type="text/javascript">
+        function handleSelect(selection)
+        {
+          if (selection == "Setting") {
+            window.location.href = '/account'
+          }
+          else if (selection == "Logout") {
+            window.location.href = '/logout'
+          }
+        }
+      </script>
+
+      <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
+        <option value="" selected disabled hidden>Account</option>
+        <option value="Setting">Setting</option>
+        <option value="Logout">Logout</option>
+      </select>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  document.getElementsByName("<%=locals.title%>")[0].classList.add("active");
+</script>

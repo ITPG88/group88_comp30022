@@ -1,0 +1,81 @@
+<form action="/signup" method="post" id="signup">
+  <div class="content">
+    <div class="login">
+      <div class="logo">
+        <a href="/">
+          <img src="/assets/img/Subject%20Review%20Logo.png" alt="" />
+        </a>
+      </div>
+
+      <div
+        id="err"
+        style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%;"
+      >Must be a unimelb email, please try again</div>
+
+      <ul>
+        <li><label>Username</label></li>
+        <li>
+          <input
+            required
+            type="text"
+            placeholder="Enter your username"
+            name="username"
+            value="<%=locals.username%>"
+          />
+        </li>
+      </ul>
+
+      <ul>
+        <li><label>Name</label></li>
+        <li>
+          <input
+            required
+            type="text"
+            placeholder="Enter your name"
+            name="fullName"
+            value="<%=locals.fullName%>"
+          />
+        </li>
+      </ul>
+
+      <ul>
+        <li><label>Email</label></li>
+        <li>
+          <input
+            required
+            type="text"
+            placeholder="Enter your email address"
+            name="email"
+            value="<%=locals.email%>"
+          />
+        </li>
+      </ul>
+
+      <ul>
+        <li><label>Password</label></li>
+        <li>
+          <input
+            required
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+          />
+        </li>
+      </ul>
+    </div>
+
+    <div class="signupbutton">
+      <button type="submit">Sign Up</button>
+    </div>
+    <p>Already have an account?<a href="/login"> Sign in</a></p>
+  </div>
+</form>
+
+<script>
+  const errElement = document.getElementById("err");
+  const errors = <%-JSON.stringify(locals.errors)%>
+  for (const err of errors) {
+    document.getElementById("err").style.display = "flex";
+    errElement.insertAdjacentHTML('beforeend', "<li  style = \"margin: 3px 0;\" >"+err+"</li>")
+  }
+</script>

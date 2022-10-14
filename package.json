@@ -1,20 +1,36 @@
 {
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "mongoose": "^6.5.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "jest": "^29.0.3",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.6.1",
+    "mongoose-extend-schema": "^1.0.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "require": "^0.4.4"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start2": "nodemon server2.js",
+    "test": "jest --watchAll --verbose"
   },
   "name": "group88_comp30022",
-  "description": "Name: Kai, StudentID: 1078175\r Name: Sebastian Davey Gargano, StudentID: 1083288\r Name: Ellen (Qingying Lyu), StudentID: 1173888\r Name: Mavis(Jia Zhao), StudentID: 1071383\r Name: Jason Phan, StudentID:",
+  "description": "Name: Kai, StudentID: 1078175\r Name: Sebastian Davey Gargano, StudentID: 1083288\r Name: Ellen (Qingying Lyu), StudentID: 1173888\r Name: Mavis(Jia Zhao), StudentID: 1071383\r Name: Jason Phan, StudentID:1180106",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ITPG88/group88_comp30022.git"

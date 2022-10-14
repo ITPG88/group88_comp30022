@@ -1,54 +1,74 @@
-import mongoose, {mongo} from "mongoose";
+const mongoose = require("mongoose");
+const extendSchema = require("mongoose-extend-schema");
 
-
-const subjectSchema = new mongoose.Schema({
-    subjectCode: String,
-    subjectName: String,
-    fieldOfStudy: String,
-    university: String
-});
-
-const commentSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema(
+  {
     content: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User'
-});
-
-const reviewSchema = new mongoose.Schema({
-    content: {
-        type: String,
-        required: true
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
     },
-    author: mongoose.Schema.Types.ObjectId, ref : 'User',
     isPrivate: {
-        type: Boolean,
-        required: true,
-        default: false
+      type: Boolean,
+      required: true,
+      default: false,
     },
     isVisible: {
-        type: Boolean,
-        required: true,
-        default: true
+      type: Boolean,
+      required: true,
+      default: true,
     },
-    subject: subjectSchema,
+    subject: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subject",
+    },
     rating: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
-    comments: [commentSchema],
-    status: {
-        type: String,
-        enum : ['APPROVED', 'REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
-        default: 'APPROVED'
-    }
-}, {
-    timestamps: true
+    nLikes: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    comments: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Comment",
+      required: true,
+      default: [],
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: { createdAt: false, updatedAt: true } }
+);
+
+const pendingReviewSchema = new extendSchema(reviewSchema, {
+  attemptedCode: String,
+  attemptedName: String,
+  attemptedfield: String,
+  status: {
+    type: String,
+    enum: ["REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
+    default: "FLAGGED",
+  },
 });
 
-const Review = mongoose.model('Review', reviewSchema);
-const Comment = mongoose.model('Comment', commentSchema);
-const Subject = mongoose.model('Subject', subjectSchema);
+const Review = mongoose.model("Review", reviewSchema, "reviews");
+const PendingReview = mongoose.model(
+  "PendingReview",
+  pendingReviewSchema,
+  "pendingReviews"
+);
 
-module.exports = {Review, Comment, Subject}
+module.exports = { Review, PendingReview };
