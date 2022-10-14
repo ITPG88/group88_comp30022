@@ -3,14 +3,14 @@ const passport = require("passport");
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-const methodOverride = require('method-override')
+const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const session = require("express-session");
 const path = require("path");
 const app = express();
 const connectDB = require("./server/database/connection");
-const {Review} = require("./server/model/review");
+const { Review } = require("./server/model/review");
 
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
@@ -27,19 +27,20 @@ app.use((req, res, next) => {
     res.local.error_msg = req.flash('error_msg');
     next();
 })*/
-
+app.enable("trust proxy");
 // Session
 app.use(
   session({
     // The secret used to sign session cookies (ADD ENV VAR)
     secret: process.env.SESSION_SECRET || "keyboard cat",
     name: "user", // The cookie name (CHANGE THIS)
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
+    proxy: true,
     cookie: {
       sameSite: "strict",
       httpOnly: true,
-      secure: app.get("env") === "production",
+      secure: true,
     },
   })
 );
@@ -53,9 +54,9 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static(__dirname + "/"));
-app.use(methodOverride('_method'));
-app.use('/static', express.static( "static" ))
-app.use('/static/css', express.static( "styles" ))
+app.use(methodOverride("_method"));
+app.use("/static", express.static("static"));
+app.use("/static/css", express.static("styles"));
 
 // Bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -79,7 +80,6 @@ app.all("*", (req, res) => {
     .render("error", { errorCode: "404", message: "That route is invalid." });
   //res.send('error')
 });
-
 
 // Listen on port
 app.listen(PORT, () => {
