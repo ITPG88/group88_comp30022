@@ -22,7 +22,7 @@
     "require": "^0.4.4"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server2.js",
     "start2": "nodemon server2.js",
     "test": "jest --watchAll --verbose"
   },
