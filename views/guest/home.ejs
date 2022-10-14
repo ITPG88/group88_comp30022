@@ -38,18 +38,29 @@
           <div class="inline">
             <form class="view-subject">
               <a
-                href="/subject/<%= review.subject.subjectCode %> "
                 class="medium-buttn view-subject-bttn"
+                onclick="loginMessage()"
                 >View Subject</a
               >
+
             </form>
             <form class="view-subject">
               <a
-                href="/subject/<%= review.subject.subjectCode %>/review/<%= review.id %> "
                 class="medium-buttn view-subject-bttn"
+                onclick="loginMessage()"
                 >View review</a
               >
             </form>
+
+            <script>
+              function loginMessage() {
+                if (confirm("Please login to your account in order to proceed to next step." 
+                  + " Do you want to login now?") == true) {
+                   window.location.href = "/login"
+                }
+              }
+            </script>
+
           </div>
           <footer><%= review.createdAt.toLocaleDateString() %></footer>
         </article>
