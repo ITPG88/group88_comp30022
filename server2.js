@@ -46,7 +46,7 @@ app.use(
     cookie: {
       sameSite: "strict",
       httpOnly: true,
-      secure: true,
+      secure: "auto",
     },
   })
 );
@@ -80,50 +80,48 @@ app.use("/subject", require("./server/routes2/subject"));
 
 //routes which handles the requests
 app.get("/hello", (req, res, next) => {
-    let emailTemplate;
-    let capitalizedFirstName = "John";
-    let userEmail = "1105138402@qq.com";
-    ejs
-      .renderFile(path.join(__dirname, "views/welcome-mail.ejs"), {
-        user_firstname: capitalizedFirstName,
-        confirm_link: "http://www.8link.in/confirm=" + userEmail
-      })
-      .then(result => {
-        emailTemplate = result;
-  
-        const message = {
-          to: userEmail,
-          from: { email: "welcome@8link.in", name: "8link" },
-          subject: "Welcome link",
-          html: emailTemplate
-        };
-  
-        return SGmail.send(message)
-          .then(sent => {
-            // Awesome Logic to check if mail was sent
-            res.status(200).json({
-              message: "Welcome mail was sent"
-            });
-          })
-          .catch(err => {
-            console.log("Error sending mail", err);
-            res.status(400).json({
-              message: "Welcome mail was not sent",
-              error: err
-            });
-          });
-  
-        //res.send(emailTemplate);
-      })
-      .catch(err => {
-        res.status(400).json({
-          message: "Error Rendering emailTemplate",
-          error: err
-        });
-      });
-  });
-  
+  let emailTemplate;
+  let capitalizedFirstName = "John";
+  let userEmail = "1105138402@qq.com";
+  ejs
+    .renderFile(path.join(__dirname, "views/welcome-mail.ejs"), {
+      user_firstname: capitalizedFirstName,
+      confirm_link: "http://www.8link.in/confirm=" + userEmail,
+    })
+    .then((result) => {
+      emailTemplate = result;
 
+      const message = {
+        to: userEmail,
+        from: { email: "welcome@8link.in", name: "8link" },
+        subject: "Welcome link",
+        html: emailTemplate,
+      };
+
+      return SGmail.send(message)
+        .then((sent) => {
+          // Awesome Logic to check if mail was sent
+          res.status(200).json({
+            message: "Welcome mail was sent",
+          });
+        })
+        .catch((err) => {
+          console.log("Error sending mail", err);
+          res.status(400).json({
+            message: "Welcome mail was not sent",
+            error: err,
+          });
+        });
+
+      //res.send(emailTemplate);
+    })
+    .catch((err) => {
+      res.status(400).json({
+        message: "Error Rendering emailTemplate",
+        error: err,
+      });
+    });
+});
 
 app.all("*", (req, res) => {
   res.redirect("/error404");
