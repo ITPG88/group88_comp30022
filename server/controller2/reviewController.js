@@ -5,6 +5,7 @@ const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
 const Mongoose = require("mongoose");
+const { render } = require("ejs");
 
 /**
  * @description Helper function that gets reviews based on fieldsOfInterest.
@@ -348,3 +349,20 @@ exports.getNumPendingReviews = async (req, res, next) => {
   }).count();
   next();
 };
+
+exports.editReviews = async (req, res, next) => {
+  console.log("i am in edit review")
+  const review = await Review.findById(req.params.id).populate("subject")
+  console.log(req.params.id)
+  res.render("student/edit_review", {review:review})
+}
+
+exports.editreviews = async (req, res, next) => {
+  console.log("i am in edit review page")
+  let review = await Review.findById(req.params.id).populate("subject")
+  review.content = req.body.content
+  
+  review = await review.save()
+  res.redirect('/home')
+  
+}

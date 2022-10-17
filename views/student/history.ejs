@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,1,0"
     />
   </head>
+
   <body>
     <%- include('../partials/navbars/_student_navbar') %> <%-
     include('../partials/_student-history-header') %>
@@ -25,7 +26,10 @@
             <article class="each-review">
               <span class="material-symbols-outlined">favorite</span>
 
+              
               <h3><%= review.subject.subjectCode %></h3>
+                
+              
               <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
                 <%= review.subject.subjectName %>
               </h4>
@@ -55,6 +59,14 @@
                     >View review</a
                   >
                 </form>
+
+                <form class="view-subject" style="margin-bottom: 20px;">
+                  <a
+                    href="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review.id %> "
+                    class="medium-buttn view-subject-bttn"
+                    >Edit review</a
+                  >
+                </form>
               </div>
               <footer><%= review.createdAt.toLocaleDateString() %></footer>
             </article>
@@ -63,4 +75,6 @@
       </div>
     </section>
   </body>
+
 </html>
+

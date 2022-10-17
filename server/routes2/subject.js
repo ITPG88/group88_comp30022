@@ -20,6 +20,14 @@ router.param("subjectCode", subjectController.findSubject);
 
 router.get("/:subjectCode/review/:id", subjectController.loadSingleReview);
 
+// @desc Edit a review
+// @route Get
+router.get("/:subjectCode/review/edit/:id", reviewController.editReviews);
+
+// @desc Edit a review
+// @route Post
+router.post("/:subjectCode/review/edit/:id", reviewController.editreviews);
+
 // @desc Add comment to review
 // @route /POST
 router.post(
@@ -79,5 +87,7 @@ router.post(
   auth.ensureAuth,
   subjectController.postReview
 );
+
+
 
 module.exports = router;
