@@ -1,5 +1,6 @@
 *.idea
-
+.prettierrc.json
+.prettierignore
 /node_modules
 
 .DS_Store
