@@ -42,7 +42,7 @@
           </div>
 
           <div class="review-footer view-review-footer view-review-footer-2to1">
-            <div class="like-reply-remove">
+            <div class="like-reply-remove" onclick="loginMessage()">
               <button class="like-button like-button-color small-buttn">
                 <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
               </button>
@@ -51,19 +51,21 @@
                 action="/subject/<%= subjectCode %>/review/<%= review._id %>/flagged"
                 method="POST"
               >
-                <button class="report-bttn">Report</button>
+                <button class="report-bttn" onclick="loginMessage()">Report</button>
               </form>
-            </div>
-            <form
-              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
-              method="POST"
-            >
-              <button class="remove-button-color small-buttn">Remove</button>
-            </form>
-          </div>
         </article>
         <% } else{ %> <% } %> <% }) %>
       </div>
     </section>
+
+    <script>
+      function loginMessage() {
+        if (confirm("Please login to your account in order to proceed to next step." 
+          + " Do you want to login now?") == true) {
+          window.location.href = "/login"
+        }
+      }
+    </script>
+
   </body>
 </html>

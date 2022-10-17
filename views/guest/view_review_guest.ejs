@@ -48,7 +48,7 @@
             >
 
             <div class="review-footer">
-                <img class="like-button small-buttn">
+                <img class="like-button small-buttn" onclick="loginMessage()">
                     <img src="/static/Like%20symbol.png" /><%= review.nLikes%>
                 </button>
                 <h8
@@ -69,8 +69,10 @@
                     placeholder=" Add a comment..."
                     name="content"
                     class="comment-post"
+                    onclick="loginMessage()"
             ></textarea>
-                <button class="medium-buttn post-bttn">Post</button>
+                <button class="medium-buttn post-bttn" onclick="loginMessage()">Post</button>
+                
             </form>
         </div>
 
@@ -88,17 +90,9 @@
                             action="/subject/<%=subjectCode %>/review/<%= review._id %>/<%=comment._id%>/likeComment"
                             method="POST"
                     >
-                        <button class="like-bttn small-buttn" type="submit">
+                        <button class="like-bttn small-buttn" type="submit" onclick="loginMessage()">
                             <img src="/static/Lke symbol (white).png" /><%= (comment.nLikes
                                     !== null) ? comment.nLikes : 111%>
-                        </button>
-                    </form>
-                    <form
-                            action="/subject/<%=subjectCode %>/review/<%= review._id %>/<%=comment._id%>?_method=DELETE"
-                            method="POST"
-                    >
-                        <button class="remove-bttn small-buttn" type="submit">
-                            Remove
                         </button>
                     </form>
                 </div>
@@ -106,6 +100,16 @@
             </article>
         <% }) %>
     </div>
+
+    <script>
+      function loginMessage() {
+        if (confirm("Please login to your account in order to proceed to next step." 
+          + " Do you want to login now?") == true) {
+          window.location.href = "/login"
+        }
+      }
+    </script>
+
 </section>
 </body>
 </html>
