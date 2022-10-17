@@ -18,8 +18,8 @@ const PORT = process.env.PORT || 8080;
 const cors = require("cors");
 const ejs = require("ejs");
 const SGmail = require("@sendgrid/mail");
-const apiKey = `${process.env.SENDGRID_API_KEY}`;
-console.log("SendGrid key ", apiKey);
+//const apiKey = `${process.env.SENDGRID_API_KEY}`;
+//console.log("SendGrid key ", apiKey);
 
 require("./server/services/passport")(passport);
 connectDB();
@@ -75,7 +75,8 @@ app.use("/", require("./server/routes2/index"));
 app.use("/settings", require("./server/routes2/settings"));
 app.use("/subject", require("./server/routes2/subject"));
 
-SGmail.setApiKey(process.env.SendGrid_Key);
+// Send mail stuff
+// SGmail.setApiKey(process.env.SendGrid_Key);
 
 //routes which handles the requests
 app.get("/hello", (req, res, next) => {
