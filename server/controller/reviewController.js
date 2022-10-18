@@ -7,29 +7,6 @@ const Student = require("../model/user").Student;
 const Mongoose = require("mongoose");
 const { render } = require("ejs");
 
-/**
- * @description Helper function that gets reviews based on fieldsOfInterest.
- *
- */
-async function getReviewsByFieldOfInterest(req) {
-  let reviews = [];
-  let subjectIDs = [];
-  let fieldsOfInterest = (await Student.findById(req.user._id))
-    .fieldsOfInterest;
-  /*
-  if (fieldsOfInterest) {
-    fieldsOfInterest.forEach((field) => {
-      subjectIDs.push(Subject.find({fieldOfStudy: field}));
-    });
-  }
-
-  for (const subjectID of subjectIDs) {
-    const review = await Review.find({ subject: subjectID }).populate('subject').limit(5);
-    reviews.push(review);
-  }
-  return reviews;*/
-  return [];
-}
 
 /*
 STUDENT(and guest)-CALLED FUNCTIONS
@@ -50,18 +27,13 @@ exports.getHomepageReviews = async (req, res) => {
           );
         });
       }
-      // If no liked reviews, try field of interest
       if (reviews.length === 0) {
-        reviews = await getReviewsByFieldOfInterest(req);
-        // If no field of interest, default
-        if (reviews.length === 0) {
-          reviews = await Review.find()
+        reviews = await Review.find()
             .sort({ createdAt: -1 })
             .populate("subject")
             .limit(19);
-        }
-        res.render("student/home", { reviews: reviews });
       }
+        res.render("student/home", { reviews: reviews });
     } else {
       // Moderator
       res.redirect("/home/flagged");
@@ -76,6 +48,13 @@ exports.getHomepageReviews = async (req, res) => {
     res.render("guest/home", { reviews: reviews });
   }
 };
+
+/**
+ *
+ * @param req
+ * @param res
+ * @Description: retrieves the relevant reviews for a student user's browse page
+ */
 exports.getBrowsePageReviews = async (req, res) => {
   if (!req.user) {
     res.redirect("/home");
@@ -101,7 +80,7 @@ exports.getBrowsePageReviews = async (req, res) => {
     }
 
     for (const subject of subjects){
-      const result = await Review.find({subject: subject._id}).populate("subject");
+      const result = await Review.find({subject: subject._id}).populate("subject").limit(4);
       reviews = reviews.concat(result)
     }
     if (reviews.length < 10){
@@ -114,6 +93,13 @@ exports.getBrowsePageReviews = async (req, res) => {
   res.render("student/browse", {title: "browse", reviews: reviews});
 };
 
+/**
+ *
+ * @param req
+ * @param res
+ * @description retrieves the reviews for a given student user's history page. Guest, moderator have no history,
+ * redirect them.
+ */
 exports.getHistoryReviews = async (req, res) => {
   if (req.user.type === "moderator") {
     // Moderator has no history, should be redirected to home
@@ -129,6 +115,8 @@ exports.getHistoryReviews = async (req, res) => {
     comments: comments,
   });
 };
+
+
 exports.setFullName = async (req, res, next) => {
   if (req.user) res.locals.fullName = req.user.fullName;
   next();
@@ -216,6 +204,13 @@ exports.postReview = async (req, res) => {
   }
 };
 
+
+/**
+ *
+ * @param req
+ * @param res
+ * @description deletes a review given in a request
+ */
 exports.deleteReview = async (req, res) => {
   if (!req.user) {
     // Guest handling
@@ -272,7 +267,7 @@ exports.deleteFlaggedPendingReview = async (req, res) => {
     return;
   }
 
-  const pendingReview = await PendingReview.findByIdAndDelete(req.params.id);
+  await PendingReview.findByIdAndDelete(req.params.id);
   res.redirect("/home/flagged");
 };
 

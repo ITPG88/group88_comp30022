@@ -16,7 +16,7 @@
             <img src="../../assets/img/Subject%20Review%20Logo.png" alt="" />
           </li>
           <li>
-            <a href="settings/appearance"><span>Appearence</span></a>
+            <a href="settings/appearance"><span>Appearance</span></a>
           </li>
           <li>
             <a href="/account"><span>Account</span></a>
@@ -38,7 +38,7 @@
         <a href="/home">
           <img src="../../assets/img/close%20button.png" alt="" />
         </a>
-
+        <form action="/settings/interest_areas/edit_study_fields" method="post" id="settings_interests">
         <div class="areas">
           <ul style="padding-top: 5%">
             <li>
@@ -61,7 +61,7 @@
                 <label class="b" for="sports">Sports</label>
             </li>
             <li><input type="checkbox" hidden name="envi" id="envi" />
-                <label class="b" for="envi">Enviroment</label>
+                <label class="b" for="envi">Environment</label>
             </li>
           </ul>
 
@@ -106,7 +106,13 @@
                 <label class="b" for="ENGR">Engineering</label>
             </li>
           </ul>
+          <div style="text-align: right">
+            <div class="finishbutton">
+              <button type="submit">Finish</button>
+            </div>
+          </div>
         </div>
+        </form>
     </div>
     </div>
   </body>

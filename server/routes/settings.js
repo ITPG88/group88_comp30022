@@ -20,7 +20,7 @@ router.get('/interest_areas', auth.ensureAuth, (req, res) => {
     res.render("student/interest_areas_settings", { title: "interests" });
 });
 
-router.post('/interest_areas', auth.ensureAuth, settingsController.editFieldsOfInterest);
+router.post('/interest_areas/edit_study_fields', auth.ensureAuth, settingsController.updateFieldsOfInterest);
 
 router.get('/logout', auth.ensureAuth, (req, res) => {
     res.redirect('logout');
@@ -33,6 +33,8 @@ router.get('/appearance', auth.ensureAuth, (req, res) => {
 router.get('/close', auth.ensureAuth, (req, res) => {
     res.redirect("home");
 });
+
+
 
 
 module.exports = router;

@@ -76,6 +76,7 @@ exports.getStudentReviews = async (req, res) => {
   res.render("student/home", { reviews: reviews });
 };
 
+
 exports.editStudentFieldsOfInterest = async (req, res) => {
   console.log(req.body);
   const username = req.user.username;
