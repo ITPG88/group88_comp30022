@@ -11,9 +11,11 @@ exports.updateFieldsOfInterest = async (req, res) =>{
         res.redirect("/logout");
         return;
     }
-    let fieldsOfInterest = [];
+    let fieldsOfInterest = req.user.fieldsOfInterest;
     for (let code in req.body) {
-        fieldsOfInterest.push(code);
+        if (!fieldsOfInterest.includes(code)){
+            fieldsOfInterest.push(code);
+        }
     }
     const student = await Student.findOneAndUpdate(
         { username: req.user.username },
