@@ -5,25 +5,39 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 
-exports.updateFieldsOfInterest = async (req, res) =>{
-    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-        console.log("Object missing");
-        res.redirect("/logout");
+exports.getFieldsOfInterest = async (req, res, next) =>{
+    const studentID = req.user._id;
+    const student = await Student.findById(studentID).lean();
+    res.locals.fieldsOfInterest = student.fieldsOfInterest;
+
+    next();
+}
+
+
+exports.editFieldsOfInterest = async (req, res) =>{
+    console.log(req.body);
+    const studentID = req.user._id;
+    const student = await Student.findById(studentID).lean();
+
+
+    if (!req.body) {
+        res.redirect("/home");
         return;
     }
-    let fieldsOfInterest = req.user.fieldsOfInterest;
-    for (let code in req.body) {
-        if (!fieldsOfInterest.includes(code)){
-            fieldsOfInterest.push(code);
-        }
-    }
-    const student = await Student.findOneAndUpdate(
-        { username: req.user.username },
-        { fieldsOfInterest: fieldsOfInterest }
-    );
-    res.redirect("/settings/interest_areas", {student: student});
 
+    let fieldsofInterest = [];
+
+    for (let interest in req.body) {
+      fieldsofInterest.push(interest);
+    }
+    
+    await Student.findOneAndUpdate(
+      { _id: studentID },
+      { fieldsOfInterest: fieldsofInterest }
+    );
+    res.redirect("/settings/interest_areas");
 }
+
 
 
 exports.editAccountSettings = async (req, res) => {
