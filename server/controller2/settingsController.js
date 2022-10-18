@@ -5,8 +5,19 @@ const Student = require("../model/user").Student;
 const mongoose = require("mongoose");
 
 
-exports.editFieldsOfInterest = async (req, res) =>{
+exports.getFieldsOfInterest = async (req, res, next) =>{
     const studentID = req.user._id;
+    const student = await Student.findById(studentID).lean();
+    res.locals.fieldsOfInterest = student.fieldsOfInterest;
+
+    next();
+}
+
+
+exports.editFieldsOfInterest = async (req, res) =>{
+    console.log(req.body);
+    const studentID = req.user._id;
+    const student = await Student.findById(studentID).lean();
 
 
     if (!req.body) {
@@ -14,27 +25,16 @@ exports.editFieldsOfInterest = async (req, res) =>{
         return;
     }
 
-    console.log(req.body);
-
-    await Student.findByIdAndUpdate(studentID, {fieldsOfInterest: newFieldsOfInterest}).catch(err => {
-        console.log("Error detected");
-        res.status(500).send({
-            message:
-                err.message ||
-                "Some error occurred while creating a updating fields of interest.",
-        });
-
-    });
-
     let fieldsofInterest = [];
-    for (let code in req.body) {
-      fieldsofInterest.push(code);
+
+    for (let interest in req.body) {
+      fieldsofInterest.push(interest);
     }
+    
     await Student.findOneAndUpdate(
-      { studentID: username },
+      { _id: studentID },
       { fieldsOfInterest: fieldsofInterest }
     );
-    res.redirect("/interest_areas");
 }
 
 exports.editAccountSettings = async (req, res) => {

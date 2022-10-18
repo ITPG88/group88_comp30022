@@ -16,8 +16,8 @@ router.get('/account', auth.ensureAuth, (req, res) => {
 
 router.post('/account', auth.ensureAuth, settingsController.editAccountSettings);
 
-router.get('/interest_areas', auth.ensureAuth, (req, res) => {
-    res.render("student/interest_areas_settings", { title: "interests" });
+router.get('/interest_areas', auth.ensureAuth, settingsController.getFieldsOfInterest, (req, res) => {
+    res.render("student/interest_areas_settings", { title: "interests"});
 });
 
 router.post('/interest_areas', auth.ensureAuth, settingsController.editFieldsOfInterest);
