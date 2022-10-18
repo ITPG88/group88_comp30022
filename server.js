@@ -10,7 +10,6 @@ const session = require("express-session");
 const path = require("path");
 const app = express();
 const connectDB = require("./server/database/connection");
-const { Review } = require("./server/model/review");
 
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
