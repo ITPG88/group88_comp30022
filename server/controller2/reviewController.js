@@ -363,6 +363,6 @@ exports.editreviews = async (req, res, next) => {
   review.content = req.body.content
   
   review = await review.save()
-  res.redirect('/home')
+  res.redirect('/history')
   
 }
