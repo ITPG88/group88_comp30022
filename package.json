@@ -22,8 +22,8 @@
     "require": "^0.4.4"
   },
   "scripts": {
-    "start": "nodemon server2.js",
-    "start2": "nodemon server2.js",
+    "start": "nodemon server.js",
+    "start2": "nodemon server.js",
     "test": "jest --watchAll --verbose"
   },
   "name": "group88_comp30022",

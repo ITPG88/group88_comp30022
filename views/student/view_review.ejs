@@ -43,7 +43,7 @@
           <p><%= review.content %></p>
           <h7
             ><b>
-              <%= (review.author.fullName!=null) ? `${review.author.fullName}` :
+              <%= (!review.isPrivate && review.author.fullName != null) ? `${review.author.fullName}` :
               'Anonymous'%></b
             >
             <%= review.createdAt.toLocaleDateString() %></h7

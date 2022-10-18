@@ -1,11 +1,38 @@
+const auth = require("../services/auth");
+const reviewController = require("../controller/reviewController");
+const settingsController = require("../controller/settingsController");
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
+const passport = require("passport");
 
-const student = require("../controller/studentController");
-const login = require("../controller/loginController");
-const auth = require("../helper/auth");
-router.get("/", auth.hasPriv, student.account);
-router.get("/appearance", auth.hasPriv, student.appearance);
-router.get("/interests", auth.hasPriv, student.interests);
+
+router.get("/", auth.ensureAuth, (req, res) => {
+    res.redirect("/settings/account");
+});
+
+router.get('/account', auth.ensureAuth, (req, res) => {
+    res.render("student/account_settings", {user: req.user});
+});
+
+router.post('/account', auth.ensureAuth, settingsController.editAccountSettings);
+
+router.get('/interest_areas', auth.ensureAuth, (req, res) => {
+    res.render("student/interest_areas_settings", { title: "interests" });
+});
+
+router.post('/interest_areas', auth.ensureAuth, settingsController.editFieldsOfInterest);
+
+router.get('/logout', auth.ensureAuth, (req, res) => {
+    res.redirect('logout');
+});
+
+router.get('/appearance', auth.ensureAuth, (req, res) => {
+    res.render("student/appearance_settings", {user: req.user});
+});
+
+router.get('/close', auth.ensureAuth, (req, res) => {
+    res.redirect("home");
+});
+
+
 module.exports = router;

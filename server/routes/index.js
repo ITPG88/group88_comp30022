@@ -1,70 +1,205 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
-const studentController = require("../controller/studentController");
-const services = require("../services/render");
+const passport = require("passport");
 
-const login = require("../controller/loginController");
-const auth = require("../helper/auth");
+const loginController = require("../controller/loginController");
+const auth = require("../services/auth");
+const reviewController = require("../controller/reviewController");
+const subjectController = require("../controller/subjectController");
+const { PendingReview } = require("../model/review");
 
-// Landing Page
-router.get("/", auth.ensureGuest, services.landing);
+// @desc Landing
+// @route GET /
+router.get("/", auth.ensureGuest, (req, res) => {
+  if (Object.keys(req.query)[0] === "signedup") {
+    console.log("made an account");
+    res.render("landing", { signedup: 1 });
+  } else {
+    res.render("landing");
+  }
+});
 
-// Login Page
-router.get("/login", auth.ensureGuest, services.login);
+// @desc Login page
+// @route GET /login
+router.get("/login", (req, res) => {
+  let error;
+  let username;
+  if (typeof req.session.messages === "undefined") {
+  } else if (req.session.messages.length === 0) {
+  } else {
+    username = req.session.messages[0];
+    req.session.messages = [];
+  }
+  res.render("login.ejs", {
+    title: "Login",
+    username: username,
+  });
+});
 
+// @desc Attempt login
+// @route POST /login
 router.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureMessage: true,
+  }),
   (req, res) => {
     res.redirect("/home");
   }
 );
 
+// @desc Signup page
+// @route GET /signup
+router.get("/signup", (req, res) => {
+  res.render("signup.ejs", { title: "signup" });
+});
+
+// @desc Attempt Signup
+// @route POST /signup
+router.post("/signup", loginController.createStudent, (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/signup/choose_interests",
+    failureRedirect: "/signup",
+  })(req, res, next);
+});
+
+// @desc Signup interests page
+// @route GET /signup/choose_interests
+router.get("/signup/choose_interests", (req, res) => {
+  res.render("signup_interests.ejs", { title: "interests" });
+});
+
+// @desc Add fields on sign-up handle
+// @route POST /signup
+router.post(
+  "/signup/choose_interests",
+  loginController.editStudentFieldsOfInterest
+);
+
+// @desc Forgot password
+// @route GET /forgot_password
+router.get("/forgot_password", (req, res) => {
+  res.render("forgot_password.ejs", { title: "forgot_password" });
+});
+
+// @desc Get homepage
+// @route GET /home
+// re-route moderators to /home/flagged
+router.get(
+  "/home",
+  reviewController.setFullName,
+  subjectController.getSubjectList,
+  reviewController.getHomepageReviews
+);
+
+// @desc create review via pop-up from homepage
+// @route POST /home
+router.post(
+    "/home",
+    auth.ensureAuth,
+    reviewController.postReview
+);
+
+// @desc get browsepage
+// @route GET /browse
+router.get("/browse", auth.ensureAuth, reviewController.getBrowsePageReviews);
+
+// @desc get historypage
+// @route GET /history
+router.get(
+  "/history",
+  auth.ensureAuth,
+  reviewController.setFullName,
+  reviewController.getHistoryReviews
+);
+
+// @desc get account
+// @route GET /account
+router.get("/account", (req, res) => {
+  res.redirect("/settings");
+});
+
+// @desc get logout
+// @route GET /logout
 router.get("/logout", (req, res, next) => {
   req.logout((error) => {
     if (error) {
       return next(error);
     }
-    res.redirect("/");
+    if (Object.keys(req.query).length === 0) {
+      res.redirect("/");
+      return;
+    }
+    res.redirect("/?" + Object.keys(req.query)[0]);
   });
 });
 
-router.get("/forgetpassword", auth.ensureGuest, login.forget);
+// @desc get write_review
+// @route GET /write_review
+router.get(
+  "/write_review",
+  auth.ensureAuth,
+  subjectController.getSubjectList,
+  (req, res) => {
+    res.render("student/write_review.ejs");
+  }
+);
 
-// SignUp Page
-router.get("/signup", auth.ensureGuest, services.signup);
-router.get("/signup/choose_interests", services.signupPreferences);
+router.post(
+  "/write_review",
+  auth.ensureAuth,
+  subjectController.findSubject,
+  reviewController.postReview
+);
 
-// passport not set up yet
-const student = require("../controller/studentController");
-const mod = require("../controller/moderatorController");
-// router.get("/home", login.ensureAuth, (req, res) => {
-//   if (1 /*isStudent*/) {
-//     student.home;
-//   } else if (1 /* isAdmin*/) {
-//     mod.home;
-//   }
-// });
-
-router.get("/home", auth.isAdmin, student.home);
-router.get("/browse", auth.isAdmin, student.browse);
-router.get("/history", auth.isAdmin, student.history);
-router.get("/account", (req, res) => {
-  res.redirect("/settings");
+router.all("/error404", (req, res) => {
+  res.status(404).render("error404.ejs");
 });
+
+/*
+Moderator
+ */
+
+// @desc get pending_subject
+// @route GET /home/pending_subject
+//router.get("/home/pending_subject", auth.ensureAuth, reviewController.getSubjectPendingReviews);
+
+/*****/
+router.get(
+  "/home/flagged",
+  auth.ensureAuth,
+  reviewController.setFullName,
+  reviewController.getNumPendingReviews,
+  reviewController.getFlaggedReviews
+);
+
+router.get(
+  "/home/pending_subject",
+  auth.ensureAuth,
+  reviewController.setFullName,
+  reviewController.getNumPendingReviews,
+  reviewController.getPendingSubjectReviews
+);
+
+router.post("/home/pending_subject/:id/reject", reviewController.deletePendingSubjectReview);
+router.post("/home/pending_subject/:id/approve", reviewController.approvePendingSubjectReview);
+router.post(
+  "/home/flagged/:id/remove",
+  auth.ensureAuth,
+  reviewController.deleteFlaggedPendingReview
+);
+
+router.post(
+  "/home/flagged/:id/neglect",
+  auth.ensureAuth,
+  reviewController.neglectFlaggedPendingReview
+);
+
+router.post(
+  "/home/flagged/:id",
+  auth.ensureAuth,
+  reviewController.deleteFlaggedPendingReview
+);
+
 module.exports = router;
-
-// API
-//router.get('/api/users', studentController.getStudent);
-router.post("/api/users", studentController.createNewStudent);
-router.patch("/api/users/:id", studentController.updateStudentUser);
-router.get("/api/users/:id", studentController.getCurrentStudent);
-
-// Login page (with failure message displayed upon login failure)
-// router.get("/login", (req, res) => {
-//   res.render("Login", { flash: req.flash("error"), title: "Login" });
-// });
-
-// // add a route to handle the GET request for student homepage
-// studentRouter.get("/:student_id", studentController.getCurrentStudent);
