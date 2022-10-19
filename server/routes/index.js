@@ -1,11 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const passport = require('passport')
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 
-const loginController = require('../controller/loginController')
-const auth = require('../services/auth')
-const reviewController = require('../controller/reviewController')
-const subjectController = require('../controller/subjectController')
+const loginController = require("../controller/loginController");
+const auth = require("../services/auth");
+const reviewController = require("../controller/reviewController");
+const subjectController = require("../controller/subjectController");
+const settingsController = require("../controller/settingsController");
+const { PendingReview } = require("../model/review");
+
 // @desc Landing
 // @route GET /
 router.get('/', auth.ensureGuest, (req, res) => {
@@ -28,11 +31,12 @@ router.get('/login', (req, res) => {
     username = req.session.messages[0]
     req.session.messages = []
   }
-  res.render('login.ejs', {
-    title: 'Login',
-    username
-  })
-})
+  res.render("login.ejs", {
+    title: "Login",
+    username: username,
+    emailSent: false,
+  });
+});
 
 // @desc Attempt login
 // @route POST /login
@@ -211,4 +215,6 @@ router.post(
   }
 )
 
-module.exports = router
+router.post('/forget', settingsController.sendEmail);
+
+module.exports = router;

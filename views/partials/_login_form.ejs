@@ -54,7 +54,7 @@
   </div>
 </form>
 
-<!-- The Modal -->
+<!-- The Modal For Sending Recovery Email-->
 <div id="forget" class="modal">
   <!-- Modal Content -->
 
@@ -81,6 +81,7 @@
           <li>
             <input
               type="text"
+              name="email"
               placeholder=" Enter your email address..."
               required
             />
@@ -97,16 +98,27 @@
     </div>
   </form>
 </div>
+
+<!-- The Modal For Sending Recovery Email-->
+<div id="sent" class="modal">
+    <!-- Modal Content -->
+    <% if(emailSent == true){ %>
+        <%- include('../partials/_email_sent') %>
+    <% } %>
+</div>
+
 <script>
   if ("<%=locals.username%>" !== "") {
     document.getElementById("err").style.display = "flex";
   }
   var modal = document.getElementById("forget");
+  var modal2 = document.getElementById("sent");
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      modal2.style.display = "none";
     }
   };
 </script>
