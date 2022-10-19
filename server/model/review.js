@@ -1,74 +1,74 @@
-const mongoose = require("mongoose");
-const extendSchema = require("mongoose-extend-schema");
+const mongoose = require('mongoose')
+const ExtendSchema = require('mongoose-extend-schema')
 
 const reviewSchema = new mongoose.Schema(
   {
     content: {
       type: String,
-      required: true,
+      required: true
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Student",
-      required: true,
+      ref: 'Student',
+      required: true
     },
     isPrivate: {
       type: Boolean,
       required: true,
-      default: false,
+      default: false
     },
     isVisible: {
       type: Boolean,
       required: true,
-      default: true,
+      default: true
     },
     subject: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Subject",
+      ref: 'Subject'
     },
     rating: {
       type: Number,
-      required: true,
+      required: true
     },
     nLikes: {
       type: Number,
       required: true,
-      default: 0,
+      default: 0
     },
     comments: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Comment",
+      ref: 'Comment',
       required: true,
-      default: [],
+      default: []
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now
     },
     updatedAt: {
       type: Date,
-      default: Date.now,
-    },
+      default: Date.now
+    }
   },
   { timestamps: { createdAt: false, updatedAt: true } }
-);
+)
 
-const pendingReviewSchema = new extendSchema(reviewSchema, {
+const pendingReviewSchema = new ExtendSchema(reviewSchema, {
   attemptedCode: String,
   attemptedName: String,
   attemptedfield: String,
   status: {
     type: String,
-    enum: ["REQUIRES_SUBJECT_REVIEW", "FLAGGED"],
-    default: "FLAGGED",
-  },
-});
+    enum: ['REQUIRES_SUBJECT_REVIEW', 'FLAGGED'],
+    default: 'FLAGGED'
+  }
+})
 
-const Review = mongoose.model("Review", reviewSchema, "reviews");
+const Review = mongoose.model('Review', reviewSchema, 'reviews')
 const PendingReview = mongoose.model(
-  "PendingReview",
+  'PendingReview',
   pendingReviewSchema,
-  "pendingReviews"
-);
+  'pendingReviews'
+)
 
-module.exports = { Review, PendingReview };
+module.exports = { Review, PendingReview }
