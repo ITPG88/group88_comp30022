@@ -131,6 +131,7 @@
     <ul>
       <li><label for="subjectCode" style="font-size: 26px">Subject Code</label></li>
       <li>
+        <div class="autocomplete" style = "width: 75%;">
         <input
           id="myInput"
           style="
@@ -140,12 +141,13 @@
             border: 1px solid #ccc;
             background-color: #3b3b3b;
             box-sizing: border-box;
-            width: 75%; height: 40px; background-color: #1e1e1e
+            height: 40px; background-color: #1e1e1e
           "
           type="text"
           name="subjectCode"
           class="each-field"
         />
+    </div>
       </li>
     </ul>
     <br />
@@ -239,11 +241,13 @@
     <div style="display: inline-flex">
       <div>
         <input
+          checked
           style="width: 30px; height: 30px"
           name="visible"
           type="checkbox"
+          
         />
-        <label style="margin-top: -6px; font-size: 26px" for="visible"
+        <label style="margin-top: -6px; font-size: 26px" for="visible" 
           >Visible</label
         >
       </div>
@@ -274,7 +278,7 @@
 <script>
   const subjectList = <%-JSON.stringify(locals.subjectList)%>
   autocomplete(document.getElementsByName("code")[0], subjectList, 3);
-    autocomplete(document.getElementById("myInput"), subjectList, 5);
+  autocomplete(document.getElementById("myInput"), subjectList, 3);
 </script>
 
 
