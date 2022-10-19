@@ -22,13 +22,13 @@ exports.editFieldsOfInterest = async (req, res) => {
 
   for (const interest in req.body) {
     if (!fieldsOfInterest.includes(interest)) {
-      fieldsOfInterest.push(interest);
+      fieldsOfInterest.push(interest)
     }
   }
 
   await Student.findOneAndUpdate(
     { _id: studentID },
-    { fieldsOfInterest: fieldsOfInterest }
+    { fieldsOfInterest }
   )
   res.redirect('/settings/interest_areas')
 }

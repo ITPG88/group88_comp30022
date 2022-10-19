@@ -1,10 +1,11 @@
+---
 name: Node.js CI + Lint
 
 on:
   push:
-    branches: ["demo"]
+    branches: ['demo']
   pull_request:
-    branches: ["demo"]
+    branches: ['demo']
 
 jobs:
   build-and-test:
@@ -20,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
       - run: npm ci
       - run: npm test
         env:
@@ -41,5 +42,6 @@ jobs:
         uses: github/super-linter/slim@v4
         env:
           VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: "main"
+          DEFAULT_BRANCH: 'main'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILTER_REGEX_EXCLUDE: tests/*

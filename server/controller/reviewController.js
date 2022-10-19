@@ -256,18 +256,6 @@ exports.getPendingSubjectReviews = async (req, res) => {
   })
 }
 
-exports.deleteFlaggedPendingReview = async (req, res) => {
-  // console.log("i am in remove moderator")
-  if (req.user.type === 'student') {
-    console.log('Student attempted to enter moderator area')
-    res.redirect('/home')
-    return
-  }
-
-  await PendingReview.findByIdAndDelete(req.params.id)
-  res.redirect('/home/flagged')
-}
-
 exports.neglectFlaggedPendingReview = async (req, res) => {
   console.log('in neglect')
   const review = await PendingReview.findById(req.params.id)
@@ -285,8 +273,7 @@ exports.neglectFlaggedPendingReview = async (req, res) => {
   await PendingReview.findByIdAndDelete(req.params.id)
   res.redirect('/home/flagged')
 }
-
-exports.deletePendingSubjectReview = async (req, res) => {
+exports.deletePendingReview = async (req, res, next) => {
   // console.log("i am in remove moderator")
   if (req.user.type === 'student') {
     console.log('Student attempted to enter moderator area')
@@ -295,7 +282,7 @@ exports.deletePendingSubjectReview = async (req, res) => {
   }
 
   await PendingReview.findByIdAndDelete(req.params.id)
-  res.redirect('/home/pending_subject')
+  next()
 }
 
 exports.approvePendingSubjectReview = async (req, res) => {

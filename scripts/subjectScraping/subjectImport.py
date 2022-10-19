@@ -1,7 +1,8 @@
 import pymongo
 import json
-# python subjectImport.py 
-CONNECTION_URL =  "mongodb+srv://admin:adminpassword@cluster0.7ilezxe.mongodb.net"
+
+# python subjectImport.py
+CONNECTION_URL = "mongodb+srv://admin:adminpassword@cluster0.7ilezxe.mongodb.net"
 client = pymongo.MongoClient(CONNECTION_URL)
 db = client.subjectReviewDB
 collection = db.subjects

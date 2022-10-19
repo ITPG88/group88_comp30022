@@ -178,7 +178,10 @@ router.get(
 
 router.post(
   '/home/pending_subject/:id/reject',
-  reviewController.deletePendingSubjectReview
+  reviewController.deletePendingReview,
+  (req, res) => {
+    res.redirect('/home/pending_subject')
+  }
 )
 router.post(
   '/home/pending_subject/:id/approve',
@@ -187,7 +190,10 @@ router.post(
 router.post(
   '/home/flagged/:id/remove',
   auth.ensureAuth,
-  reviewController.deleteFlaggedPendingReview
+  reviewController.deletePendingReview,
+  (req, res) => {
+    res.redirect('/home/flagged')
+  }
 )
 
 router.post(
@@ -199,7 +205,10 @@ router.post(
 router.post(
   '/home/flagged/:id',
   auth.ensureAuth,
-  reviewController.deleteFlaggedPendingReview
+  reviewController.deletePendingReview,
+  (req, res) => {
+    res.redirect('/home/flagged')
+  }
 )
 
 module.exports = router
