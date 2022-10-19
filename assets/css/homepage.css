@@ -1,453 +1,438 @@
-*{
-    margin:0;
-    padding:0;
-    list-style: none;
-    border:none;
-    outline: none;
-    text-decoration: none;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-:root{
-    --color-page: #3B3B3B;
-    --color-navbar: #333333;
-    --pri-color:#6A4873;
-    --font-color:#F5F5F5;
-    --secondary-font-color:#EFC0EC;
-    --star-review-color:#A660A1;
-    --review-pri-color:rgb(80,60,76);
-    --container-width:90%;
+:root {
+  --color-page: #3b3b3b;
+  --color-navbar: #333;
+  --pri-color: #6a4873;
+  --font-color: #f5f5f5;
+  --secondary-font-color: #efc0ec;
+  --star-review-color: #a660a1;
+  --review-pri-color: rgb(80 60 76);
+  --container-width: 90%;
 }
 
-body{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: var(--color-page);
-    color:var(--font-color);
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  background: var(--color-page);
+  color: var(--font-color);
 }
 
-.container{
-    width: var(--container-width);
-    margin: 0 auto;
+.container {
+  width: var(--container-width);
+  margin: 0 auto;
 }
 
-section{
-    padding: 150px 0;
+section {
+  padding: 150px 0;
 }
 
-h1{
-    font-weight: medium;
-    font-size: 50px;
+h1 {
+  font-weight: medium;
+  font-size: 50px;
 }
 
-
-h2{
-    font-weight: lighter;
-    font-size: 30px;
+h2 {
+  font-weight: lighter;
+  font-size: 30px;
 }
 
-section h3{
-    font-size: 34px;
+section h3 {
+  font-size: 34px;
 }
 
-section h4{
-    font-size:16px;
+section h4 {
+  font-size: 16px;
 }
 
-section h5{
-    font-weight: lighter;
-    font-size: 20px;
+section h5 {
+  font-weight: lighter;
+  font-size: 20px;
 }
 
-section h6{
-    font-weight: medium;
-    font-size: 26px;
+section h6 {
+  font-weight: medium;
+  font-size: 26px;
 }
 
-section h7{
-    font-weight: lighter;
-    font-size: 18px;
+a {
+  color: var(--font-color);
+  font-size: 28px;
 }
 
-section h7 b{
-    color: var(--secondary-font-color);
-    font-size: 24px;
+.active {
+  border-bottom: 4px solid var(--pri-color);
 }
 
-section h8{
-    font-weight: lighter;
-    font-size:18px;
-    padding-left: 10px;
+.big-buttn {
+  width: 270px;
+  height: 65px;
+  font-size: 22px;
+  color: var(--font-color);
+  background-color: var(--color-navbar);
+  margin: 0 20px 50px 0;
+  cursor: pointer;
 }
 
-
-h9{
-    font-weight: regular;
-    font-size: 30px;
+.medium-buttn {
+  width: 145px;
+  height: 35px;
+  font-size: 18px;
+  margin: 5px;
+  cursor: pointer;
 }
 
-a{
-    color:var(--font-color);
-    font-size: 28px;
+.small-buttn {
+  width: 100px;
+  height: 35px;
+  font-size: 18px;
+  margin: 5px;
+  cursor: pointer;
 }
 
-.active{
-    border-bottom: 4px solid var(--pri-color);
+/* =====================NAVBAR====================== */
+nav {
+  background-color: var(--color-navbar);
+  width: 100vw;
+  height: 85px;
+  position: fixed;
+  top: 0;
+  z-index: 11;
 }
 
-.big-buttn{
-    width:270px;
-    height:65px;
-    font-size: 22px;
-    color:var(--font-color);
-    background-color: var(--color-navbar);
-    margin: 0px 20px 50px 0px;
-    cursor: pointer;
+.navbar-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.medium-buttn{
-    width:145px;
-    height:35px;
-    font-size: 18px;
-    margin: 5px;
-    cursor: pointer;
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
-.small-buttn{
-    width:100px;
-    height:35px;
-    font-size: 18px;
-    margin: 5px;
-    cursor: pointer;
+.nav-searchbar {
+  display: flex;
 }
 
-
-/*=====================NAVBAR======================*/
-nav{
-    background-color: var(--color-navbar);
-    width: 100vw;
-    height: 85px;
-    position:fixed;
-    top:0;
-    z-index: 11;
+.nav-searchbar input {
+  width: 475px;
+  height: 54px;
+  font-size: 18px;
 }
 
-.navbar-container{
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav-searchbar button {
+  background-color: white;
 }
 
-.navbar-menu{
-    display: flex;
-    align-items: center;
-    gap: 30px;
+.nav-searchbar span {
+  font-size: 40px;
+  color: black;
 }
 
-.nav-searchbar{
-    display:flex;
+/* =====================HEADER====================== */
+header {
+  background-color: var(--color-navbar);
+  position: relative;
+  top: 85px;
+  height: 15vw;
 }
 
-.nav-searchbar input{
-    width: 475px;
-    height: 54px;
-    font-size: 18px;
+.header-container {
+  height: 100%;
+  align-items: center;
 }
 
-.nav-searchbar button{
-    background-color: white;
+.header-content h1 {
+  padding-top: 30px;
+  margin-bottom: 35px;
 }
 
-.nav-searchbar span{
-    font-size: 40px;
-    color:black;
+.header-content h1 b {
+  color: var(--secondary-font-color);
 }
 
-/*=====================HEADER======================*/
-header{
-    background-color: var(--color-navbar);
-    position: relative;
-    top:85px;
-    height: 15vw;
+.header-content h2 {
+  padding-top: 30px;
 }
 
-.header-container{
-    height: 100%;
-    align-items: center;
+.header-content h2 b {
+  color: var(--pri-color);
 }
 
-.header-content h1{
-    padding-top: 30px;
-    margin-bottom: 35px;
+.lower-header-part {
+  display: flex;
 }
 
-.header-content h1 b{
-    color: var(--secondary-font-color);
+.lower-header-part .star-review {
+  margin-top: 30px;
+  margin-left: 10px;
 }
 
-.header-content h2{
-    padding-top: 30px;
+.lower-header-part .star-review span {
+  font-size: 40px;
+  color: var(--star-review-color);
 }
 
-.header-content h2 b{
-    color: var(--pri-color);
+.lowerheader-wrftsbutton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.lower-header-part{
-    display: flex;
+/* =====================REVIEW SECTION====================== */
+
+.review-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }
 
-.lower-header-part .star-review{
-    margin-top: 30px;
-    margin-left: 10px;
-}
-.lower-header-part .star-review span{
-    font-size: 40px;
-    color: var(--star-review-color);
+.review-container-moderator {
+  display: grid;
+  grid-template-rows: 460px;
+  gap: 40px;
 }
 
-.lowerheader-wrftsbutton{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-/*=====================REVIEW SECTION======================*/
-
-.review-container{
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:40px;
+.review-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
 }
 
-.review-container-moderator{
-    display:grid;
-    grid-template-rows: 460px;
-    gap:40px;
+/* =====================Button for different page====================== */
+.review-button-moderator {
+  text-align: center;
 }
 
-.review-footer{
-    display: flex;
-    align-items: center;
-    margin-top:15px;
+.review-button-homepage {
+  text-align: left;
 }
 
-/*=====================Button for different page======================*/
-.review-button-moderator{
-    text-align:center;
+/* =====================End here====================== */
+.review-section button {
+  font-weight: lighter;
 }
 
-.review-button-homepage{
-    text-align:left;
-}
-/*=====================End here======================*/
-.review-section button{
-    font-weight: lighter;
-} 
-
-.each-review{
-    background: var(--review-pri-color);
-    padding: 25px;
+.each-review {
+  background: var(--review-pri-color);
+  padding: 25px;
 }
 
-
-/*=====================For Review Titlebar======================*/
-.review-titlebar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--star-review-color);
-    margin-bottom: 30px;
-    margin-top:-25px;
-    margin-right: -25px;
-    margin-left: -25px;
-    padding: 10px 25px;
+/* =====================For Review Titlebar====================== */
+.review-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--star-review-color);
+  margin-bottom: 30px;
+  margin-top: -25px;
+  margin-right: -25px;
+  margin-left: -25px;
+  padding: 10px 25px;
 }
 
+/* =====================END HERE====================== */
 
-/*=====================END HERE======================*/
-
-
-/*=====================Button Type======================*/
-.recommend-button{
-    background-color: var(--pri-color);
-    color: var(--font-color);
-    font-size: 26px;
-    width:195px;
-    height:50px;
+/* =====================Button Type====================== */
+.recommend-button {
+  background-color: var(--pri-color);
+  color: var(--font-color);
+  font-size: 26px;
+  width: 195px;
+  height: 50px;
 }
 
-.Time-button{
-    font-size: 26px;
-    width:100px;
-    background-color: var(--color-page);
+.Time-button {
+  font-size: 26px;
+  width: 100px;
+  background-color: var(--color-page);
 }
 
-.edit-release-button{
-    color:var(--pri-color);
-    background-color: white;
+.edit-release-button {
+  color: var(--pri-color);
+  background-color: white;
 }
 
-.reject-button{
-    color:var(--font-color);
-    background-color: var(--pri-color);
+.reject-button {
+  color: var(--font-color);
+  background-color: var(--pri-color);
 }
 
-/*.write-review-button{
+/* .write-review-button{
     background-color: var(--pri-color);
     font-size: 22px;
     font-weight: lighter;
     width:173px;
     height: 67px;
     margin-top: 25px;
-}*/
+} */
 
-
-.header-content a{
-    width:175px;
-    height: 68px;
-    background-color: var(--pri-color);
-    font-size: 22px;
-    padding: 10px;
-    text-align: center;
+.header-content a {
+  width: 175px;
+  height: 68px;
+  background-color: var(--pri-color);
+  font-size: 22px;
+  padding: 10px;
+  text-align: center;
 }
 
-.neglect-button{
-    color:var(--pri-color);
+.neglect-button {
+  color: var(--pri-color);
 }
 
-.remove-button{
-    background-color: var(--color-navbar);
-    color: var(--font-color);
+.remove-button {
+  background-color: var(--color-navbar);
+  color: var(--font-color);
 }
 
-.like-button-container span{
-    font-size: 10px;
+.like-button-container span {
+  font-size: 10px;
 }
 
-.like-button{
-    align-items: center;
-    background-color: var(--secondary-font-color);
-    font-size: 18px;
-    width:80px;
-    height:35px;
+.like-button {
+  align-items: center;
+  background-color: var(--secondary-font-color);
+  font-size: 18px;
+  width: 80px;
+  height: 35px;
 }
 
-.like-button img{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    margin-top: 1px;
+.like-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  margin-top: 1px;
 }
 
-.wrfts-button{
-    height:50px;
-    background-color: var(--pri-color);
-    color: var(--font-color);
-    font-weight: lighter;
-}
-/*=====================END HERE======================*/
-
-/*=====================Type of Review/comment section size======================*/
-.review-header-flagged{
-    display:flex;
+.wrfts-button {
+  height: 50px;
+  background-color: var(--pri-color);
+  color: var(--font-color);
+  font-weight: lighter;
 }
 
-.header-flagged{
-    margin-right: 10px;
-}
-/*=====================END HERE======================*/
-.each-review p{
-    padding:5px 0;
-    font-size: 18px;
-    font-weight: lighter;
+/* =====================END HERE====================== */
+
+/* =====================Type of Review/comment section size====================== */
+.review-header-flagged {
+  display: flex;
 }
 
-.each-review-big p{
-    padding:40px 0;
-    font-size: 22px;
-    font-weight: lighter;
+.header-flagged {
+  margin-right: 10px;
 }
 
-.each-review footer{
-    font-size: 16px;
-    color:var(--secondary-font-color);
-    float: right;
+/* =====================END HERE====================== */
+.each-review p {
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: lighter;
 }
 
-.each-review .material-symbols-outlined{
-    float:right;
-    font-size: 50px;
-    color: var(--secondary-font-color);
+.each-review-big p {
+  padding: 40px 0;
+  font-size: 22px;
+  font-weight: lighter;
 }
 
-.each-review .star-review{
-    margin-top: 5px;
-    font-size: 18px;
+.each-review footer {
+  font-size: 16px;
+  color: var(--secondary-font-color);
+  float: right;
 }
 
-
-.each-review .star-review span{
-    color:var(--star-review-color);
+.each-review .material-symbols-outlined {
+  float: right;
+  font-size: 50px;
+  color: var(--secondary-font-color);
 }
 
-.each-review-big .star-review span{
-    color:var(--star-review-color);
-    font-size:26px;
-    float:left;
+.each-review .star-review {
+  margin-top: 5px;
+  font-size: 18px;
 }
 
-.each-review-big .star-review-big{
-    display: flex;
-    align-items: center;
-    margin-left: -7px;
+.each-review .star-review span {
+  color: var(--star-review-color);
 }
 
-
-.each-review-big .star-review-big span{
-    color:var(--star-review-color);
-    font-size:40px;
-    float:left;
+.each-review-big .star-review span {
+  color: var(--star-review-color);
+  font-size: 26px;
+  float: left;
 }
 
-/*=====================FOOTER CSS======================*/
-.view-review-footer{
-    margin-top: 60px;
-    margin-left: -10px;
+.each-review-big .star-review-big {
+  display: flex;
+  align-items: center;
+  margin-left: -7px;
 }
 
-.view-review-footer-2to1{
-    display: flex;
-    justify-content: space-between;
-
+.each-review-big .star-review-big span {
+  color: var(--star-review-color);
+  font-size: 40px;
+  float: left;
 }
 
-.like-reply-remove{
-    display: flex;
-    align-items: center;
-}
-.view-review-footer .like-button{
-    background-color: var(--review-pri-color);
-    color: var(--font-color);
-    font-weight: lighter;
+/* =====================FOOTER CSS====================== */
+.view-review-footer {
+  margin-top: 60px;
+  margin-left: -10px;
 }
 
-.view-review-footer .like-button-color{
-    background-color: var(--secondary-font-color);
-    color: var(--color-navbar);
-    font-weight: lighter;
+.view-review-footer-2to1 {
+  display: flex;
+  justify-content: space-between;
 }
 
-.navbar-menu select{
-    background-color: #333333;
-    color:#fff;
-    border: none;
-    font-size: 28px;
-    font-weight: regular;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.like-reply-remove {
+  display: flex;
+  align-items: center;
+}
+
+.view-review-footer .like-button {
+  background-color: var(--review-pri-color);
+  color: var(--font-color);
+  font-weight: lighter;
+}
+
+.view-review-footer .like-button-color {
+  background-color: var(--secondary-font-color);
+  color: var(--color-navbar);
+  font-weight: lighter;
+}
+
+.navbar-menu select {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  font-weight: regular;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .navbar-menu option {
-    font-size: 28px;
-    font-weight: regular;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 28px;
+  font-weight: regular;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }

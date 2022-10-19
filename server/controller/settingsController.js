@@ -1,69 +1,63 @@
-const Review = require("../model/review").Review;
-const Subject = require("../model/subject");
 const User = require("../model/user").User;
 const Student = require("../model/user").Student;
-const mongoose = require("mongoose");
 const SGmail = require("@sendgrid/mail");
 
 const Sender = 'subjects_review@email.com';
 const Chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const PasswordLength = 15;
 
-exports.getFieldsOfInterest = async (req, res, next) =>{
-    const studentID = req.user._id;
-    const student = await Student.findById(studentID).lean();
-    res.locals.fieldsOfInterest = student.fieldsOfInterest;
+exports.getFieldsOfInterest = async (req, res, next) => {
+  const studentID = req.user._id
+  const student = await Student.findById(studentID).lean()
+  res.locals.fieldsOfInterest = student.fieldsOfInterest
 
-    next();
+  next()
 }
-
 
 exports.editFieldsOfInterest = async (req, res) =>{
     console.log(req.body);
     const studentID = req.user._id;
+  if (!req.body) {
+    return
+  }
 
-    if (!req.body) {
-        res.redirect("/home");
-        return;
+  const fieldsOfInterest = []
+
+  for (const interest in req.body) {
+    if (!fieldsOfInterest.includes(interest)) {
+      fieldsOfInterest.push(interest)
     }
+  }
 
-    let fieldsofInterest = [];
-
-    for (let interest in req.body) {
-      fieldsofInterest.push(interest);
-    }
-    
-    await Student.findOneAndUpdate(
-      { _id: studentID },
-      { fieldsOfInterest: fieldsofInterest }
-    );
-    res.redirect("/settings/interest_areas");
+  await Student.findOneAndUpdate(
+    { _id: studentID },
+    { fieldsOfInterest }
+  )
+  res.redirect('/settings/interest_areas')
 }
 
-
-
 exports.editAccountSettings = async (req, res) => {
-    if (!req.body){
-        res.redirect("/account");
-        return;
-    }
+  if (!req.body) {
+    res.redirect('/account')
+    return
+  }
 
-    console.log(req.body);
+  console.log(req.body)
 
-    if (req.body.email && req.user.type === 'moderator'){
-        console.log("Moderator email change attempted.");
-        res.status(500).send({message: "Illegal modification attempted"});
-        return;
-    }
+  if (req.body.email && req.user.type === 'moderator') {
+    console.log('Moderator email change attempted.')
+    res.status(500).send({ message: 'Illegal modification attempted' })
+    return
+  }
 
-    const userID = req.user._id;
-    let fields = {}
-    if (req.body.fullName){
-        fields.fullName = req.body.fullName;
-    }
-    if (req.body.email){
-        fields.email = req.body.email;
-    }
+  const userID = req.user._id
+  const fields = {}
+  if (req.body.fullName) {
+    fields.fullName = req.body.fullName
+  }
+  if (req.body.email) {
+    fields.email = req.body.email
+  }
 
     await User.findByIdAndUpdate(userID, fields)
         .then(data => {
@@ -82,7 +76,7 @@ exports.editAccountSettings = async (req, res) => {
 exports.sendEmail = async (req, res) => {
     SGmail.setApiKey(process.env.SENDGRID_API_KEY);
 
-    const user = await User.findOne({email: req.body.email}).lean()
+    const user = await User.findOne({email: req.body.email}).lean();
     console.log(user);
 
     if (user) { 

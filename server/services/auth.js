@@ -1,27 +1,27 @@
-function ensureAuth(req, res, next) {
+function ensureAuth (req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    return next()
   } else {
-    res.redirect("/");
+    res.redirect('/')
   }
 }
 
-function ensureGuest(req, res, next) {
+function ensureGuest (req, res, next) {
   if (req.isAuthenticated()) {
-    res.redirect("/home");
+    res.redirect('/home')
   } else {
-    return next();
+    return next()
   }
 }
-function forwardAuthenticated(req, res, next) {
+function forwardAuthenticated (req, res, next) {
   if (!req.isAuthenticated()) {
-    return next();
+    return next()
   }
-  res.redirect("/");
+  res.redirect('/')
 }
 
 module.exports = {
   ensureAuth,
   ensureGuest,
-  forwardAuthenticated,
-};
+  forwardAuthenticated
+}
