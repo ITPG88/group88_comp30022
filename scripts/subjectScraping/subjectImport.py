@@ -1,5 +1,5 @@
-import pymongo
 import json
+import pymongo
 
 # python subjectImport.py
 CONNECTION_URL = "mongodb+srv://admin:adminpassword@cluster0.7ilezxe.mongodb.net"
