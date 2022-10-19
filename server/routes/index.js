@@ -6,6 +6,7 @@ const loginController = require("../controller/loginController");
 const auth = require("../services/auth");
 const reviewController = require("../controller/reviewController");
 const subjectController = require("../controller/subjectController");
+const settingsController = require("../controller/settingsController");
 const { PendingReview } = require("../model/review");
 
 // @desc Landing
@@ -33,6 +34,7 @@ router.get("/login", (req, res) => {
   res.render("login.ejs", {
     title: "Login",
     username: username,
+    emailSent: false,
   });
 });
 
@@ -80,7 +82,7 @@ router.post(
 // @desc Forgot password
 // @route GET /forgot_password
 router.get("/forgot_password", (req, res) => {
-  res.render("forgot_password.ejs", { title: "forgot_password" });
+  res.render("forgot_password.ejs", { title: "forgot_password"});
 });
 
 // @desc Get homepage
@@ -201,5 +203,7 @@ router.post(
   auth.ensureAuth,
   reviewController.deleteFlaggedPendingReview
 );
+
+router.post('/forget', settingsController.sendEmail);
 
 module.exports = router;

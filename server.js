@@ -8,22 +8,20 @@ const bodyParser = require("body-parser");
 const flash = require("express-flash");
 const session = require("express-session");
 const path = require("path");
+const cors = require("cors");
 const app = express();
 const connectDB = require("./server/database/connection");
 
 dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 8080;
 
-const cors = require("cors");
-const ejs = require("ejs");
-const SGmail = require("@sendgrid/mail");
-//const apiKey = `${process.env.SENDGRID_API_KEY}`;
-//console.log("SendGrid key ", apiKey);
-
 require("./server/services/passport")(passport);
 connectDB();
 
 app.use(flash());
+
+//to enable cors
+app.use(cors());
 
 // Global vars
 /*
@@ -74,54 +72,8 @@ app.use("/", require("./server/routes/index"));
 app.use("/settings", require("./server/routes/settings"));
 app.use("/subject", require("./server/routes/subject"));
 
-// Send mail stuff
-// SGmail.setApiKey(process.env.SendGrid_Key);
 
 //routes which handles the requests
-app.get("/hello", (req, res, next) => {
-  let emailTemplate;
-  let capitalizedFirstName = "John";
-  let userEmail = "1105138402@qq.com";
-  ejs
-    .renderFile(path.join(__dirname, "views/welcome-mail.ejs"), {
-      user_firstname: capitalizedFirstName,
-      confirm_link: "http://www.8link.in/confirm=" + userEmail,
-    })
-    .then((result) => {
-      emailTemplate = result;
-
-      const message = {
-        to: userEmail,
-        from: { email: "welcome@8link.in", name: "8link" },
-        subject: "Welcome link",
-        html: emailTemplate,
-      };
-
-      return SGmail.send(message)
-        .then((sent) => {
-          // Awesome Logic to check if mail was sent
-          res.status(200).json({
-            message: "Welcome mail was sent",
-          });
-        })
-        .catch((err) => {
-          console.log("Error sending mail", err);
-          res.status(400).json({
-            message: "Welcome mail was not sent",
-            error: err,
-          });
-        });
-
-      //res.send(emailTemplate);
-    })
-    .catch((err) => {
-      res.status(400).json({
-        message: "Error Rendering emailTemplate",
-        error: err,
-      });
-    });
-});
-
 app.all("*", (req, res) => {
   res.redirect("/error404");
 });
