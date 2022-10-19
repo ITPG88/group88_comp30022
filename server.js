@@ -32,6 +32,7 @@ app.use((req, res, next) => {
     res.local.error_msg = req.flash('error_msg');
     next();
 })*/
+
 app.enable("trust proxy");
 // Session
 app.use(
