@@ -56,7 +56,7 @@
             </button>
             </form>
             <h8
-              ><%= (review.comments.length!=1) ? `${review.comments.length}
+              ><%= (review.comments.length!==1) ? `${review.comments.length}
               replies` : '1 reply'%>
             </h8>
             <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
