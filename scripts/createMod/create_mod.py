@@ -1,5 +1,6 @@
-import bcrypt
 import getpass
+
+import bcrypt
 import pymongo
 from pymongo.errors import ServerSelectionTimeoutError
 

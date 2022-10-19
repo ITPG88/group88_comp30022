@@ -1,6 +1,8 @@
 import pymongo
 
-CONNECTION_URL = "mongodb+srv://admin:adminpassword@cluster0.7ilezxe.mongodb.net/subjectReviewDB?retryWrites=true&w=majority"
+CONNECTION_URL = (
+    "mongodb+srv://admin:adminpassword@cluster0.7ilezxe.mongodb.net/subjectReviewDB?retryWrites=true&w=majority"
+)
 client = pymongo.MongoClient(CONNECTION_URL, serverSelectionTimeoutMS=5000)
 client.server_info()
 db = client.subjectReviewDB
