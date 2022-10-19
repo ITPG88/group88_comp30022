@@ -15,6 +15,7 @@
     "mongoose": "^6.6.1",
     "mongoose-extend-schema": "^1.0.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "require": "^0.4.4"
@@ -41,7 +42,6 @@
   "homepage": "https://github.com/ITPG88/group88_comp30022#readme",
   "devDependencies": {
     "jest": "^29.2.1",
-    "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
     "standard": "^17.0.0",
     "stylelint": "^14.14.0",
