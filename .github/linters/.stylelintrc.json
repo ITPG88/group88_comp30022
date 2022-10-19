@@ -5,6 +5,6 @@
         "selector-id-pattern": null,
         "selector-class-pattern": null
     },
-    "ignoreFiles": ["assets/*"]
+    "ignoreFiles": ["../../assets/**", "../../coverage/**"]
       
 }

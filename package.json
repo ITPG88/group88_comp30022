@@ -23,7 +23,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "jest --verbose --coverage",
-    "lint": "standard \"**/*.js\" --fix && stylelint \"style/*.css\" --fix --config \".github/linters/.stylelintrc.json\""
+    "lint": "standard \"**/*.js\" --fix && stylelint \"**.css\" --fix --config \".github/linters/.stylelintrc.json\""
   },
   "name": "group88_comp30022",
   "description": "Name: Kai, StudentID: 1078175\r Name: Sebastian Davey Gargano, StudentID: 1083288\r Name: Ellen (Qingying Lyu), StudentID: 1173888\r Name: Mavis(Jia Zhao), StudentID: 1071383\r Name: Jason Phan, StudentID:1180106",

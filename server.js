@@ -1,27 +1,27 @@
 // nodemon server2.js
-const passport = require("passport");
-const express = require("express");
-const dotenv = require("dotenv");
-const morgan = require("morgan");
-const methodOverride = require("method-override");
-const bodyParser = require("body-parser");
-const flash = require("express-flash");
-const session = require("express-session");
-const path = require("path");
-const cors = require("cors");
-const app = express();
-const connectDB = require("./server/database/connection");
+const passport = require('passport')
+const express = require('express')
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const methodOverride = require('method-override')
+const bodyParser = require('body-parser')
+const flash = require('express-flash')
+const session = require('express-session')
+const path = require('path')
+const cors = require('cors')
+const app = express()
+const connectDB = require('./server/database/connection')
 
 dotenv.config({ path: 'config.env' })
 const PORT = process.env.PORT || 8080
 
-require("./server/services/passport")(passport);
-connectDB();
+require('./server/services/passport')(passport)
+connectDB()
 
-app.use(flash());
+app.use(flash())
 
-//to enable cors
-app.use(cors());
+// to enable cors
+app.use(cors())
 
 // Global vars
 /*
@@ -73,11 +73,10 @@ app.use('/', require('./server/routes/index'))
 app.use('/settings', require('./server/routes/settings'))
 app.use('/subject', require('./server/routes/subject'))
 
-
-//routes which handles the requests
-app.all("*", (req, res) => {
-  res.redirect("/error404");
-});
+// routes which handles the requests
+app.all('*', (req, res) => {
+  res.redirect('/error404')
+})
 // Error 404 not found
 app.all('*', (req, res) => {
   // 'default' route to catch user errors
