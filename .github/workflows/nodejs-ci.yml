@@ -2,9 +2,9 @@ name: Node.js CI + Lint
 
 on:
   push:
-    branches: ["github-actions-test"]
+    branches: ["demo"]
   pull_request:
-    branches: ["github-actions-test"]
+    branches: ["demo"]
 
 jobs:
   build-and-test:
