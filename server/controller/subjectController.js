@@ -156,7 +156,8 @@ exports.deleteReview = async (req, res) => {
       .catch((err) => {
         if (err) {
           res.status(500).send({
-            message: `Could not delete review with id=${req.params.id}`
+            message:
+              err.message || `Could not delete review with id=${req.params.id}`
           })
         }
       })

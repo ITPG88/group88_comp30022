@@ -1,587 +1,594 @@
-*{
-    margin:0;
-    padding:0;
-    list-style: none;
-    border:none;
-    outline: none;
-    text-decoration: none;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-:root{
-    --color-page: #3B3B3B;
-    --color-navbar: #333333;
-    --pri-color:#6A4873;
-    --font-color:#F5F5F5;
-    --secondary-font-color:#EFC0EC;
-    --star-review-color:#A660A1;
-    --review-pri-color:rgb(80,60,76);
-    --container-width:90%;
+:root {
+  --color-page: #3b3b3b;
+  --color-navbar: #333;
+  --pri-color: #6a4873;
+  --font-color: #f5f5f5;
+  --secondary-font-color: #efc0ec;
+  --star-review-color: #a660a1;
+  --review-pri-color: rgb(80 60 76);
+  --container-width: 90%;
 }
 
-body{
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background: var(--color-page);
-    color:var(--font-color);
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  background: var(--color-page);
+  color: var(--font-color);
 }
 
-.container{
-    width: var(--container-width);
-    margin: 0 auto;
+.container {
+  width: var(--container-width);
+  margin: 0 auto;
 }
 
-section{
-    padding: 150px 0;
+section {
+  padding: 150px 0;
 }
 
-h1{
-    font-weight: medium;
-    font-size: 50px;
+h1 {
+  font-weight: medium;
+  font-size: 50px;
 }
 
-
-h2{
-    font-weight: lighter;
-    font-size: 30px;
+h2 {
+  font-weight: lighter;
+  font-size: 30px;
 }
 
-section h3{
-    font-size: 30px;
+section h3 {
+  font-size: 30px;
 }
 
-section h4{
-    font-size:16px;
+section h4 {
+  font-size: 16px;
 }
 
-section h5{
-    font-weight: lighter;
-    font-size: 20px;
+section h5 {
+  font-weight: lighter;
+  font-size: 20px;
 }
 
-section h6{
-    font-weight: medium;
-    font-size: 26px;
+section h6 {
+  font-weight: medium;
+  font-size: 26px;
 }
 
-section h7{
-    font-weight: lighter;
-    font-size: 18px;
+a {
+  color: var(--font-color);
+  font-size: 28px;
 }
 
-section h7 b{
-    color: var(--secondary-font-color);
-    font-size: 24px;
+.active {
+  border-bottom: 4px solid var(--pri-color);
 }
 
-section h8{
-    font-weight: lighter;
-    font-size:18px;
-    padding-left: 10px;
+.big-buttn {
+  width: 270px;
+  height: 65px;
+  font-size: 22px;
+  color: var(--font-color);
+  background-color: var(--color-navbar);
+  margin: 0 20px 50px 0;
+  cursor: pointer;
 }
-
 
-h9{
-    font-weight: regular;
-    font-size: 30px;
+.medium-buttn {
+  width: 145px;
+  height: 35px;
+  font-size: 18px;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 
-a{
-    color:var(--font-color);
-    font-size: 28px;
+.small-buttn {
+  width: 100px;
+  height: 35px;
+  font-size: 18px;
+  margin: 5px;
+  cursor: pointer;
 }
 
-.active{
-    border-bottom: 4px solid var(--pri-color);
+/* =====================NAVBAR====================== */
+nav {
+  background-color: var(--color-navbar);
+  width: 100vw;
+  max-width: 100%;
+  height: 85px;
+  position: fixed;
+  top: 0;
+  z-index: 11;
 }
 
-.big-buttn{
-    width:270px;
-    height:65px;
-    font-size: 22px;
-    color:var(--font-color);
-    background-color: var(--color-navbar);
-    margin: 0px 20px 50px 0px;
-    cursor: pointer;
+.navbar-container {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  vertical-align: top;
+  align-items: center;
 }
 
-.medium-buttn{
-    width:145px;
-    height:35px;
-    font-size: 18px;
-    margin: 5px;
-    padding: 5px;
-    cursor: pointer;
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
-.small-buttn{
-    width:100px;
-    height:35px;
-    font-size: 18px;
-    margin: 5px;
-    cursor: pointer;
+.nav-searchbar {
+  display: flex;
 }
 
-
-/*=====================NAVBAR======================*/
-nav{
-    background-color: var(--color-navbar);
-    width: 100vw;
-    max-width: 100%;
-    height: 85px;
-    position:fixed;
-    top:0;
-    z-index: 11;
+.nav-searchbar input {
+  width: 475px;
+  height: 54px;
+  font-size: 18px;
 }
 
-.navbar-container{
-    box-sizing: border-box;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    vertical-align: top;
-    align-items: center;
+.nav-searchbar button {
+  background-color: white;
 }
 
-.navbar-menu{
-    display: flex;
-    align-items: center;
-    gap: 30px;
+.nav-searchbar span {
+  font-size: 40px;
+  color: black;
 }
 
-.nav-searchbar{
-    display:flex;
+/* =====================Button Type====================== */
+.recommend-button {
+  background-color: var(--pri-color);
+  color: var(--font-color);
+  font-size: 26px;
+  width: 195px;
+  height: 50px;
 }
 
-.nav-searchbar input{
-    width: 475px;
-    height: 54px;
-    font-size: 18px;
+.Time-button {
+  font-size: 26px;
+  width: 100px;
+  background-color: var(--color-page);
 }
 
-.nav-searchbar button{
-    background-color: white;
+.edit-release-button {
+  color: var(--pri-color);
+  background-color: white;
 }
 
-.nav-searchbar span{
-    font-size: 40px;
-    color:black;
+.reject-button {
+  color: var(--font-color);
+  background-color: var(--pri-color);
 }
 
-/*=====================HEADER======================*/
-header{
-    background-color: var(--color-navbar);
-    position: relative;
-    top:85px;
-    height: 15vw;
-}
+/* .write-review-button{
+      background-color: var(--pri-color);
+      font-size: 22px;
+      font-weight: lighter;
+      width:173px;
+      height: 67px;
+      margin-top: 25px;
+  } */
 
-.header-container{
-    height: 100%;
-    align-items: center;
+.header-content a {
+  width: 175px;
+  height: 68px;
+  background-color: var(--pri-color);
+  font-size: 22px;
+  padding: 10px;
+  text-align: center;
 }
 
-.header-content h1{
-    padding-top: 30px;
-    margin-bottom: 35px;
+.neglect-button {
+  color: var(--pri-color);
 }
 
-.header-content-np h1{
-    margin-bottom: -10px;
+.remove-button {
+  background-color: var(--color-navbar);
+  color: var(--font-color);
 }
 
-.header-content h1 b{
-    color: var(--secondary-font-color);
+.like-button-container span {
+  font-size: 10px;
 }
 
-.header-content h2{
-    padding-top: 30px;
+.like-button {
+  align-items: center;
+  background-color: var(--secondary-font-color);
+  font-size: 18px;
+  width: 80px;
+  height: 35px;
 }
 
-.header-content h2 b{
-    color: var(--pri-color);
+.like-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  margin-top: 1px;
 }
 
-.lower-header-part{
-    display: flex;
+.wrfts-button {
+  text-align: center;
+  height: 50px;
+  font-size: 15px;
+  background-color: var(--pri-color);
+  color: var(--font-color);
+  font-weight: lighter;
 }
 
-.lower-header-part .star-review{
-    margin-top: 30px;
-    margin-left: 10px;
-}
-.lower-header-part .star-review span{
-    font-size: 40px;
-    color: var(--star-review-color);
+.report-bttn {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-top: 5px;
+  color: var(--font-color);
+  background-color: var(--review-pri-color);
+  cursor: pointer;
 }
 
-.lowerheader-wrftsbutton{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-/*=====================REVIEW SECTION======================*/
+/* =====================END HERE====================== */
 
-.review-container{
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:40px;
+/* =====================HEADER====================== */
+header {
+  background-color: var(--color-navbar);
+  position: relative;
+  top: 85px;
+  height: 15vw;
 }
 
-.review-container-moderator{
-    display:grid;
-    grid-template-rows: 260px;
-    gap:40px;
+.header-container {
+  height: 100%;
+  align-items: center;
 }
 
-.review-container-fr{
-    display:grid;
-    grid-template-rows: 320px;
-    gap:40px;
+.header-content h1 {
+  padding-top: 30px;
+  margin-bottom: 35px;
 }
 
-.review-footer{
-    display: flex;
-    align-items: center;
-    margin-top:15px;
+.header-content-np h1 {
+  margin-bottom: -10px;
 }
 
-/*=====================Button for different page======================*/
-.review-button-moderator{
-    text-align:center;
+.header-content h1 b {
+  color: var(--secondary-font-color);
 }
 
-.review-button-homepage{
-    text-align:left;
+.header-content h2 {
+  padding-top: 30px;
 }
-/*=====================End here======================*/
-.review-section button{
-    font-weight: lighter;
-} 
 
-.each-review{
-    background: var(--review-pri-color);
-    padding: 25px;
+.header-content h2 b {
+  color: var(--pri-color);
 }
 
-.each-review-m{
-    height: 330px;
-    margin-bottom: 30px;
+.lower-header-part {
+  display: flex;
 }
-/*=====================For Review Titlebar======================*/
-.review-titlebar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--star-review-color);
-    margin-bottom: 30px;
-    margin-top:-25px;
-    margin-right: -25px;
-    margin-left: -25px;
-    padding: 10px 25px;
+
+.lower-header-part .star-review {
+  margin-top: 30px;
+  margin-left: 10px;
 }
 
+.lower-header-part .star-review span {
+  font-size: 40px;
+  color: var(--star-review-color);
+}
 
-/*=====================END HERE======================*/
+.lowerheader-wrftsbutton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+/* =====================REVIEW SECTION====================== */
 
-/*=====================Button Type======================*/
-.recommend-button{
-    background-color: var(--pri-color);
-    color: var(--font-color);
-    font-size: 26px;
-    width:195px;
-    height:50px;
+.review-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 15px 0;
+  word-wrap: break-word;
 }
 
-.Time-button{
-    font-size: 26px;
-    width:100px;
-    background-color: var(--color-page);
+.review-container-moderator {
+  display: grid;
+  grid-template-rows: 260px;
+  gap: 40px;
 }
 
-.edit-release-button{
-    color:var(--pri-color);
-    background-color: white;
+.review-container-fr {
+  display: grid;
+  grid-template-rows: 320px;
+  gap: 40px;
 }
 
-.reject-button{
-    color:var(--font-color);
-    background-color: var(--pri-color);
+.review-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
 }
-
-/*.write-review-button{
-    background-color: var(--pri-color);
-    font-size: 22px;
-    font-weight: lighter;
-    width:173px;
-    height: 67px;
-    margin-top: 25px;
-}*/
 
-
-.header-content a{
-    width:175px;
-    height: 68px;
-    background-color: var(--pri-color);
-    font-size: 22px;
-    padding: 10px;
-    text-align: center;
+/* =====================Button for different page====================== */
+.review-button-moderator {
+  text-align: center;
 }
 
-.neglect-button{
-    color:var(--pri-color);
+.review-button-homepage {
+  text-align: left;
 }
 
-.remove-button{
-    background-color: var(--color-navbar);
-    color: var(--font-color);
+/* =====================End here====================== */
+.review-section button {
+  font-weight: lighter;
 }
 
-.like-button-container span{
-    font-size: 10px;
+.each-review {
+  background: var(--review-pri-color);
+  padding: 25px;
 }
 
-.like-button{
-    align-items: center;
-    background-color: var(--secondary-font-color);
-    font-size: 18px;
-    width:80px;
-    height:35px;
+.each-review-m {
+  height: 330px;
+  margin-bottom: 30px;
 }
 
-.like-button img{
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    margin-top: 1px;
+/* =====================For Review Titlebar====================== */
+.review-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--star-review-color);
+  margin: -25px -25px 30px;
+  padding: 10px 25px;
 }
 
-.wrfts-button{
-    text-align: center;
-    height:50px;
-    font-size: 15px;
-    background-color: var(--pri-color);
-    color: var(--font-color);
-    font-weight: lighter;
-}
+/* =====================END HERE====================== */
 
-.report-bttn{
-    font-size: 16px;
-    margin-left: 10px;
-    margin-top: 5px;
-    color: var(--font-color);
-    background-color: var(--review-pri-color);
-    cursor: pointer;
+/* =====================Type of Review/comment section size====================== */
+.review-header-flagged {
+  display: flex;
 }
-/*=====================END HERE======================*/
 
-/*=====================Type of Review/comment section size======================*/
-.review-header-flagged{
-    display:flex;
+.header-flagged {
+  margin-right: 10px;
 }
 
-.header-flagged{
-    margin-right: 10px;
+/* =====================END HERE====================== */
+.each-review p {
+  padding: 5px 0;
+  font-size: 18px;
+  font-weight: lighter;
+  word-wrap: break-word;
 }
-/*=====================END HERE======================*/
-.review-container{
-    padding:15px 0;
-    word-wrap: break-word;
-}
 
-.each-review p{
-    padding:5px 0;
-    font-size: 18px;
-    font-weight: lighter;
-    word-wrap: break-word;
+.each-review-big p {
+  font-size: 22px;
+  font-weight: lighter;
+  word-wrap: break-word;
 }
 
-.each-review-big p{
-    font-size: 22px;
-    font-weight: lighter;
-    word-wrap: break-word;
+.each-review footer {
+  font-size: 16px;
+  color: var(--secondary-font-color);
+  float: right;
 }
 
-.each-review footer{
-    font-size: 16px;
-    color:var(--secondary-font-color);
-    float: right;
+.each-review .material-symbols-outlined {
+  float: right;
+  font-size: 50px;
+  color: var(--secondary-font-color);
 }
 
-.each-review .material-symbols-outlined{
-    float:right;
-    font-size: 50px;
-    color: var(--secondary-font-color);
+.each-review .star-review {
+  margin-top: 5px;
+  font-size: 18px;
 }
 
-.each-review .star-review{
-    margin-top: 5px;
-    font-size: 18px;
+.each-review .star-review span {
+  color: var(--star-review-color);
 }
 
-
-.each-review .star-review span{
-    color:var(--star-review-color);
+.each-review-big .star-review span {
+  color: var(--star-review-color);
+  font-size: 26px;
+  float: left;
 }
 
-.each-review-big .star-review span{
-    color:var(--star-review-color);
-    font-size:26px;
-    float:left;
+.each-review-big .star-review-big {
+  display: flex;
+  align-items: center;
+  margin-left: -7px;
 }
 
-.each-review-big .star-review-big{
-    display: flex;
-    align-items: center;
-    margin-left: -7px;
+.each-review-big .star-review-big span {
+  color: var(--star-review-color);
+  font-size: 40px;
+  float: left;
 }
-
 
-.each-review-big .star-review-big span{
-    color:var(--star-review-color);
-    font-size:40px;
-    float:left;
+.each-review .view-subject {
+  margin-top: 15px;
 }
 
-.each-review .view-subject{
-    margin-top: 15px;
+.each-review form .view-subject-bttn {
+  margin-left: 0;
+  color: var(--font-color);
+  background-color: var(--star-review-color);
+  font-size: 18px;
+  font-weight: lighter;
+  text-align: center;
 }
-.each-review form .view-subject-bttn{
-    margin-left: 0px;
-    color: var(--font-color);
-    background-color: var(--star-review-color);
-    font-size: 18px;
-    font-weight: lighter;
-    text-align: center;
-}
-/*=====================FOOTER CSS======================*/
-.view-review-footer{
-    margin-top: 30px;
-    margin-left: -10px;
-}
 
-.view-review-footer-2to1{
-    margin-top: 0px;
-    margin-left: -3px;
-    display: flex;
-    justify-content: space-between;
+/* =====================FOOTER CSS====================== */
+.view-review-footer {
+  margin-top: 30px;
+  margin-left: -10px;
+}
 
+.view-review-footer-2to1 {
+  margin-top: 0;
+  margin-left: -3px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.like-reply-remove{
-    display: flex;
-    align-items: center;
+.like-reply-remove {
+  display: flex;
+  align-items: center;
 }
-.view-review-footer .like-button{
-    background-color: var(--review-pri-color);
-    color: var(--font-color);
-    font-weight: lighter;
+
+.view-review-footer .like-button {
+  background-color: var(--review-pri-color);
+  color: var(--font-color);
+  font-weight: lighter;
 }
 
-.view-review-footer .like-button-color{
-    background-color: var(--secondary-font-color);
-    color: var(--color-navbar);
-    font-weight: lighter;
+.view-review-footer .like-button-color {
+  background-color: var(--secondary-font-color);
+  color: var(--color-navbar);
+  font-weight: lighter;
 }
-/*=====================COMMENT CSS======================*/
-.inline{
-    display: flex;
+
+/* =====================COMMENT CSS====================== */
+.inline {
+  display: flex;
 }
 
 hr.solid {
-    margin-top: 15px;
-    border-top: 3px solid #bbb;
+  margin-top: 15px;
+  border-top: 3px solid #bbb;
 }
 
-.each-comment{
-    margin-top: -25px;
-    background-color: var(--color-page);
-    margin-bottom: -35px;
+.each-comment {
+  margin-top: -25px;
+  background-color: var(--color-page);
+  margin-bottom: -35px;
 }
 
-.comment-area{
-    width: 100%;
-    height: 56px;
-}
-.comment-area .comment-post{
-    padding-top: 15px;
-    width: 1205px;
-    height: 56px;
-    font-size: 22px;
-    background-color: #1E1E1E;
-    color: var(--font-color);
+.comment-area {
+  width: 100%;
+  height: 56px;
 }
 
-.comment-area .post-bttn{
-    margin-top: 0px;
-    width:150px;
-    height:56px;
-    font-size: 28px;
-    margin-right: 0px;
-    background-color: #7B7B7B;
-    color: var(--font-color);
+.comment-area .comment-post {
+  padding-top: 15px;
+  width: 1205px;
+  height: 56px;
+  font-size: 22px;
+  background-color: #1e1e1e;
+  color: var(--font-color);
 }
 
-.remove-bttn{
-    margin-left: 0px;
-    background-color: var(--color-page);
-    color: var(--font-color);
+.comment-area .post-bttn {
+  margin-top: 0;
+  width: 150px;
+  height: 56px;
+  font-size: 28px;
+  margin-right: 0;
+  background-color: #7b7b7b;
+  color: var(--font-color);
 }
 
-.like-bttn{
-    margin-left: -23px;
-    margin-right: 0px;
-    background-color: var(--color-page);
-    color: var(--font-color);
+.remove-bttn {
+  margin-left: 0;
+  background-color: var(--color-page);
+  color: var(--font-color);
 }
 
+.like-bttn {
+  margin-left: -23px;
+  margin-right: 0;
+  background-color: var(--color-page);
+  color: var(--font-color);
+}
 
 /* AUTOCOMPLETE */
 .autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: flex;
-  }
+  /* the container must be positioned relative: */
+  position: relative;
+  display: flex;
+}
 
 .autocomplete-items {
-position: absolute;
-border: 1px solid #d4d4d4;
-border-bottom: none;
-border-top: none;
-z-index: 99;
-/*position the autocomplete items to be the same width as the container:*/
-top: 100%;
-left: 0;
-right: 0;
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+
+  /* position the autocomplete items to be the same width as the container: */
+  top: 100%;
+  left: 0;
+  right: 0;
 }
+
 .autocomplete-items div {
-padding: 10px;
-cursor: pointer;
-background-color: #1E1E1E;
-border-bottom: 1px solid #d4d4d4;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #d4d4d4;
 }
+
 .autocomplete-items div:hover {
-/*when hovering an item:*/
-background-color: #444444;
+  /* when hovering an item: */
+  background-color: #444;
 }
+
 .autocomplete-active {
-/*when navigating through the items using the arrow keys:*/
-background-color: DodgerBlue !important;
-color: #ffffff;
+  /* when navigating through the items using the arrow keys: */
+  background-color: dodgerblue !important;
+  color: #fff;
 }
 
-
-.navbar-menu select{
-    background-color: #333333;
-    color:#fff;
-    border: none;
-    font-size: 28px;
-    font-weight: regular;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.navbar-menu select {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  font-weight: regular;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
 
 .navbar-menu option {
-    font-size: 28px;
-    font-weight: regular;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 28px;
+  font-weight: regular;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 }
