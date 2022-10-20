@@ -21,9 +21,8 @@ const mongoDB = require('../server/database/connection')
 const mongoose = require('mongoose')
 
 describe('Testing Routes', () => {
-  beforeAll((done) => {
-    mongoDB.connectDB()
-    done()
+  beforeAll(() => {
+    return mongoDB.connectDB()
   })
 
   afterAll((done) => {
