@@ -155,7 +155,7 @@ exports.deleteReview = async (req, res) => {
             message: `Cannot delete with id ${req.params.id}. Is the id correct?`
           })
         } else {
-          res.redirect(`/history`)
+          res.redirect('/history')
         }
       })
       .catch((err) => {
