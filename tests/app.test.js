@@ -45,5 +45,26 @@ describe('Testing Routes', () => {
     test('/signup', () => {
       return request(app).get('/signup').expect(200)
     })
+
+    test('/subject/:code', () => {
+      return request(app).get('/subject/COMP10001').expect(200)
+    })
+  })
+
+  describe('Redirects - not logged in', () => {
+    test('/random-path-that-doesnt-exist goes to 404', () => {
+      return request(app)
+        .get('/asdfasdf')
+        .expect(302)
+        .expect('Location', '/error404')
+    })
+
+    test('/browse goes back to landing', () => {
+      return request(app).get('/browse').expect(302).expect('Location', '/')
+    })
+
+    test('/settings goes back to landing', () => {
+      return request(app).get('/settings').expect(302).expect('Location', '/')
+    })
   })
 })
