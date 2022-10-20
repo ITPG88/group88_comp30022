@@ -35,6 +35,28 @@
           <textarea name="content" class="each-field big-form"><%= review.content %></textarea>
         </div>
         
+
+        <div class="form-field inline-checkbox toright">
+         
+          <div class="visible-checkbox inline-checkbox">
+            <input
+              style="width: 30px; height: 30px"
+              name="visible"
+              type="checkbox"
+              
+            />
+            <label style="margin-top: -6px" for="visible">Visible</label>
+          </div>
+
+        
+          <div
+            class="private-checkbox inline-checkbox"
+            style="margin-right: -60px; margin-left: 20px"
+          >
+            <input style="width: 30px; height: 30px" name="private" type="checkbox" />
+            <label style="margin-top: -6px" for="private">Anonymous</label>
+          </div>
+        </div>
         
         <div class="close-submit-bttn">
           <a href="/history" style="font-size: 26px">close</a>
