@@ -19,6 +19,15 @@
     <div class="container">
       <h1>Edit your review</h1>
 
+      <form
+              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
+              method="POST"
+              style="display: block; float: right;"
+            >
+              <button type="submit" class="remove-button-color medium-buttn" style="margin-right:-60px;width: 200px; background-color: var(--pri-color); color: var(--font-color);">
+                              Delete Review
+                            </button>
+      </form>
       <form action="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review._id %>" method="POST">
         <div class="form-field">
           <label for="subjectCode">Subject Code: </label>

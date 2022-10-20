@@ -60,6 +60,7 @@ exports.loadSingleReview = async (req, res) => {
     // Logged in mode
     res.render('./student/view_review', {
       review,
+      user: req.user,
       subjectCode: req.params.subjectCode
     })
   } else {
@@ -154,7 +155,7 @@ exports.deleteReview = async (req, res) => {
             message: `Cannot delete with id ${req.params.id}. Is the id correct?`
           })
         } else {
-          res.redirect(`/subject/${req.params.subjectCode}`)
+          res.redirect('/history')
         }
       })
       .catch((err) => {

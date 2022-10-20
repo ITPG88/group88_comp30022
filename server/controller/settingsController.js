@@ -1,5 +1,6 @@
 const User = require('../model/user').User
 const Student = require('../model/user').Student
+const validateEmail = require('./loginController').ValidateEmail
 const SGmail = require('@sendgrid/mail')
 
 const Sender = 'subjects_review@email.com'
@@ -56,11 +57,20 @@ exports.editAccountSettings = async (req, res) => {
     fields.fullName = req.body.fullName
   }
   if (req.body.email) {
-    fields.email = req.body.email
+    if (validateEmail(req.body.email)) {
+      fields.email = req.body.email
+    } else {
+      return
+    }
   }
 
   await User.findByIdAndUpdate(userID, fields)
     .then(data => {
+      if (req.body.fullName) {
+        req.user.fullName = req.body.fullName
+      } else {
+        req.user.email = req.body.email
+      }
       res.redirect('/account')
     }).catch(err => {
       console.log('Error detected')
