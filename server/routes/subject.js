@@ -81,8 +81,9 @@ router.get('/', (req, res) => {
 // @desc Post a review
 // @route POST
 router.post(
-  '/subject/:subjectCode',
+  '/:subjectCode/write_review',
   auth.ensureAuth,
+  subjectController.findSubject,
   subjectController.postReview
 )
 

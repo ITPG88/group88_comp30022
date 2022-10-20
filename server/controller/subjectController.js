@@ -74,8 +74,11 @@ exports.loadSingleReview = async (req, res) => {
 exports.postReview = async (req, res) => {
   const subject = req.subject
 
+  console.log("In the correct method");
+
   let review = new Review({
     subject: subject._id,
+    author: req.user._id,
     subjectCode: subject.subjectCode,
     subjectName: subject.subjectName,
     content: req.body.content,
@@ -103,6 +106,7 @@ exports.findSubject = async (req, res, next) => {
   } else {
     subjectCode = req.params.subjectCode
   }
+  console.log(`subjectcode = ${subjectCode}`);
   const subject = await Subject.findOne({
     $or: [
       { subjectCode: new RegExp(`^${subjectCode}$`, 'i') },
