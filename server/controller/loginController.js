@@ -101,7 +101,7 @@ exports.resetPassword = async (req, res) => {
 
 // Password and email functions
 // validate email
-function ValidateEmail (email) {
+function ValidateEmail(email) {
   const STUDENT_EMAIL = 'student.unimelb.edu.au'
   // RFC-5322 Email regex
   const emailRegex =
@@ -113,4 +113,4 @@ function ValidateEmail (email) {
 }
 exports.sendPasswordEmailLink = async (req, res) => {}
 
-module.exports = { ValidateEmail }
+exports.ValidateEmail = ValidateEmail
