@@ -100,18 +100,17 @@ exports.resetPassword = async (req, res) => {
 }
 
 // Password and email functions
-
-const STUDENT_EMAIL = 'student.unimelb.edu.au'
-// RFC-5322 Email regex
-const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 // validate email
-function ValidateEmail (email) {
+function ValidateEmail(email) {
+  const STUDENT_EMAIL = 'student.unimelb.edu.au'
+  // RFC-5322 Email regex
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   if (emailRegex.test(email)) {
     if (email.endsWith(STUDENT_EMAIL)) return true
   }
-  console.log('You have entered an invalid email address!')
   return false
 }
-
 exports.sendPasswordEmailLink = async (req, res) => {}
+
+exports.ValidateEmail = ValidateEmail
