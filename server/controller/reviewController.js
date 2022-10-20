@@ -83,9 +83,9 @@ exports.getBrowsePageReviews = async (req, res) => {
     if (reviews.length < 10) {
       reviews = reviews.concat(
         await Review.find()
-          .sort({ createdAt: -1 })
+          .sort({ nLikes: -1 })
           .populate('subject')
-          .limit(20 - reviews.length)
+          .limit(15 - reviews.length)
       )
     }
   }

@@ -57,10 +57,16 @@ exports.editAccountSettings = async (req, res) => {
   }
   if (req.body.email) {
     fields.email = req.body.email
+    console.log("trying to update email")
   }
 
   await User.findByIdAndUpdate(userID, fields)
     .then(data => {
+      if (req.body.fullName){
+        req.user.fullName = req.body.fullName
+      } else {
+        req.user.email = req.body.email
+      }
       res.redirect('/account')
     }).catch(err => {
       console.log('Error detected')
