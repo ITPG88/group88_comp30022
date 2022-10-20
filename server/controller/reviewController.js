@@ -138,7 +138,7 @@ exports.postReview = async (req, res) => {
     res.redirect('/home')
     return
   }
-  console.log(req.body);
+  console.log(req.body)
   if (!content || !subjectCode || !rating) {
     console.log('no either one')
     errors.push({ message: 'Not all fields correctly filled' })
