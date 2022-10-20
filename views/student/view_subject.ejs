@@ -57,15 +57,11 @@
                 <button class="report-bttn">Report</button>
               </form>
             </div>
-            <form
-              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
-              method="POST"
-              style="display: block"
-            >
+            <form action="/subject/<%= subjectCode %>/review/<%= review._id%>">
               <button type="submit" class="remove-button-color small-buttn">
-                Remove
+                View
               </button>
-            </form>
+              </form>
           </div>
         </article>
         <% } else{ %> <% } %> <% }) %>
