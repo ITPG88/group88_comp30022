@@ -38,10 +38,9 @@ describe('Testing Routes', () => {
     test('/login', () => {
       return request(app).get('/login').expect(200)
     })
-
     test('/home', () => {
       return request(app).get('/home').expect(200)
-    })
+    }, 100000)
 
     test('/signup', () => {
       return request(app).get('/signup').expect(200)
