@@ -337,8 +337,8 @@ exports.editreviews = async (req, res, next) => {
   console.log('i am in edit review page')
   let review = await Review.findById(req.params.id).populate('subject')
   review.content = req.body.content
-  review.isVisible = req.body.visible == 'on'
-  review.isPrivate = req.body.private == 'on'
+  review.isVisible = req.body.visible === 'on'
+  review.isPrivate = req.body.private === 'on'
   review = await review.save()
   res.redirect('/history')
 }
