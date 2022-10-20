@@ -55,11 +55,14 @@
               <img src="/static/Like%20symbol.png" /><%= review.nLikes%>
             </button>
             </form>
-            <h8
+            <div>
+              <li><h8
               ><%= (review.comments.length!==1) ? `${review.comments.length}
               replies` : '1 reply'%>
-            </h8>
+              </h8></li>
+
             <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
+            </div>
           </div>
         </article>
 
