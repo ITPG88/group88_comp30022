@@ -60,6 +60,7 @@ exports.loadSingleReview = async (req, res) => {
     // Logged in mode
     res.render('./student/view_review', {
       review,
+      user: req.user,
       subjectCode: req.params.subjectCode
     })
   } else {
