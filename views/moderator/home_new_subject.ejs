@@ -58,7 +58,7 @@
             ><b style="margin-right: 10px"
               ><%= (review.author.fullName!=null) ? `${review.author.fullName}`
               : 'Anonymous'%> </b
-            >date</h7
+            ><%= review.createdAt.toLocaleString()%></h7
           >
 
           <div class="star-review" style="margin-left: -5px; margin-top: 5px">
