@@ -34,7 +34,6 @@ router.get('/login', (req, res) => {
   res.render("login.ejs", {
     title: "Login",
     username: username,
-    emailSent: false,
   });
 });
 
@@ -215,6 +214,19 @@ router.post(
   }
 )
 
-router.post('/forget', settingsController.sendEmail);
+router.get('/forget',
+    (req, res) => {
+      res.render('./email_sent.ejs', { title: 'email_sent' });
+    }
+)
+
+router.post('/forget', loginController.sendEmail);
+
+router.get('/email_sent',
+    (req, res) => {
+      res.render('/email_sent.ejs', { title: 'email_sent' });
+    }
+  )
+
 
 module.exports = router;
