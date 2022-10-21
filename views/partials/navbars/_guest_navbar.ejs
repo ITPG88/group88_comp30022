@@ -1,18 +1,21 @@
 <nav>
   <div class="container navbar-container">
     <a href="/home">
-    <img src="/static/Subject Review Logo.png" />
+      <img src="/static/Subject Review Logo.png" />
     </a>
     <form class="nav-searchbar" action="/subject/" id="search" method="get">
-      <input
-        style="padding-left: 1em"
-        type="text"
-        placeholder="Enter Subject Name/Code..."
-        name="code"
-      />
-      <button type="submit">
-        <span class="material-symbols-outlined">search</span>
-      </button>
+      <div class="autocomplete">
+        <input
+          style="padding-left: 1em"
+          type="text"
+          placeholder="Enter Subject Name/Code..."
+          name="code"
+          id="code"
+        />
+        <button type="submit">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
     </form>
     <ul class="navbar-menu">
       <li><a name="home" href="/home">Home</a></li>
@@ -22,5 +25,12 @@
 </nav>
 
 <script>
-  document.getElementsByName("<%=locals.title%>")[0].classList.add("active");
+  document.getElementsByName('<%=locals.title%>')[0].classList.add('active')
+</script>
+
+<script type="text/javascript" src="/server/services/autocomplete.js"></script>
+<script defer>
+  const subjectList = <%-JSON.stringify(locals.subjectList)%>
+  autocomplete(document.getElementsByName("code")[0], subjectList, 3);
+  autocomplete(document.getElementById("myInput"), subjectList, 3);
 </script>

@@ -131,21 +131,23 @@
         <ul>
             <li><label for="subjectCode" style="font-size: 26px">Subject Code</label></li>
             <li>
-                <input
-                        id="myInput"
-                        style="
-            width: 100%;
-            padding: 6px 10px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            background-color: #3b3b3b;
-            box-sizing: border-box;
-            width: 75%; height: 40px; background-color: #1e1e1e
-          "
-                        type="text"
-                        name="subjectCode"
-                        class="each-field"
-                />
+                <div class="autocomplete" style = "width: 75%;">
+                    <input
+                      id="myInput"
+                      style="
+                        width: 100%;
+                        padding: 6px 10px;
+                        display: inline-block;
+                        border: 1px solid #ccc;
+                        background-color: #3b3b3b;
+                        box-sizing: border-box;
+                        height: 40px; background-color: #1e1e1e
+                      "
+                      type="text"
+                      name="subjectCode"
+                      class="each-field"
+                    />
+                </div>
             </li>
         </ul>
         <br />
@@ -262,7 +264,7 @@
         <br />
 
         <div style="text-align: center; padding-right: 20%; margin-top: -10px">
-            <a href="/home" class="write-review-button big-buttn" id="cancle"
+            <a href="/browse" class="write-review-button big-buttn" id="cancle"
             >Close</a
             >
             <button class="save" formmethod="post">Submit</button>
@@ -273,7 +275,7 @@
 <script type="text/javascript" src="/server/services/autocomplete.js"></script>
 <script>
     const subjectList = <%-JSON.stringify(locals.subjectList)%>
-        autocomplete(document.getElementsByName("code")[0], subjectList, 3);
+    autocomplete(document.getElementsByName("code")[0], subjectList, 3);
     autocomplete(document.getElementById("myInput"), subjectList, 5);
 </script>
 
@@ -430,7 +432,7 @@
 
         <div style="text-align: center; padding-right: 20%; margin-top: -10px">
 
-            <a href="/home" class="write-review-button big-buttn" id="cancle2">Close</a>
+            <a href="/browse" class="write-review-button big-buttn" id="cancle2">Close</a>
             <button class="save" formmethod="post">Submit</button>
         </div>
 

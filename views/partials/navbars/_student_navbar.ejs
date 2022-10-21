@@ -22,18 +22,20 @@
       <li><a name="browse" href="/browse">Browse</a></li>
       <li><a name="history" href="/history">History</a></li>
       <script type="text/javascript">
-        function handleSelect(selection)
-        {
-          if (selection == "Setting") {
+        function handleSelect(selection) {
+          if (selection == 'Setting') {
             window.location.href = '/account'
-          }
-          else if (selection == "Logout") {
+          } else if (selection == 'Logout') {
             window.location.href = '/logout'
           }
         }
       </script>
 
-      <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
+      <select
+        name="Account"
+        onchange="javascript:handleSelect(this.value)"
+        id="Account"
+      >
         <option value="" selected disabled hidden>Account</option>
         <option value="Setting">Settings</option>
         <option value="Logout">Logout</option>
@@ -43,5 +45,5 @@
 </nav>
 
 <script>
-  document.getElementsByName("<%=locals.title%>")[0].classList.add("active");
+  document.getElementsByName('<%=locals.title%>')[0].classList.add('active')
 </script>

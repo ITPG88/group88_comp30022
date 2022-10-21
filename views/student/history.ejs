@@ -21,60 +21,61 @@
     include('../partials/_student-history-header') %>
     <section class="review-section">
       <div class="container review-container">
-        <% reviews.forEach(review => { %>
-          <% if(review.subject != null){ %>
-            <article class="each-review">
-              <span class="material-symbols-outlined">favorite</span>
+        <% reviews.forEach(review => { %> <% if(review.subject != null){ %>
+        <article class="each-review">
+          <span class="material-symbols-outlined">favorite</span>
 
-              
-              <h3><%= review.subject.subjectCode %></h3>
-                
-              
-              <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
-                <%= review.subject.subjectName %>
-              </h4>
+          <h3><%= review.subject.subjectCode %></h3>
 
-              <h4>University of Melbourne</h4>
-              <div class="star-review">
-                <% for(let i = 0; i < review.rating; i++){ %>
-                  <span class="fa fa-star checked"></span>
-                <% } %>
-                <% for(let j = 0; j < 5-review.rating; j++){ %>
-                  <span class="fa fa-star" style="color: #ffffff;"></span>
-                <% } %>
-              </div>
-              <p><%= review.content %></p>
-              <div class="inline">
-                <form class="view-subject">
-                  <a
-                    href="/subject/<%= review.subject.subjectCode %>"
-                    class="medium-buttn view-subject-bttn"
-                    >View Subject</a
-                  >
-                </form>
-                <form class="view-subject">
-                  <a
-                    href="/subject/<%= review.subject.subjectCode %>/review/<%= review.id %> "
-                    class="medium-buttn view-subject-bttn"
-                    >View review</a
-                  >
-                </form>
+          <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
+            <%= review.subject.subjectName %>
+          </h4>
 
-                <form class="view-subject" style="margin-bottom: 20px;">
-                  <a
-                    href="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review.id %> "
-                    class="medium-buttn view-subject-bttn"
-                    >Edit review</a
-                  >
-                </form>
-              </div>
-              <footer><%= review.createdAt.toLocaleDateString() %></footer>
-            </article>
-            <% } else{ %> <% } %>
-        <% }) %>
+          <h4>University of Melbourne</h4>
+          <div class="star-review">
+            <% for(let i = 0; i < review.rating; i++){ %>
+            <span class="fa fa-star checked"></span>
+            <% } %> <% for(let j = 0; j < 5-review.rating; j++){ %>
+            <span class="fa fa-star" style="color: #ffffff"></span>
+            <% } %>
+          </div>
+          <p><%= review.content %></p>
+          <div class="inline">
+            <form class="view-subject">
+              <a
+                href="/subject/<%= review.subject.subjectCode %>"
+                class="medium-buttn view-subject-bttn"
+                >View Subject</a
+              >
+            </form>
+            <form class="view-subject">
+              <a
+                href="/subject/<%= review.subject.subjectCode %>/review/<%= review.id %> "
+                class="medium-buttn view-subject-bttn"
+                >View review</a
+              >
+            </form>
+
+            <form class="view-subject" style="margin-bottom: 20px">
+              <a
+                href="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review.id %> "
+                class="medium-buttn view-subject-bttn"
+                >Edit review</a
+              >
+            </form>
+          </div>
+          <footer><%= review.createdAt.toLocaleDateString() %></footer>
+        </article>
+        <% } else{ %> <% } %> <% }) %>
       </div>
     </section>
   </body>
-
+  <script
+    type="text/javascript"
+    src="/server/services/autocomplete.js"
+  ></script>
+  <script>
+    const subjectList = <%-JSON.stringify(locals.subjectList)%>
+    autocomplete(document.getElementsByName("code")[0], subjectList, 3);
+  </script>
 </html>
-
