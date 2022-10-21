@@ -12,7 +12,7 @@ exports.loadSubjectPage = async (req, res) => {
     const reviews = await Review.find({
       subject: result._id,
       isVisible: true
-    }).populate('author')
+    }).populate('author').sort({ createdAt: -1 })
 
     let totalRating = 0
     console.log(reviews.length)
@@ -94,7 +94,7 @@ exports.postReview = async (req, res) => {
   try {
     review = await review.save()
     // console.log(review)
-    res.redirect(`/subject/${req.body.subjectCode}/`)
+    res.redirect(`/subject/${subject.subjectCode}/`)
   } catch (e) {
     console.log(e)
     res.render('student/write_review', { review })
