@@ -68,7 +68,6 @@
   ></script>
   <script>
     const subjectList = <%-JSON.stringify(locals.subjectList)%>
-    autocomplete(document.getElementsByName("code")[0], subjectList, 3);
     autocomplete(document.getElementById("myInput"), subjectList, 3);
   </script>
 </html>

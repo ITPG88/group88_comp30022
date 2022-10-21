@@ -31,10 +31,17 @@
           >
           <div class="star-review star-review-big">
             <% for(let i = 0; i < review.rating; i++){ %>
-              <span class="material-symbols-outlined" style="margin-right: -7px; font-size: 40px;">star</span>
-            <% } %>
-            <% for(let j = 0; j < 5-review.rating; j++){ %>
-              <span class="material-symbols-outlined" style="margin-right: -7px; color: #ffffff; font-size: 40px;">star</span>
+            <span
+              class="material-symbols-outlined"
+              style="margin-right: -7px; font-size: 40px"
+              >star</span
+            >
+            <% } %> <% for(let j = 0; j < 5-review.rating; j++){ %>
+            <span
+              class="material-symbols-outlined"
+              style="margin-right: -7px; color: #ffffff; font-size: 40px"
+              >star</span
+            >
             <% } %>
           </div>
 
@@ -44,10 +51,16 @@
 
           <div class="review-footer view-review-footer view-review-footer-2to1">
             <div class="like-reply-remove">
-              <form action="/subject/<%=subjectCode %>/review/<%= review._id %>/likeReview" method="POST">
-              <button class="like-button like-button-color small-buttn" type="submit">
-                <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
-              </button>
+              <form
+                action="/subject/<%=subjectCode %>/review/<%= review._id %>/likeReview"
+                method="POST"
+              >
+                <button
+                  class="like-button like-button-color small-buttn"
+                  type="submit"
+                >
+                  <img src="/assets/img/Like symbol.png" /><%= review.nLikes%>
+                </button>
               </form>
               <h8><%= `${review.comments.length} replies`%></h8>
               <form
@@ -61,7 +74,7 @@
               <button type="submit" class="remove-button-color small-buttn">
                 View
               </button>
-              </form>
+            </form>
           </div>
         </article>
         <% } else{ %> <% } %> <% }) %>
@@ -69,4 +82,3 @@
     </section>
   </body>
 </html>
-

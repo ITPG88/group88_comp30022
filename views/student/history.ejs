@@ -70,12 +70,4 @@
       </div>
     </section>
   </body>
-  <script
-    type="text/javascript"
-    src="/server/services/autocomplete.js"
-  ></script>
-  <script>
-    const subjectList = <%-JSON.stringify(locals.subjectList)%>
-    autocomplete(document.getElementsByName("code")[0], subjectList, 3);
-  </script>
 </html>

@@ -13,10 +13,18 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:subjectCode', subjectController.loadSubjectPage)
+router.get(
+  '/:subjectCode',
+  subjectController.getSubjectList,
+  subjectController.loadSubjectPage
+)
 router.param('subjectCode', subjectController.findSubject)
 
-router.get('/:subjectCode/review/:id', subjectController.loadSingleReview)
+router.get(
+  '/:subjectCode/review/:id',
+  subjectController.getSubjectList,
+  subjectController.loadSingleReview
+)
 
 // @desc Edit a review
 // @route Get
