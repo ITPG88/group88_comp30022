@@ -94,7 +94,7 @@ exports.postReview = async (req, res) => {
   try {
     review = await review.save()
     // console.log(review)
-    res.redirect(`/subject/${req.body.subjectCode}/review/${review._id}`)
+    res.redirect(`/subject/${req.body.subjectCode}/`)
   } catch (e) {
     console.log(e)
     res.render('student/write_review', { review })
@@ -149,6 +149,9 @@ exports.deleteReview = async (req, res) => {
     req.user.type === 'moderator' ||
     review.author.toString() === req.user._id.toString()
   ) {
+    for (const commentID of review.comments) {
+      await Comment.findByIdAndDelete(commentID)
+    }
     await Review.findByIdAndDelete(req.params.id)
       .then((data) => {
         if (!data) {
