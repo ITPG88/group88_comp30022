@@ -19,6 +19,15 @@
     <div class="container">
       <h1>Edit your review</h1>
 
+      <form
+              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
+              method="POST"
+              style="display: block; float: right;"
+            >
+              <button type="submit" class="remove-button-color medium-buttn" style="margin-right:-60px;width: 200px; background-color: var(--pri-color); color: var(--font-color);">
+                              Delete Review
+                            </button>
+      </form>
       <form action="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review._id %>" method="POST">
         <div class="form-field">
           <label for="subjectCode">Subject Code: </label>
@@ -35,6 +44,40 @@
           <textarea name="content" class="each-field big-form"><%= review.content %></textarea>
         </div>
         
+
+        <div class="form-field inline-checkbox toright">
+         
+          <div class="visible-checkbox inline-checkbox">
+            <% if (review.isVisible) {%>
+            <input
+              style="width: 30px; height: 30px"
+              name="visible"
+              type="checkbox"
+              checked
+            />
+            <% } else {%>
+              <input
+                      style="width: 30px; height: 30px"
+                      name="visible"
+                      type="checkbox"
+              />
+              <% }%>
+            <label style="margin-top: -6px" for="visible">Visible</label>
+          </div>
+
+        
+          <div
+            class="private-checkbox inline-checkbox"
+            style="margin-right: -60px; margin-left: 20px"
+          >
+            <% if (review.isAnonymous) {%>
+            <input style="width: 30px; height: 30px" name="private" type="checkbox" checked />
+            <% } else { %>
+              <input style="width: 30px; height: 30px" name="private" type="checkbox"/>
+              <% }%>
+            <label style="margin-top: -6px" for="private">Anonymous</label>
+          </div>
+        </div>
         
         <div class="close-submit-bttn">
           <a href="/history" style="font-size: 26px">close</a>

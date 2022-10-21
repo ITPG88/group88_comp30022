@@ -66,30 +66,49 @@ exports.getBrowsePageReviews = async (req, res) => {
     // Students get reviews from their interested field of study, then recent reviews
     const student = await Student.findById(req.user._id)
     const fieldsOfInterest = student.fieldsOfInterest
-    const subjects = []
+    // const subjects = []
     for (const field of fieldsOfInterest) {
-      const result = await Subject.find({ fieldOfStudy: field })
-      for (const sub of result) {
-        subjects.push(sub)
-      }
+      const result = await Review.aggregate([
+        {
+          $lookup: {
+            from: 'subjects',
+            localField: 'subject',
+            foreignField: '_id',
+            as: 'subject2'
+          }
+        },
+        { $match: { 'subject2.fieldOfStudy': field } },
+        { $limit: 4 }
+      ])
+
+      await Subject.populate(result, { path: 'subject' })
+      reviews = reviews.concat(result)
+      //   const result = await Subject.find({ fieldOfStudy: field })
+      //   for (const sub of result) {
+      //     subjects.push(sub)
+      //   }
     }
 
-    for (const subject of subjects) {
-      const result = await Review.find({ subject: subject._id })
-        .populate('subject')
-        .limit(4)
-      reviews = reviews.concat(result)
-    }
-    if (reviews.length < 10) {
+    // for (const subject of subjects) {
+    //   const result = await Review.find({ subject: subject._id })
+    //     .populate('subject')
+    //     .limit(4)
+    //   reviews = reviews.concat(result)
+    // }
+    if (reviews.length === 10) {
       reviews = reviews.concat(
         await Review.find()
-          .sort({ createdAt: -1 })
+          .sort({ nLikes: 1 })
           .populate('subject')
-          .limit(20 - reviews.length)
+          .limit(15 - reviews.length)
       )
     }
   }
-  res.render('student/browse', { title: 'browse', reviews })
+  res.render('student/browse', {
+    title: 'browse',
+    reviews,
+    userType: req.user.type
+  })
 }
 
 /**
@@ -138,7 +157,7 @@ exports.postReview = async (req, res) => {
     res.redirect('/home')
     return
   }
-
+  console.log(req.body)
   if (!content || !subjectCode || !rating) {
     console.log('no either one')
     errors.push({ message: 'Not all fields correctly filled' })
@@ -337,7 +356,8 @@ exports.editreviews = async (req, res, next) => {
   console.log('i am in edit review page')
   let review = await Review.findById(req.params.id).populate('subject')
   review.content = req.body.content
-
+  review.isVisible = req.body.visible === 'on'
+  review.isPrivate = req.body.private === 'on'
   review = await review.save()
   res.redirect('/history')
 }

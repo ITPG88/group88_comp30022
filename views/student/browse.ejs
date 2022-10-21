@@ -17,7 +17,7 @@
   </head>
   <body>
     <%- include('../partials/navbars/_student_navbar') %> <%-
-     include('../partials/_student-browse-header')%>
+    include('../partials/_student-browse-header')%>
     <h1>in browse</h1>
     <section class="review-section">
       <div class="container review-container">
@@ -33,10 +33,9 @@
           <h4>University of Melbourne</h4>
           <div class="star-review">
             <% for(let i = 0; i < review.rating; i++){ %>
-              <span class="fa fa-star checked"></span>
-            <% } %>
-            <% for(let j = 0; j < 5-review.rating; j++){ %>
-              <span class="fa fa-star" style="color: #ffffff;"></span>
+            <span class="fa fa-star checked"></span>
+            <% } %> <% for(let j = 0; j < 5-review.rating; j++){ %>
+            <span class="fa fa-star" style="color: #ffffff"></span>
             <% } %>
           </div>
           <p><%= review.content %></p>
@@ -62,4 +61,12 @@
       </div>
     </section>
   </body>
+  <script
+    type="text/javascript"
+    src="/server/services/autocomplete.js"
+  ></script>
+  <script>
+    const subjectList = <%-JSON.stringify(locals.subjectList)%>
+    autocomplete(document.getElementById("myInput"), subjectList, 3);
+  </script>
 </html>

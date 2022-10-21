@@ -12,15 +12,19 @@ exports.loadSubjectPage = async (req, res) => {
     const reviews = await Review.find({
       subject: result._id,
       isVisible: true
-    }).populate('author')
+    }).populate('author').sort({ createdAt: -1 })
 
+    let totalRating = 0
+    console.log(reviews.length)
+    for (let i = 0; i < reviews.length; i++) {
+      totalRating = totalRating + reviews[i].rating
+    }
+    console.log(
+      `in view subject page with avgrating = ${Math.round(
+        totalRating / reviews.length
+      )}`
+    )
     if (req.user) {
-      let totalRating = 0
-      for (let i = 0; i < reviews.length; i++) {
-        totalRating = totalRating + reviews[i].rating
-      }
-      // console.log(Math.round(total_rating/reviews.length))
-      console.log('in viiew subject page')
       res.render('student/view_subject', {
         subject: result,
         reviews,
@@ -30,7 +34,8 @@ exports.loadSubjectPage = async (req, res) => {
       // Guest
       res.render('guest/view_subject_guest', {
         subject: result,
-        reviews
+        reviews,
+        avg_rating: Math.round(totalRating / reviews.length)
       })
     }
   } else {
@@ -60,6 +65,7 @@ exports.loadSingleReview = async (req, res) => {
     // Logged in mode
     res.render('./student/view_review', {
       review,
+      user: req.user,
       subjectCode: req.params.subjectCode
     })
   } else {
@@ -74,8 +80,11 @@ exports.loadSingleReview = async (req, res) => {
 exports.postReview = async (req, res) => {
   const subject = req.subject
 
+  console.log('In the correct method')
+
   let review = new Review({
     subject: subject._id,
+    author: req.user._id,
     subjectCode: subject.subjectCode,
     subjectName: subject.subjectName,
     content: req.body.content,
@@ -89,7 +98,7 @@ exports.postReview = async (req, res) => {
   try {
     review = await review.save()
     // console.log(review)
-    res.redirect(`/subject/${req.body.subjectCode}/review/${review._id}`)
+    res.redirect(`/subject/${subject.subjectCode}/`)
   } catch (e) {
     console.log(e)
     res.render('student/write_review', { review })
@@ -103,6 +112,7 @@ exports.findSubject = async (req, res, next) => {
   } else {
     subjectCode = req.params.subjectCode
   }
+  console.log(`subjectcode = ${subjectCode}`)
   const subject = await Subject.findOne({
     $or: [
       { subjectCode: new RegExp(`^${subjectCode}$`, 'i') },
@@ -143,6 +153,9 @@ exports.deleteReview = async (req, res) => {
     req.user.type === 'moderator' ||
     review.author.toString() === req.user._id.toString()
   ) {
+    for (const commentID of review.comments) {
+      await Comment.findByIdAndDelete(commentID)
+    }
     await Review.findByIdAndDelete(req.params.id)
       .then((data) => {
         if (!data) {
@@ -150,7 +163,7 @@ exports.deleteReview = async (req, res) => {
             message: `Cannot delete with id ${req.params.id}. Is the id correct?`
           })
         } else {
-          res.redirect(`/subject/${req.params.subjectCode}`)
+          res.redirect('/history')
         }
       })
       .catch((err) => {

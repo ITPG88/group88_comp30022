@@ -1,13 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const passport = require("passport");
+const express = require('express')
+const router = express.Router()
+const passport = require('passport')
 
-const loginController = require("../controller/loginController");
-const auth = require("../services/auth");
-const reviewController = require("../controller/reviewController");
-const subjectController = require("../controller/subjectController");
-const settingsController = require("../controller/settingsController");
-const { PendingReview } = require("../model/review");
+const loginController = require('../controller/loginController')
+const auth = require('../services/auth')
+const reviewController = require('../controller/reviewController')
+const subjectController = require('../controller/subjectController')
+const settingsController = require('../controller/settingsController')
 
 // @desc Landing
 // @route GET /
@@ -100,7 +99,12 @@ router.post('/home', auth.ensureAuth, reviewController.postReview)
 
 // @desc get browsepage
 // @route GET /browse
-router.get('/browse', auth.ensureAuth, reviewController.getBrowsePageReviews)
+router.get(
+  '/browse',
+  auth.ensureAuth,
+  subjectController.getSubjectList,
+  reviewController.getBrowsePageReviews
+)
 
 // @desc get historypage
 // @route GET /history
@@ -108,6 +112,7 @@ router.get(
   '/history',
   auth.ensureAuth,
   reviewController.setFullName,
+  subjectController.getSubjectList,
   reviewController.getHistoryReviews
 )
 
@@ -167,6 +172,7 @@ router.get(
   '/home/flagged',
   auth.ensureAuth,
   reviewController.setFullName,
+  subjectController.getSubjectList,
   reviewController.getNumPendingReviews,
   reviewController.getFlaggedReviews
 )
@@ -175,6 +181,7 @@ router.get(
   '/home/pending_subject',
   auth.ensureAuth,
   reviewController.setFullName,
+  subjectController.getSubjectList,
   reviewController.getNumPendingReviews,
   reviewController.getPendingSubjectReviews
 )
@@ -229,4 +236,4 @@ router.get('/email_sent',
   )
 
 
-module.exports = router;
+module.exports = router

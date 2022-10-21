@@ -1,0 +1,51 @@
+<header>
+    <div class="container header-container">
+        <div class="header-content header-content-np">
+            <div class="subject-name-code">
+                <h1><%= locals.subjectName %></h1>
+                <br />
+                <h9><%= locals.subjectCode %></h9>
+            </div>
+
+
+
+            <div class="lowerheader-wrftsbutton">
+                <div class="lower-header-part">
+                    <h2>
+                        <%= (reviews.length>=1) ? `${reviews.length} reviews` : `0 review`%>
+                        <b>|</b> Overall
+                    </h2>
+
+                    <div class="star-review">
+                        <% if(avg_rating > 0){ %>
+                            <% for(let i = 0; i < avg_rating; i++){ %>
+                                <span class="material-symbols-outlined">star</span>
+                            <% } %>
+                            <% for(let j = 0; j < 5-avg_rating; j++){ %>
+                                <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
+                            <% } %>
+                        <% } else{ %>
+                            <% for(let j = 0; j < 5; j++){ %>
+                                <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <button id="window" style="
+      background: #6A4873;
+      cursor: pointer;
+      margin:10px;
+      color: #ffffff;
+      border: none;
+      width: 140px;
+      height: 55px;
+      font-size: 18px;
+      font-weight: lighter;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+      ">Write a review for this subject</button>
+
+            </div>
+        </div>
+    </div>
+</header>

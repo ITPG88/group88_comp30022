@@ -226,7 +226,7 @@
 
     <ul>
       <li>
-        <label for="content" style="font-size: 26px">Review-content</label>
+        <label for="content" style="font-size: 26px">Review body:</label>
       </li>
       <li>
         <textarea
@@ -266,7 +266,7 @@
     <br />
 
     <div style="text-align: center; padding-right: 20%; margin-top: -10px">
-      <a href="/home" class="write-review-button big-buttn" id="cancle"
+      <a href="/home" class="write-review-button big-buttn" id="cancel"
         >Close</a
       >
       <button class="save" formmethod="post">Submit</button>
@@ -274,12 +274,6 @@
   </div>
 </form>
 
-<script type="text/javascript" src="/server/services/autocomplete.js"></script>
-<script>
-  const subjectList = <%-JSON.stringify(locals.subjectList)%>
-  autocomplete(document.getElementsByName("code")[0], subjectList, 3);
-  autocomplete(document.getElementById("myInput"), subjectList, 3);
-</script>
 
 
 </form>

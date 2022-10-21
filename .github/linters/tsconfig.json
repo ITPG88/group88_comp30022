@@ -7,6 +7,16 @@
       "tests",
       "tools",
       "/tmp/lint/.automation/test",
-      "scripts/subjectScraping/*",
-    ]
+      "../../scripts/**/*.ts",
+    ],
+    "ts-standard": {
+        "@typescript-eslint/no-misused-promises": [
+            "error",
+            {
+              "checksVoidReturn": false
+            }
+          ]
+      }
+    
+      
   }

@@ -9,9 +9,9 @@ exports.getFieldsOfInterest = async (req, res, next) => {
   next()
 }
 
-exports.editFieldsOfInterest = async (req, res) =>{
-    console.log(req.body);
-    const studentID = req.user._id;
+exports.editFieldsOfInterest = async (req, res) => {
+  console.log(req.body)
+  const studentID = req.user._id
   if (!req.body) {
     return
   }
@@ -51,21 +51,28 @@ exports.editAccountSettings = async (req, res) => {
     fields.fullName = req.body.fullName
   }
   if (req.body.email) {
-    fields.email = req.body.email
+    if (validateEmail(req.body.email)) {
+      fields.email = req.body.email
+    } else {
+      return
+    }
   }
 
-    await User.findByIdAndUpdate(userID, fields)
-        .then(data => {
-            res.redirect("/account");
-        }).catch(err => {
-        console.log("Error detected");
-        res.status(500).send({
-            message:
+  await User.findByIdAndUpdate(userID, fields)
+    .then(data => {
+      if (req.body.fullName) {
+        req.user.fullName = req.body.fullName
+      } else {
+        req.user.email = req.body.email
+      }
+      res.redirect('/account')
+    }).catch(err => {
+      console.log('Error detected')
+      res.status(500).send({
+        message:
                 err.message ||
-                "Some error occurred while creating a updating user fields.",
-        });
-    });
-
+                'Some error occurred while creating a updating user fields.'
+      })
+    })
 }
-
 
