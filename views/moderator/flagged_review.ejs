@@ -23,11 +23,11 @@
         <%- include('../partials/_flagged-newsubject') %>
         <div class="container review-container-moderator review-container-fr">
             <% reviews.forEach(review => { %>
-                <% if(review.status == "FLAGGED"){ %>
+                <% if(review.status === "FLAGGED"){ %>
                     <article class="each-review each-review-big">
                         <div class="review-titlebar">
                             <div>
-                                <h5>Disrespectful! Please delete it.</h6>
+                                <h5>Reported. Please review content.</h5>
                             </div>
                             <div class = "inline">
                                 <form action="/home/flagged/<%= review._id %>/neglect" method="POST">
@@ -42,7 +42,10 @@
         
                         <div class="review-header-flagged">
                             <div class="header-flagged">
-                                <h3> <%= review.subject.subjectCode %> </h3>
+                                <a href="/subject/<%=review.subject.subjectCode%>">
+                                    <h3> <%= review.subject.subjectCode %> </h3>
+                                </a>
+
                                 <h4>University of Melbourne</h4>
                             </div>
 
@@ -64,8 +67,14 @@
         
                         <div class="review-footer">
                             <button class="like-button small-buttn"><img src="/assets/img/Like%20symbol.png"><%=review.nLikes%></button>
+                            <div>
+                                <li>
                             <h8><%= (review.comments.length!=1) ? `${review.comments.length} replies` : "1 reply"%></h8>
+                                </li>
+                                <li>
                             <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
+                                </li>
+                            </div>
                         </div>
                     </article>
                     <% } else{ %>  
