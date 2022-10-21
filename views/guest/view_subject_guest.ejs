@@ -17,6 +17,7 @@
   </head>
   <body>
     <%- include('../partials/navbars/_guest_navbar') %>
+    <%- include('../partials/_guest-view-subject-header') %>
     <section class="review-section">
       <div class="container review-container-moderator">
         <% reviews.forEach(review => { %> <% if(review.isVisible){ %>
@@ -30,12 +31,14 @@
           >
 
           <div class="star-review star-review-big">
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
-            <span class="material-symbols-outlined">star</span>
+            <% for(let i = 0; i < review.rating; i++){ %>
+              <span class="material-symbols-outlined" style="margin-right: -7px; font-size: 40px;">star</span>
+            <% } %>
+            <% for(let j = 0; j < 5-review.rating; j++){ %>
+              <span class="material-symbols-outlined" style="margin-right: -7px; color: #ffffff; font-size: 40px;">star</span>
+            <% } %>
           </div>
+
 
           <div class="review-container">
             <p><%= review.content %></p>

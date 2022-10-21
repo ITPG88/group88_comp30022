@@ -14,13 +14,13 @@ exports.loadSubjectPage = async (req, res) => {
       isVisible: true
     }).populate('author')
 
+    let totalRating = 0
+    console.log(reviews.length)
+    for (let i = 0; i < reviews.length; i++) {
+      totalRating = totalRating + reviews[i].rating
+    }
+    console.log(`in view subject page with avgrating = ${Math.round(totalRating / reviews.length)}`)
     if (req.user) {
-      let totalRating = 0
-      for (let i = 0; i < reviews.length; i++) {
-        totalRating = totalRating + reviews[i].rating
-      }
-      // console.log(Math.round(total_rating/reviews.length))
-      console.log('in viiew subject page')
       res.render('student/view_subject', {
         subject: result,
         reviews,
@@ -30,7 +30,8 @@ exports.loadSubjectPage = async (req, res) => {
       // Guest
       res.render('guest/view_subject_guest', {
         subject: result,
-        reviews
+        reviews,
+        avg_rating: Math.round(totalRating / reviews.length)
       })
     }
   } else {

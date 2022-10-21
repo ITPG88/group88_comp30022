@@ -51,11 +51,15 @@
                 <button class="like-button small-buttn" onclick="loginMessage()">
                     <img src="/static/Like%20symbol.png" /><%= review.nLikes%>
                 </button>
-                <h8
+                <div>
+                <li><h8
                 ><%= (review.comments.length!==1) ? `${review.comments.length}
               replies` : '1 reply'%>
-                </h8>
+                </h8></li>
+                <li>
                 <h8><%= (review.isVisible) ? "Visible" : "Invisible"%></h8>
+                </li>
+                </div>
             </div>
         </article>
 
