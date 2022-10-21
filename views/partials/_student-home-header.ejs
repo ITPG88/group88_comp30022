@@ -33,8 +33,8 @@
     position: absolute;
     left: 20%;
     top: 15%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   #pop h1 {
     text-align: center;
@@ -91,8 +91,8 @@
     height: 40px;
     font-size: 20px;
     font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   .save {
@@ -103,22 +103,22 @@
     height: 40px;
     font-size: 20px;
     font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 </style>
 
 <script>
-  $("#window").click(function () {
-    $("#pop").show();
-  });
+  $('#window').click(function () {
+    $('#pop').show()
+  })
 
-  $("#cancle").click(function () {
-    $("#pop").hide();
-  });
-  $("#save").click(function () {
-    $("#pop").hide();
-  });
+  $('#cancle').click(function () {
+    $('#pop').hide()
+  })
+  $('#save').click(function () {
+    $('#pop').hide()
+  })
 </script>
 
 <!-- review your subject pop window-->
@@ -129,30 +129,37 @@
 
   <div style="padding-left: 15%">
     <ul>
-      <li><label for="subjectCode" style="font-size: 26px">Subject Code</label></li>
       <li>
-        <div class="autocomplete" style = "width: 75%;">
-        <input
-          id="myInput"
-          style="
-            width: 100%;
-            padding: 6px 10px;
-            display: inline-block;
-            border: 1px solid #ccc;
-            background-color: #3b3b3b;
-            box-sizing: border-box;
-            height: 40px; background-color: #1e1e1e
-          "
-          type="text"
-          name="subjectCode"
-          class="each-field"
-        />
-    </div>
+        <label for="subjectCode" style="font-size: 26px">Subject Code</label>
+      </li>
+      <li>
+        <div class="autocomplete" style="width: 75%">
+          <input
+            id="myInput"
+            style="
+              width: 100%;
+              padding: 6px 10px;
+              display: inline-block;
+              border: 1px solid #ccc;
+              background-color: #3b3b3b;
+              box-sizing: border-box;
+              height: 40px;
+              background-color: #1e1e1e;
+            "
+            type="text"
+            name="subjectCode"
+            class="each-field"
+          />
+        </div>
       </li>
     </ul>
     <br />
     <ul>
-      <li><label for="subjectName" style="font-size: 26px">Subject Name (optional)</label></li>
+      <li>
+        <label for="subjectName" style="font-size: 26px"
+          >Subject Name (optional)</label
+        >
+      </li>
       <li>
         <input
           id="myInput"
@@ -163,7 +170,9 @@
             border: 1px solid #ccc;
             background-color: #3b3b3b;
             box-sizing: border-box;
-            width: 75%; height: 40px; background-color: #1e1e1e
+            width: 75%;
+            height: 40px;
+            background-color: #1e1e1e;
           "
           type="text"
           name="subjectName"
@@ -174,7 +183,11 @@
     </ul>
     <br />
     <ul>
-      <li><label for="fieldofstudy" style="font-size: 26px">Field of Study (optional)</label></li>
+      <li>
+        <label for="fieldofstudy" style="font-size: 26px"
+          >Field of Study (optional)</label
+        >
+      </li>
       <li>
         <input
           id="myInput"
@@ -185,7 +198,9 @@
             border: 1px solid #ccc;
             background-color: #3b3b3b;
             box-sizing: border-box;
-            width: 75%; height: 40px; background-color: #1e1e1e
+            width: 75%;
+            height: 40px;
+            background-color: #1e1e1e;
           "
           type="text"
           name="fieldofstudy"
@@ -245,9 +260,8 @@
           style="width: 30px; height: 30px"
           name="visible"
           type="checkbox"
-          
         />
-        <label style="margin-top: -6px; font-size: 26px" for="visible" 
+        <label style="margin-top: -6px; font-size: 26px" for="visible"
           >Visible</label
         >
       </div>
@@ -274,163 +288,159 @@
   </div>
 </form>
 
-
-
-</form>
-
-
-
-
 <style>
   #pop2 {
-      display: none;
-      width: 50%;
-      height: 480px;
-      background: #3b3b3b;
-      position: absolute;
-      left: 30%;
-      top: 15%;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: none;
+    width: 50%;
+    height: 480px;
+    background: #3b3b3b;
+    position: absolute;
+    left: 30%;
+    top: 15%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-  #pop2 h1{
-        text-align: center;
-        color: #fff;
-        font-size:35px;
-        font-weight: normal;
-        padding-top: 20px;
-
-
-    }
-  #pop2 label{
+  #pop2 h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 35px;
+    font-weight: normal;
+    padding-top: 20px;
+  }
+  #pop2 label {
     font-weight: lighter;
-    
-
-
   }
-  .form-field{
+  .form-field {
     font-weight: lighter;
     font-size: 30px;
     padding-bottom: 30px;
-}
+  }
 
-  .each-field{
+  .each-field {
     color: #fff;
     font-size: 22px;
     font-weight: lighter;
-
-}
-
-
-
-  #cancle2 {      
-      background: #3b3b3b;
-      color: #ffffff;
-      border: none;
-      width: 100px;
-      height: 40px;
-      font-size: 20px;
-      font-weight: lighter;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
   }
-  
+
+  #cancle2 {
+    background: #3b3b3b;
+    color: #ffffff;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
   .save {
-      background: #6A4873;
-      color: #ffffff;
-      border: none;
-      width: 100px;
-      height: 40px;
-      font-size: 20px;
-      font-weight: lighter;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
+    background: #6a4873;
+    color: #ffffff;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-  </style>
+</style>
 
-    
-    <script>
-      $("#window2").click(function() {
-          $('#pop2').show();
-      })
-      $("#window2").click(function() {
-          $('#pop').hide();
-      })
-    
-      $("#cancle2").click(function() {
-          $('#pop2').hide();
-      })
- 
-  
-    </script>
+<script>
+  $('#window2').click(function () {
+    $('#pop2').show()
+  })
+  $('#window2').click(function () {
+    $('#pop').hide()
+  })
 
+  $('#cancle2').click(function () {
+    $('#pop2').hide()
+  })
+</script>
 
+<form id="pop2" action="/write_review" method="POST">
+  <h1 style="padding-top: 30px">Search your subject</h1>
+  <br />
+  <br />
 
- 
- <form id="pop2" action="/write_review" method="POST">
+  <div style="padding-left: 20%">
+    <ul>
+      <li>
+        <label for="subjectCode" style="font-size: 26px">Subject Code</label>
+      </li>
+      <li>
+        <input
+          type="text"
+          name="subjectCode"
+          class="each-field"
+          style="width: 70%; height: 40px; background-color: #1e1e1e"
+        />
+      </li>
+    </ul>
+    <br />
 
-  <h1 style="padding-top: 30px;">Search your subject</h1>
-      <br>
-      <br>
+    <ul>
+      <li><label style="font-size: 26px">Subject Name</label></li>
+      <li>
+        <input
+          type="text"
+          name="subjectCode"
+          class="each-field"
+          style="width: 70%; height: 40px; background-color: #1e1e1e"
+        />
+      </li>
+    </ul>
+    <br />
 
-      <div style="padding-left: 20%">
-          <ul>
-              <li><label for="subjectCode" style="font-size: 26px;">Subject Code</label></li>
-              <li><input type="text" name="subjectCode" class="each-field" style="width:70%;
-              height:40px;
+    <ul>
+      <li><label style="font-size: 26px">Field of study(optional)</label></li>
+      <li>
+        <span>
+          <select
+            style="
+              width: 70%;
+              height: 40px;
               background-color: #1e1e1e;
-              
-              
-              "/></li>
-          </ul>
-          <br>
+              font-size: 20px;
+              color: #fff;
+            "
+          >
+            <option>---select---</option>
+            <option>Architecture</option>
+            <option>Business</option>
+            <option>Design</option>
+            <option>Education</option>
+            <option>Engineering</option>
+            <option>Environment</option>
+            <option>Food</option>
+            <option>Health Science</option>
+            <option>Sociology</option>
+            <option>IT</option>
+            <option>Law</option>
+            <option>Media</option>
+            <option>Medicine</option>
+            <option>Nursing</option>
+            <option>Psychology</option>
+            <option>Science</option>
+            <option>Sport</option>
+          </select>
+        </span>
+      </li>
+    </ul>
 
-          <ul>
-            <li><label style="font-size: 26px;">Subject Name</label></li>
-            <li><input type="text" name="subjectCode" class="each-field" style="width:70%;
-            height:40px;
-            background-color: #1e1e1e;
-            
-            
-            "/></li>
-        </ul>
-        <br>
+    <br />
+    <br />
 
-        <ul>
-          <li><label style="font-size: 26px;">Field of study(optional)</label></li> 
-          <li><span>
-              <select style="width: 70%; height:40px;background-color: #1e1e1e; font-size: 20px; color: #fff;">
-                  <option>---select---</option>
-                  <option>Architecture</option>
-                  <option>Business</option>
-                  <option>Design</option>
-                  <option>Education</option>
-                  <option>Engineering</option>
-                  <option>Environment</option>
-                  <option>Food</option>
-                  <option>Health Science</option>
-                  <option>Sociology</option>
-                  <option>IT</option>
-                  <option>Law</option>
-                  <option>Media</option>
-                  <option>Medicine</option>
-                  <option>Nursing</option>
-                  <option>Psychology</option>
-                  <option>Science</option>
-                  <option>Sport</option>
-              </select>
-              </span>
-          </li>
-      </ul>
-
-      <br>
-      <br>
-  
-
-          <div style="text-align: center; padding-right: 20%; margin-top: -10px">  
-  
-            <a href="/home" class="write-review-button big-buttn" id="cancle2">Close</a> 
-            <button class="save" formmethod="post">Submit</button>
-          </div>
-                    
-        </div>
-  </form>
+    <div style="text-align: center; padding-right: 20%; margin-top: -10px">
+      <a href="/home" class="write-review-button big-buttn" id="cancle2"
+        >Close</a
+      >
+      <button class="save" formmethod="post">Submit</button>
+    </div>
+  </div>
+</form>
+<script>
+  autocomplete(document.getElementById('myInput'), subjectList, 3)
+</script>
