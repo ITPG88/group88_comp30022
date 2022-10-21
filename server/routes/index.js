@@ -100,7 +100,12 @@ router.post('/home', auth.ensureAuth, reviewController.postReview)
 
 // @desc get browsepage
 // @route GET /browse
-router.get('/browse', auth.ensureAuth, reviewController.getBrowsePageReviews)
+router.get(
+  '/browse',
+  auth.ensureAuth,
+  subjectController.getSubjectList,
+  reviewController.getBrowsePageReviews
+)
 
 // @desc get historypage
 // @route GET /history
@@ -108,6 +113,7 @@ router.get(
   '/history',
   auth.ensureAuth,
   reviewController.setFullName,
+  subjectController.getSubjectList,
   reviewController.getHistoryReviews
 )
 
