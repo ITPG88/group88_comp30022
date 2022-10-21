@@ -13,34 +13,7 @@
 
 <body>
 <nav>
-    <div class = "container navbar-container">
-        <img src="/assets/img/Subject%20Review%20Logo.png">
-        <form class="nav-searchbar">
-            <input type="text" placeholder=" Enter Subject Name/Code...">
-            <button><span class="material-symbols-outlined">search</span></button>
-        </form>
-        <ul class="navbar-menu">
-            <li><a href="Moderator-Homepage(Flagged review).html" class ="active">Home</a></li>
-            <li><a href="Moderator-Homepage(Browse).html">Browse</a></li>
-            <script type="text/javascript">
-                function handleSelect(selection)
-                {
-                  if (selection == "Setting") {
-                    window.location.href = '/account'
-                  }
-                  else if (selection == "Logout") {
-                    window.location.href = '/logout'
-                  }
-                }
-              </script>
-        
-              <select name="Account" onchange="javascript:handleSelect(this.value)" id="Account">
-                <option value="" selected disabled hidden>Account</option>
-                <option value="Setting">Setting</option>
-                <option value="Logout">Logout</option>
-              </select>
-        </ul>
-    </div>
+    <%- include('../partials/navbars/_moderator_navbar') %>
 </nav>
 
 <header>

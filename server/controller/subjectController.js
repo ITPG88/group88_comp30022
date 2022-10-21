@@ -19,7 +19,11 @@ exports.loadSubjectPage = async (req, res) => {
     for (let i = 0; i < reviews.length; i++) {
       totalRating = totalRating + reviews[i].rating
     }
-    console.log(`in view subject page with avgrating = ${Math.round(totalRating / reviews.length)}`)
+    console.log(
+      `in view subject page with avgrating = ${Math.round(
+        totalRating / reviews.length
+      )}`
+    )
     if (req.user) {
       res.render('student/view_subject', {
         subject: result,

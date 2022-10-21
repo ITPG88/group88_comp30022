@@ -16,56 +16,64 @@
     />
   </head>
   <body style="min-width: 300px">
-    <%- include('../partials/navbars/_student_navbar') %> 
-    <%- include('../partials/_moderator-fr-header') %>
+    <%- include('../partials/navbars/_moderator_navbar') %> <%-
+    include('../partials/_moderator-fr-header') %>
 
     <section class="review-section">
-        <%- include('../partials/_flagged-newsubject') %>
-        <div class="container review-container-moderator review-container-fr">
-            <% if (locals.reviews) reviews.forEach(review => { %>
-                    <article class="each-review each-review-big">
-                        <div class="review-titlebar">
-                            <div>
-                                <h5>Interest of field:</h5>
-                                <h6><%= review.attemptedfield %></h6>
-                            </div>
-                            <div class = "inline">
-                                <form action="/home/pending_subject/<%= review._id %>/approve" method="POST">
-                                    <button class="neglect-button medium-buttn">Approve</button>
-                                </form>
-                                <form action="/home/pending_subject/<%= review._id %>/reject" method="POST">
-                                    <button class="remove-button small-buttn">Reject</button>
-                                </form>
-                            </div>
-                        
-                        </div>
-        
-                        <div class="review-header-flagged">
-                            <div class="header-flagged">
-                                <h3> <%= review.attemptedCode %> <%= review.attemptedName %></h3>
-                                <h4>University of Melbourne</h4>
-                            </div>
-                        </div>
-                        
-                        <p style="margin: 10px 0px;"><%= review.content %> </p>
-                        
-                        <h7><b style="margin-right: 10px;"><%= (review.author.fullName!=null) ? `${review.author.fullName}` : 'Anonymous'%> </b>date</h7>
-                        
-                        <div class="star-review" style="margin-left: -5px; margin-top:5px;">
-                            <% for(let i = 0; i < review.rating; i++){ %>
-                              <span class="material-symbols-outlined">star</span>
-                            <% } %>
-                            <% for(let j = 0; j < 5-review.rating; j++){ %>
-                              <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
-                            <% } %>
-                            <h8> Visible</h8>
-                        </div>
+      <%- include('../partials/_flagged-newsubject') %>
+      <div class="container review-container-moderator review-container-fr">
+        <% if (locals.reviews) reviews.forEach(review => { %>
+        <article class="each-review each-review-big">
+          <div class="review-titlebar">
+            <div>
+              <h5>Interest of field:</h5>
+              <h6><%= review.attemptedfield %></h6>
+            </div>
+            <div class="inline">
+              <form
+                action="/home/pending_subject/<%= review._id %>/approve"
+                method="POST"
+              >
+                <button class="neglect-button medium-buttn">Approve</button>
+              </form>
+              <form
+                action="/home/pending_subject/<%= review._id %>/reject"
+                method="POST"
+              >
+                <button class="remove-button small-buttn">Reject</button>
+              </form>
+            </div>
+          </div>
 
-                    </article>
-            <% }) %> 
+          <div class="review-header-flagged">
+            <div class="header-flagged">
+              <h3><%= review.attemptedCode %> <%= review.attemptedName %></h3>
+              <h4>University of Melbourne</h4>
+            </div>
+          </div>
 
-        </div>
+          <p style="margin: 10px 0px"><%= review.content %></p>
 
+          <h7
+            ><b style="margin-right: 10px"
+              ><%= (review.author.fullName!=null) ? `${review.author.fullName}`
+              : 'Anonymous'%> </b
+            >date</h7
+          >
+
+          <div class="star-review" style="margin-left: -5px; margin-top: 5px">
+            <% for(let i = 0; i < review.rating; i++){ %>
+            <span class="material-symbols-outlined">star</span>
+            <% } %> <% for(let j = 0; j < 5-review.rating; j++){ %>
+            <span class="material-symbols-outlined" style="color: #ffffff"
+              >star</span
+            >
+            <% } %>
+            <h8> Visible</h8>
+          </div>
+        </article>
+        <% }) %>
+      </div>
     </section>
   </body>
 </html>

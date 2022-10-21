@@ -89,7 +89,11 @@ exports.getBrowsePageReviews = async (req, res) => {
       )
     }
   }
-  res.render('student/browse', { title: 'browse', reviews })
+  res.render('student/browse', {
+    title: 'browse',
+    reviews,
+    userType: req.user.type
+  })
 }
 
 /**
