@@ -30,12 +30,11 @@ router.get('/login', (req, res) => {
     username = req.session.messages[0]
     req.session.messages = []
   }
-  res.render('login.ejs', {
-    title: 'Login',
-    username,
-    emailSent: false
-  })
-})
+  res.render("login.ejs", {
+    title: "Login",
+    username: username,
+  });
+});
 
 // @desc Attempt login
 // @route POST /login
@@ -222,6 +221,19 @@ router.post(
   }
 )
 
-router.post('/forget', settingsController.sendEmail)
+router.get('/forget',
+    (req, res) => {
+      res.render('./email_sent.ejs', { title: 'email_sent' });
+    }
+)
+
+router.post('/forget', loginController.sendEmail);
+
+router.get('/email_sent',
+    (req, res) => {
+      res.render('/email_sent.ejs', { title: 'email_sent' });
+    }
+  )
+
 
 module.exports = router

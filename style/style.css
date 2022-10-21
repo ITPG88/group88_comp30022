@@ -2559,6 +2559,29 @@ body {
     sans-serif;
 }
 
+#failMessage {
+    justify-content: center;
+    align-items: center;
+    width: 270px;
+    background-color: #632222;
+    color: #f5f5f5;
+    border: 0;
+    border-radius: 0%;
+    text-align: center;
+    font-weight: lighter;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+  }
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -2739,4 +2762,33 @@ button:hover {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+}
+
+.navbar-container button {
+    width: 120px;
+    height: 45px;
+    font-size: 26px;
+    cursor: pointer;
+    background-color: #6a4873;
+    float: right;
+    margin: 30px;
+    border: none;
+  }
+  
+.navbar-container a {
+    font-weight: lighter;
+    color: white;
+    text-decoration: none;
+  }
+
+.sent p {
+    text-align: center;
+}
+
+.Emailsent {
+    margin: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
