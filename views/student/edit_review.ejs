@@ -48,12 +48,20 @@
         <div class="form-field inline-checkbox toright">
          
           <div class="visible-checkbox inline-checkbox">
+            <% if (review.isVisible) {%>
             <input
               style="width: 30px; height: 30px"
               name="visible"
               type="checkbox"
-              
+              checked
             />
+            <% } else {%>
+              <input
+                      style="width: 30px; height: 30px"
+                      name="visible"
+                      type="checkbox"
+              />
+              <% }%>
             <label style="margin-top: -6px" for="visible">Visible</label>
           </div>
 
@@ -62,7 +70,11 @@
             class="private-checkbox inline-checkbox"
             style="margin-right: -60px; margin-left: 20px"
           >
-            <input style="width: 30px; height: 30px" name="private" type="checkbox" />
+            <% if (review.isAnonymous) {%>
+            <input style="width: 30px; height: 30px" name="private" type="checkbox" checked />
+            <% } else { %>
+              <input style="width: 30px; height: 30px" name="private" type="checkbox"/>
+              <% }%>
             <label style="margin-top: -6px" for="private">Anonymous</label>
           </div>
         </div>
