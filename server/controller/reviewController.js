@@ -66,7 +66,7 @@ exports.getBrowsePageReviews = async (req, res) => {
     // Students get reviews from their interested field of study, then recent reviews
     const student = await Student.findById(req.user._id)
     const fieldsOfInterest = student.fieldsOfInterest
-    const subjects = []
+    // const subjects = []
 
     for (const field of fieldsOfInterest) {
       const result = await Review.aggregate([
