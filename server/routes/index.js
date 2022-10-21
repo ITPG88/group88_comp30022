@@ -6,7 +6,6 @@ const loginController = require('../controller/loginController')
 const auth = require('../services/auth')
 const reviewController = require('../controller/reviewController')
 const subjectController = require('../controller/subjectController')
-const settingsController = require('../controller/settingsController')
 
 // @desc Landing
 // @route GET /
@@ -30,11 +29,11 @@ router.get('/login', (req, res) => {
     username = req.session.messages[0]
     req.session.messages = []
   }
-  res.render("login.ejs", {
-    title: "Login",
-    username: username,
-  });
-});
+  res.render('login.ejs', {
+    title: 'Login',
+    username
+  })
+})
 
 // @desc Attempt login
 // @route POST /login
@@ -221,19 +220,14 @@ router.post(
   }
 )
 
-router.get('/forget',
-    (req, res) => {
-      res.render('./email_sent.ejs', { title: 'email_sent' });
-    }
-)
+router.get('/forget', (req, res) => {
+  res.render('./email_sent.ejs', { title: 'email_sent' })
+})
 
-router.post('/forget', loginController.sendEmail);
+router.post('/forget', loginController.sendEmail)
 
-router.get('/email_sent',
-    (req, res) => {
-      res.render('/email_sent.ejs', { title: 'email_sent' });
-    }
-  )
-
+router.get('/email_sent', (req, res) => {
+  res.render('/email_sent.ejs', { title: 'email_sent' })
+})
 
 module.exports = router

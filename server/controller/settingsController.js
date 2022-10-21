@@ -1,6 +1,6 @@
-const User = require("../model/user").User;
-const Student = require("../model/user").Student;
-
+const User = require('../model/user').User
+const Student = require('../model/user').Student
+const ValidateEmail = require('../controller/loginController').ValidateEmail
 exports.getFieldsOfInterest = async (req, res, next) => {
   const studentID = req.user._id
   const student = await Student.findById(studentID).lean()
@@ -24,10 +24,7 @@ exports.editFieldsOfInterest = async (req, res) => {
     }
   }
 
-  await Student.findOneAndUpdate(
-    { _id: studentID },
-    { fieldsOfInterest }
-  )
+  await Student.findOneAndUpdate({ _id: studentID }, { fieldsOfInterest })
   res.redirect('/settings/interest_areas')
 }
 
@@ -51,7 +48,7 @@ exports.editAccountSettings = async (req, res) => {
     fields.fullName = req.body.fullName
   }
   if (req.body.email) {
-    if (validateEmail(req.body.email)) {
+    if (ValidateEmail(req.body.email)) {
       fields.email = req.body.email
     } else {
       return
@@ -59,20 +56,20 @@ exports.editAccountSettings = async (req, res) => {
   }
 
   await User.findByIdAndUpdate(userID, fields)
-    .then(data => {
+    .then((data) => {
       if (req.body.fullName) {
         req.user.fullName = req.body.fullName
       } else {
         req.user.email = req.body.email
       }
       res.redirect('/account')
-    }).catch(err => {
+    })
+    .catch((err) => {
       console.log('Error detected')
       res.status(500).send({
         message:
-                err.message ||
-                'Some error occurred while creating a updating user fields.'
+          err.message ||
+          'Some error occurred while creating a updating user fields.'
       })
     })
 }
-

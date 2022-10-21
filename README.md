@@ -1,7 +1,29 @@
 # Subjects Review
 
-Name: Kai, StudentID: 1078175
-Name: Sebastian Davey Gargano, StudentID: 1083288
-Name: Ellen (Qingying Lyu), StudentID: 1173888
-Name: Mavis(Jia Zhao), StudentID: 1071383
-Name: Jason Phan, StudentID: 1180106
+This was a capstone project for COMP30022 created over a 12 week period
+
+Subjects Review is a personal item registry tool that provides a platform not only for storage
+of University of Melbourne subject experiences and reviews, but for the sharing of them with
+other University of Melbourne students.
+
+## The Team
+
+Sebastian Davey Gargano : scrum master, product owner, backend developer
+
+Kai : front end lead, full stack dev and designer
+
+Ellen (Qingying Lyu) : Design lead, front end developer
+
+Mavis(Jia Zhao) : Authentication lead, Testing and front end developer
+
+Jason Phan : Backend lead, testing
+
+## Technologies
+
+- MongoDB
+- Express.js
+- Node.js
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
