@@ -10,11 +10,11 @@ other University of Melbourne students.
 
 Sebastian Davey Gargano : scrum master, product owner, backend developer
 
-Kai : front end lead, full stack dev and designer
+Kai : frontend lead, full stack dev and designer
 
-Ellen (Qingying Lyu) : Design lead, front end developer
+Ellen (Qingying Lyu) : Design lead, frontend developer
 
-Mavis(Jia Zhao) : Authentication lead, Testing and front end developer
+Mavis(Jia Zhao) : Authentication lead, Testing and frontend developer
 
 Jason Phan : Backend lead, testing
 
