@@ -66,9 +66,10 @@ exports.getBrowsePageReviews = async (req, res) => {
     // Students get reviews from their interested field of study, then recent reviews
     const student = await Student.findById(req.user._id)
     const fieldsOfInterest = student.fieldsOfInterest
-    // const subjects = []
+     const subjects = []
 
-    for (const field of fieldsOfInterest) {
+    /*
+     for (const field of fieldsOfInterest) {
       const result = await Review.aggregate([
         {
           $lookup: {
@@ -82,19 +83,20 @@ exports.getBrowsePageReviews = async (req, res) => {
       ])
 
       await Subject.populate(result, { path: 'subject' })
-      reviews = reviews.concat(result)
-      //   const result = await Subject.find({ fieldOfStudy: field })
-      //   for (const sub of result) {
-      //     subjects.push(sub)
-      //   }
+      reviews = reviews.concat(result)*/
+    for (const field of fieldsOfInterest) {
+         const result = await Subject.find({ fieldOfStudy: field })
+         for (const sub of result) {
+           subjects.push(sub)
+         }
     }
 
-    // for (const subject of subjects) {
-    //   const result = await Review.find({ subject: subject._id })
-    //     .populate('subject')
-    //     .limit(4)
-    //   reviews = reviews.concat(result)
-    // }
+     for (const subject of subjects) {
+       const result = await Review.find({ subject: subject._id })
+         .populate('subject')
+         .limit(4)
+       reviews = reviews.concat(result)
+     }
     if (reviews.length === 0) {
       reviews = reviews.concat(
         await Review.find()
