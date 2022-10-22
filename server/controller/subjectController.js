@@ -24,7 +24,11 @@ exports.loadSubjectPage = async (req, res) => {
         totalRating / reviews.length
       )}`
     )
+    
+    res.locals.userType = null;
+
     if (req.user) {
+      res.locals.userType = req.user.type;
       res.render('student/view_subject', {
         subject: result,
         reviews,
