@@ -80,6 +80,21 @@ studentSchema.pre('save', function save (next) {
   })
 })
 
+studentSchema.pre('findOneAndUpdate', async function (next) {
+    const user = this
+
+    try {
+        if (user._update.password) {
+            const hash = await bcrypt.hash(user._update.password, SALT_FACTOR)
+            user._update.password = hash;
+        }
+        next();
+    } catch (err) {
+        return next(err);
+    }
+})
+
+
 const User = mongoose.model('User', userSchema, 'users')
 const Student = mongoose.model('Student', studentSchema, 'users')
 const Moderator = mongoose.model('Moderator', moderatorSchema, 'users')
