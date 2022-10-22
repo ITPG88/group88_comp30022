@@ -1,13 +1,13 @@
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <header>
-  <div class="container header-container">
-    <div class="header-content">
-      <h1>Welcome, <b><%= locals.fullName || "Student Name"%></b>!</h1>
+    <div class="container header-container">
+        <div class="header-content">
+            <h1>Welcome, <b><%= locals.fullName || "Student Name" %></b>!</h1>
 
-      <button
-        id="window"
-        style="
+            <button
+                    id="window"
+                    style="
           background: #6a4873;
           color: #ffffff;
           border: none;
@@ -18,125 +18,128 @@
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         "
-      >
-        Write Review
-      </button>
+            >
+                Write Review
+            </button>
+        </div>
     </div>
-  </div>
 </header>
 <style>
-  #pop {
-    display: none;
-    width: 60%;
-    height: 900px;
-    background: #3b3b3b;
-    position: absolute;
-    left: 20%;
-    top: 15%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  #pop h1 {
-    text-align: center;
-    color: #fff;
-    font-size: 35px;
-    font-weight: normal;
-    padding-top: 20px;
-  }
-  #pop label {
-    font-weight: lighter;
-  }
-  .form-field {
-    font-weight: lighter;
-    font-size: 30px;
-    padding-bottom: 30px;
-  }
+    #pop {
+        display: none;
+        width: 60%;
+        height: 900px;
+        background: #3b3b3b;
+        position: absolute;
+        left: 20%;
+        top: 15%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 
-  .each-field {
-    color: #fff;
-    font-size: 22px;
-    font-weight: lighter;
-    background-color: #1e1e1e;
-  }
+    #pop h1 {
+        text-align: center;
+        color: #fff;
+        font-size: 35px;
+        font-weight: normal;
+        padding-top: 20px;
+    }
 
-  .star-review {
-    width: 29%;
-  }
+    #pop label {
+        font-weight: lighter;
+    }
 
-  .star-review input {
-    display: none;
-  }
+    .form-field {
+        font-weight: lighter;
+        font-size: 30px;
+        padding-bottom: 30px;
+    }
 
-  .star-review label {
-    float: right;
-    padding-right: 5px;
-    padding-bottom: 20px;
-    font-size: 40px;
-    color: var(--font-color);
-  }
+    .each-field {
+        color: #fff;
+        font-size: 22px;
+        font-weight: lighter;
+        background-color: #1e1e1e;
+    }
 
-  input:checked ~ label {
-    color: var(--star-review-color);
-  }
+    .star-review {
+        width: 29%;
+    }
 
-  input:not(:checked) ~ label:hover input:not(:checked) ~ label:hover ~ label {
-    color: var(--star-review-color);
-  }
+    .star-review input {
+        display: none;
+    }
 
-  #cancle {
-    background: #3b3b3b;
-    color: #ffffff;
-    border: none;
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+    .star-review label {
+        float: right;
+        padding-right: 5px;
+        padding-bottom: 20px;
+        font-size: 40px;
+        color: var(--font-color);
+    }
 
-  .save {
-    background: #6a4873;
-    color: #ffffff;
-    border: none;
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+    input:checked ~ label {
+        color: var(--star-review-color);
+    }
+
+    input:not(:checked) ~ label:hover input:not(:checked) ~ label:hover ~ label {
+        color: var(--star-review-color);
+    }
+
+    #cancle {
+        background: #3b3b3b;
+        color: #ffffff;
+        border: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: lighter;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .save {
+        background: #6a4873;
+        color: #ffffff;
+        border: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: lighter;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 </style>
 
 <script>
-  $('#window').click(function () {
-    $('#pop').show()
-  })
+    $('#window').click(function () {
+        $('#pop').show()
+    })
 
-  $('#cancle').click(function () {
-    $('#pop').hide()
-  })
-  $('#save').click(function () {
-    $('#pop').hide()
-  })
+    $('#cancle').click(function () {
+        $('#pop').hide()
+    })
+    $('#save').click(function () {
+        $('#pop').hide()
+    })
 </script>
 
 <!-- review your subject pop window-->
 <form id="pop" action="/write_review" method="POST">
-  <h1 style="padding-top: 30px">Review your subject</h1>
-  <br />
-  <br />
+    <h1 style="padding-top: 30px">Review your subject</h1>
+    <br/>
+    <br/>
 
-  <div style="padding-left: 15%">
-    <ul>
-      <li>
-        <label for="subjectCode" style="font-size: 26px">Subject Code</label>
-      </li>
-      <li>
-        <div class="autocomplete" style="width: 75%">
-          <input
-            id="myInput"
-            style="
+    <div style="padding-left: 15%">
+        <ul>
+            <li>
+                <label for="subjectCode" style="font-size: 26px">Subject Code</label>
+            </li>
+            <li>
+                <div class="autocomplete" style="width: 75%">
+                    <input
+                            id="myInput"
+                            style="
               width: 100%;
               padding: 6px 10px;
               display: inline-block;
@@ -146,24 +149,24 @@
               height: 40px;
               background-color: #1e1e1e;
             "
-            type="text"
-            name="subjectCode"
-            class="each-field"
-          />
-        </div>
-      </li>
-    </ul>
-    <br />
-    <ul>
-      <li>
-        <label for="subjectName" style="font-size: 26px"
-          >Subject Name (optional)</label
-        >
-      </li>
-      <li>
-        <input
-          id="myInput"
-          style="
+                            type="text"
+                            name="subjectCode"
+                            class="each-field"
+                    />
+                </div>
+            </li>
+        </ul>
+        <br/>
+        <ul>
+            <li>
+                <label for="subjectName" style="font-size: 26px"
+                >Subject Name (optional)</label
+                >
+            </li>
+            <li>
+                <input
+                        id="myInput"
+                        style="
             width: 100%;
             padding: 6px 10px;
             display: inline-block;
@@ -174,24 +177,24 @@
             height: 40px;
             background-color: #1e1e1e;
           "
-          type="text"
-          name="subjectName"
-          class="each-field"
-          placeholder="Fill this if subject not in list..."
-        />
-      </li>
-    </ul>
-    <br />
-    <ul>
-      <li>
-        <label for="fieldofstudy" style="font-size: 26px"
-          >Field of Study (optional)</label
-        >
-      </li>
-      <li>
-        <input
-          id="myInput"
-          style="
+                        type="text"
+                        name="subjectName"
+                        class="each-field"
+                        placeholder="Fill this if subject not in list..."
+                />
+            </li>
+        </ul>
+        <br/>
+        <ul>
+            <li>
+                <label for="fieldofstudy" style="font-size: 26px"
+                >Field of Study (optional)</label
+                >
+            </li>
+            <li>
+                <input
+                        id="myInput"
+                        style="
             width: 100%;
             padding: 6px 10px;
             display: inline-block;
@@ -202,204 +205,207 @@
             height: 40px;
             background-color: #1e1e1e;
           "
-          type="text"
-          name="fieldofstudy"
-          class="each-field"
-          placeholder="Fill this if subject not in list..."
-        />
-      </li>
-    </ul>
-    <br />
-    <ul>
-      <li><label for="rating" style="font-size: 26px">Rate</label></li>
-      <li>
-        <div class="star-review">
-          <input type="radio" id="star5" name="rating" value="5" /><label
-            for="star5"
-            class="fa fa-star full"
-          ></label>
-          <input type="radio" id="star4" name="rating" value="4" /><label
-            for="star4"
-            class="fa fa-star full"
-          ></label>
-          <input type="radio" id="star3" name="rating" value="3" /><label
-            for="star3"
-            class="fa fa-star full"
-          ></label>
-          <input type="radio" id="star2" name="rating" value="2" /><label
-            for="star2"
-            class="fa fa-star full"
-          ></label>
-          <input type="radio" id="star1" name="rating" value="1" /><label
-            for="star1"
-            class="fa fa-star full"
-          ></label>
-        </div>
-      </li>
-    </ul>
-    <br />
+                        type="text"
+                        name="fieldofstudy"
+                        class="each-field"
+                        placeholder="Fill this if subject not in list..."
+                />
+            </li>
+        </ul>
+        <br/>
+        <ul>
+            <li><label for="rating" style="font-size: 26px">Rate</label></li>
+            <li>
+                <div class="star-review">
+                    <input type="radio" id="star5" name="rating" value="5"/><label
+                            for="star5"
+                            class="fa fa-star full"
+                    ></label>
+                    <input type="radio" id="star4" name="rating" value="4"/><label
+                            for="star4"
+                            class="fa fa-star full"
+                    ></label>
+                    <input type="radio" id="star3" name="rating" value="3"/><label
+                            for="star3"
+                            class="fa fa-star full"
+                    ></label>
+                    <input type="radio" id="star2" name="rating" value="2"/><label
+                            for="star2"
+                            class="fa fa-star full"
+                    ></label>
+                    <input type="radio" id="star1" name="rating" value="1"/><label
+                            for="star1"
+                            class="fa fa-star full"
+                    ></label>
+                </div>
+            </li>
+        </ul>
+        <br/>
 
-    <ul>
-      <li>
-        <label for="content" style="font-size: 26px">Review body:</label>
-      </li>
-      <li>
+        <ul>
+            <li>
+                <label for="content" style="font-size: 26px">Review body:</label>
+            </li>
+            <li>
         <textarea
-          name="content"
-          class="each-field big-form"
-          style="width: 75%; height: 220px; background-color: #1e1e1e"
+                name="content"
+                class="each-field big-form"
+                style="width: 75%; height: 220px; background-color: #1e1e1e"
         >
         </textarea>
-      </li>
-    </ul>
+            </li>
+        </ul>
 
-    <div style="display: inline-flex">
-      <div>
-        <input
-          checked
-          style="width: 30px; height: 30px"
-          name="visible"
-          type="checkbox"
-        />
-        <label style="margin-top: -6px; font-size: 26px" for="visible"
-          >Visible</label
-        >
-      </div>
-      <div style="padding-left: 20px">
-        <input
-          style="width: 30px; height: 30px"
-          name="private"
-          type="checkbox"
-        />
-        <label style="margin-top: -6px; font-size: 26px" for="private"
-          >Private</label
-        >
-      </div>
-    </div>
-    <br />
-    <br />
+        <div style="display: inline-flex">
+            <div>
+                <input
+                        checked
+                        style="width: 30px; height: 30px"
+                        name="visible"
+                        type="checkbox"
+                />
+                <label style="margin-top: -6px; font-size: 26px" for="visible"
+                >Visible</label
+                >
+            </div>
+            <div style="padding-left: 20px">
+                <input
+                        style="width: 30px; height: 30px"
+                        name="private"
+                        type="checkbox"
+                />
+                <label style="margin-top: -6px; font-size: 26px" for="private"
+                >Private</label
+                >
+            </div>
+        </div>
+        <br/>
+        <br/>
 
-    <div style="text-align: center; padding-right: 20%; margin-top: -10px">
-      <a href="/home" class="write-review-button big-buttn" id="cancel"
-        >Close</a
-      >
-      <button class="save" formmethod="post">Submit</button>
+        <div style="text-align: center; padding-right: 20%; margin-top: -10px">
+            <a href="/home" class="write-review-button big-buttn" id="cancel"
+            >Close</a
+            >
+            <button class="save" formmethod="post">Submit</button>
+        </div>
     </div>
-  </div>
 </form>
 
 <style>
-  #pop2 {
-    display: none;
-    width: 50%;
-    height: 480px;
-    background: #3b3b3b;
-    position: absolute;
-    left: 30%;
-    top: 15%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-  #pop2 h1 {
-    text-align: center;
-    color: #fff;
-    font-size: 35px;
-    font-weight: normal;
-    padding-top: 20px;
-  }
-  #pop2 label {
-    font-weight: lighter;
-  }
-  .form-field {
-    font-weight: lighter;
-    font-size: 30px;
-    padding-bottom: 30px;
-  }
+    #pop2 {
+        display: none;
+        width: 50%;
+        height: 480px;
+        background: #3b3b3b;
+        position: absolute;
+        left: 30%;
+        top: 15%;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 
-  .each-field {
-    color: #fff;
-    font-size: 22px;
-    font-weight: lighter;
-  }
+    #pop2 h1 {
+        text-align: center;
+        color: #fff;
+        font-size: 35px;
+        font-weight: normal;
+        padding-top: 20px;
+    }
 
-  #cancle2 {
-    background: #3b3b3b;
-    color: #ffffff;
-    border: none;
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+    #pop2 label {
+        font-weight: lighter;
+    }
 
-  .save {
-    background: #6a4873;
-    color: #ffffff;
-    border: none;
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: lighter;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+    .form-field {
+        font-weight: lighter;
+        font-size: 30px;
+        padding-bottom: 30px;
+    }
+
+    .each-field {
+        color: #fff;
+        font-size: 22px;
+        font-weight: lighter;
+    }
+
+    #cancle2 {
+        background: #3b3b3b;
+        color: #ffffff;
+        border: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: lighter;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .save {
+        background: #6a4873;
+        color: #ffffff;
+        border: none;
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        font-weight: lighter;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
 </style>
 
 <script>
-  $('#window2').click(function () {
-    $('#pop2').show()
-  })
-  $('#window2').click(function () {
-    $('#pop').hide()
-  })
+    $('#window2').click(function () {
+        $('#pop2').show()
+    })
+    $('#window2').click(function () {
+        $('#pop').hide()
+    })
 
-  $('#cancle2').click(function () {
-    $('#pop2').hide()
-  })
+    $('#cancle2').click(function () {
+        $('#pop2').hide()
+    })
 </script>
 
 <form id="pop2" action="/write_review" method="POST">
-  <h1 style="padding-top: 30px">Search your subject</h1>
-  <br />
-  <br />
+    <h1 style="padding-top: 30px">Search your subject</h1>
+    <br/>
+    <br/>
 
-  <div style="padding-left: 20%">
-    <ul>
-      <li>
-        <label for="subjectCode" style="font-size: 26px">Subject Code</label>
-      </li>
-      <li>
-        <input
-          type="text"
-          name="subjectCode"
-          class="each-field"
-          style="width: 70%; height: 40px; background-color: #1e1e1e"
-        />
-      </li>
-    </ul>
-    <br />
+    <div style="padding-left: 20%">
+        <ul>
+            <li>
+                <label for="subjectCode" style="font-size: 26px">Subject Code</label>
+            </li>
+            <li>
+                <input
+                        type="text"
+                        name="subjectCode"
+                        class="each-field"
+                        style="width: 70%; height: 40px; background-color: #1e1e1e"
+                />
+            </li>
+        </ul>
+        <br/>
 
-    <ul>
-      <li><label style="font-size: 26px">Subject Name</label></li>
-      <li>
-        <input
-          type="text"
-          name="subjectCode"
-          class="each-field"
-          style="width: 70%; height: 40px; background-color: #1e1e1e"
-        />
-      </li>
-    </ul>
-    <br />
+        <ul>
+            <li><label style="font-size: 26px">Subject Name</label></li>
+            <li>
+                <input
+                        type="text"
+                        name="subjectCode"
+                        class="each-field"
+                        style="width: 70%; height: 40px; background-color: #1e1e1e"
+                />
+            </li>
+        </ul>
+        <br/>
 
-    <ul>
-      <li><label style="font-size: 26px">Field of study(optional)</label></li>
-      <li>
+        <ul>
+            <li><label style="font-size: 26px">Field of study(optional)</label></li>
+            <li>
         <span>
           <select
-            style="
+                  style="
               width: 70%;
               height: 40px;
               background-color: #1e1e1e;
@@ -427,20 +433,20 @@
             <option>Sport</option>
           </select>
         </span>
-      </li>
-    </ul>
+            </li>
+        </ul>
 
-    <br />
-    <br />
+        <br/>
+        <br/>
 
-    <div style="text-align: center; padding-right: 20%; margin-top: -10px">
-      <a href="/home" class="write-review-button big-buttn" id="cancle2"
-        >Close</a
-      >
-      <button class="save" formmethod="post">Submit</button>
+        <div style="text-align: center; padding-right: 20%; margin-top: -10px">
+            <a href="/home" class="write-review-button big-buttn" id="cancle2"
+            >Close</a
+            >
+            <button class="save" formmethod="post">Submit</button>
+        </div>
     </div>
-  </div>
 </form>
 <script>
-  autocomplete(document.getElementById('myInput'), subjectList, 3)
+    autocomplete(document.getElementById('myInput'), subjectList, 3)
 </script>

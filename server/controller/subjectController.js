@@ -12,7 +12,9 @@ exports.loadSubjectPage = async (req, res) => {
     const reviews = await Review.find({
       subject: result._id,
       isVisible: true
-    }).populate('author').sort({ createdAt: -1 })
+    })
+      .populate('author')
+      .sort({ createdAt: -1 })
 
     let totalRating = 0
     console.log(reviews.length)
@@ -20,9 +22,9 @@ exports.loadSubjectPage = async (req, res) => {
       totalRating = totalRating + reviews[i].rating
     }
     console.log(
-      `in view subject page with avgrating = ${Math.round(
-        totalRating / reviews.length
-      )}`
+            `in view subject page with avgrating = ${Math.round(
+                totalRating / reviews.length
+            )}`
     )
     
     res.locals.userType = null;
@@ -127,6 +129,8 @@ exports.findSubject = async (req, res, next) => {
   if (subject) {
     res.locals.subjectCode = subject.subjectCode
     res.locals.subjectName = subject.subjectName
+  } else {
+    return res.redirect('/error404')
   }
   req.subject = subject
   next()
@@ -155,7 +159,7 @@ exports.deleteReview = async (req, res) => {
   const review = await Review.findById(req.params.id)
   if (
     req.user.type === 'moderator' ||
-    review.author.toString() === req.user._id.toString()
+        review.author.toString() === req.user._id.toString()
   ) {
     for (const commentID of review.comments) {
       await Comment.findByIdAndDelete(commentID)
@@ -174,7 +178,7 @@ exports.deleteReview = async (req, res) => {
         if (err) {
           res.status(500).send({
             message:
-              err.message || `Could not delete review with id=${req.params.id}`
+                            err.message || `Could not delete review with id=${req.params.id}`
           })
         }
       })
@@ -224,7 +228,7 @@ exports.deleteComment = async (req, res) => {
   const comment = await Comment.findById(commentID)
   if (
     req.user.type === 'moderator' ||
-    comment.author.toString() === req.user._id.toString()
+        comment.author.toString() === req.user._id.toString()
   ) {
     await Comment.findByIdAndDelete(commentID)
     const review = await Review.findByIdAndUpdate(reviewID, {
@@ -251,16 +255,18 @@ exports.likeReview = async (req, res) => {
 
   const student = await Student.findById(req.user._id)
   if (student.likedList.includes(reviewID)) {
+    console.log('correctly terminating')
     // Student cannot like comment more than once
     return
-  } else {
-    console.log('correct up to herre')
-    console.log(
-      await Student.findByIdAndUpdate(req.user._id, {
-        $push: { likedList: reviewID }
-      })
-    )
   }
+
+  console.log('correct up to herre')
+  console.log(
+    await Student.findByIdAndUpdate(req.user._id, {
+      $push: { likedList: reviewID }
+    })
+  )
+
   const reviewUpdated = await Review.findByIdAndUpdate(reviewID, {
     $inc: { nLikes: 1 }
   })
@@ -269,7 +275,7 @@ exports.likeReview = async (req, res) => {
     console.log('review liking error')
   }
   // redirect back to the page POST request came from with new review
-  res.redirect('back')
+  // res.redirect('back')
 }
 
 exports.likeComment = async (req, res) => {
