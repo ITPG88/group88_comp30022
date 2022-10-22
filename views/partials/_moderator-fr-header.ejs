@@ -1,14 +1,14 @@
 <header>
-  <div class="container header-container">
-    <div class="header-content">
-      <h1>Welcome, <b><%= locals.fullName%></b>!</h1>
+    <div class="container header-container">
+        <div class="header-content">
+            <h1>Welcome, <b><%= locals.fullName %></b>!</h1>
 
-      <h2>
-        <%= (locals.flaggedReviewCount>=1) ? `${locals.flaggedReviewCount}
-        flagged reviews` : '0 flagged reviews'%> <b>|</b> <%=
-        (locals.newSubjectCount>=1) ? `${locals.newSubjectCount} new subjects` :
-        '0 new subjects'%>
-      </h2>
+            <h2>
+                <%= (locals.flaggedReviewCount >= 1) ? `${locals.flaggedReviewCount}
+        flagged reviews` : '0 flagged reviews' %> <b>|</b> <%=
+                (locals.newSubjectCount >= 1) ? `${locals.newSubjectCount} new subjects` :
+                        '0 new subjects' %>
+            </h2>
+        </div>
     </div>
-  </div>
 </header>

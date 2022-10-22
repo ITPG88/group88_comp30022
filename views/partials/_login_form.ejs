@@ -1,117 +1,117 @@
 <form action="/login" method="post" id="login">
-  <div class="content">
-    <div class="login">
-      <div class="logo">
-        <a href="/">
-          <img src="/assets/img/Subject%20Review%20Logo.png" alt="" />
+    <div class="content">
+        <div class="login">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/img/Subject%20Review%20Logo.png" alt=""/>
+                </a>
+            </div>
+            <div id="err" style="padding: 5%; height: 40px">
+                The username or password was incorrect. Please try again.
+            </div>
+            <ul>
+                <li><label>Username</label></li>
+                <li>
+                    <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="Enter your username"
+                            style="padding-left: 10px; padding-right: 10px"
+                            value="<%= locals.username %>"
+                            required
+                    />
+                </li>
+            </ul>
+
+            <ul>
+                <li><label>Password</label></li>
+                <li>
+                    <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Enter your password"
+                            style="padding-left: 10px; padding-right: 10px"
+                            required
+                    />
+                </li>
+            </ul>
+        </div>
+
+        <a
+                href="#"
+                onclick="document.getElementById('forget').style.display='block'"
+                style="padding-left: 200px; font-size: 14px"
+        >Forget password?
         </a>
-      </div>
-      <div id="err" style="padding: 5%; height: 40px">
-        The username or password was incorrect. Please try again.
-      </div>
-      <ul>
-        <li><label>Username</label></li>
-        <li>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Enter your username"
-            style="padding-left: 10px; padding-right: 10px"
-            value="<%=locals.username%>"
-            required
-          />
-        </li>
-      </ul>
 
-      <ul>
-        <li><label>Password</label></li>
-        <li>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            style="padding-left: 10px; padding-right: 10px"
-            required
-          />
-        </li>
-      </ul>
+        <div class="loginbutton">
+            <button type="submit">Login</button>
+        </div>
+        <p>Don't have a student account?<a href="/signup"> Sign up</a></p>
+        <p>Want to look around? <a href="/home">Click here</a></p>
     </div>
-
-    <a
-      href="#"
-      onclick="document.getElementById('forget').style.display='block'"
-      style="padding-left: 200px; font-size: 14px"
-      >Forget password?
-    </a>
-
-    <div class="loginbutton">
-      <button type="submit">Login</button>
-    </div>
-    <p>Don't have a student account?<a href="/signup"> Sign up</a></p>
-    <p>Want to look around? <a href="/home">Click here</a></p>
-  </div>
 </form>
 
 <!-- The Modal For Sending Recovery Email-->
 <div id="forget" class="modal">
-  <!-- Modal Content -->
+    <!-- Modal Content -->
 
-  <form class="modal-content animate" method="post" action="/forget">
+    <form class="modal-content animate" method="post" action="/forget">
     <span
-      onclick="document.getElementById('forget').style.display='none'"
-      class="close"
-      title="Close"
-      >&times;</span
+            onclick="document.getElementById('forget').style.display='none'"
+            class="close"
+            title="Close"
+    >&times;</span
     >
-    <div class="forgetemail">
-      <h1>Forget your password?</h1>
-      <br />
-      <p>Enter the email address associated with your account</p>
-      <p>and we'll send you a link to reset your password</p>
-      <br />
-      <div
-        id="err"
-        style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%"
-      ></div>
-      <div class="emailEntering">
-        <ul>
-          <li><label>Your email</label></li>
-          <li>
-            <input
-              type="text"
-              name="email"
-              placeholder=" Enter your email address..."
-              required
-            />
-          </li>
-        </ul>
-      </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <div class="sendemailbutton">
-        <button type="submit">Send email to me</button>
-      </div>
-    </div>
-  </form>
+        <div class="forgetemail">
+            <h1>Forget your password?</h1>
+            <br/>
+            <p>Enter the email address associated with your account</p>
+            <p>and we'll send you a link to reset your password</p>
+            <br/>
+            <div
+                    id="err"
+                    style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%"
+            ></div>
+            <div class="emailEntering">
+                <ul>
+                    <li><label>Your email</label></li>
+                    <li>
+                        <input
+                                type="text"
+                                name="email"
+                                placeholder=" Enter your email address..."
+                                required
+                        />
+                    </li>
+                </ul>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="sendemailbutton">
+                <button type="submit">Send email to me</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script>
-  if ('<%=locals.username%>' !== '') {
-    document.getElementById('err').style.display = 'flex'
-  }
-  var modal = document.getElementById('forget')
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = 'none'
+    if ('<%= locals.username %>' !== '') {
+        document.getElementById('err').style.display = 'flex'
     }
-  }
-  if ('<%=locals.user%>' == '') {
-    document.getElementById('failMessage').style.display = 'flex'
-  }
+    var modal = document.getElementById('forget')
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none'
+        }
+    }
+    if ('<%= locals.user %>' == '') {
+        document.getElementById('failMessage').style.display = 'flex'
+    }
 </script>

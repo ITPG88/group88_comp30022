@@ -1,28 +1,27 @@
-
 <div class="info">
     <ul style="padding-top: 5%">
         <li>
             <label>Username</label>
-            <p><%= user.username%></p>
+            <p><%= user.username %></p>
         </li>
     </ul>
 
     <ul>
         <li>
-            <form action="/settings/account", method="post", id="editFullName">
-            <label>Name</label>
-            <input required type="text" name='fullName' placeholder="<%=user.fullName%>"/>
-            <button style="margin-left: 135px" type="submit">Edit</button>
+            <form action="/settings/account" , method="post" , id="editFullName">
+                <label>Name</label>
+                <input required type="text" name='fullName' placeholder="<%= user.fullName %>"/>
+                <button style="margin-left: 135px" type="submit">Edit</button>
             </form>
         </li>
     </ul>
 
     <ul style="padding-bottom: 5%">
         <li>
-            <form action="/settings/account", method="post", id="editEmail">
-            <label>Email</label>
-            <input required type="text" name='email' placeholder="<%=user.email%>" />
-            <button style="margin-left: 151px" >Edit</button>
+            <form action="/settings/account" , method="post" , id="editEmail">
+                <label>Email</label>
+                <input required type="text" name='email' placeholder="<%= user.email %>"/>
+                <button style="margin-left: 151px">Edit</button>
             </form>
         </li>
     </ul>

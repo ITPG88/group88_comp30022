@@ -1,97 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Student home</title>
-    <link rel="stylesheet" href="/style/review.css" />
+    <link rel="stylesheet" href="/style/review.css"/>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,1,0"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,1,0"
     />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Edit your review</h1>
+</head>
+<body>
+<div class="container">
+    <h1>Edit your review</h1>
 
-      <form
-              action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
-              method="POST"
-              style="display: block; float: right;"
-            >
-              <button type="submit" class="remove-button-color medium-buttn" style="margin-right:-60px;width: 200px; background-color: var(--pri-color); color: var(--font-color);">
-                              Delete Review
-                            </button>
-      </form>
-      <form action="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review._id %>" method="POST">
+    <form
+            action="/subject/<%= subjectCode %>/review/<%= review._id %>/delete"
+            method="POST"
+            style="display: block; float: right;"
+    >
+        <button type="submit" class="remove-button-color medium-buttn"
+                style="margin-right:-60px;width: 200px; background-color: var(--pri-color); color: var(--font-color);">
+            Delete Review
+        </button>
+    </form>
+    <form action="/subject/<%= review.subject.subjectCode %>/review/edit/<%= review._id %>" method="POST">
         <div class="form-field">
-          <label for="subjectCode">Subject Code: </label>
-          <label><%= review.subject.subjectCode %></label>
+            <label for="subjectCode">Subject Code: </label>
+            <label><%= review.subject.subjectCode %></label>
         </div>
 
         <div class="form-field">
-          <label for="subjectCode">Subject Name: </label>
-          <label><%= review.subject.subjectName %></label>
+            <label for="subjectCode">Subject Name: </label>
+            <label><%= review.subject.subjectName %></label>
         </div>
-        
+
         <div class="form-field">
-          <label for="content">Review Content: </label>
-          <textarea name="content" class="each-field big-form"><%= review.content %></textarea>
+            <label for="content">Review Content: </label>
+            <textarea name="content" class="each-field big-form"><%= review.content %></textarea>
         </div>
-        
+
 
         <div class="form-field inline-checkbox toright">
-         
-          <div class="visible-checkbox inline-checkbox">
-            <% if (review.isVisible) {%>
-            <input
-              style="width: 30px; height: 30px"
-              name="visible"
-              type="checkbox"
-              checked
-            />
-            <% } else {%>
-              <input
-                      style="width: 30px; height: 30px"
-                      name="visible"
-                      type="checkbox"
-              />
-              <% }%>
-            <label style="margin-top: -6px" for="visible">Visible</label>
-          </div>
 
-        
-          <div
-            class="private-checkbox inline-checkbox"
-            style="margin-right: -60px; margin-left: 20px"
-          >
-            <% if (review.isAnonymous) {%>
-            <input style="width: 30px; height: 30px" name="private" type="checkbox" checked />
-            <% } else { %>
-              <input style="width: 30px; height: 30px" name="private" type="checkbox"/>
-              <% }%>
-            <label style="margin-top: -6px" for="private">Anonymous</label>
-          </div>
+            <div class="visible-checkbox inline-checkbox">
+                <% if (review.isVisible) { %>
+                    <input
+                            style="width: 30px; height: 30px"
+                            name="visible"
+                            type="checkbox"
+                            checked
+                    />
+                <% } else { %>
+                    <input
+                            style="width: 30px; height: 30px"
+                            name="visible"
+                            type="checkbox"
+                    />
+                <% } %>
+                <label style="margin-top: -6px" for="visible">Visible</label>
+            </div>
+
+
+            <div
+                    class="private-checkbox inline-checkbox"
+                    style="margin-right: -60px; margin-left: 20px"
+            >
+                <% if (review.isAnonymous) { %>
+                    <input style="width: 30px; height: 30px" name="private" type="checkbox" checked/>
+                <% } else { %>
+                    <input style="width: 30px; height: 30px" name="private" type="checkbox"/>
+                <% } %>
+                <label style="margin-top: -6px" for="private">Anonymous</label>
+            </div>
         </div>
-        
+
         <div class="close-submit-bttn">
-          <a href="/history" style="font-size: 26px">close</a>
-          <button type="submit" formmethod="post" class="medium-buttn submit-bttn">
-            submit
-          </button>
+            <a href="/history" style="font-size: 26px">close</a>
+            <button type="submit" formmethod="post" class="medium-buttn submit-bttn">
+                submit
+            </button>
         </div>
-        
+
         <script type="text/javascript" src="/server/services/autocomplete.js"></script>
         <script>
-          const subjectList = <%-JSON.stringify(locals.subjectList)%>
-            autocomplete(document.getElementById("myInput"), subjectList, 5);
+            const subjectList = <%- JSON.stringify(locals.subjectList) %>
+                autocomplete(document.getElementById("myInput"), subjectList, 5);
         </script>
-      </form>
-    </div>
-  </body>
+    </form>
+</div>
+</body>
 </html>

@@ -3,16 +3,15 @@
         <div class="header-content header-content-np">
             <div class="subject-name-code">
                 <h1><%= locals.subjectName %></h1>
-                <br />
+                <br/>
                 <h9><%= locals.subjectCode %></h9>
             </div>
-
 
 
             <div class="lowerheader-wrftsbutton">
                 <div class="lower-header-part">
                     <h2>
-                        <%= (reviews.length>=1) ? `${reviews.length} reviews` : `0 review`%>
+                        <%= (reviews.length >= 1) ? `${reviews.length} reviews` : `0 review` %>
                         <b>|</b> Overall
                     </h2>
 
@@ -21,7 +20,7 @@
                             <% for(let i = 0; i < avg_rating; i++){ %>
                                 <span class="material-symbols-outlined">star</span>
                             <% } %>
-                            <% for(let j = 0; j < 5-avg_rating; j++){ %>
+                            <% for(let j = 0; j < 5 - avg_rating; j++){ %>
                                 <span class="material-symbols-outlined" style="color: #ffffff;">star</span>
                             <% } %>
                         <% } else{ %>
@@ -43,7 +42,8 @@
       font-weight: lighter;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-      ">Write a review for this subject</button>
+      ">Write a review for this subject
+                </button>
 
             </div>
         </div>

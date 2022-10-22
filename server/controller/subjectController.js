@@ -20,9 +20,9 @@ exports.loadSubjectPage = async (req, res) => {
       totalRating = totalRating + reviews[i].rating
     }
     console.log(
-      `in view subject page with avgrating = ${Math.round(
-        totalRating / reviews.length
-      )}`
+            `in view subject page with avgrating = ${Math.round(
+                totalRating / reviews.length
+            )}`
     )
     if (req.user) {
       res.render('student/view_subject', {
@@ -151,7 +151,7 @@ exports.deleteReview = async (req, res) => {
   const review = await Review.findById(req.params.id)
   if (
     req.user.type === 'moderator' ||
-    review.author.toString() === req.user._id.toString()
+        review.author.toString() === req.user._id.toString()
   ) {
     for (const commentID of review.comments) {
       await Comment.findByIdAndDelete(commentID)
@@ -170,7 +170,7 @@ exports.deleteReview = async (req, res) => {
         if (err) {
           res.status(500).send({
             message:
-              err.message || `Could not delete review with id=${req.params.id}`
+                            err.message || `Could not delete review with id=${req.params.id}`
           })
         }
       })
@@ -220,7 +220,7 @@ exports.deleteComment = async (req, res) => {
   const comment = await Comment.findById(commentID)
   if (
     req.user.type === 'moderator' ||
-    comment.author.toString() === req.user._id.toString()
+        comment.author.toString() === req.user._id.toString()
   ) {
     await Comment.findByIdAndDelete(commentID)
     const review = await Review.findByIdAndUpdate(reviewID, {

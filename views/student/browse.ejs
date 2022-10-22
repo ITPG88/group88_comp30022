@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Subjects Review: Browse</title>
-    <link rel="stylesheet" href="/style/homepage.css" />
+    <link rel="stylesheet" href="/style/homepage.css"/>
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,1,0"
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,100,1,0"
     />
-  </head>
-  <body>
-    <%- include('../partials/navbars/_student_navbar') %> <%-
-    include('../partials/_student-browse-header')%>
-    <h1>in browse</h1>
-    <section class="review-section">
-      <div class="container review-container">
+</head>
+<body>
+<%- include('../partials/navbars/_student_navbar') %> <%-
+include('../partials/_student-browse-header') %>
+<h1>in browse</h1>
+<section class="review-section">
+    <div class="container review-container">
         <% reviews.forEach(review => { %> <% if(review.isVisible){ %>
-        <article class="each-review">
-          <span class="material-symbols-outlined">favorite</span>
+            <article class="each-review">
+                <span class="material-symbols-outlined">favorite</span>
 
-          <h3><%= review.subject.subjectCode %></h3>
-          <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
-            <%= review.subject.subjectName %>
-          </h4>
+                <h3><%= review.subject.subjectCode %></h3>
+                <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
+                    <%= review.subject.subjectName %>
+                </h4>
 
-          <h4>University of Melbourne</h4>
-          <div class="star-review">
-            <% for(let i = 0; i < review.rating; i++){ %>
-            <span class="fa fa-star checked"></span>
-            <% } %> <% for(let j = 0; j < 5-review.rating; j++){ %>
-            <span class="fa fa-star" style="color: #ffffff"></span>
-            <% } %>
-          </div>
-          <p><%= review.content %></p>
-          <div class="inline">
-            <form class="view-subject">
-              <a
-                href="/subject/<%= review.subject.subjectCode %>"
-                class="medium-buttn view-subject-bttn"
-                >View Subject</a
-              >
-            </form>
-            <form class="view-subject">
-              <a
-                href="/subject/<%= review.subject.subjectCode %>/review/<%= review._id %> "
-                class="medium-buttn view-subject-bttn"
-                >View Review</a
-              >
-            </form>
-          </div>
-          <footer><%= review.createdAt.toLocaleDateString() %></footer>
-        </article>
-        <% } else{ %> <% } %> <% }) %>
-      </div>
-    </section>
-  </body>
+                <h4>University of Melbourne</h4>
+                <div class="star-review">
+                    <% for(let i = 0; i < review.rating; i++){ %>
+                        <span class="fa fa-star checked"></span>
+                    <% } %>
+                    <% for(let j = 0; j < 5 - review.rating; j++){ %>
+                        <span class="fa fa-star" style="color: #ffffff"></span>
+                    <% } %>
+                </div>
+                <p><%= review.content %></p>
+                <div class="inline">
+                    <form class="view-subject">
+                        <a
+                                href="/subject/<%= review.subject.subjectCode %>"
+                                class="medium-buttn view-subject-bttn"
+                        >View Subject</a
+                        >
+                    </form>
+                    <form class="view-subject">
+                        <a
+                                href="/subject/<%= review.subject.subjectCode %>/review/<%= review._id %> "
+                                class="medium-buttn view-subject-bttn"
+                        >View Review</a
+                        >
+                    </form>
+                </div>
+                <footer><%= review.createdAt.toLocaleDateString() %></footer>
+            </article>
+        <% } else{ %> <% } %>
+        <% }) %>
+    </div>
+</section>
+</body>
 </html>
