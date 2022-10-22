@@ -12,7 +12,9 @@ exports.loadSubjectPage = async (req, res) => {
     const reviews = await Review.find({
       subject: result._id,
       isVisible: true
-    }).populate('author').sort({ createdAt: -1 })
+    })
+      .populate('author')
+      .sort({ createdAt: -1 })
 
     let totalRating = 0
     console.log(reviews.length)
@@ -123,6 +125,8 @@ exports.findSubject = async (req, res, next) => {
   if (subject) {
     res.locals.subjectCode = subject.subjectCode
     res.locals.subjectName = subject.subjectName
+  } else {
+    return res.redirect('/error404')
   }
   req.subject = subject
   next()
@@ -254,7 +258,9 @@ exports.likeReview = async (req, res) => {
 
   console.log('correct up to herre')
   console.log(
-    await Student.findByIdAndUpdate(req.user._id, { $push: { likedList: reviewID } })
+    await Student.findByIdAndUpdate(req.user._id, {
+      $push: { likedList: reviewID }
+    })
   )
 
   const reviewUpdated = await Review.findByIdAndUpdate(reviewID, {
