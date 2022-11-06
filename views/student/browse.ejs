@@ -26,11 +26,11 @@ include('../partials/_student-browse-header') %>
                 <span class="material-symbols-outlined">favorite</span>
 
                 <h3><%= review.subject.subjectCode %></h3>
-                <h4 style="font-size: 18px; font-style: italic; font-weight: lighter">
+                <h4>
                     <%= review.subject.subjectName %>
                 </h4>
 
-                <h4>University of Melbourne</h4>
+                <h4 style="font-size: 15px; font-style: italic; font-weight: lighter">University of Melbourne</h4>
                 <div class="star-review">
                     <% for(let i = 0; i < review.rating; i++){ %>
                         <span class="fa fa-star checked"></span>

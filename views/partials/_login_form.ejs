@@ -71,10 +71,6 @@
             <p>Enter the email address associated with your account</p>
             <p>and we'll send you a link to reset your password</p>
             <br/>
-            <div
-                    id="err"
-                    style="flex-direction: column; min-height: 50px; padding: 5% 2.5% 5% 5%"
-            ></div>
             <div class="emailEntering">
                 <ul>
                     <li><label>Your email</label></li>
@@ -100,18 +96,26 @@
 </div>
 
 <script>
+    
     if ('<%= locals.username %>' !== '') {
         document.getElementById('err').style.display = 'flex'
     }
     var modal = document.getElementById('forget')
+
+
+    if ('<%= error %>' != '') {
+        modal.style.display = 'flex'
+
+        var errorString =
+                    '<%- JSON.stringify(error) %>'
+        alert(errorString.split('"')[3])
+        
+    }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none'
         }
-    }
-    if ('<%= locals.user %>' == '') {
-        document.getElementById('failMessage').style.display = 'flex'
     }
 </script>

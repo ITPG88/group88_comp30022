@@ -31,7 +31,8 @@ router.get('/login', (req, res) => {
   }
   res.render('login.ejs', {
     title: 'Login',
-    username
+    username,
+    error: null
   })
 })
 
