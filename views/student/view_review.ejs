@@ -54,7 +54,9 @@
             <div class="review-footer">
                 <form action="/subject/<%= subjectCode %>/review/<%= review._id %>/likeReview" method="POST">
                     <button type="submit" class="like-button small-buttn">
+
                         <img src="/static/Like%20symbol.png"/><%= review.nLikes %>
+
                     </button>
                 </form>
                 <div>
@@ -100,8 +102,14 @@
                             method="POST"
                     >
                         <button class="like-bttn small-buttn" type="submit">
+                            <% console.log(review._id)%>
+                            <% if (!user.likedComments.includes(comment._id)){ %>
                             <img src="/static/Lke symbol (white).png"/><%= (comment.nLikes
                                     !== null) ? comment.nLikes : 111 %>
+                            <% } else {%>
+                                    <img src="/static/Like symbol.png"/><%= (comment.nLikes
+                                            !== null) ? comment.nLikes : 111 %>
+                            <%}%>
                         </button>
                     </form>
                     <form
