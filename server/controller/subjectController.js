@@ -256,17 +256,21 @@ exports.likeReview = async (req, res) => {
   const student = await Student.findById(req.user._id)
   if (student.likedList.includes(reviewID)) {
     console.log('correctly terminating')
-    // Student cannot like comment more than once
+    // Student cannot like comment more than once, clicking again unlikes
+    await Student.findByIdAndUpdate(req.user._id, {
+      $pull: { likedList: reviewID }
+    })
+    await Review.findByIdAndUpdate(reviewID, {
+      $inc: { nLikes: -1 }
+    })
+    res.redirect('back')
     return
   }
-
-  console.log('correct up to herre')
   console.log(
     await Student.findByIdAndUpdate(req.user._id, {
       $push: { likedList: reviewID }
     })
   )
-
   const reviewUpdated = await Review.findByIdAndUpdate(reviewID, {
     $inc: { nLikes: 1 }
   })
@@ -275,7 +279,7 @@ exports.likeReview = async (req, res) => {
     console.log('review liking error')
   }
   // redirect back to the page POST request came from with new review
-  // res.redirect('back')
+  res.redirect('back')
 }
 
 exports.likeComment = async (req, res) => {
@@ -287,12 +291,20 @@ exports.likeComment = async (req, res) => {
   const student = await Student.findById(req.user._id)
   if (student.likedComments.includes(commentID)) {
     // Student cannot like comment more than once
-    return
-  } else {
     await Student.findByIdAndUpdate(req.user._id, {
-      $push: { likedComments: commentID }
+      $pull: { likedComments: commentID }
     })
+    await Comment.findByIdAndUpdate(commentID, {
+      $inc: { nLikes: -1 }
+    })
+    res.redirect('back')
+    return
   }
+
+  await Student.findByIdAndUpdate(req.user._id, {
+    $push: { likedComments: commentID }
+  })
+
   const commentUpdated = await Comment.findByIdAndUpdate(commentID, {
     $inc: { nLikes: 1 }
   })

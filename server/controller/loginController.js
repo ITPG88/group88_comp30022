@@ -109,7 +109,6 @@ exports.resetPassword = async (req, res) => {
 }
 
 exports.sendEmail = async (req, res) => {
-
   const transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
@@ -150,15 +149,15 @@ exports.sendEmail = async (req, res) => {
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        const error = JSON.parse('{"error":"Fail to send the verification email"}');
-        res.render('login.ejs', {error})
+        const error = JSON.parse('{"error":"Fail to send the verification email"}')
+        res.render('login.ejs', { error })
       } else {
         res.render('./email_sent', { email })
       }
     })
   } else {
-    const error = JSON.parse('{"error":"Cannot find an account associated to this email"}');
-    res.render('login.ejs', {error})
+    const error = JSON.parse('{"error":"Cannot find an account associated to this email"}')
+    res.render('login.ejs', { error })
   }
 }
 
