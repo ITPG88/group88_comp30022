@@ -10,7 +10,7 @@ router.get('/', auth.ensureAuth, (req, res) => {
 })
 
 router.get('/account', auth.ensureAuth, (req, res) => {
-  res.render('student/account_settings', { user: req.user, error: null})
+  res.render('student/account_settings', { user: req.user, error: null })
 })
 
 router.post('/account', auth.ensureAuth, settingsController.editAccountSettings)

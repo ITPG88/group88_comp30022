@@ -45,7 +45,7 @@ exports.editAccountSettings = async (req, res) => {
   const userID = req.user._id
   const user = await User.findById(userID)
   const fields = {}
-  var error
+  let error
 
   if (req.body.fullName) {
     fields.fullName = req.body.fullName
@@ -60,17 +60,17 @@ exports.editAccountSettings = async (req, res) => {
     }
   }
 
-  const newPassword = req.body.password;
+  const newPassword = req.body.password
   if (newPassword) {
     if (newPassword.length < 5) {
-        error = JSON.parse('{"error":"Password should be at least 5 characters"}')
-        res.render('student/account_settings.ejs', { user, error })
-        return
+      error = JSON.parse('{"error":"Password should be at least 5 characters"}')
+      res.render('student/account_settings.ejs', { user, error })
+      return
     } else {
-        await Student.findOneAndUpdate({ _id: userID }, { password: newPassword })
-        res.redirect('/account')
-        return
-    } 
+      await Student.findOneAndUpdate({ _id: userID }, { password: newPassword })
+      res.redirect('/account')
+      return
+    }
   }
 
   await User.findByIdAndUpdate(userID, fields)
