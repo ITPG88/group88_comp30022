@@ -1,5 +1,5 @@
 ## Site usage
-To browse the site, simply press *browse as guest* or go to [url]/home.\
+To browse the site, simply press *browse as guest* or go to homepage.\
 From there you may search and read any reviews made public.\
 Create a user or login via the login portal. To post, comment on and like reviews, you must be a registered user.
 
