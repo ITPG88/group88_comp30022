@@ -9,8 +9,7 @@ exports.connectDB = async () => {
     })
     con.connection.useDb('subjectReviewDB')
     con.connection.getClient().db('SubjectReviewDB')
-    mongoose.connection.on('connected', () => console.log('Connected'))
-    console.log(`MongoDB connected : ${con.connection.host}\n`)
+    mongoose.connection.on('connected', () => console.log(`MongoDB connected : ${con.connection.host}\n`))
   } catch (err) {
     console.log(err)
     process.exit(1)
