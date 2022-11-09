@@ -1,0 +1,15 @@
+## Site usage
+To browse the site, simply press *browse as guest* or go to [url]/home.\
+From there you may search and read any reviews made public.\
+Create a user or login via the login portal. To post, comment on and like reviews, you must be a registered user.
+
+Login as a moderator with your provided details via the login portal. Judge reviews by clicking delete to remove
+and neglect to re-publish. Create subjects via the form provided where you deem fit.
+
+## Create Moderator
+
+## Codebase
+
+Works with a model-view-controller structure. Connections established via server.js file. Routing files
+can be found in /routes, and should have a corresponding controller file in /controller (expect for 
+index, which should have its logic in reviewController).

@@ -20,10 +20,14 @@ Jason Phan : Backend lead, testing
 
 ## Technologies
 
-- MongoDB
+- MongoDB/Mongoose
 - Express.js
 - Node.js
+- EJS/HTML5
+- run *npm i* for dependencies
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](https://choosealicense.com/licenses/mit/)
+- *see license folder for license copies*
+
