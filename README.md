@@ -24,10 +24,21 @@ Jason Phan : Backend lead, testing
 - Express.js
 - Node.js
 - EJS/HTML5
-- run *npm i* for dependencies
+- run _npm i_ for dependencies
+
+## Moderator Creation Terminal Application
+
+**Creation of a moderator account is simplified through a python script**
+
+Found in: /scripts/createMod
+
+Run the executable and a terminal should open.
+
+(Alternatively, simply run the python script)
+
+Follow the prompts to enter a Mongo URI, admin username and password.
 
 ## License
 
 - [MIT](https://choosealicense.com/licenses/mit/)
-- *see license folder for license copies*
-
+- _see license folder for license copies_
