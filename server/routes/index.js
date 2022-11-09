@@ -225,7 +225,7 @@ router.get('/forget', (req, res) => {
   res.render('./email_sent.ejs', { title: 'email_sent' })
 })
 
-router.post('/forget', loginController.sendEmail)
+router.post('/forget', loginController.sendNewPasswordEmail)
 
 router.get('/email_sent', (req, res) => {
   res.render('/email_sent.ejs', { title: 'email_sent' })

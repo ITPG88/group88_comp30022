@@ -43,7 +43,10 @@ exports.editAccountSettings = async (req, res) => {
   }
 
   const userID = req.user._id
+  const user = await User.findById(userID)
   const fields = {}
+  var error
+
   if (req.body.fullName) {
     fields.fullName = req.body.fullName
   }
@@ -51,8 +54,23 @@ exports.editAccountSettings = async (req, res) => {
     if (ValidateEmail(req.body.email)) {
       fields.email = req.body.email
     } else {
+      error = JSON.parse('{"error":"Needs to be a unimelb email"}')
+      res.render('student/account_setting.ejs', { user, error })
       return
     }
+  }
+
+  const newPassword = req.body.password;
+  if (newPassword) {
+    if (newPassword.length < 5) {
+        error = JSON.parse('{"error":"Password should be at least 5 characters"}')
+        res.render('student/account_settings.ejs', { user, error })
+        return
+    } else {
+        await Student.findOneAndUpdate({ _id: userID }, { password: newPassword })
+        res.redirect('/account')
+        return
+    } 
   }
 
   await User.findByIdAndUpdate(userID, fields)

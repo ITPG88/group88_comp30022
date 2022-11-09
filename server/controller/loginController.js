@@ -108,7 +108,7 @@ exports.resetPassword = async (req, res) => {
   res.redirect('/login', { message: 'Password reset. Please login.' })
 }
 
-exports.sendEmail = async (req, res) => {
+exports.sendNewPasswordEmail = async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'hotmail',
     auth: {
@@ -173,6 +173,5 @@ function ValidateEmail (email) {
   }
   return false
 }
-exports.sendPasswordEmailLink = async (req, res) => {}
 
 exports.ValidateEmail = ValidateEmail
