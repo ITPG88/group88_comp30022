@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subjects Review-login</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
 
-<body>
-
-<div class="content">
-    <div class="login">
-
+  <body>
+    <div class="content">
+      <div class="login">
         <div class="logo">
-            <img src="../assets/img/Subject Review Logo.png" alt="">
+          <img src="/assets/img/Subject Review Logo.png" alt="" />
         </div>
-
-        <ul>
+        <form id="loginForm" action="/login" method="post">
+          <ul>
             <li><label>Username</label></li>
-            <li><input type="text" placeholder=" Enter your email address or user ID"></li>
-        </ul>
+            <li>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                placeholder=" Enter your email address or user ID"
+                required
+              />
+            </li>
+          </ul>
 
-        <ul>
+          <ul>
             <li><label>Password</label></li>
-            <li><input type="password" placeholder=" Enter your password"></li>           
-        </ul>        
+            <li>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder=" Enter your password"
+                required
+              />
+            </li>
+          </ul>
+        </form>
+      </div>
+
+      <a href="/forgetpassword" style="padding-left: 200px; font-size: 14px"
+        >Forget password?
+      </a>
+
+      <div class="loginbutton">
+        <button type="submit" form="loginForm">Login</button>
+      </div>
+      <p>Don't have an account?<a href="/signup"> Sign up</a></p>
     </div>
-
-    <a href="" style="padding-left: 200px; font-size: 14px;">Forget password? </a>
-
-    <div class="loginbutton">
-        <button type="button">Login</button>
-    </div>
-    <p>Don't have an account?<a href=""> Sign up</a></p>
-</div>
-
-
-</body>
+  </body>
 </html>
